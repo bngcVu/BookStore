@@ -11,6 +11,11 @@ Sử dụng:
 
 Output:
     seed_data_tiki.sql - File SQL INSERT với dữ liệu thật
+    
+Lưu ý:
+    - File generated tương thích với database_optimizations.sql
+    - Chạy create_tables.sql trước, sau đó chạy optimization, cuối cùng import seed data
+    - Script này sẽ TRUNCATE các bảng trước khi import
 """
 
 import requests
@@ -539,9 +544,23 @@ class SQLGenerator:
         lines.append("-- BOOKSTORE SEED DATA - CRAWLED FROM TIKI")
         lines.append(f"-- Generated: {datetime.now().isoformat()}")
         lines.append("-- ⚠️ FOR EDUCATIONAL PURPOSES ONLY")
-        lines.append("-- ============================================================\n")
+        lines.append("-- ============================================================")
+        lines.append("")
         lines.append("SET NAMES utf8mb4;")
-        lines.append("SET FOREIGN_KEY_CHECKS = 0;\n")
+        lines.append("SET FOREIGN_KEY_CHECKS = 0;")
+        lines.append("")
+        
+        # Add TRUNCATE statements
+        lines.append("-- Clear existing data (order matters due to FK constraints)")
+        truncate_tables = [
+            "voucher_usage", "vouchers", "shipping_rates", "shipping_carriers",
+            "inventory", "book_variants", "book_images", "book_authors", "books",
+            "authors", "publishers", "categories", "users", "admins",
+            "customer_tiers", "provinces"
+        ]
+        for table in truncate_tables:
+            lines.append(f"TRUNCATE TABLE `{table}`;")
+        lines.append("")
         
         # Categories
         lines.append("-- Categories")
@@ -643,9 +662,15 @@ class SQLGenerator:
         # Add static data (admins, users, shipping, vouchers)
         lines.append(self._generate_static_data())
         
-        lines.append("\nSET FOREIGN_KEY_CHECKS = 1;")
-        lines.append("\n-- ============================================================")
+        lines.append("")
+        lines.append("SET FOREIGN_KEY_CHECKS = 1;")
+        lines.append("")
+        lines.append("-- ============================================================")
         lines.append(f"-- CRAWL COMPLETE: {len(self.books)} books from Tiki.vn")
+        lines.append("-- ============================================================")
+        lines.append("-- ✅ Compatible with database_optimizations.sql")
+        lines.append("-- ✅ Triggers will auto-update: avg_rating, sold_count, inventory")
+        lines.append("-- ✅ Use stored procedures: sp_get_bestsellers(), sp_check_stock_availability()")
         lines.append("-- ============================================================")
         
         return "\n".join(lines)
