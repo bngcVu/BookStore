@@ -4,8 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-create_tables.sql
-database_optimizations.sql
+# Ignore entire SQL folder (database schema, scripts, docs)
+sql/
 
 ### STS ###
 .apt_generated
