@@ -37,8 +37,8 @@ CREATE TABLE IF NOT EXISTS inventory_history (
 
 -- Thêm cột mở rộng cho bảng provinces
 ALTER TABLE provinces 
-    ADD COLUMN IF NOT EXISTS full_name VARCHAR(150) AFTER name,
-    ADD COLUMN IF NOT EXISTS type ENUM('thanh_pho','tinh') DEFAULT 'tinh' AFTER full_name;
+    ADD COLUMN full_name VARCHAR(150) AFTER name,
+    ADD COLUMN type ENUM('thanh_pho','tinh') DEFAULT 'tinh' AFTER full_name;
 
 -- ============================================================
 -- 3. THÊM SOFT DELETE
@@ -46,20 +46,20 @@ ALTER TABLE provinces
 
 -- Thêm cột deleted_at cho các bảng quan trọng
 ALTER TABLE books 
-    ADD COLUMN IF NOT EXISTS deleted_at DATETIME DEFAULT NULL,
-    ADD INDEX IF NOT EXISTS idx_books_deleted (deleted_at);
+    ADD COLUMN deleted_at DATETIME DEFAULT NULL,
+    ADD INDEX idx_books_deleted (deleted_at);
 
 ALTER TABLE users 
-    ADD COLUMN IF NOT EXISTS deleted_at DATETIME DEFAULT NULL,
-    ADD INDEX IF NOT EXISTS idx_users_deleted (deleted_at);
+    ADD COLUMN deleted_at DATETIME DEFAULT NULL,
+    ADD INDEX idx_users_deleted (deleted_at);
 
 ALTER TABLE orders 
-    ADD COLUMN IF NOT EXISTS deleted_at DATETIME DEFAULT NULL,
-    ADD INDEX IF NOT EXISTS idx_orders_deleted (deleted_at);
+    ADD COLUMN deleted_at DATETIME DEFAULT NULL,
+    ADD INDEX idx_orders_deleted (deleted_at);
 
 ALTER TABLE categories
-    ADD COLUMN IF NOT EXISTS deleted_at DATETIME DEFAULT NULL,
-    ADD INDEX IF NOT EXISTS idx_categories_deleted (deleted_at);
+    ADD COLUMN deleted_at DATETIME DEFAULT NULL,
+    ADD INDEX idx_categories_deleted (deleted_at);
 
 -- ============================================================
 -- 4. COMPOSITE INDEX CHO PERFORMANCE
@@ -67,62 +67,62 @@ ALTER TABLE categories
 
 -- Bảng books - Query phổ biến: danh sách sách active, sắp xếp theo bán chạy/đánh giá
 ALTER TABLE books 
-    ADD INDEX IF NOT EXISTS idx_books_active_featured_sold (is_active, is_featured, sold_count DESC),
-    ADD INDEX IF NOT EXISTS idx_books_active_rating (is_active, avg_rating DESC),
-    ADD INDEX IF NOT EXISTS idx_books_active_created (is_active, created_at DESC),
-    ADD INDEX IF NOT EXISTS idx_books_category_active (category_id, is_active, sold_count DESC);
+    ADD INDEX idx_books_active_featured_sold (is_active, is_featured, sold_count DESC),
+    ADD INDEX idx_books_active_rating (is_active, avg_rating DESC),
+    ADD INDEX idx_books_active_created (is_active, created_at DESC),
+    ADD INDEX idx_books_category_active (category_id, is_active, sold_count DESC);
 
 -- Bảng book_variants - Query thường dùng
 ALTER TABLE book_variants 
-    ADD INDEX IF NOT EXISTS idx_variants_book_active (book_id, is_active),
-    ADD INDEX IF NOT EXISTS idx_variants_active_price (is_active, price);
+    ADD INDEX idx_variants_book_active (book_id, is_active),
+    ADD INDEX idx_variants_active_price (is_active, price);
 
 -- Bảng orders - Query cho admin dashboard và user history
 ALTER TABLE orders 
-    ADD INDEX IF NOT EXISTS idx_orders_status_created (status, created_at DESC),
-    ADD INDEX IF NOT EXISTS idx_orders_user_status_created (user_id, status, created_at DESC),
-    ADD INDEX IF NOT EXISTS idx_orders_payment_status_created (payment_status, created_at DESC);
+    ADD INDEX idx_orders_status_created (status, created_at DESC),
+    ADD INDEX idx_orders_user_status_created (user_id, status, created_at DESC),
+    ADD INDEX idx_orders_payment_status_created (payment_status, created_at DESC);
 
 -- Bảng order_items - Join thường xuyên
 ALTER TABLE order_items 
-    ADD INDEX IF NOT EXISTS idx_orderitems_variant_reviewed (variant_id, is_reviewed);
+    ADD INDEX idx_orderitems_variant_reviewed (variant_id, is_reviewed);
 
 -- Bảng flash_sale_items - Check sold out
 ALTER TABLE flash_sale_items 
-    ADD INDEX IF NOT EXISTS idx_flash_items_sale_sold (flash_sale_id, sold_count);
+    ADD INDEX idx_flash_items_sale_sold (flash_sale_id, sold_count);
 
 -- Bảng reviews - Filter theo rating và visible
 ALTER TABLE reviews 
-    ADD INDEX IF NOT EXISTS idx_reviews_book_rating_visible (book_id, rating, is_visible),
-    ADD INDEX IF NOT EXISTS idx_reviews_book_created (book_id, created_at DESC),
-    ADD INDEX IF NOT EXISTS idx_reviews_verified_visible (is_verified, is_visible);
+    ADD INDEX idx_reviews_book_rating_visible (book_id, rating, is_visible),
+    ADD INDEX idx_reviews_book_created (book_id, created_at DESC),
+    ADD INDEX idx_reviews_verified_visible (is_verified, is_visible);
 
 -- Bảng vouchers - Query active vouchers
 ALTER TABLE vouchers 
-    ADD INDEX IF NOT EXISTS idx_vouchers_active_dates (is_active, start_date, end_date),
-    ADD INDEX IF NOT EXISTS idx_vouchers_code_active (code, is_active);
+    ADD INDEX idx_vouchers_active_dates (is_active, start_date, end_date),
+    ADD INDEX idx_vouchers_code_active (code, is_active);
 
 -- Bảng flash_sales - Query active sales trong khung giờ
 ALTER TABLE flash_sales 
-    ADD INDEX IF NOT EXISTS idx_flash_active_time (is_active, start_time, end_time);
+    ADD INDEX idx_flash_active_time (is_active, start_time, end_time);
 
 -- Bảng promotions - Query active promotions
 ALTER TABLE promotions 
-    ADD INDEX IF NOT EXISTS idx_promos_active_dates (is_active, start_date, end_date),
-    ADD INDEX IF NOT EXISTS idx_promos_type_active (type, is_active);
+    ADD INDEX idx_promos_active_dates (is_active, start_date, end_date),
+    ADD INDEX idx_promos_type_active (type, is_active);
 
 -- Bảng inventory - Query low stock
 ALTER TABLE inventory 
-    ADD INDEX IF NOT EXISTS idx_inventory_low_stock (quantity, min_stock_level);
+    ADD INDEX idx_inventory_low_stock (quantity, min_stock_level);
 
 -- Bảng user_book_interactions - ML recommendations
 ALTER TABLE user_book_interactions 
-    ADD INDEX IF NOT EXISTS idx_interactions_user_type (user_id, interaction_type, last_interaction_at DESC),
-    ADD INDEX IF NOT EXISTS idx_interactions_book_type (book_id, interaction_type);
+    ADD INDEX idx_interactions_user_type (user_id, interaction_type, last_interaction_at DESC),
+    ADD INDEX idx_interactions_book_type (book_id, interaction_type);
 
 -- Bảng notifications - Unread notifications
 ALTER TABLE notifications 
-    ADD INDEX IF NOT EXISTS idx_notif_user_unread (user_id, is_read, created_at DESC);
+    ADD INDEX idx_notif_user_unread (user_id, is_read, created_at DESC);
 
 -- ============================================================
 -- 5. CHECK CONSTRAINTS - Data Integrity
@@ -130,137 +130,137 @@ ALTER TABLE notifications
 
 -- Bảng books
 ALTER TABLE books 
-    ADD CONSTRAINT IF NOT EXISTS chk_books_price 
+    ADD CONSTRAINT chk_books_price 
         CHECK (base_price >= 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_books_rating 
+    ADD CONSTRAINT chk_books_rating 
         CHECK (avg_rating >= 0 AND avg_rating <= 5),
-    ADD CONSTRAINT IF NOT EXISTS chk_books_review_count 
+    ADD CONSTRAINT chk_books_review_count 
         CHECK (review_count >= 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_books_sold_count 
+    ADD CONSTRAINT chk_books_sold_count 
         CHECK (sold_count >= 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_books_view_count 
+    ADD CONSTRAINT chk_books_view_count 
         CHECK (view_count >= 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_books_pages 
+    ADD CONSTRAINT chk_books_pages 
         CHECK (pages IS NULL OR pages > 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_books_weight 
+    ADD CONSTRAINT chk_books_weight 
         CHECK (weight_grams IS NULL OR weight_grams > 0);
 
 -- Bảng book_variants
 ALTER TABLE book_variants 
-    ADD CONSTRAINT IF NOT EXISTS chk_variant_price 
+    ADD CONSTRAINT chk_variant_price 
         CHECK (price > 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_variant_compare_price 
+    ADD CONSTRAINT chk_variant_compare_price 
         CHECK (compare_at_price IS NULL OR compare_at_price >= price);
 
 -- Bảng inventory
 ALTER TABLE inventory 
-    ADD CONSTRAINT IF NOT EXISTS chk_inventory_quantity 
+    ADD CONSTRAINT chk_inventory_quantity 
         CHECK (quantity >= 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_inventory_reserved 
+    ADD CONSTRAINT chk_inventory_reserved 
         CHECK (reserved_quantity >= 0 AND reserved_quantity <= quantity),
-    ADD CONSTRAINT IF NOT EXISTS chk_inventory_min_stock 
+    ADD CONSTRAINT chk_inventory_min_stock 
         CHECK (min_stock_level >= 0);
 
 -- Bảng vouchers
 ALTER TABLE vouchers 
-    ADD CONSTRAINT IF NOT EXISTS chk_voucher_dates 
+    ADD CONSTRAINT chk_voucher_dates 
         CHECK (end_date > start_date),
-    ADD CONSTRAINT IF NOT EXISTS chk_voucher_usage 
+    ADD CONSTRAINT chk_voucher_usage 
         CHECK (used_count <= usage_limit OR usage_limit IS NULL),
-    ADD CONSTRAINT IF NOT EXISTS chk_voucher_discount 
+    ADD CONSTRAINT chk_voucher_discount 
         CHECK (discount_value > 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_voucher_min_order 
+    ADD CONSTRAINT chk_voucher_min_order 
         CHECK (min_order_value >= 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_voucher_used_count 
+    ADD CONSTRAINT chk_voucher_used_count 
         CHECK (used_count >= 0);
 
 -- Bảng flash_sales
 ALTER TABLE flash_sales 
-    ADD CONSTRAINT IF NOT EXISTS chk_flash_time 
+    ADD CONSTRAINT chk_flash_time 
         CHECK (end_time > start_time);
 
 -- Bảng flash_sale_items
 ALTER TABLE flash_sale_items 
-    ADD CONSTRAINT IF NOT EXISTS chk_flash_item_price 
+    ADD CONSTRAINT chk_flash_item_price 
         CHECK (sale_price > 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_flash_item_quantity 
+    ADD CONSTRAINT chk_flash_item_quantity 
         CHECK (quantity_limit >= 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_flash_item_per_user 
+    ADD CONSTRAINT chk_flash_item_per_user 
         CHECK (per_user_limit > 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_flash_item_sold 
+    ADD CONSTRAINT chk_flash_item_sold 
         CHECK (sold_count >= 0 AND (quantity_limit = 0 OR sold_count <= quantity_limit));
 
 -- Bảng promotions
 ALTER TABLE promotions 
-    ADD CONSTRAINT IF NOT EXISTS chk_promo_dates 
+    ADD CONSTRAINT chk_promo_dates 
         CHECK (end_date > start_date),
-    ADD CONSTRAINT IF NOT EXISTS chk_promo_percent 
+    ADD CONSTRAINT chk_promo_percent 
         CHECK (discount_percent IS NULL OR (discount_percent > 0 AND discount_percent <= 100)),
-    ADD CONSTRAINT IF NOT EXISTS chk_promo_combo_price 
+    ADD CONSTRAINT chk_promo_combo_price 
         CHECK (combo_price IS NULL OR combo_price > 0);
 
 -- Bảng orders
 ALTER TABLE orders 
-    ADD CONSTRAINT IF NOT EXISTS chk_order_subtotal 
+    ADD CONSTRAINT chk_order_subtotal 
         CHECK (subtotal >= 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_order_shipping 
+    ADD CONSTRAINT chk_order_shipping 
         CHECK (shipping_fee >= 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_order_discount 
+    ADD CONSTRAINT chk_order_discount 
         CHECK (discount_amount >= 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_order_points 
+    ADD CONSTRAINT chk_order_points 
         CHECK (points_used >= 0 AND points_discount >= 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_order_total 
+    ADD CONSTRAINT chk_order_total 
         CHECK (total_amount >= 0);
 
 -- Bảng order_items
 ALTER TABLE order_items 
-    ADD CONSTRAINT IF NOT EXISTS chk_orderitem_quantity 
+    ADD CONSTRAINT chk_orderitem_quantity 
         CHECK (quantity > 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_orderitem_price 
+    ADD CONSTRAINT chk_orderitem_price 
         CHECK (unit_price >= 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_orderitem_discount 
+    ADD CONSTRAINT chk_orderitem_discount 
         CHECK (discount_amount >= 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_orderitem_subtotal 
+    ADD CONSTRAINT chk_orderitem_subtotal 
         CHECK (subtotal >= 0);
 
 -- Bảng refunds
 ALTER TABLE refunds 
-    ADD CONSTRAINT IF NOT EXISTS chk_refund_amount 
+    ADD CONSTRAINT chk_refund_amount 
         CHECK (refund_amount >= 0);
 
 -- Bảng payments
 ALTER TABLE payments 
-    ADD CONSTRAINT IF NOT EXISTS chk_payment_amount 
+    ADD CONSTRAINT chk_payment_amount 
         CHECK (amount > 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_payment_installment 
+    ADD CONSTRAINT chk_payment_installment 
         CHECK (installment_months IS NULL OR installment_months IN (3,6,9,12,18,24));
 
 -- Bảng users
 ALTER TABLE users 
-    ADD CONSTRAINT IF NOT EXISTS chk_user_total_spent 
+    ADD CONSTRAINT chk_user_total_spent 
         CHECK (total_spent >= 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_user_points 
+    ADD CONSTRAINT chk_user_points 
         CHECK (reward_points >= 0);
 
 -- Bảng customer_tiers
 ALTER TABLE customer_tiers 
-    ADD CONSTRAINT IF NOT EXISTS chk_tier_min_spent 
+    ADD CONSTRAINT chk_tier_min_spent 
         CHECK (min_spent >= 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_tier_discount 
+    ADD CONSTRAINT chk_tier_discount 
         CHECK (discount_percent >= 0 AND discount_percent <= 100);
 
 -- Bảng shipping_rates
 ALTER TABLE shipping_rates 
-    ADD CONSTRAINT IF NOT EXISTS chk_shipping_fees 
+    ADD CONSTRAINT chk_shipping_fees 
         CHECK (base_fee >= 0 AND per_kg_fee >= 0 AND per_500g_fee >= 0),
-    ADD CONSTRAINT IF NOT EXISTS chk_shipping_days 
+    ADD CONSTRAINT chk_shipping_days 
         CHECK (estimated_days_min > 0 AND estimated_days_max >= estimated_days_min),
-    ADD CONSTRAINT IF NOT EXISTS chk_shipping_threshold 
+    ADD CONSTRAINT chk_shipping_threshold 
         CHECK (free_ship_threshold IS NULL OR free_ship_threshold > 0);
 
 -- Bảng carts
 ALTER TABLE carts 
-    ADD CONSTRAINT IF NOT EXISTS chk_cart_quantity 
+    ADD CONSTRAINT chk_cart_quantity 
         CHECK (quantity > 0);
 
 -- ============================================================
@@ -588,7 +588,7 @@ SELECT
 FROM books b
 INNER JOIN categories c ON b.category_id = c.id
 INNER JOIN publishers p ON b.publisher_id = p.id
-LEFT JOIN book_authors ba ON b.book_id = ba.book_id
+LEFT JOIN book_authors ba ON b.id = ba.book_id
 LEFT JOIN authors a ON ba.author_id = a.id
 WHERE b.deleted_at IS NULL
 GROUP BY b.id;
