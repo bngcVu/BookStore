@@ -1,0 +1,201 @@
+/* ==============================================
+   AUREUM BOOKS - COLOR SYSTEM DOCUMENTATION
+   ============================================== */
+
+/* 
+   DESIGN PHILOSOPHY:
+   - Warm, sophisticated earth tones
+   - No bright purples or blues (except tier diamond)
+   - Muted, professional status colors
+   - Cohesive bookstore aesthetic
+*/
+
+/* ==============================================
+   STATUS BADGE STYLES
+   ============================================== */
+
+/* Pending / Warning - Warm Amber */
+.badge-pending,
+.status-pending {
+    background: rgba(217, 119, 6, 0.1);
+    color: #D97706;
+    border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+/* Confirmed - Deep Forest Green */
+.badge-confirmed,
+.status-confirmed {
+    background: rgba(6, 95, 70, 0.1);
+    color: #065F46;
+    border: 1px solid rgba(6, 95, 70, 0.2);
+}
+
+/* Shipping / In Transit - Deep Burgundy */
+.badge-shipping,
+.status-shipping {
+    background: rgba(124, 45, 18, 0.1);
+    color: #7C2D12;
+    border: 1px solid rgba(124, 45, 18, 0.2);
+}
+
+/* Delivered / Success - Dark Forest */
+.badge-delivered,
+.badge-success,
+.status-delivered {
+    background: rgba(20, 83, 45, 0.1);
+    color: #14532D;
+    border: 1px solid rgba(20, 83, 45, 0.2);
+}
+
+/* Cancelled / Error - Deep Red */
+.badge-cancelled,
+.badge-danger,
+.status-cancelled {
+    background: rgba(153, 27, 27, 0.1);
+    color: #991B1B;
+    border: 1px solid rgba(153, 27, 27, 0.2);
+}
+
+/* ==============================================
+   TIER BADGE STYLES
+   ============================================== */
+
+/* Silver Tier */
+.tier-silver {
+    background: linear-gradient(135deg, #E5E7EB, #D1D5DB);
+    color: #374151;
+    border: 1px solid #9CA3AF;
+}
+
+/* Gold Tier */
+.tier-gold {
+    background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+    color: #92400E;
+    border: 1px solid #D97706;
+}
+
+/* Diamond Tier */
+.tier-diamond {
+    background: linear-gradient(135deg, #DBEAFE, #BFDBFE);
+    color: #1E3A8A;
+    border: 1px solid #3B82F6;
+}
+
+/* ==============================================
+   BUTTON VARIANTS
+   ============================================== */
+
+.btn-primary {
+    background: var(--color-cta);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--color-cta-light);
+}
+
+/* ==============================================
+   INFO BOX STYLES (Replace Purple Boxes)
+   ============================================== */
+
+/* Shipping Info - Burgundy Theme */
+.info-box-shipping {
+    background: rgba(124, 45, 18, 0.08);
+    border: 1px solid rgba(124, 45, 18, 0.2);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.info-box-shipping .info-icon {
+    color: #7C2D12;
+}
+
+.info-box-shipping .info-text {
+    color: #1C1917;
+}
+
+.info-box-shipping .info-highlight {
+    color: #7C2D12;
+    font-weight: 600;
+}
+
+/* Success Info - Forest Green Theme */
+.info-box-success {
+    background: rgba(20, 83, 45, 0.08);
+    border: 1px solid rgba(20, 83, 45, 0.2);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.info-box-success .info-icon {
+    color: #14532D;
+}
+
+/* Warning Info - Amber Theme */
+.info-box-warning {
+    background: rgba(217, 119, 6, 0.08);
+    border: 1px solid rgba(217, 119, 6, 0.2);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.info-box-warning .info-icon {
+    color: #D97706;
+}
+
+/* ==============================================
+   TAB BADGE COLORS (Refined)
+   ============================================== */
+
+.tab-badge-all {
+    background: var(--color-cta);
+    color: white;
+}
+
+.tab-badge-pending {
+    background: #D97706;
+    color: white;
+}
+
+.tab-badge-confirmed {
+    background: #065F46;
+    color: white;
+}
+
+.tab-badge-shipping {
+    background: #7C2D12;
+    color: white;
+}
+
+.tab-badge-delivered {
+    background: #14532D;
+    color: white;
+}
+
+.tab-badge-cancelled {
+    background: #991B1B;
+    color: white;
+}
+
+/* ==============================================
+   USAGE EXAMPLES
+   ============================================== */
+
+/*
+  STATUS BADGES:
+  <span class="badge badge-shipping">Đang giao hàng</span>
+  <span class="badge badge-delivered">Đã giao</span>
+  <span class="badge badge-pending">Chờ xác nhận</span>
+
+  TIER BADGES:
+  <div class="tier-gold">
+      <i data-lucide="crown"></i> VÀNG
+  </div>
+
+  INFO BOXES:
+  <div class="info-box-shipping">
+      <i data-lucide="truck" class="info-icon"></i>
+      <p class="info-text">Đang giao đến bạn</p>
+      <p class="info-highlight">GHTK123456</p>
+  </div>
+*/

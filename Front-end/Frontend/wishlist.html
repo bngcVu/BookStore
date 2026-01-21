@@ -5,350 +5,350 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sách Yêu Thích - Aureum Books</title>
-    <meta name="description" content="Danh sách sách yêu thích của bạn tại Aureum Books">
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            background: #F5F5FA;
+        }
+
+        .account-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .account-sidebar {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem 0;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #808089;
+            padding: 0 1.5rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .sidebar-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            color: #333333;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-menu-item:hover {
+            background: #F5F5FA;
+            color: var(--color-cta);
+        }
+
+        .sidebar-menu-item.active {
+            background: rgba(146, 64, 14, 0.08);
+            color: var(--color-cta);
+            border-left-color: var(--color-cta);
+            font-weight: 600;
+        }
+
+        .page-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 1.5rem;
+        }
+
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .wishlist-item {
+            background: white;
+            border: 1px solid #E5E5E5;
+            border-radius: 8px;
+            padding: 0.75rem;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .wishlist-item:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            width: 28px;
+            height: 28px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .remove-btn:hover {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .book-image {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+        }
+
+        .book-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 0.25rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .book-author {
+            font-size: 0.85rem;
+            color: #808089;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-price {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-cta);
+            margin-bottom: 0.75rem;
+        }
+
+        .stock-status {
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .stock-status.in-stock {
+            color: #14532D;
+        }
+
+        .stock-status.low-stock {
+            color: #D97706;
+        }
+
+        .stock-status.out-stock {
+            color: #991B1B;
+        }
+
+        .btn-add-cart {
+            width: 100%;
+            padding: 0.6rem;
+            background: var(--color-cta);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-add-cart:hover {
+            background: var(--color-cta-light);
+        }
+
+        .btn-add-cart:disabled {
+            background: #E5E5E5;
+            color: #808089;
+            cursor: not-allowed;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            color: #E5E5E5;
+        }
+    </style>
 </head>
 
 <body>
-    <header>
+    <header class="glass">
         <div class="container">
             <nav style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0;">
                 <a href="index.html" class="logo" style="font-size: 1.75rem; font-weight: 700;">AUREUM BOOKS</a>
                 <div style="display: flex; gap: 2rem; align-items: center;">
                     <a href="catalog.html" class="nav-link">Danh mục</a>
                     <a href="index.html#flash-sale" class="nav-link">Flash Sale</a>
-                    <a href="account.html" class="nav-link">Tài khoản</a>
-                    <a href="cart.html" class="nav-link">
-                        <i data-lucide="shopping-cart"></i>
-                    </a>
+                    <a href="account.html" class="nav-link" style="color: var(--color-cta);">Tài khoản</a>
+                    <a href="cart.html" class="nav-link"><i data-lucide="shopping-cart"></i></a>
                 </div>
             </nav>
         </div>
     </header>
 
-    <main style="padding: 4rem 0; background: #FAFAF9;">
-        <div class="container">
-            <div class="dashboard-container">
-                <!-- Sidebar -->
-                <aside class="sidebar">
-                    <div style="text-align: center; padding: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                        <div
-                            style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--color-cta), #D97706); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; font-weight: 700;">
-                            NT
-                        </div>
-                        <h3 style="color: var(--color-primary); margin-bottom: 0.5rem;">Nguyễn Văn Thành</h3>
-                        <div
-                            style="display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, #FCD34D, #F59E0B); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700; color: var(--color-primary);">
-                            <i data-lucide="crown" style="width: 14px;"></i> VÀNG
-                        </div>
+    <main style="padding-top: 100px;">
+        <div class="account-layout">
+            <aside class="account-sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Tài khoản</div>
+                    <a href="account.html" class="sidebar-menu-item">
+                        <i data-lucide="layout-dashboard" style="width: 18px;"></i> Tổng quan
+                    </a>
+                    <a href="profile.html" class="sidebar-menu-item">
+                        <i data-lucide="user" style="width: 18px;"></i> Thông tin cá nhân
+                    </a>
+                    <a href="addresses.html" class="sidebar-menu-item">
+                        <i data-lucide="map-pin" style="width: 18px;"></i> Sổ địa chỉ
+                    </a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Đơn hàng</div>
+                    <a href="orders.html" class="sidebar-menu-item">
+                        <i data-lucide="package" style="width: 18px;"></i> Quản lý đơn hàng
+                    </a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Ưu đãi</div>
+                    <a href="rewards.html" class="sidebar-menu-item">
+                        <i data-lucide="gift" style="width: 18px;"></i> Điểm thưởng
+                    </a>
+                    <a href="wishlist.html" class="sidebar-menu-item active">
+                        <i data-lucide="heart" style="width: 18px;"></i> Sách yêu thích
+                    </a>
+                </div>
+            </aside>
+
+            <div class="account-main">
+                <div class="page-card">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h1 class="page-title" style="margin: 0;">Sách yêu thích (18)</h1>
+                        <button class="btn-add-cart" style="width: auto; padding: 0.6rem 1.5rem;">
+                            <i data-lucide="shopping-cart"
+                                style="width: 16px; display: inline; margin-right: 0.5rem;"></i>
+                            Thêm tất cả vào giỏ
+                        </button>
                     </div>
 
-                    <nav style="padding: 1rem 0;">
-                        <a href="account.html" class="sidebar-link">
-                            <i data-lucide="layout-dashboard"></i> Tổng quan
-                        </a>
-                        <a href="orders.html" class="sidebar-link">
-                            <i data-lucide="package"></i> Đơn hàng
-                        </a>
-                        <a href="wishlist.html" class="sidebar-link active">
-                            <i data-lucide="heart"></i> Yêu thích
-                        </a>
-                        <a href="rewards.html" class="sidebar-link">
-                            <i data-lucide="gift"></i> Điểm thưởng
-                        </a>
-                        <a href="addresses.html" class="sidebar-link">
-                            <i data-lucide="map-pin"></i> Địa chỉ
-                        </a>
-                        <a href="profile.html" class="sidebar-link">
-                            <i data-lucide="user"></i> Thông tin cá nhân
-                        </a>
-                        <a href="login.html" class="sidebar-link" style="color: #EF4444;">
-                            <i data-lucide="log-out"></i> Đăng xuất
-                        </a>
-                    </nav>
-                </aside>
-
-                <!-- Main Content -->
-                <div class="dashboard-main">
-                    <div class="glass-card">
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
-                            <div>
-                                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Sách Yêu Thích</h1>
-                                <p style="color: var(--color-secondary);">Bạn có <span
-                                        style="color: var(--color-cta); font-weight: 700;">12 cuốn sách</span> trong
-                                    danh sách yêu thích</p>
-                            </div>
-                            <div style="display: flex; gap: 1rem;">
-                                <select class="input-field" style="min-width: 180px;">
-                                    <option>Sắp xếp: Mới nhất</option>
-                                    <option>Cũ nhất</option>
-                                    <option>Giá thấp đến cao</option>
-                                    <option>Giá cao đến thấp</option>
-                                    <option>Tên A-Z</option>
-                                </select>
-                            </div>
+                    <div class="wishlist-grid">
+                        <!-- Item 1 -->
+                        <div class="wishlist-item">
+                            <button class="remove-btn">
+                                <i data-lucide="x" style="width: 16px;"></i>
+                            </button>
+                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80"
+                                alt="Book" class="book-image">
+                            <div class="book-title">Ông Già và Biển Cả</div>
+                            <div class="book-author">Ernest Hemingway</div>
+                            <div class="book-price">185.000đ</div>
+                            <div class="stock-status in-stock">Còn hàng</div>
+                            <button class="btn-add-cart">Thêm vào giỏ</button>
                         </div>
 
-                        <!-- Quick Actions -->
-                        <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
-                            <button class="btn btn-primary">
-                                <i data-lucide="shopping-cart" style="width: 16px;"></i> Thêm tất cả vào giỏ
+                        <!-- Item 2 -->
+                        <div class="wishlist-item">
+                            <button class="remove-btn">
+                                <i data-lucide="x" style="width: 16px;"></i>
                             </button>
-                            <button class="btn btn-secondary">
-                                <i data-lucide="share-2" style="width: 16px;"></i> Chia sẻ danh sách
-                            </button>
-                            <button class="btn btn-secondary" style="border-color: #EF4444; color: #EF4444;">
-                                <i data-lucide="trash-2" style="width: 16px;"></i> Xóa tất cả
-                            </button>
+                            <img src="https://images.unsplash.com/photo-1543004218-ee141104975e?auto=format&fit=crop&w=300&q=80"
+                                alt="Book" class="book-image">
+                            <div class="book-title">Gatsby Vĩ Đại</div>
+                            <div class="book-author">F. Scott Fitzgerald</div>
+                            <div class="book-price">210.000đ</div>
+                            <div class="stock-status in-stock">Còn hàng</div>
+                            <button class="btn-add-cart">Thêm vào giỏ</button>
                         </div>
 
-                        <!-- Wishlist Grid -->
-                        <div class="product-grid">
-                            <!-- Wishlist Item 1 -->
-                            <div class="book-card" style="background: white; position: relative;">
-                                <button class="wishlist-btn"
-                                    style="position: absolute; top: 1rem; right: 1rem; z-index: 10; background: rgba(239,68,68,0.9); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s;">
-                                    <i data-lucide="heart" style="width: 20px; fill: white;"></i>
-                                </button>
-                                <span class="badge"
-                                    style="position: absolute; top: 1rem; left: 1rem; background: #EF4444; z-index: 10;">-40%
-                                    Flash Sale</span>
-
-                                <div class="book-img-wrapper">
-                                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80"
-                                        alt="Book">
-                                </div>
-                                <div class="book-info">
-                                    <p class="book-author">Ernest Hemingway</p>
-                                    <h3>Ông Già và Biển Cả</h3>
-                                    <div style="display: flex; align-items: baseline; gap: 0.75rem; margin: 0.75rem 0;">
-                                        <p style="font-size: 1.5rem; font-weight: 700; color: #EF4444;">111.000đ</p>
-                                        <p
-                                            style="text-decoration: line-through; color: var(--color-secondary); font-size: 0.95rem;">
-                                            185.000đ</p>
-                                    </div>
-
-                                    <!-- Stock Status -->
-                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                                        <div style="width: 8px; height: 8px; background: #10B981; border-radius: 50%;">
-                                        </div>
-                                        <p style="color: #10B981; font-size: 0.85rem; font-weight: 600;">Còn hàng</p>
-                                    </div>
-
-                                    <div style="display: flex; gap: 0.5rem;">
-                                        <button class="btn btn-primary" style="flex: 1;">
-                                            <i data-lucide="shopping-cart" style="width: 16px;"></i> Thêm vào giỏ
-                                        </button>
-                                        <a href="product.html" class="btn btn-secondary" style="padding: 0.75rem;">
-                                            <i data-lucide="eye" style="width: 16px;"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Wishlist Item 2 -->
-                            <div class="book-card" style="background: white; position: relative;">
-                                <button class="wishlist-btn"
-                                    style="position: absolute; top: 1rem; right: 1rem; z-index: 10; background: rgba(239,68,68,0.9); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                                    <i data-lucide="heart" style="width: 20px; fill: white;"></i>
-                                </button>
-                                <span class="badge"
-                                    style="position: absolute; top: 1rem; left: 1rem; background: #8B5CF6; z-index: 10;">Mua
-                                    2 Tặng 1</span>
-
-                                <div class="book-img-wrapper">
-                                    <img src="https://images.unsplash.com/photo-1543004218-ee141104975e?auto=format&fit=crop&w=300&q=80"
-                                        alt="Book">
-                                </div>
-                                <div class="book-info">
-                                    <p class="book-author">F. Scott Fitzgerald</p>
-                                    <h3>Gatsby Vĩ Đại</h3>
-                                    <div style="display: flex; align-items: baseline; gap: 0.75rem; margin: 0.75rem 0;">
-                                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-cta);">
-                                            210.000đ</p>
-                                    </div>
-
-                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                                        <div style="width: 8px; height: 8px; background: #10B981; border-radius: 50%;">
-                                        </div>
-                                        <p style="color: #10B981; font-size: 0.85rem; font-weight: 600;">Còn hàng</p>
-                                    </div>
-
-                                    <div style="display: flex; gap: 0.5rem;">
-                                        <button class="btn btn-primary" style="flex: 1;">
-                                            <i data-lucide="shopping-cart" style="width: 16px;"></i> Thêm vào giỏ
-                                        </button>
-                                        <a href="product.html" class="btn btn-secondary" style="padding: 0.75rem;">
-                                            <i data-lucide="eye" style="width: 16px;"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Wishlist Item 3 -->
-                            <div class="book-card" style="background: white; position: relative;">
-                                <button class="wishlist-btn"
-                                    style="position: absolute; top: 1rem; right: 1rem; z-index: 10; background: rgba(239,68,68,0.9); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                                    <i data-lucide="heart" style="width: 20px; fill: white;"></i>
-                                </button>
-
-                                <div class="book-img-wrapper">
-                                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=300&q=80"
-                                        alt="Book">
-                                </div>
-                                <div class="book-info">
-                                    <p class="book-author">George Orwell</p>
-                                    <h3>1984</h3>
-                                    <div style="display: flex; align-items: baseline; gap: 0.75rem; margin: 0.75rem 0;">
-                                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-cta);">
-                                            195.000đ</p>
-                                    </div>
-
-                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                                        <div style="width: 8px; height: 8px; background: #F59E0B; border-radius: 50%;">
-                                        </div>
-                                        <p style="color: #F59E0B; font-size: 0.85rem; font-weight: 600;">Sắp hết hàng
-                                        </p>
-                                    </div>
-
-                                    <div style="display: flex; gap: 0.5rem;">
-                                        <button class="btn btn-primary" style="flex: 1;">
-                                            <i data-lucide="shopping-cart" style="width: 16px;"></i> Thêm vào giỏ
-                                        </button>
-                                        <a href="product.html" class="btn btn-secondary" style="padding: 0.75rem;">
-                                            <i data-lucide="eye" style="width: 16px;"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Wishlist Item 4 - Out of Stock -->
-                            <div class="book-card" style="background: white; position: relative; opacity: 0.6;">
-                                <button class="wishlist-btn"
-                                    style="position: absolute; top: 1rem; right: 1rem; z-index: 10; background: rgba(239,68,68,0.9); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                                    <i data-lucide="heart" style="width: 20px; fill: white;"></i>
-                                </button>
-                                <span class="badge"
-                                    style="position: absolute; top: 1rem; left: 1rem; background: #78716C; z-index: 10;">Hết
-                                    hàng</span>
-
-                                <div class="book-img-wrapper">
-                                    <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=300&q=80"
-                                        alt="Book">
-                                </div>
-                                <div class="book-info">
-                                    <p class="book-author">Haruki Murakami</p>
-                                    <h3>Rừng Na Uy</h3>
-                                    <div style="display: flex; align-items: baseline; gap: 0.75rem; margin: 0.75rem 0;">
-                                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-secondary);">
-                                            245.000đ</p>
-                                    </div>
-
-                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                                        <div style="width: 8px; height: 8px; background: #EF4444; border-radius: 50%;">
-                                        </div>
-                                        <p style="color: #EF4444; font-size: 0.85rem; font-weight: 600;">Hết hàng</p>
-                                    </div>
-
-                                    <div style="display: flex; gap: 0.5rem;">
-                                        <button class="btn btn-secondary" style="flex: 1;" disabled>
-                                            <i data-lucide="bell" style="width: 16px;"></i> Báo khi có hàng
-                                        </button>
-                                        <a href="product.html" class="btn btn-secondary" style="padding: 0.75rem;">
-                                            <i data-lucide="eye" style="width: 16px;"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Wishlist Item 5 -->
-                            <div class="book-card" style="background: white; position: relative;">
-                                <button class="wishlist-btn"
-                                    style="position: absolute; top: 1rem; right: 1rem; z-index: 10; background: rgba(239,68,68,0.9); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                                    <i data-lucide="heart" style="width: 20px; fill: white;"></i>
-                                </button>
-                                <span class="badge"
-                                    style="position: absolute; top: 1rem; left: 1rem; background: #10B981; z-index: 10;">Mới
-                                    về</span>
-
-                                <div class="book-img-wrapper">
-                                    <img src="https://images.unsplash.com/photo-1524578271613-d550eacf6090?auto=format&fit=crop&w=300&q=80"
-                                        alt="Book">
-                                </div>
-                                <div class="book-info">
-                                    <p class="book-author">Jane Austen</p>
-                                    <h3>Kiêu Hãnh và Định Kiến</h3>
-                                    <div style="display: flex; align-items: baseline; gap: 0.75rem; margin: 0.75rem 0;">
-                                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-cta);">
-                                            165.000đ</p>
-                                    </div>
-
-                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                                        <div style="width: 8px; height: 8px; background: #10B981; border-radius: 50%;">
-                                        </div>
-                                        <p style="color: #10B981; font-size: 0.85rem; font-weight: 600;">Còn hàng</p>
-                                    </div>
-
-                                    <div style="display: flex; gap: 0.5rem;">
-                                        <button class="btn btn-primary" style="flex: 1;">
-                                            <i data-lucide="shopping-cart" style="width: 16px;"></i> Thêm vào giỏ
-                                        </button>
-                                        <a href="product.html" class="btn btn-secondary" style="padding: 0.75rem;">
-                                            <i data-lucide="eye" style="width: 16px;"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Wishlist Item 6 -->
-                            <div class="book-card" style="background: white; position: relative;">
-                                <button class="wishlist-btn"
-                                    style="position: absolute; top: 1rem; right: 1rem; z-index: 10; background: rgba(239,68,68,0.9); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                                    <i data-lucide="heart" style="width: 20px; fill: white;"></i>
-                                </button>
-
-                                <div class="book-img-wrapper">
-                                    <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=300&q=80"
-                                        alt="Book">
-                                </div>
-                                <div class="book-info">
-                                    <p class="book-author">Leo Tolstoy</p>
-                                    <h3>Chiến Tranh và Hòa Bình</h3>
-                                    <div style="display: flex; align-items: baseline; gap: 0.75rem; margin: 0.75rem 0;">
-                                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-cta);">
-                                            385.000đ</p>
-                                    </div>
-
-                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                                        <div style="width: 8px; height: 8px; background: #10B981; border-radius: 50%;">
-                                        </div>
-                                        <p style="color: #10B981; font-size: 0.85rem; font-weight: 600;">Còn hàng</p>
-                                    </div>
-
-                                    <div style="display: flex; gap: 0.5rem;">
-                                        <button class="btn btn-primary" style="flex: 1;">
-                                            <i data-lucide="shopping-cart" style="width: 16px;"></i> Thêm vào giỏ
-                                        </button>
-                                        <a href="product.html" class="btn btn-secondary" style="padding: 0.75rem;">
-                                            <i data-lucide="eye" style="width: 16px;"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                        <!-- Item 3 - Low Stock -->
+                        <div class="wishlist-item">
+                            <button class="remove-btn">
+                                <i data-lucide="x" style="width: 16px;"></i>
+                            </button>
+                            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=300&q=80"
+                                alt="Book" class="book-image">
+                            <div class="book-title">1984</div>
+                            <div class="book-author">George Orwell</div>
+                            <div class="book-price">195.000đ</div>
+                            <div class="stock-status low-stock">Sắp hết hàng</div>
+                            <button class="btn-add-cart">Thêm vào giỏ</button>
                         </div>
 
-                        <!-- Empty State (Hidden when has items) -->
-                        <div class="empty-state" style="display: none; text-align: center; padding: 4rem 2rem;">
-                            <i data-lucide="heart"
-                                style="width: 80px; height: 80px; color: var(--color-secondary); margin: 0 auto 1.5rem;"></i>
-                            <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Danh sách yêu thích trống</h2>
-                            <p style="color: var(--color-secondary); margin-bottom: 2rem;">Hãy thêm những cuốn sách yêu
-                                thích của bạn để dễ dàng theo dõi và mua sắm sau này</p>
-                            <a href="catalog.html" class="btn btn-primary">
-                                <i data-lucide="book-open" style="width: 16px;"></i> Khám phá sách
-                            </a>
+                        <!-- Item 4 - Out of Stock -->
+                        <div class="wishlist-item">
+                            <button class="remove-btn">
+                                <i data-lucide="x" style="width: 16px;"></i>
+                            </button>
+                            <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=300&q=80"
+                                alt="Book" class="book-image">
+                            <div class="book-title">Rừng Na Uy</div>
+                            <div class="book-author">Haruki Murakami</div>
+                            <div class="book-price">245.000đ</div>
+                            <div class="stock-status out-stock">Hết hàng</div>
+                            <button class="btn-add-cart" disabled>Hết hàng</button>
+                        </div>
+
+                        <!-- Item 5 -->
+                        <div class="wishlist-item">
+                            <button class="remove-btn">
+                                <i data-lucide="x" style="width: 16px;"></i>
+                            </button>
+                            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=300&q=80"
+                                alt="Book" class="book-image">
+                            <div class="book-title">Nhà Giả Kim</div>
+                            <div class="book-author">Paulo Coelho</div>
+                            <div class="book-price">165.000đ</div>
+                            <div class="stock-status in-stock">Còn hàng</div>
+                            <button class="btn-add-cart">Thêm vào giỏ</button>
+                        </div>
+
+                        <!-- Item 6 -->
+                        <div class="wishlist-item">
+                            <button class="remove-btn">
+                                <i data-lucide="x" style="width: 16px;"></i>
+                            </button>
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80"
+                                alt="Book" class="book-image">
+                            <div class="book-title">Đắc Nhân Tâm</div>
+                            <div class="book-author">Dale Carnegie</div>
+                            <div class="book-price">125.000đ</div>
+                            <div class="stock-status in-stock">Còn hàng</div>
+                            <button class="btn-add-cart">Thêm vào giỏ</button>
                         </div>
                     </div>
                 </div>
@@ -356,54 +356,8 @@
         </div>
     </main>
 
-    <footer>
-        <div class="container footer-grid">
-            <div class="footer-col">
-                <a href="#" class="logo" style="color: white; font-size: 2rem;">AUREUM BOOKS</a>
-                <p style="margin-top: 1.5rem;">Hành trình đi tìm tri thức bắt đầu từ một trang sách tuyệt mỹ.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Về Chúng Tôi</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Câu chuyện thương hiệu</a></li>
-                    <li><a href="#">Tầm nhìn & Sứ mệnh</a></li>
-                    <li><a href="#">Chính sách bảo mật</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Hỗ Trợ Khách Hàng</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Hướng dẫn mua hàng</a></li>
-                    <li><a href="#">Chính sách đổi trả</a></li>
-                    <li><a href="#">Vận chuyển & Giao nhận</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Liên Hệ</h4>
-                <p>Email: contact@aureumbooks.com</p>
-                <p>Hotline: 1900 1234</p>
-            </div>
-        </div>
-        <div class="container footer-bottom">
-            <p>&copy; 2026 Aureum Books. Tất cả quyền được bảo lưu.</p>
-        </div>
-    </footer>
-
     <script>
         lucide.createIcons();
-
-        // Wishlist toggle
-        const wishlistBtns = document.querySelectorAll('.wishlist-btn');
-        wishlistBtns.forEach(btn => {
-            btn.addEventListener('click', function () {
-                // Toggle wishlist (would sync with backend)
-                this.style.background = 'rgba(120,113,108,0.9)';
-                this.querySelector('i').style.fill = 'none';
-                setTimeout(() => {
-                    this.closest('.book-card').style.display = 'none';
-                }, 300);
-            });
-        });
     </script>
 </body>
 

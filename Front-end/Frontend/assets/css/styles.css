@@ -1,16 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-    /* Color Palette - Refined & Premium */
+    /* Color Palette - Sophisticated Bookstore Theme */
     --color-primary: #1C1917;
-    --color-secondary: #57534E;
-    --color-cta: #A16207;
-    --color-background: #FAFAF9;
+    /* Rich Charcoal - main text */
+    --color-secondary: #78716C;
+    /* Warm Gray - secondary text */
+    --color-cta: #92400E;
+    /* Deep Amber - primary CTA */
+    --color-cta-light: #B45309;
+    /* Lighter Amber - hover states */
+    --color-background: #FAF8F5;
+    /* Warm Cream - page background */
     --color-bg: #1C1917;
-    /* Dark background for account pages */
+    /* Dark background (legacy) */
     --color-text: #1C1917;
     --color-white-80: rgba(255, 255, 255, 0.85);
     --color-glass: rgba(255, 255, 255, 0.7);
+
+    /* Status Colors - Muted & Sophisticated */
+    --color-pending: #D97706;
+    /* Warm Amber - pending/warning */
+    --color-confirmed: #065F46;
+    /* Deep Forest Green - confirmed */
+    --color-shipping: #7C2D12;
+    /* Deep Burgundy - in transit */
+    --color-delivered: #14532D;
+    /* Dark Forest - success */
+    --color-cancelled: #991B1B;
+    /* Deep Red - error/cancelled */
+
+    /* Tier Colors - Refined Metallics */
+    --color-tier-silver: #71717A;
+    /* Muted Silver */
+    --color-tier-gold: #92400E;
+    /* Deep Gold */
+    --color-tier-diamond: #1E3A8A;
+    /* Deep Sapphire Blue */
 
     /* Spacing - Balanced System */
     --space-xs: 0.25rem;
