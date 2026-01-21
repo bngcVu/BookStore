@@ -6,6 +6,8 @@
     --color-secondary: #57534E;
     --color-cta: #A16207;
     --color-background: #FAFAF9;
+    --color-bg: #1C1917;
+    /* Dark background for account pages */
     --color-text: #1C1917;
     --color-white-80: rgba(255, 255, 255, 0.85);
     --color-glass: rgba(255, 255, 255, 0.7);
@@ -627,6 +629,181 @@ footer {
     background: var(--color-primary);
     color: white;
     padding: var(--space-3xl) 0;
+}
+
+/* Dashboard & Account Pages - Light Elegant Theme */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.sidebar {
+    background: white;
+    border: 1px solid #E7E5E4;
+    border-radius: 16px;
+    overflow: hidden;
+    position: sticky;
+    top: 100px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    color: #57534E;
+    transition: all 0.3s;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-link:hover {
+    background: #FAFAF9;
+    color: var(--color-primary);
+}
+
+.sidebar-link.active {
+    background: #FEF3C7;
+    color: var(--color-cta);
+    border-left-color: var(--color-cta);
+}
+
+.dashboard-main {
+    min-width: 0;
+}
+
+.glass-card {
+    background: white;
+    border: 1px solid #E7E5E4;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 1rem;
+    border-bottom: 2px solid #E7E5E4;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 1rem 1.5rem;
+    color: #78716C;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tab-btn:hover {
+    color: var(--color-primary);
+}
+
+.tab-btn.active {
+    color: var(--color-cta);
+    border-bottom-color: var(--color-cta);
+}
+
+/* Input Groups */
+.input-group {
+    position: relative;
+}
+
+.input-field,
+.input-group input,
+.input-group select,
+select.input-field {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: #FAFAF9;
+    border: 1px solid #E7E5E4;
+    border-radius: 8px;
+    color: var(--color-primary);
+    font-size: 0.95rem;
+    transition: all 0.3s;
+}
+
+.input-field:focus,
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: var(--color-cta);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(161, 98, 7, 0.1);
+}
+
+.input-field::placeholder {
+    color: #A8A29E;
+}
+
+/* Stat Cards */
+.stat-card {
+    background: white;
+    border: 1px solid #E7E5E4;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Table */
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th {
+    text-align: left;
+    padding: 1rem;
+    color: #78716C;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid #E7E5E4;
+    background: #FAFAF9;
+}
+
+table td {
+    padding: 1rem;
+    color: var(--color-primary);
+    border-bottom: 1px solid #F5F5F4;
+}
+
+table tr:hover {
+    background: #FAFAF9;
+}
+
+/* Nav Link */
+.nav-link {
+    color: var(--color-text);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--color-cta);
+}
+
+/* Logo */
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
 }
 
 /* Mobile Responsive */

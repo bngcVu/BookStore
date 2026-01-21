@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Cá Nhân - Aureum Books</title>
+    <meta name="description" content="Quản lý thông tin cá nhân của bạn tại Aureum Books">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0;">
+                <a href="index.html" class="logo" style="font-size: 1.75rem; font-weight: 700;">AUREUM BOOKS</a>
+                <div style="display: flex; gap: 2rem; align-items: center;">
+                    <a href="catalog.html" class="nav-link">Danh mục</a>
+                    <a href="index.html#flash-sale" class="nav-link">Flash Sale</a>
+                    <a href="account.html" class="nav-link">Tài khoản</a>
+                    <a href="cart.html" class="nav-link">
+                        <i data-lucide="shopping-cart"></i>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding: 4rem 0; background: #FAFAF9;">
+        <div class="container">
+            <div class="dashboard-container">
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div style="text-align: center; padding: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <div
+                            style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--color-cta), #D97706); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; font-weight: 700;">
+                            NT
+                        </div>
+                        <h3 style="color: var(--color-primary); margin-bottom: 0.5rem;">Nguyễn Văn Thành</h3>
+                        <div
+                            style="display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, #FCD34D, #F59E0B); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700; color: var(--color-primary);">
+                            <i data-lucide="crown" style="width: 14px;"></i> VÀNG
+                        </div>
+                    </div>
+
+                    <nav style="padding: 1rem 0;">
+                        <a href="account.html" class="sidebar-link">
+                            <i data-lucide="layout-dashboard"></i> Tổng quan
+                        </a>
+                        <a href="orders.html" class="sidebar-link">
+                            <i data-lucide="package"></i> Đơn hàng
+                        </a>
+                        <a href="wishlist.html" class="sidebar-link">
+                            <i data-lucide="heart"></i> Yêu thích
+                        </a>
+                        <a href="rewards.html" class="sidebar-link">
+                            <i data-lucide="gift"></i> Điểm thưởng
+                        </a>
+                        <a href="addresses.html" class="sidebar-link">
+                            <i data-lucide="map-pin"></i> Địa chỉ
+                        </a>
+                        <a href="profile.html" class="sidebar-link active">
+                            <i data-lucide="user"></i> Thông tin cá nhân
+                        </a>
+                        <a href="login.html" class="sidebar-link" style="color: #EF4444;">
+                            <i data-lucide="log-out"></i> Đăng xuất
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="dashboard-main">
+                    <!-- Profile Header -->
+                    <div class="glass-card" style="margin-bottom: 2rem;">
+                        <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
+                            <div style="position: relative;">
+                                <div
+                                    style="width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--color-cta), #D97706); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: white; font-weight: 700;">
+                                    NT
+                                </div>
+                                <button
+                                    style="position: absolute; bottom: 0; right: 0; background: var(--color-cta); border: 3px solid var(--color-primary); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                    <i data-lucide="camera" style="width: 18px; color: white;"></i>
+                                </button>
+                            </div>
+                            <div style="flex: 1;">
+                                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Nguyễn Văn Thành</h1>
+                                <p style="color: var(--color-secondary); margin-bottom: 1rem;">Thành viên từ: 15/03/2024
+                                </p>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                    <div
+                                        style="display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, #FCD34D, #F59E0B); padding: 0.5rem 1.25rem; border-radius: 20px;">
+                                        <i data-lucide="crown" style="width: 16px; color: var(--color-primary);"></i>
+                                        <span style="font-weight: 700; color: var(--color-primary);">Hạng VÀNG</span>
+                                    </div>
+                                    <div
+                                        style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(16,185,129,0.2); padding: 0.5rem 1.25rem; border-radius: 20px; border: 1px solid rgba(16,185,129,0.3);">
+                                        <i data-lucide="shield-check" style="width: 16px; color: #10B981;"></i>
+                                        <span style="font-weight: 600; color: #10B981;">Đã xác thực</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personal Information Form -->
+                    <div class="glass-card" style="margin-bottom: 2rem;">
+                        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Thông Tin Cá Nhân</h2>
+
+                        <form style="display: grid; gap: 1.5rem;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label
+                                        style="display: block; margin-bottom: 0.5rem; color: white; font-weight: 600;">Họ
+                                        và tên *</label>
+                                    <input type="text" class="input-field" value="Nguyễn Văn Thành" required>
+                                </div>
+                                <div class="form-group">
+                                    <label
+                                        style="display: block; margin-bottom: 0.5rem; color: white; font-weight: 600;">Email
+                                        *</label>
+                                    <div style="position: relative;">
+                                        <input type="email" class="input-field" value="thanh.nguyen@example.com"
+                                            required>
+                                        <span
+                                            style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: #10B981;">
+                                            <i data-lucide="check-circle" style="width: 18px;"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label
+                                        style="display: block; margin-bottom: 0.5rem; color: white; font-weight: 600;">Số
+                                        điện thoại *</label>
+                                    <div style="position: relative;">
+                                        <input type="tel" class="input-field" value="0901 234 567" required>
+                                        <span
+                                            style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: #10B981;">
+                                            <i data-lucide="check-circle" style="width: 18px;"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label
+                                        style="display: block; margin-bottom: 0.5rem; color: white; font-weight: 600;">Ngày
+                                        sinh</label>
+                                    <input type="date" class="input-field" value="1995-05-15">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label
+                                    style="display: block; margin-bottom: 0.5rem; color: white; font-weight: 600;">Giới
+                                    tính</label>
+                                <div style="display: flex; gap: 2rem;">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                        <input type="radio" name="gender" value="male" checked
+                                            style="width: 18px; height: 18px;">
+                                        <span style="color: white;">Nam</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                        <input type="radio" name="gender" value="female"
+                                            style="width: 18px; height: 18px;">
+                                        <span style="color: white;">Nữ</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                        <input type="radio" name="gender" value="other"
+                                            style="width: 18px; height: 18px;">
+                                        <span style="color: white;">Khác</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div
+                                style="display: flex; justify-content: flex-end; gap: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                                <button type="button" class="btn btn-secondary">Hủy thay đổi</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i data-lucide="save" style="width: 16px;"></i> Lưu thay đổi
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Change Password -->
+                    <div class="glass-card" style="margin-bottom: 2rem;">
+                        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Đổi Mật Khẩu</h2>
+
+                        <form style="display: grid; gap: 1.5rem;">
+                            <div class="form-group">
+                                <label
+                                    style="display: block; margin-bottom: 0.5rem; color: white; font-weight: 600;">Mật
+                                    khẩu hiện tại *</label>
+                                <div style="position: relative;">
+                                    <input type="password" class="input-field" placeholder="Nhập mật khẩu hiện tại"
+                                        required>
+                                    <button type="button"
+                                        style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;">
+                                        <i data-lucide="eye" style="width: 18px; color: var(--color-secondary);"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label
+                                    style="display: block; margin-bottom: 0.5rem; color: white; font-weight: 600;">Mật
+                                    khẩu mới *</label>
+                                <div style="position: relative;">
+                                    <input type="password" class="input-field" placeholder="Nhập mật khẩu mới" required>
+                                    <button type="button"
+                                        style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;">
+                                        <i data-lucide="eye" style="width: 18px; color: var(--color-secondary);"></i>
+                                    </button>
+                                </div>
+                                <p style="color: var(--color-secondary); font-size: 0.85rem; margin-top: 0.5rem;">
+                                    Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và số
+                                </p>
+                            </div>
+
+                            <div class="form-group">
+                                <label
+                                    style="display: block; margin-bottom: 0.5rem; color: white; font-weight: 600;">Xác
+                                    nhận mật khẩu mới *</label>
+                                <div style="position: relative;">
+                                    <input type="password" class="input-field" placeholder="Nhập lại mật khẩu mới"
+                                        required>
+                                    <button type="button"
+                                        style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;">
+                                        <i data-lucide="eye" style="width: 18px; color: var(--color-secondary);"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div
+                                style="display: flex; justify-content: flex-end; gap: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                                <button type="button" class="btn btn-secondary">Hủy</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i data-lucide="lock" style="width: 16px;"></i> Đổi mật khẩu
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Notification Preferences -->
+                    <div class="glass-card" style="margin-bottom: 2rem;">
+                        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Tùy Chọn Thông Báo</h2>
+
+                        <div style="display: grid; gap: 1.5rem;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <div>
+                                    <h4 style="color: white; margin-bottom: 0.25rem;">Thông báo đơn hàng</h4>
+                                    <p style="color: var(--color-secondary); font-size: 0.9rem;">Nhận thông báo về trạng
+                                        thái đơn hàng qua email</p>
+                                </div>
+                                <label class="toggle-switch"
+                                    style="position: relative; display: inline-block; width: 52px; height: 28px;">
+                                    <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                                    <span
+                                        style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: var(--color-cta); border-radius: 28px; transition: 0.3s;"></span>
+                                </label>
+                            </div>
+
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <div>
+                                    <h4 style="color: white; margin-bottom: 0.25rem;">Khuyến mãi & Ưu đãi</h4>
+                                    <p style="color: var(--color-secondary); font-size: 0.9rem;">Nhận thông tin về các
+                                        chương trình khuyến mãi đặc biệt</p>
+                                </div>
+                                <label class="toggle-switch"
+                                    style="position: relative; display: inline-block; width: 52px; height: 28px;">
+                                    <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                                    <span
+                                        style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: var(--color-cta); border-radius: 28px; transition: 0.3s;"></span>
+                                </label>
+                            </div>
+
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <div>
+                                    <h4 style="color: white; margin-bottom: 0.25rem;">Sách mới</h4>
+                                    <p style="color: var(--color-secondary); font-size: 0.9rem;">Thông báo khi có sách
+                                        mới phù hợp với sở thích</p>
+                                </div>
+                                <label class="toggle-switch"
+                                    style="position: relative; display: inline-block; width: 52px; height: 28px;">
+                                    <input type="checkbox" style="opacity: 0; width: 0; height: 0;">
+                                    <span
+                                        style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.2); border-radius: 28px; transition: 0.3s;"></span>
+                                </label>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <h4 style="color: white; margin-bottom: 0.25rem;">Tin tức & Blog</h4>
+                                    <p style="color: var(--color-secondary); font-size: 0.9rem;">Nhận bài viết và tin
+                                        tức về sách từ Aureum Books</p>
+                                </div>
+                                <label class="toggle-switch"
+                                    style="position: relative; display: inline-block; width: 52px; height: 28px;">
+                                    <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                                    <span
+                                        style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: var(--color-cta); border-radius: 28px; transition: 0.3s;"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Account Actions -->
+                    <div class="glass-card">
+                        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: #EF4444;">Vùng Nguy Hiểm</h2>
+
+                        <div style="display: grid; gap: 1rem;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px;">
+                                <div>
+                                    <h4 style="color: white; margin-bottom: 0.25rem;">Vô hiệu hóa tài khoản</h4>
+                                    <p style="color: var(--color-secondary); font-size: 0.9rem;">Tạm thời vô hiệu hóa
+                                        tài khoản của bạn</p>
+                                </div>
+                                <button class="btn btn-secondary" style="border-color: #EF4444; color: #EF4444;">
+                                    Vô hiệu hóa
+                                </button>
+                            </div>
+
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; padding: 1.25rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px;">
+                                <div>
+                                    <h4 style="color: white; margin-bottom: 0.25rem;">Xóa tài khoản</h4>
+                                    <p style="color: var(--color-secondary); font-size: 0.9rem;">Xóa vĩnh viễn tài khoản
+                                        và toàn bộ dữ liệu</p>
+                                </div>
+                                <button class="btn btn-secondary"
+                                    style="background: #EF4444; border-color: #EF4444; color: white;">
+                                    Xóa tài khoản
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="#" class="logo" style="color: white; font-size: 2rem;">AUREUM BOOKS</a>
+                <p style="margin-top: 1.5rem;">Hành trình đi tìm tri thức bắt đầu từ một trang sách tuyệt mỹ.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Về Chúng Tôi</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Câu chuyện thương hiệu</a></li>
+                    <li><a href="#">Tầm nhìn & Sứ mệnh</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Hỗ Trợ Khách Hàng</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Hướng dẫn mua hàng</a></li>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                    <li><a href="#">Vận chuyển & Giao nhận</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Liên Hệ</h4>
+                <p>Email: contact@aureumbooks.com</p>
+                <p>Hotline: 1900 1234</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Aureum Books. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Toggle password visibility
+        const togglePasswordBtns = document.querySelectorAll('button[type="button"]');
+        togglePasswordBtns.forEach(btn => {
+            if (btn.querySelector('[data-lucide="eye"]')) {
+                btn.addEventListener('click', function () {
+                    const input = this.previousElementSibling || this.parentElement.querySelector('input');
+                    if (input && input.type === 'password') {
+                        input.type = 'text';
+                        this.innerHTML = '<i data-lucide="eye-off" style="width: 18px; color: var(--color-secondary);"></i>';
+                    } else if (input) {
+                        input.type = 'password';
+                        this.innerHTML = '<i data-lucide="eye" style="width: 18px; color: var(--color-secondary);"></i>';
+                    }
+                    lucide.createIcons();
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

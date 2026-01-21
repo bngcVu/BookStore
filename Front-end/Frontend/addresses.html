@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Địa Chỉ Giao Hàng - Aureum Books</title>
+    <meta name="description" content="Quản lý địa chỉ giao hàng của bạn tại Aureum Books">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0;">
+                <a href="index.html" class="logo" style="font-size: 1.75rem; font-weight: 700;">AUREUM BOOKS</a>
+                <div style="display: flex; gap: 2rem; align-items: center;">
+                    <a href="catalog.html" class="nav-link">Danh mục</a>
+                    <a href="index.html#flash-sale" class="nav-link">Flash Sale</a>
+                    <a href="account.html" class="nav-link">Tài khoản</a>
+                    <a href="cart.html" class="nav-link">
+                        <i data-lucide="shopping-cart"></i>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding: 4rem 0; background: #FAFAF9;">
+        <div class="container">
+            <div class="dashboard-container">
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div style="text-align: center; padding: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <div
+                            style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--color-cta), #D97706); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; font-weight: 700;">
+                            NT
+                        </div>
+                        <h3 style="color: var(--color-primary); margin-bottom: 0.5rem;">Nguyễn Văn Thành</h3>
+                        <div
+                            style="display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, #FCD34D, #F59E0B); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700; color: var(--color-primary);">
+                            <i data-lucide="crown" style="width: 14px;"></i> VÀNG
+                        </div>
+                    </div>
+
+                    <nav style="padding: 1rem 0;">
+                        <a href="account.html" class="sidebar-link">
+                            <i data-lucide="layout-dashboard"></i> Tổng quan
+                        </a>
+                        <a href="orders.html" class="sidebar-link">
+                            <i data-lucide="package"></i> Đơn hàng
+                        </a>
+                        <a href="wishlist.html" class="sidebar-link">
+                            <i data-lucide="heart"></i> Yêu thích
+                        </a>
+                        <a href="rewards.html" class="sidebar-link">
+                            <i data-lucide="gift"></i> Điểm thưởng
+                        </a>
+                        <a href="addresses.html" class="sidebar-link active">
+                            <i data-lucide="map-pin"></i> Địa chỉ
+                        </a>
+                        <a href="profile.html" class="sidebar-link">
+                            <i data-lucide="user"></i> Thông tin cá nhân
+                        </a>
+                        <a href="login.html" class="sidebar-link" style="color: #EF4444;">
+                            <i data-lucide="log-out"></i> Đăng xuất
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="dashboard-main">
+                    <div class="glass-card">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+                            <div>
+                                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Địa Chỉ Giao Hàng</h1>
+                                <p style="color: var(--color-secondary);">Quản lý địa chỉ giao hàng của bạn</p>
+                            </div>
+                            <button class="btn btn-primary" id="addAddressBtn">
+                                <i data-lucide="plus" style="width: 16px;"></i> Thêm địa chỉ mới
+                            </button>
+                        </div>
+
+                        <!-- Addresses Grid -->
+                        <div style="display: grid; gap: 1.5rem;">
+                            <!-- Default Address -->
+                            <div class="address-card"
+                                style="background: rgba(255,255,255,0.05); border: 2px solid var(--color-cta); border-radius: 16px; padding: 1.5rem; position: relative;">
+                                <div style="position: absolute; top: 1rem; right: 1rem; display: flex; gap: 0.5rem;">
+                                    <span class="badge" style="background: var(--color-cta);">Mặc định</span>
+                                    <button class="icon-btn"
+                                        style="background: rgba(255,255,255,0.1); border: none; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                        <i data-lucide="edit-2" style="width: 16px; color: white;"></i>
+                                    </button>
+                                    <button class="icon-btn"
+                                        style="background: rgba(239,68,68,0.2); border: none; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                        <i data-lucide="trash-2" style="width: 16px; color: #EF4444;"></i>
+                                    </button>
+                                </div>
+
+                                <div style="margin-bottom: 1rem;">
+                                    <div
+                                        style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                                        <i data-lucide="user" style="width: 18px; color: var(--color-cta);"></i>
+                                        <h3 style="font-size: 1.1rem; color: white;">Nguyễn Văn Thành</h3>
+                                    </div>
+                                    <div
+                                        style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                                        <i data-lucide="phone" style="width: 18px; color: var(--color-secondary);"></i>
+                                        <p style="color: var(--color-secondary);">0901 234 567</p>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; align-items: start; gap: 0.75rem; margin-bottom: 1rem;">
+                                    <i data-lucide="map-pin"
+                                        style="width: 18px; color: var(--color-secondary); margin-top: 0.2rem;"></i>
+                                    <div>
+                                        <p style="color: white; margin-bottom: 0.25rem;">123 Đường Lê Lợi, Phường Bến
+                                            Nghé</p>
+                                        <p style="color: var(--color-secondary);">Quận 1, TP. Hồ Chí Minh</p>
+                                    </div>
+                                </div>
+
+                                <div
+                                    style="display: flex; gap: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                                    <span class="badge"
+                                        style="background: rgba(16,185,129,0.2); color: #10B981; border: 1px solid rgba(16,185,129,0.3);">
+                                        <i data-lucide="home" style="width: 14px;"></i> Nhà riêng
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Address 2 -->
+                            <div class="address-card"
+                                style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 1.5rem; position: relative;">
+                                <div style="position: absolute; top: 1rem; right: 1rem; display: flex; gap: 0.5rem;">
+                                    <button class="icon-btn"
+                                        style="background: rgba(255,255,255,0.1); border: none; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                        <i data-lucide="edit-2" style="width: 16px; color: white;"></i>
+                                    </button>
+                                    <button class="icon-btn"
+                                        style="background: rgba(239,68,68,0.2); border: none; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                        <i data-lucide="trash-2" style="width: 16px; color: #EF4444;"></i>
+                                    </button>
+                                </div>
+
+                                <div style="margin-bottom: 1rem;">
+                                    <div
+                                        style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                                        <i data-lucide="user" style="width: 18px; color: var(--color-secondary);"></i>
+                                        <h3 style="font-size: 1.1rem; color: white;">Nguyễn Văn Thành</h3>
+                                    </div>
+                                    <div
+                                        style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                                        <i data-lucide="phone" style="width: 18px; color: var(--color-secondary);"></i>
+                                        <p style="color: var(--color-secondary);">0901 234 567</p>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; align-items: start; gap: 0.75rem; margin-bottom: 1rem;">
+                                    <i data-lucide="map-pin"
+                                        style="width: 18px; color: var(--color-secondary); margin-top: 0.2rem;"></i>
+                                    <div>
+                                        <p style="color: white; margin-bottom: 0.25rem;">456 Đường Nguyễn Huệ, Phường
+                                            Bến Nghé</p>
+                                        <p style="color: var(--color-secondary);">Quận 1, TP. Hồ Chí Minh</p>
+                                    </div>
+                                </div>
+
+                                <div
+                                    style="display: flex; gap: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                                    <span class="badge"
+                                        style="background: rgba(59,130,246,0.2); color: #3B82F6; border: 1px solid rgba(59,130,246,0.3);">
+                                        <i data-lucide="briefcase" style="width: 14px;"></i> Văn phòng
+                                    </span>
+                                    <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                                        Đặt làm mặc định
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Address 3 -->
+                            <div class="address-card"
+                                style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 1.5rem; position: relative;">
+                                <div style="position: absolute; top: 1rem; right: 1rem; display: flex; gap: 0.5rem;">
+                                    <button class="icon-btn"
+                                        style="background: rgba(255,255,255,0.1); border: none; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                        <i data-lucide="edit-2" style="width: 16px; color: white;"></i>
+                                    </button>
+                                    <button class="icon-btn"
+                                        style="background: rgba(239,68,68,0.2); border: none; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                        <i data-lucide="trash-2" style="width: 16px; color: #EF4444;"></i>
+                                    </button>
+                                </div>
+
+                                <div style="margin-bottom: 1rem;">
+                                    <div
+                                        style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                                        <i data-lucide="user" style="width: 18px; color: var(--color-secondary);"></i>
+                                        <h3 style="font-size: 1.1rem; color: white;">Trần Thị Mai (Mẹ)</h3>
+                                    </div>
+                                    <div
+                                        style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                                        <i data-lucide="phone" style="width: 18px; color: var(--color-secondary);"></i>
+                                        <p style="color: var(--color-secondary);">0912 345 678</p>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; align-items: start; gap: 0.75rem; margin-bottom: 1rem;">
+                                    <i data-lucide="map-pin"
+                                        style="width: 18px; color: var(--color-secondary); margin-top: 0.2rem;"></i>
+                                    <div>
+                                        <p style="color: white; margin-bottom: 0.25rem;">789 Đường Trần Hưng Đạo, Phường
+                                            5</p>
+                                        <p style="color: var(--color-secondary);">Quận 5, TP. Hồ Chí Minh</p>
+                                    </div>
+                                </div>
+
+                                <div
+                                    style="display: flex; gap: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                                    <span class="badge"
+                                        style="background: rgba(16,185,129,0.2); color: #10B981; border: 1px solid rgba(16,185,129,0.3);">
+                                        <i data-lucide="home" style="width: 14px;"></i> Nhà riêng
+                                    </span>
+                                    <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                                        Đặt làm mặc định
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add Address Form (Hidden by default) -->
+                        <div id="addAddressForm"
+                            style="display: none; margin-top: 2rem; padding: 2rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px;">
+                            <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Thêm Địa Chỉ Mới</h2>
+
+                            <form style="display: grid; gap: 1.5rem;">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                    <div class="form-group">
+                                        <label
+                                            style="display: block; margin-bottom: 0.5rem; color: white; font-weight: 600;">Họ
+                                            và tên *</label>
+                                        <input type="text" class="input-field" placeholder="Nguyễn Văn A" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label
+                                            style="display: block; margin-bottom: 0.5rem; color: white; font-weight: 600;">Số
+                                            điện thoại *</label>
+                                        <input type="tel" class="input-field" placeholder="0901 234 567" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label
+                                        style="display: block; margin-bottom: 0.5rem; color: white; font-weight: 600;">Địa
+                                        chỉ cụ thể *</label>
+                                    <input type="text" class="input-field" placeholder="Số nhà, tên đường" required>
+                                </div>
+
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+                                    <div class="form-group">
+                                        <label
+                                            style="display: block; margin-bottom: 0.5rem; color: white; font-weight: 600;">Tỉnh/Thành
+                                            phố *</label>
+                                        <select class="input-field" required>
+                                            <option value="">Chọn Tỉnh/Thành phố</option>
+                                            <option value="hcm">TP. Hồ Chí Minh</option>
+                                            <option value="hn">Hà Nội</option>
+                                            <option value="dn">Đà Nẵng</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label
+                                            style="display: block; margin-bottom: 0.5rem; color: white; font-weight: 600;">Quận/Huyện
+                                            *</label>
+                                        <select class="input-field" required>
+                                            <option value="">Chọn Quận/Huyện</option>
+                                            <option value="q1">Quận 1</option>
+                                            <option value="q2">Quận 2</option>
+                                            <option value="q3">Quận 3</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label
+                                            style="display: block; margin-bottom: 0.5rem; color: white; font-weight: 600;">Phường/Xã
+                                            *</label>
+                                        <select class="input-field" required>
+                                            <option value="">Chọn Phường/Xã</option>
+                                            <option value="p1">Phường Bến Nghé</option>
+                                            <option value="p2">Phường Bến Thành</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label
+                                        style="display: block; margin-bottom: 0.5rem; color: white; font-weight: 600;">Loại
+                                        địa chỉ</label>
+                                    <div style="display: flex; gap: 1rem;">
+                                        <label
+                                            style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                            <input type="radio" name="addressType" value="home" checked
+                                                style="width: 18px; height: 18px;">
+                                            <span style="color: white;">Nhà riêng</span>
+                                        </label>
+                                        <label
+                                            style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                            <input type="radio" name="addressType" value="office"
+                                                style="width: 18px; height: 18px;">
+                                            <span style="color: white;">Văn phòng</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                        <input type="checkbox" name="isDefault" style="width: 18px; height: 18px;">
+                                        <span style="color: white;">Đặt làm địa chỉ mặc định</span>
+                                    </label>
+                                </div>
+
+                                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                                    <button type="button" class="btn btn-secondary" id="cancelAddBtn">Hủy</button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i data-lucide="check" style="width: 16px;"></i> Lưu địa chỉ
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="#" class="logo" style="color: white; font-size: 2rem;">AUREUM BOOKS</a>
+                <p style="margin-top: 1.5rem;">Hành trình đi tìm tri thức bắt đầu từ một trang sách tuyệt mỹ.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Về Chúng Tôi</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Câu chuyện thương hiệu</a></li>
+                    <li><a href="#">Tầm nhìn & Sứ mệnh</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Hỗ Trợ Khách Hàng</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Hướng dẫn mua hàng</a></li>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                    <li><a href="#">Vận chuyển & Giao nhận</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Liên Hệ</h4>
+                <p>Email: contact@aureumbooks.com</p>
+                <p>Hotline: 1900 1234</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Aureum Books. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Toggle add address form
+        const addAddressBtn = document.getElementById('addAddressBtn');
+        const addAddressForm = document.getElementById('addAddressForm');
+        const cancelAddBtn = document.getElementById('cancelAddBtn');
+
+        addAddressBtn.addEventListener('click', () => {
+            addAddressForm.style.display = 'block';
+            addAddressForm.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        cancelAddBtn.addEventListener('click', () => {
+            addAddressForm.style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>
