@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài khoản của tôi | Aureum Books</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <header class="glass">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">AUREUM BOOKS</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="catalog.html">Cửa hàng</a></li>
+                <li><a href="account.html" class="active" style="color: var(--color-cta);">Tài khoản</a></li>
+            </ul>
+            <div class="nav-actions">
+                <i data-lucide="shopping-cart"></i>
+                <i data-lucide="user"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section" style="padding-top: 120px;">
+        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 3rem;">
+            <!-- Sidebar -->
+            <aside>
+                <!-- User Info Card -->
+                <div class="card" style="background: white; text-align: center; margin-bottom: 1.5rem;">
+                    <div
+                        style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--color-cta), #D97706); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: 700;">
+                        NA
+                    </div>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0.25rem;">Nguyễn Văn A</h3>
+                    <p style="font-size: 0.85rem; color: var(--color-secondary); margin-bottom: 1rem;">
+                        nguyenvana@email.com</p>
+
+                    <!-- Tier Badge -->
+                    <div
+                        style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: linear-gradient(135deg, #FEF3C7, #FDE68A); border-radius: 50px;">
+                        <i data-lucide="crown" style="width: 16px; color: #D97706;"></i>
+                        <span style="font-weight: 700; color: #92400E; font-size: 0.85rem;">Hạng Vàng</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Menu -->
+                <nav style="list-style: none;">
+                    <a href="account.html" class="sidebar-nav-item active"
+                        style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: #FEF3C7; border-radius: 8px; margin-bottom: 0.5rem; text-decoration: none; color: #92400E; font-weight: 600;">
+                        <i data-lucide="layout-dashboard" style="width: 20px;"></i>
+                        Tổng quan
+                    </a>
+                    <a href="orders.html" class="sidebar-nav-item"
+                        style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem; text-decoration: none; color: var(--color-secondary);">
+                        <i data-lucide="shopping-bag" style="width: 20px;"></i>
+                        Đơn hàng
+                    </a>
+                    <a href="wishlist.html" class="sidebar-nav-item"
+                        style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem; text-decoration: none; color: var(--color-secondary);">
+                        <i data-lucide="heart" style="width: 20px;"></i>
+                        Yêu thích
+                    </a>
+                    <a href="rewards.html" class="sidebar-nav-item"
+                        style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem; text-decoration: none; color: var(--color-secondary);">
+                        <i data-lucide="gift" style="width: 20px;"></i>
+                        Điểm thưởng
+                    </a>
+                    <a href="addresses.html" class="sidebar-nav-item"
+                        style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem; text-decoration: none; color: var(--color-secondary);">
+                        <i data-lucide="map-pin" style="width: 20px;"></i>
+                        Địa chỉ
+                    </a>
+                    <a href="profile.html" class="sidebar-nav-item"
+                        style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem; text-decoration: none; color: var(--color-secondary);">
+                        <i data-lucide="user" style="width: 20px;"></i>
+                        Thông tin cá nhân
+                    </a>
+                    <a href="login.html" class="sidebar-nav-item"
+                        style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 8px; margin-top: 2rem; text-decoration: none; color: #EF4444;">
+                        <i data-lucide="log-out" style="width: 20px;"></i>
+                        Đăng xuất
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <div>
+                <h1 style="font-size: 2rem; margin-bottom: 2rem;">Tổng quan tài khoản</h1>
+
+                <!-- Stats Grid -->
+                <div class="stat-grid" style="margin-bottom: 2.5rem;">
+                    <div class="stat-card" style="background: linear-gradient(135deg, #FEF3C7, #FDE68A); border: none;">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <p
+                                    style="color: #92400E; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">
+                                    Tổng chi tiêu</p>
+                                <p style="font-size: 2rem; font-weight: 700; color: #92400E;">12.450.000đ</p>
+                                <p style="font-size: 0.8rem; color: #D97706; margin-top: 0.5rem;">Còn 2.550.000đ để lên
+                                    Kim Cương</p>
+                            </div>
+                            <i data-lucide="trending-up" style="width: 32px; color: #D97706;"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <p class="stat-label">Điểm thưởng</p>
+                                <p class="stat-value" style="color: var(--color-cta);">1,250</p>
+                                <p style="font-size: 0.8rem; color: var(--color-secondary); margin-top: 0.5rem;">=
+                                    12.500đ</p>
+                            </div>
+                            <i data-lucide="gift" style="width: 32px; color: var(--color-cta);"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <p class="stat-label">Đơn hàng</p>
+                                <p class="stat-value">24</p>
+                                <p style="font-size: 0.8rem; color: #059669; margin-top: 0.5rem;">3 đơn đang xử lý</p>
+                            </div>
+                            <i data-lucide="shopping-bag" style="width: 32px; color: #2563EB;"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <p class="stat-label">Yêu thích</p>
+                                <p class="stat-value">18</p>
+                                <p style="font-size: 0.8rem; color: var(--color-secondary); margin-top: 0.5rem;">Sách đã
+                                    lưu</p>
+                            </div>
+                            <i data-lucide="heart" style="width: 32px; color: #EF4444;"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tier Progress -->
+                <div class="card" style="background: white; margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem;">Tiến trình hạng thành viên</h3>
+
+                    <div style="position: relative; margin-bottom: 2rem;">
+                        <div style="height: 8px; background: #F1F5F9; border-radius: 50px; overflow: hidden;">
+                            <div
+                                style="height: 100%; width: 83%; background: linear-gradient(90deg, #D97706, #FDE68A); border-radius: 50px;">
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                            <div style="text-align: center;">
+                                <i data-lucide="circle-check"
+                                    style="width: 24px; color: #059669; margin-bottom: 0.5rem;"></i>
+                                <p style="font-size: 0.75rem; font-weight: 600; color: #059669;">Bạc</p>
+                                <p style="font-size: 0.7rem; color: var(--color-secondary);">0đ</p>
+                            </div>
+                            <div style="text-align: center;">
+                                <i data-lucide="circle-check"
+                                    style="width: 24px; color: #D97706; margin-bottom: 0.5rem;"></i>
+                                <p style="font-size: 0.75rem; font-weight: 600; color: #D97706;">Vàng</p>
+                                <p style="font-size: 0.7rem; color: var(--color-secondary);">5M</p>
+                            </div>
+                            <div style="text-align: center;">
+                                <i data-lucide="circle" style="width: 24px; color: #E2E8F0; margin-bottom: 0.5rem;"></i>
+                                <p style="font-size: 0.75rem; font-weight: 600; color: var(--color-secondary);">Kim
+                                    Cương</p>
+                                <p style="font-size: 0.7rem; color: var(--color-secondary);">15M</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                        <div style="text-align: center; padding: 1rem; background: #F8FAFC; border-radius: 8px;">
+                            <p style="font-size: 0.8rem; color: var(--color-secondary); margin-bottom: 0.25rem;">Giảm
+                                giá hiện tại</p>
+                            <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-cta);">3%</p>
+                        </div>
+                        <div style="text-align: center; padding: 1rem; background: #F8FAFC; border-radius: 8px;">
+                            <p style="font-size: 0.8rem; color: var(--color-secondary); margin-bottom: 0.25rem;">
+                                Freeship</p>
+                            <p style="font-size: 1.5rem; font-weight: 700; color: #059669;">Có</p>
+                        </div>
+                        <div style="text-align: center; padding: 1rem; background: #F8FAFC; border-radius: 8px;">
+                            <p style="font-size: 0.8rem; color: var(--color-secondary); margin-bottom: 0.25rem;">Ưu tiên
+                                hỗ trợ</p>
+                            <p style="font-size: 1.5rem; font-weight: 700; color: #2563EB;">24/7</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="card" style="background: white; margin-bottom: 2rem;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h3 style="font-size: 1.25rem;">Đơn hàng gần đây</h3>
+                        <a href="orders.html" style="color: var(--color-cta); font-weight: 600; font-size: 0.9rem;">Xem
+                            tất cả →</a>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mã đơn</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: 600;">#ORD-2024-001</td>
+                                    <td>20/01/2026</td>
+                                    <td>3 sản phẩm</td>
+                                    <td style="font-weight: 700; color: var(--color-cta);">542.500đ</td>
+                                    <td><span class="badge badge-success">Đang giao</span></td>
+                                    <td>
+                                        <button class="btn btn-secondary"
+                                            style="padding: 0.5rem 1rem; font-size: 0.85rem;">Chi tiết</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 600;">#ORD-2024-002</td>
+                                    <td>18/01/2026</td>
+                                    <td>1 sản phẩm</td>
+                                    <td style="font-weight: 700; color: var(--color-cta);">185.000đ</td>
+                                    <td><span class="badge badge-primary">Chờ xác nhận</span></td>
+                                    <td>
+                                        <button class="btn btn-secondary"
+                                            style="padding: 0.5rem 1rem; font-size: 0.85rem;">Chi tiết</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Vouchers -->
+                <div class="card" style="background: white;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h3 style="font-size: 1.25rem;">Voucher của tôi</h3>
+                        <a href="#" style="color: var(--color-cta); font-weight: 600; font-size: 0.9rem;">Xem tất cả
+                            →</a>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                        <div
+                            style="border: 2px dashed var(--color-cta); border-radius: 12px; padding: 1.25rem; background: #FFFBEB;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                <div>
+                                    <p
+                                        style="font-size: 0.75rem; color: #D97706; font-weight: 600; text-transform: uppercase; margin-bottom: 0.25rem;">
+                                        Giảm giá</p>
+                                    <p style="font-size: 1.75rem; font-weight: 700; color: #92400E;">50.000đ</p>
+                                </div>
+                                <span class="badge badge-primary" style="font-size: 0.7rem;">Mới</span>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--color-secondary); margin-bottom: 0.75rem;">Cho
+                                đơn hàng từ 500.000đ</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <p style="font-size: 0.75rem; color: var(--color-secondary);">HSD: 31/01/2026</p>
+                                <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Dùng
+                                    ngay</button>
+                            </div>
+                        </div>
+
+                        <div
+                            style="border: 2px dashed #E2E8F0; border-radius: 12px; padding: 1.25rem; background: #F8FAFC;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                <div>
+                                    <p
+                                        style="font-size: 0.75rem; color: var(--color-secondary); font-weight: 600; text-transform: uppercase; margin-bottom: 0.25rem;">
+                                        Freeship</p>
+                                    <p style="font-size: 1.75rem; font-weight: 700; color: var(--color-primary);">
+                                        30.000đ</p>
+                                </div>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--color-secondary); margin-bottom: 0.75rem;">Không
+                                giới hạn đơn hàng</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <p style="font-size: 0.75rem; color: var(--color-secondary);">HSD: 28/01/2026</p>
+                                <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Dùng
+                                    ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

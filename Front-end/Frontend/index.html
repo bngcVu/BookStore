@@ -38,7 +38,7 @@
   <main>
     <!-- Hero Section -->
     <section class="hero" id="home">
-      <div class="container" style="display: flex; align-items: center; gap: 4rem;">
+      <div class="container hero-grid">
         <div class="hero-content fade-in">
           <h1 class="hero-title">Kiến Thức Là <br><span style="color: var(--color-cta);">Di Sản</span> Cao Quý</h1>
           <p class="hero-subtitle">Chào mừng bạn đến với Aureum Books, nơi những tác phẩm kinh điển và hiện đại được
@@ -105,8 +105,7 @@
             <p class="book-author">Ernest Hemingway</p>
             <h3>Ông Già và Biển Cả</h3>
             <p class="book-price">185.000đ</p>
-            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.5rem;">Thêm vào
-              giỏ</button>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Thêm vào giỏ</button>
           </div>
         </div>
         <!-- Book 2 -->
@@ -119,8 +118,7 @@
             <p class="book-author">F. Scott Fitzgerald</p>
             <h3>Gatsby Vĩ Đại</h3>
             <p class="book-price">210.000đ</p>
-            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.5rem;">Thêm vào
-              giỏ</button>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Thêm vào giỏ</button>
           </div>
         </div>
         <!-- Book 3 -->
@@ -133,8 +131,7 @@
             <p class="book-author">George Orwell</p>
             <h3>1984</h3>
             <p class="book-price">195.000đ</p>
-            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.5rem;">Thêm vào
-              giỏ</button>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Thêm vào giỏ</button>
           </div>
         </div>
         <!-- Book 4 -->
@@ -147,8 +144,7 @@
             <p class="book-author">Haruki Murakami</p>
             <h3>Rừng Na Uy</h3>
             <p class="book-price">245.000đ</p>
-            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.5rem;">Thêm vào
-              giỏ</button>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Thêm vào giỏ</button>
           </div>
         </div>
       </div>
@@ -188,29 +184,199 @@
     </section>
 
     <!-- Flash Sale Section -->
-    <section class="section" id="flash-sale" style="background: var(--color-primary); color: white;">
-      <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
-        <div>
-          <h2 class="section-title" style="color: white;">Đặc Quyền Cuối Tuần</h2>
-          <p style="color: #A8A29E; font-size: 1.25rem; margin-bottom: 2rem;">Giảm giá lên đến 40% cho các tác phẩm đoạt
-            giải Nobel</p>
-          <div id="countdown" style="display: flex; gap: 2rem;">
-            <div class="countdown-item" style="text-align: center;">
-              <span style="font-size: 3rem; font-weight: 700; display: block;">02</span>
-              <span style="color: #78716C;">Ngày</span>
+    <section class="flash-sale-section" id="flash-sale">
+      <div class="container">
+        <!-- Flash Sale Header -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+              <i data-lucide="zap" style="width: 40px; color: #FDE68A;"></i>
+              <h2 class="section-title" style="color: white; margin: 0;">⚡ FLASH SALE CUỐI TUẦN</h2>
             </div>
-            <div class="countdown-item" style="text-align: center;">
-              <span style="font-size: 3rem; font-weight: 700; display: block;">14</span>
-              <span style="color: #78716C;">Giờ</span>
+            <p style="color: #A8A29E; font-size: 1.1rem;">Giảm giá lên đến 40% • Số lượng có hạn</p>
+          </div>
+
+          <!-- Countdown Timer -->
+          <div style="display: flex; gap: 1rem;">
+            <div
+              style="text-align: center; background: rgba(255,255,255,0.15); padding: 1rem 1.5rem; border-radius: 12px; min-width: 80px; backdrop-filter: blur(10px);">
+              <p style="font-size: 2.5rem; font-weight: 700; line-height: 1; color: white;">02</p>
+              <p style="font-size: 0.8rem; color: #A8A29E; margin-top: 0.5rem;">Giờ</p>
             </div>
-            <div class="countdown-item" style="text-align: center;">
-              <span style="font-size: 3rem; font-weight: 700; display: block;">45</span>
-              <span style="color: #78716C;">Phút</span>
+            <div
+              style="text-align: center; background: rgba(255,255,255,0.15); padding: 1rem 1.5rem; border-radius: 12px; min-width: 80px; backdrop-filter: blur(10px);">
+              <p style="font-size: 2.5rem; font-weight: 700; line-height: 1; color: white;">34</p>
+              <p style="font-size: 0.8rem; color: #A8A29E; margin-top: 0.5rem;">Phút</p>
+            </div>
+            <div
+              style="text-align: center; background: rgba(255,255,255,0.15); padding: 1rem 1.5rem; border-radius: 12px; min-width: 80px; backdrop-filter: blur(10px);">
+              <p style="font-size: 2.5rem; font-weight: 700; line-height: 1; color: white;">56</p>
+              <p style="font-size: 0.8rem; color: #A8A29E; margin-top: 0.5rem;">Giây</p>
             </div>
           </div>
         </div>
-        <div class="flash-sale-btn">
-          <a href="#" class="btn btn-primary" style="padding: 1.5rem 3rem; border-radius: 50px;">Tham gia ngay</a>
+
+        <!-- Flash Sale Products Grid -->
+        <div class="product-grid">
+          <!-- Flash Sale Product 1 -->
+          <div class="book-card" style="background: white; position: relative; overflow: hidden;">
+            <div
+              style="position: absolute; top: 0; left: 0; right: 0; background: linear-gradient(135deg, #EF4444, #DC2626); color: white; padding: 0.5rem; text-align: center; font-weight: 700; font-size: 0.85rem; z-index: 2;">
+              -40% FLASH SALE
+            </div>
+            <div class="book-img-wrapper" style="margin-top: 2rem;">
+              <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80"
+                alt="Book">
+            </div>
+            <div class="book-info">
+              <p class="book-author">Ernest Hemingway</p>
+              <h3>Ông Già và Biển Cả</h3>
+              <div style="display: flex; align-items: baseline; gap: 0.75rem; margin: 0.75rem 0;">
+                <p style="font-size: 1.5rem; font-weight: 700; color: #EF4444;">111.000đ</p>
+                <p style="text-decoration: line-through; color: var(--color-secondary); font-size: 0.95rem;">185.000đ
+                </p>
+              </div>
+
+              <!-- Progress Bar -->
+              <div style="margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.5rem;">
+                  <span style="color: var(--color-secondary);">Đã bán</span>
+                  <span style="font-weight: 700; color: #EF4444;">18/30</span>
+                </div>
+                <div style="height: 8px; background: #F1F5F9; border-radius: 50px; overflow: hidden;">
+                  <div
+                    style="height: 100%; width: 60%; background: linear-gradient(90deg, #EF4444, #F87171); border-radius: 50px;">
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" style="width: 100%; background: #EF4444; font-weight: 700;">
+                <i data-lucide="zap" style="width: 16px;"></i> MUA NGAY
+              </button>
+            </div>
+          </div>
+
+          <!-- Flash Sale Product 2 -->
+          <div class="book-card" style="background: white; position: relative; overflow: hidden;">
+            <div
+              style="position: absolute; top: 0; left: 0; right: 0; background: linear-gradient(135deg, #EF4444, #DC2626); color: white; padding: 0.5rem; text-align: center; font-weight: 700; font-size: 0.85rem; z-index: 2;">
+              -35% FLASH SALE
+            </div>
+            <div class="book-img-wrapper" style="margin-top: 2rem;">
+              <img src="https://images.unsplash.com/photo-1543004218-ee141104975e?auto=format&fit=crop&w=300&q=80"
+                alt="Book">
+            </div>
+            <div class="book-info">
+              <p class="book-author">F. Scott Fitzgerald</p>
+              <h3>Gatsby Vĩ Đại</h3>
+              <div style="display: flex; align-items: baseline; gap: 0.75rem; margin: 0.75rem 0;">
+                <p style="font-size: 1.5rem; font-weight: 700; color: #EF4444;">136.500đ</p>
+                <p style="text-decoration: line-through; color: var(--color-secondary); font-size: 0.95rem;">210.000đ
+                </p>
+              </div>
+
+              <!-- Progress Bar -->
+              <div style="margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.5rem;">
+                  <span style="color: var(--color-secondary);">Đã bán</span>
+                  <span style="font-weight: 700; color: #EF4444;">42/50</span>
+                </div>
+                <div style="height: 8px; background: #F1F5F9; border-radius: 50px; overflow: hidden;">
+                  <div
+                    style="height: 100%; width: 84%; background: linear-gradient(90deg, #EF4444, #F87171); border-radius: 50px;">
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" style="width: 100%; background: #EF4444; font-weight: 700;">
+                <i data-lucide="zap" style="width: 16px;"></i> MUA NGAY
+              </button>
+            </div>
+          </div>
+
+          <!-- Flash Sale Product 3 -->
+          <div class="book-card" style="background: white; position: relative; overflow: hidden;">
+            <div
+              style="position: absolute; top: 0; left: 0; right: 0; background: linear-gradient(135deg, #EF4444, #DC2626); color: white; padding: 0.5rem; text-align: center; font-weight: 700; font-size: 0.85rem; z-index: 2;">
+              -30% FLASH SALE
+            </div>
+            <div class="book-img-wrapper" style="margin-top: 2rem;">
+              <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=300&q=80"
+                alt="Book">
+            </div>
+            <div class="book-info">
+              <p class="book-author">George Orwell</p>
+              <h3>1984</h3>
+              <div style="display: flex; align-items: baseline; gap: 0.75rem; margin: 0.75rem 0;">
+                <p style="font-size: 1.5rem; font-weight: 700; color: #EF4444;">136.500đ</p>
+                <p style="text-decoration: line-through; color: var(--color-secondary); font-size: 0.95rem;">195.000đ
+                </p>
+              </div>
+
+              <!-- Progress Bar -->
+              <div style="margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.5rem;">
+                  <span style="color: var(--color-secondary);">Đã bán</span>
+                  <span style="font-weight: 700; color: #EF4444;">35/40</span>
+                </div>
+                <div style="height: 8px; background: #F1F5F9; border-radius: 50px; overflow: hidden;">
+                  <div
+                    style="height: 100%; width: 87.5%; background: linear-gradient(90deg, #EF4444, #F87171); border-radius: 50px;">
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" style="width: 100%; background: #EF4444; font-weight: 700;">
+                <i data-lucide="zap" style="width: 16px;"></i> MUA NGAY
+              </button>
+            </div>
+          </div>
+
+          <!-- Flash Sale Product 4 -->
+          <div class="book-card" style="background: white; position: relative; overflow: hidden;">
+            <div
+              style="position: absolute; top: 0; left: 0; right: 0; background: linear-gradient(135deg, #EF4444, #DC2626); color: white; padding: 0.5rem; text-align: center; font-weight: 700; font-size: 0.85rem; z-index: 2;">
+              -25% FLASH SALE
+            </div>
+            <div class="book-img-wrapper" style="margin-top: 2rem;">
+              <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=300&q=80"
+                alt="Book">
+            </div>
+            <div class="book-info">
+              <p class="book-author">Haruki Murakami</p>
+              <h3>Rừng Na Uy</h3>
+              <div style="display: flex; align-items: baseline; gap: 0.75rem; margin: 0.75rem 0;">
+                <p style="font-size: 1.5rem; font-weight: 700; color: #EF4444;">183.750đ</p>
+                <p style="text-decoration: line-through; color: var(--color-secondary); font-size: 0.95rem;">245.000đ
+                </p>
+              </div>
+
+              <!-- Progress Bar -->
+              <div style="margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.5rem;">
+                  <span style="color: var(--color-secondary);">Đã bán</span>
+                  <span style="font-weight: 700; color: #EF4444;">8/25</span>
+                </div>
+                <div style="height: 8px; background: #F1F5F9; border-radius: 50px; overflow: hidden;">
+                  <div
+                    style="height: 100%; width: 32%; background: linear-gradient(90deg, #EF4444, #F87171); border-radius: 50px;">
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" style="width: 100%; background: #EF4444; font-weight: 700;">
+                <i data-lucide="zap" style="width: 16px;"></i> MUA NGAY
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- View All Button -->
+        <div style="text-align: center; margin-top: 3rem;">
+          <a href="catalog.html?filter=flash-sale" class="btn btn-primary"
+            style="padding: 1.25rem 3rem; font-size: 1.1rem; border-radius: 50px; background: white; color: var(--color-primary);">
+            Xem tất cả Flash Sale →
+          </a>
         </div>
       </div>
     </section>
