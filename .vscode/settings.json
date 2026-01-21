@@ -1,0 +1,6 @@
+{
+    "xml.validation.enabled": false,
+    "json.validate.enable": false,
+    "java.validate.enable": false,
+    "editor.codeActionsOnSave": null
+}
