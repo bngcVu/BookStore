@@ -1,0 +1,10 @@
+# Ignore SQL files
+Back-end/sql/
+
+# Ignore environment files
+.env
+.env.local
+.env.*.local
+
+# Ignore IDE configurations
+.idea/
