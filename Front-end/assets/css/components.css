@@ -1,0 +1,27 @@
+﻿/* Components CSS - See design-system.css for base styles */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-6);
+  font-weight: var(--font-medium);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-height: 44px;
+}
+
+.btn-primary { background-color: var(--primary-600); color: white; }
+.btn-primary:hover { background-color: var(--primary-700); }
+
+.product-card {
+  background-color: white;
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+.product-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
