@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Mục Sách | Aureum Books</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="page-fade">
+    <header class="glass" style="position: sticky; top: 0; background: rgba(255,255,255,0.9);">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">AUREUM BOOKS</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="catalog.html" class="active" style="color: var(--color-cta);">Cửa hàng</a></li>
+                <li><a href="#featured">Tin tức</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="search-box" style="position: relative;">
+                    <input type="text" class="input" placeholder="Tìm kiếm sách..."
+                        style="padding: 0.5rem 1rem; padding-left: 2.5rem; width: 250px;">
+                    <i data-lucide="search"
+                        style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 18px; color: var(--color-secondary);"></i>
+                </div>
+                <div class="cart-icon" style="cursor: pointer;">
+                    <i data-lucide="shopping-cart"></i>
+                </div>
+                <i data-lucide="user" style="cursor: pointer;"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section">
+        <div class="catalog-layout">
+            <!-- Filter Sidebar -->
+            <aside class="filter-sidebar">
+                <div class="filter-section">
+                    <h4 class="filter-title">Danh mục</h4>
+                    <ul class="filter-list">
+                        <li><label><input type="checkbox" checked> Tất cả sách</label></li>
+                        <li><label><input type="checkbox"> Văn học cổ điển</label></li>
+                        <li><label><input type="checkbox"> Nghệ thuật & Thiết kế</label></li>
+                        <li><label><input type="checkbox"> Khoa học & Đời sống</label></li>
+                        <li><label><input type="checkbox"> Kinh doanh & Đầu tư</label></li>
+                        <li><label><input type="checkbox"> Thiếu nhi</label></li>
+                    </ul>
+                </div>
+
+                <div class="filter-section">
+                    <h4 class="filter-title">Giá (VNĐ)</h4>
+                    <div class="price-range">
+                        <input type="range" style="width: 100%; accent-color: var(--color-cta);">
+                        <div
+                            style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--color-secondary); margin-top: 0.5rem;">
+                            <span>0đ</span>
+                            <span>2.000.000đ+</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h4 class="filter-title">Đánh giá</h4>
+                    <ul class="filter-list">
+                        <li><label><input type="radio" name="rating"> 5 sao (Tuyệt phẩm)</label></li>
+                        <li><label><input type="radio" name="rating"> 4 sao trở lên</label></li>
+                        <li><label><input type="radio" name="rating"> 3 sao trở lên</label></li>
+                    </ul>
+                </div>
+
+                <div class="filter-section">
+                    <h4 class="filter-title">Loại bìa</h4>
+                    <ul class="filter-list">
+                        <li><label><input type="checkbox"> Bìa cứng (Hardcover)</label></li>
+                        <li><label><input type="checkbox"> Bìa mềm (Softcover)</label></li>
+                    </ul>
+                </div>
+
+                <button class="btn btn-secondary" style="width: 100%;">Xóa tất cả bộ lọc</button>
+            </aside>
+
+            <!-- Product Grid -->
+            <section>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <p style="color: var(--color-secondary);">Hiển thị <strong>24</strong> trong số <strong>540</strong>
+                        kết quả</p>
+                    <select class="input" style="width: auto; padding: 0.5rem 2rem 0.5rem 1rem;">
+                        <option>Sắp xếp theo: Mới nhất</option>
+                        <option>Giá: Thấp đến Cao</option>
+                        <option>Giá: Cao đến Thấp</option>
+                        <option>Bán chạy nhất</option>
+                    </select>
+                </div>
+
+                <div class="product-grid">
+                    <!-- Book Item 1 -->
+                    <div class="book-card card">
+                        <div class="book-img-wrapper" style="position: relative;">
+                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80"
+                                alt="Book">
+                            <span class="badge badge-primary"
+                                style="position: absolute; top: 1rem; left: 1rem;">Bestseller</span>
+                        </div>
+                        <div class="book-info">
+                            <p class="book-author">Ernest Hemingway</p>
+                            <h3><a href="product.html" style="text-decoration: none; color: inherit;">Ông Già và Biển
+                                    Cả</a></h3>
+                            <div style="display: flex; color: #F59E0B; gap: 2px; margin-bottom: 0.5rem;">
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <span
+                                    style="color: var(--color-secondary); font-size: 0.8rem; margin-left: 0.5rem;">(128)</span>
+                            </div>
+                            <p class="book-price">185.000đ</p>
+                            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+
+                    <!-- Book Item 2 -->
+                    <div class="book-card card">
+                        <div class="book-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1543004218-ee141104975e?auto=format&fit=crop&w=300&q=80"
+                                alt="Book">
+                        </div>
+                        <div class="book-info">
+                            <p class="book-author">F. Scott Fitzgerald</p>
+                            <h3><a href="product.html" style="text-decoration: none; color: inherit;">Gatsby Vĩ Đại</a>
+                            </h3>
+                            <div style="display: flex; color: #F59E0B; gap: 2px; margin-bottom: 0.5rem;">
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <i data-lucide="star-half" style="width: 14px; fill: currentColor;"></i>
+                                <span
+                                    style="color: var(--color-secondary); font-size: 0.8rem; margin-left: 0.5rem;">(85)</span>
+                            </div>
+                            <p class="book-price">210.000đ</p>
+                            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+
+                    <!-- Book Item 3 -->
+                    <div class="book-card card">
+                        <div class="book-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=300&q=80"
+                                alt="Book">
+                        </div>
+                        <div class="book-info">
+                            <p class="book-author">George Orwell</p>
+                            <h3><a href="product.html" style="text-decoration: none; color: inherit;">1984</a></h3>
+                            <div style="display: flex; color: #F59E0B; gap: 2px; margin-bottom: 0.5rem;">
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <span
+                                    style="color: var(--color-secondary); font-size: 0.8rem; margin-left: 0.5rem;">(215)</span>
+                            </div>
+                            <p class="book-price">195.000đ</p>
+                            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+
+                    <!-- Book Item 4 -->
+                    <div class="book-card card">
+                        <div class="book-img-wrapper" style="position: relative;">
+                            <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=300&q=80"
+                                alt="Book">
+                            <span class="badge badge-danger"
+                                style="position: absolute; top: 1rem; left: 1rem;">-15%</span>
+                        </div>
+                        <div class="book-info">
+                            <p class="book-author">Haruki Murakami</p>
+                            <h3><a href="product.html" style="text-decoration: none; color: inherit;">Rừng Na Uy</a>
+                            </h3>
+                            <div style="display: flex; color: #F59E0B; gap: 2px; margin-bottom: 0.5rem;">
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <i data-lucide="star" style="width: 14px; fill: currentColor;"></i>
+                                <i data-lucide="star" style="width: 14px;"></i>
+                                <span
+                                    style="color: var(--color-secondary); font-size: 0.8rem; margin-left: 0.5rem;">(56)</span>
+                            </div>
+                            <p class="book-price">245.000đ <span
+                                    style="text-decoration: line-through; color: var(--color-secondary); font-size: 0.9rem; margin-left: 0.5rem;">285.000đ</span>
+                            </p>
+                            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 4rem;">
+                    <button class="btn btn-secondary active"
+                        style="padding: 0.5rem 1rem; background: var(--color-primary); color: white;">1</button>
+                    <button class="btn btn-secondary" style="padding: 0.5rem 1rem;">2</button>
+                    <button class="btn btn-secondary" style="padding: 0.5rem 1rem;">3</button>
+                    <button class="btn btn-secondary" style="padding: 0.5rem 1rem;">...</button>
+                    <button class="btn btn-secondary" style="padding: 0.5rem 1rem;">12</button>
+                    <button class="btn btn-secondary" style="padding: 0.5rem 1rem;"><i data-lucide="chevron-right"
+                            style="width: 18px;"></i></button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer style="margin-top: 4rem;">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="#" class="logo" style="color: white; font-size: 2rem;">AUREUM BOOKS</a>
+                <p style="margin-top: 1.5rem;">Hành trình đi tìm tri thức bắt đầu từ một trang sách tuyệt mỹ. Aureum
+                    Books đồng hành cùng bạn trên con đường kiến tạo di sản cá nhân.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Về Chúng Tôi</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Câu chuyện thương hiệu</a></li>
+                    <li><a href="#">Tầm nhìn & Sứ mệnh</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Hỗ Trợ</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Hướng dẫn mua hàng</a></li>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Liên Hệ</h4>
+                <p>Địa chỉ: 123 Đường Sách, TP. Hồ Chí Minh</p>
+                <p>Hotline: 1900 1234</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Aureum Books. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

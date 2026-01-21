@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Aureum Books</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body style="background: #F1F5F9;">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div style="padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <a href="../index.html" class="logo" style="color: white; font-size: 1.5rem;">AUREUM ADMIN</a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <li><a href="index.html" class="active"><i data-lucide="layout-dashboard"></i> Tổng quan</a></li>
+                <li><a href="books.html"><i data-lucide="book-open"></i> Quản lý sách</a></li>
+                <li><a href="#"><i data-lucide="layers"></i> Danh mục</a></li>
+                <li><a href="orders.html"><i data-lucide="shopping-bag"></i> Đơn hàng</a></li>
+                <li><a href="#"><i data-lucide="users"></i> Khách hàng</a></li>
+                <li><a href="#"><i data-lucide="ticket"></i> Khuyến mãi</a></li>
+                <li><a href="#"><i data-lucide="bar-chart-3"></i> Báo cáo</a></li>
+                <li style="margin-top: 4rem;"><a href="#"><i data-lucide="settings"></i> Cài đặt</a></li>
+                <li><a href="#" style="color: #F87171;"><i data-lucide="log-out"></i> Đăng xuất</a></li>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <header
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; background: white; padding: 1rem 2rem; border-radius: 12px; box-shadow: var(--shadow-sm); position: static;">
+                <h2 style="font-family: 'Jost', sans-serif; font-size: 1.25rem;">Chào buổi sáng, Admin!</h2>
+                <div style="display: flex; align-items: center; gap: 1.5rem;">
+                    <div style="position: relative; cursor: pointer;">
+                        <i data-lucide="bell"></i>
+                        <span
+                            style="position: absolute; top: -5px; right: -5px; background: #EF4444; color: white; width: 16px; height: 16px; border-radius: 50%; font-size: 10px; display: flex; align-items: center; justify-content: center;">4</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer;">
+                        <div
+                            style="width: 32px; height: 32px; border-radius: 50%; background: var(--color-cta); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px;">
+                            AD</div>
+                        <span style="font-weight: 600; font-size: 0.9rem;">Quản trị viên</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stats Overview -->
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <span class="stat-label">Tổng doanh thu</span>
+                            <span class="stat-value">128.450.000đ</span>
+                            <p style="color: #059669; font-size: 0.8rem; margin-top: 0.5rem;"><i
+                                    data-lucide="trending-up" style="width: 14px; vertical-align: middle;"></i> +12.5%
+                                so với tháng trước</p>
+                        </div>
+                        <div style="padding: 0.5rem; background: #FEF3C7; color: #D97706; border-radius: 8px;"><i
+                                data-lucide="dollar-sign"></i></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <span class="stat-label">Đơn hàng mới</span>
+                            <span class="stat-value">42</span>
+                            <p style="color: #059669; font-size: 0.8rem; margin-top: 0.5rem;"><i
+                                    data-lucide="trending-up" style="width: 14px; vertical-align: middle;"></i> +5.2%
+                                hôm nay</p>
+                        </div>
+                        <div style="padding: 0.5rem; background: #DBEAFE; color: #2563EB; border-radius: 8px;"><i
+                                data-lucide="shopping-cart"></i></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <span class="stat-label">Sách sắp hết kho</span>
+                            <span class="stat-value" style="color: #EF4444;">12</span>
+                            <p style="color: var(--color-secondary); font-size: 0.8rem; margin-top: 0.5rem;">Cần nhập
+                                thêm hàng ngay</p>
+                        </div>
+                        <div style="padding: 0.5rem; background: #FEE2E2; color: #DC2626; border-radius: 8px;"><i
+                                data-lucide="package"></i></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <span class="stat-label">Khách hàng mới</span>
+                            <span class="stat-value">158</span>
+                            <p style="color: #059669; font-size: 0.8rem; margin-top: 0.5rem;"><i
+                                    data-lucide="trending-up" style="width: 14px; vertical-align: middle;"></i> +18%
+                                tháng này</p>
+                        </div>
+                        <div style="padding: 0.5rem; background: #D1FAE5; color: #059669; border-radius: 8px;"><i
+                                data-lucide="user-plus"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts & Lists -->
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
+                <!-- Revenue Chart -->
+                <div class="card" style="background: white;">
+                    <h3 style="margin-bottom: 2rem; font-family: 'Jost', sans-serif;">Biểu đồ doanh thu tuần này</h3>
+                    <canvas id="revenueChart" height="250"></canvas>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="card" style="background: white;">
+                    <h3 style="margin-bottom: 1.5rem; font-family: 'Jost', sans-serif;">Đơn hàng gần đây</h3>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 1px solid #F1F5F9;">
+                            <div>
+                                <p style="font-weight: 600; font-size: 0.9rem;">#ORD-8842</p>
+                                <p style="font-size: 0.8rem; color: var(--color-secondary);">Nguyễn Văn A - 450.000đ</p>
+                            </div>
+                            <span class="badge badge-success">Giao xong</span>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 1px solid #F1F5F9;">
+                            <div>
+                                <p style="font-weight: 600; font-size: 0.9rem;">#ORD-8841</p>
+                                <p style="font-size: 0.8rem; color: var(--color-secondary);">Trần Thị B - 120.000đ</p>
+                            </div>
+                            <span class="badge badge-info">Đang xử lý</span>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 1px solid #F1F5F9;">
+                            <div>
+                                <p style="font-weight: 600; font-size: 0.9rem;">#ORD-8840</p>
+                                <p style="font-size: 0.8rem; color: var(--color-secondary);">Lê Văn C - 890.000đ</p>
+                            </div>
+                            <span class="badge badge-primary">Chờ xác nhận</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem; font-size: 0.8rem;">Xem tất
+                        cả đơn hàng</button>
+                </div>
+            </div>
+
+            <!-- Bottom Table: Inventory Alert -->
+            <div class="card" style="margin-top: 1.5rem; background: white;">
+                <h3 style="margin-bottom: 1.5rem; font-family: 'Jost', sans-serif;">Cảnh báo tồn kho thấp (Low Stock)
+                </h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>SKU</th>
+                                <th>Sản phẩm</th>
+                                <th>Tồn kho</th>
+                                <th>Đã đặt (Reserved)</th>
+                                <th>Hạn mức</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>BK-HEM-001</td>
+                                <td style="font-weight: 600;">Ông Già và Biển Cả (Bìa cứng)</td>
+                                <td style="color: #EF4444; font-weight: 700;">5</td>
+                                <td>2</td>
+                                <td>10</td>
+                                <td><span class="badge badge-danger">Gần hết</span></td>
+                                <td><button class="btn btn-secondary"
+                                        style="padding: 0.25rem 0.75rem; font-size: 0.8rem;">Nhập hàng</button></td>
+                            </tr>
+                            <tr>
+                                <td>BK-ORW-002</td>
+                                <td style="font-weight: 600;">1984 (Premium Edition)</td>
+                                <td style="color: #D97706; font-weight: 700;">8</td>
+                                <td>1</td>
+                                <td>5</td>
+                                <td><span class="badge badge-primary">Sắp hết</span></td>
+                                <td><button class="btn btn-secondary"
+                                        style="padding: 0.25rem 0.75rem; font-size: 0.8rem;">Nhập hàng</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Revenue Chart
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN'],
+                datasets: [{
+                    label: 'Doanh thu (triệu VNĐ)',
+                    data: [12, 19, 15, 25, 22, 35, 28],
+                    borderColor: '#CA8A04',
+                    backgroundColor: 'rgba(202, 138, 4, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#F1F5F9' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Sách | Aureum Admin</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body style="background: #F1F5F9;">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div style="padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <a href="../index.html" class="logo" style="color: white; font-size: 1.5rem;">AUREUM ADMIN</a>
+            </div>
+            <nav class="sidebar-nav">
+                <li><a href="index.html"><i data-lucide="layout-dashboard"></i> Tổng quan</a></li>
+                <li><a href="books.html" class="active"><i data-lucide="book-open"></i> Quản lý sách</a></li>
+                <li><a href="#"><i data-lucide="layers"></i> Danh mục</a></li>
+                <li><a href="#"><i data-lucide="shopping-bag"></i> Đơn hàng</a></li>
+                <li><a href="#"><i data-lucide="users"></i> Khách hàng</a></li>
+                <li style="margin-top: 4rem;"><a href="#"><i data-lucide="settings"></i> Cài đặt</a></li>
+                <li><a href="#" style="color: #F87171;"><i data-lucide="log-out"></i> Đăng xuất</a></li>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h1 style="font-family: 'Jost', sans-serif; font-size: 1.75rem;">Quản Lý Danh Mục Sách</h1>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn btn-secondary" style="background: white;"><i data-lucide="download"
+                            style="width: 18px; vertical-align: middle;"></i> Xuất báo cáo</button>
+                    <button class="btn btn-primary"><i data-lucide="plus"
+                            style="width: 18px; vertical-align: middle;"></i> Thêm sách mới</button>
+                </div>
+            </header>
+
+            <!-- Filters Bar -->
+            <div class="card"
+                style="background: white; margin-bottom: 1.5rem; padding: 1rem 2rem; display: flex; gap: 2rem; align-items: center;">
+                <div style="flex: 1; position: relative;">
+                    <input type="text" class="input" placeholder="Tìm kiếm theo tên sách, ISBN, tác giả..."
+                        style="padding-left: 2.5rem;">
+                    <i data-lucide="search"
+                        style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 18px; color: var(--color-secondary);"></i>
+                </div>
+                <select class="input" style="width: 200px;">
+                    <option>Tất cả danh mục</option>
+                    <option>Văn học cổ điển</option>
+                    <option>Kinh doanh</option>
+                </select>
+                <select class="input" style="width: 150px;">
+                    <option>Trạng thái</option>
+                    <option>Đang bán</option>
+                    <option>Ngừng bán</option>
+                    <option>Hết hàng</option>
+                </select>
+            </div>
+
+            <!-- Books Table -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ảnh</th>
+                            <th>Tên sách / Tác giả</th>
+                            <th>Danh mục</th>
+                            <th>Giá cơ bản</th>
+                            <th>Tồn kho</th>
+                            <th>Đã bán</th>
+                            <th>Đánh giá</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Book 1 -->
+                        <tr>
+                            <td>
+                                <div style="width: 40px; height: 56px; border-radius: 4px; overflow: hidden;">
+                                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=100&q=80"
+                                        alt="Book" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                            </td>
+                            <td>
+                                <p style="font-weight: 600;">Ông Già và Biển Cả</p>
+                                <p style="font-size: 0.8rem; color: var(--color-secondary);">Ernest Hemingway</p>
+                            </td>
+                            <td><span class="badge badge-info" style="font-size: 0.7rem;">Văn học</span></td>
+                            <td>185.000đ</td>
+                            <td style="font-weight: 600; color: #EF4444;">5</td>
+                            <td>1,248</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.25rem; color: #F59E0B;">
+                                    <i data-lucide="star" style="width: 14px; fill: currentColor;"></i> 4.9
+                                </div>
+                            </td>
+                            <td><span class="badge badge-success">Đang bán</span></td>
+                            <td>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button
+                                        style="border: none; background: #F1F5F9; padding: 0.5rem; border-radius: 6px; cursor: pointer; color: var(--color-secondary);"><i
+                                            data-lucide="edit-3" style="width: 16px;"></i></button>
+                                    <button
+                                        style="border: none; background: #FEE2E2; padding: 0.5rem; border-radius: 6px; cursor: pointer; color: #DC2626;"><i
+                                            data-lucide="trash-2" style="width: 16px;"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Book 2 -->
+                        <tr>
+                            <td>
+                                <div style="width: 40px; height: 56px; border-radius: 4px; overflow: hidden;">
+                                    <img src="https://images.unsplash.com/photo-1543004218-ee141104975e?auto=format&fit=crop&w=100&q=80"
+                                        alt="Book" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                            </td>
+                            <td>
+                                <p style="font-weight: 600;">Gatsby Vĩ Đại</p>
+                                <p style="font-size: 0.8rem; color: var(--color-secondary);">F. Scott Fitzgerald</p>
+                            </td>
+                            <td><span class="badge badge-info" style="font-size: 0.7rem;">Văn học</span></td>
+                            <td>210.000đ</td>
+                            <td style="font-weight: 600;">45</td>
+                            <td>856</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.25rem; color: #F59E0B;">
+                                    <i data-lucide="star" style="width: 14px; fill: currentColor;"></i> 4.7
+                                </div>
+                            </td>
+                            <td><span class="badge badge-success">Đang bán</span></td>
+                            <td>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button
+                                        style="border: none; background: #F1F5F9; padding: 0.5rem; border-radius: 6px; cursor: pointer; color: var(--color-secondary);"><i
+                                            data-lucide="edit-3" style="width: 16px;"></i></button>
+                                    <button
+                                        style="border: none; background: #FEE2E2; padding: 0.5rem; border-radius: 6px; cursor: pointer; color: #DC2626;"><i
+                                            data-lucide="trash-2" style="width: 16px;"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination Area -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
+                <p style="color: var(--color-secondary); font-size: 0.9rem;">Hiển thị 10 trong số 5,240 cuốn sách</p>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-secondary" style="padding: 0.5rem 1rem;">Trước</button>
+                    <button class="btn btn-secondary"
+                        style="padding: 0.5rem 1rem; background: var(--color-primary); color: white;">1</button>
+                    <button class="btn btn-secondary" style="padding: 0.5rem 1rem;">2</button>
+                    <button class="btn btn-secondary" style="padding: 0.5rem 1rem;">3</button>
+                    <button class="btn btn-secondary" style="padding: 0.5rem 1rem;">Sau</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
