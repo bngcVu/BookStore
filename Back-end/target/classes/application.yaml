@@ -1,0 +1,67 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: BookStore
+
+  # MySQL Database Configuration
+  datasource:
+    url: "jdbc:mysql://localhost:3306/bookstore?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&allowPublicKeyRetrieval=true&characterEncoding=UTF-8"
+    username: root
+    password: "123456"  # Thay bằng password MySQL của bạn
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      pool-name: BookStoreHikariPool
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 30000
+      connection-timeout: 20000
+      max-lifetime: 1800000
+
+  # JPA / Hibernate Configuration
+  jpa:
+    hibernate:
+      ddl-auto: validate  # validate = không tự tạo/sửa table, chỉ validate với schema
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+        use_sql_comments: true
+    open-in-view: false
+    naming:
+      physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  # Jackson JSON Configuration
+  jackson:
+    date-format: "yyyy-MM-dd HH:mm:ss"
+    time-zone: "Asia/Ho_Chi_Minh"
+    serialization:
+      "write-dates-as-timestamps": false
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: your_email@gmail.com
+    password: your_app_password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+security:
+  jwt:
+    secret: "change-this-secret-to-a-long-random-value"
+    access-token-exp-min: 60
+    refresh-token-exp-days: 7
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    "com.bookstore": DEBUG
+    "org.hibernate.SQL": DEBUG
+    "org.hibernate.type.descriptor.sql.BasicBinder": TRACE
