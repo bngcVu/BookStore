@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aureum Books | Hiệu Sách Cao Cấp</title>
+  <meta name="description" content="Khám phá bộ sưu tập sách tuyển chọn trong trải nghiệm mua sắm sang trọng nhất.">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+  <header class="glass">
+    <div class="container nav-container">
+      <a href="#" class="logo">AUREUM BOOKS</a>
+      <ul class="nav-links">
+        <li><a href="#home">Trang chủ</a></li>
+        <li><a href="#categories">Danh mục</a></li>
+        <li><a href="#featured">Sách nổi bật</a></li>
+        <li><a href="#flash-sale">Flash Sale</a></li>
+        <li><a href="#contact">Liên hệ</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="btn btn-secondary" style="padding: 0.5rem 1rem;">Đăng nhập</button>
+        <div class="cart-icon" style="cursor: pointer; position: relative;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-shopping-cart">
+            <circle cx="8" cy="21" r="1" />
+            <circle cx="19" cy="21" r="1" />
+            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="container" style="display: flex; align-items: center; gap: 4rem;">
+        <div class="hero-content fade-in">
+          <h1 class="hero-title">Kiến Thức Là <br><span style="color: var(--color-cta);">Di Sản</span> Cao Quý</h1>
+          <p class="hero-subtitle">Chào mừng bạn đến với Aureum Books, nơi những tác phẩm kinh điển và hiện đại được
+            tuyển chọn khắt khe nhất để phục vụ tâm hồn yêu sách.</p>
+          <div class="hero-btns" style="display: flex; gap: 1rem;">
+            <a href="#featured" class="btn btn-primary">Khám phá ngay</a>
+            <a href="#categories" class="btn btn-secondary">Xem danh mục</a>
+          </div>
+        </div>
+        <div class="hero-image fade-in" style="animation-delay: 0.2s;">
+          <div class="hero-img-container">
+            <img src="assets/images/hero.png" alt="Aureum Bookstore Interior">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category Section -->
+    <section class="section container" id="categories">
+      <div class="section-header">
+        <h2 class="section-title">Danh Mục Tuyển Chọn</h2>
+        <p style="color: var(--color-secondary);">Những mảng màu đa dạng của tri thức nhân loại</p>
+      </div>
+      <div class="category-grid">
+        <div class="category-card liquid-glass">
+          <img src="assets/images/literature.png" alt="Văn học">
+          <div class="category-overlay">
+            <h3>Văn Học Cổ Điển</h3>
+            <p>1,200+ tác phẩm</p>
+          </div>
+        </div>
+        <div class="category-card liquid-glass">
+          <img src="assets/images/arts.png" alt="Nghệ thuật">
+          <div class="category-overlay">
+            <h3>Nghệ Thuật & Kiến Trúc</h3>
+            <p>850+ tác phẩm</p>
+          </div>
+        </div>
+        <div class="category-card liquid-glass">
+          <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80"
+            alt="Khoa học">
+          <div class="category-overlay">
+            <h3>Khoa Học & Đời Sống</h3>
+            <p>640+ tác phẩm</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Books Section -->
+    <section class="section container" id="featured">
+      <div class="section-header">
+        <h2 class="section-title">Sách Nổi Bật</h2>
+        <p style="color: var(--color-secondary);">Những tựa sách đang được yêu thích nhất tại Aureum Books</p>
+      </div>
+      <div class="product-grid">
+        <!-- Book 1 -->
+        <div class="book-card">
+          <div class="book-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80"
+              alt="Book Cover">
+          </div>
+          <div class="book-info">
+            <p class="book-author">Ernest Hemingway</p>
+            <h3>Ông Già và Biển Cả</h3>
+            <p class="book-price">185.000đ</p>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.5rem;">Thêm vào
+              giỏ</button>
+          </div>
+        </div>
+        <!-- Book 2 -->
+        <div class="book-card">
+          <div class="book-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1543004218-ee141104975e?auto=format&fit=crop&w=300&q=80"
+              alt="Book Cover">
+          </div>
+          <div class="book-info">
+            <p class="book-author">F. Scott Fitzgerald</p>
+            <h3>Gatsby Vĩ Đại</h3>
+            <p class="book-price">210.000đ</p>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.5rem;">Thêm vào
+              giỏ</button>
+          </div>
+        </div>
+        <!-- Book 3 -->
+        <div class="book-card">
+          <div class="book-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=300&q=80"
+              alt="Book Cover">
+          </div>
+          <div class="book-info">
+            <p class="book-author">George Orwell</p>
+            <h3>1984</h3>
+            <p class="book-price">195.000đ</p>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.5rem;">Thêm vào
+              giỏ</button>
+          </div>
+        </div>
+        <!-- Book 4 -->
+        <div class="book-card">
+          <div class="book-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=300&q=80"
+              alt="Book Cover">
+          </div>
+          <div class="book-info">
+            <p class="book-author">Haruki Murakami</p>
+            <h3>Rừng Na Uy</h3>
+            <p class="book-price">245.000đ</p>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.5rem;">Thêm vào
+              giỏ</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rewards Section -->
+    <section class="section container" id="loyalty">
+      <div class="section-header">
+        <h2 class="section-title">Đặc Quyền Hội Viên</h2>
+        <p style="color: var(--color-secondary);">Tích lũy giá trị, tận hưởng tinh hoa</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+        <!-- Silver -->
+        <div class="card" style="text-align: center; border-top: 4px solid #A8A29E;">
+          <h4 style="font-size: 1.5rem; margin-bottom: 1rem;">Hạng Bạc</h4>
+          <p style="font-size: 2rem; font-weight: 700; color: var(--color-primary); margin-bottom: 1rem;">1%</p>
+          <p style="color: var(--color-secondary);">Tích điểm trên mỗi đơn hàng. Miễn phí vận chuyển đơn từ 300K.</p>
+        </div>
+        <!-- Gold -->
+        <div class="card"
+          style="text-align: center; border-top: 4px solid var(--color-cta); transform: scale(1.05); z-index: 10; background: white;">
+          <h4 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-cta);">Hạng Vàng</h4>
+          <p style="font-size: 2rem; font-weight: 700; color: var(--color-cta); margin-bottom: 1rem;">3%</p>
+          <p style="color: var(--color-secondary);">Ưu tiên hỗ trợ 24/7. Quà tặng sinh nhật đặc biệt. Giảm 5% cho sách
+            mới.
+          </p>
+        </div>
+        <!-- Platinum -->
+        <div class="card" style="text-align: center; border-top: 4px solid #1C1917;">
+          <h4 style="font-size: 1.5rem; margin-bottom: 1rem;">Hạng Kim Cương</h4>
+          <p style="font-size: 2rem; font-weight: 700; color: var(--color-primary); margin-bottom: 1rem;">5%</p>
+          <p style="color: var(--color-secondary);">Freeship mọi đơn hàng. Tham gia các buổi ra mắt sách VIP. Chiết khấu
+            tối
+            đa.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Flash Sale Section -->
+    <section class="section" id="flash-sale" style="background: var(--color-primary); color: white;">
+      <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
+        <div>
+          <h2 class="section-title" style="color: white;">Đặc Quyền Cuối Tuần</h2>
+          <p style="color: #A8A29E; font-size: 1.25rem; margin-bottom: 2rem;">Giảm giá lên đến 40% cho các tác phẩm đoạt
+            giải Nobel</p>
+          <div id="countdown" style="display: flex; gap: 2rem;">
+            <div class="countdown-item" style="text-align: center;">
+              <span style="font-size: 3rem; font-weight: 700; display: block;">02</span>
+              <span style="color: #78716C;">Ngày</span>
+            </div>
+            <div class="countdown-item" style="text-align: center;">
+              <span style="font-size: 3rem; font-weight: 700; display: block;">14</span>
+              <span style="color: #78716C;">Giờ</span>
+            </div>
+            <div class="countdown-item" style="text-align: center;">
+              <span style="font-size: 3rem; font-weight: 700; display: block;">45</span>
+              <span style="color: #78716C;">Phút</span>
+            </div>
+          </div>
+        </div>
+        <div class="flash-sale-btn">
+          <a href="#" class="btn btn-primary" style="padding: 1.5rem 3rem; border-radius: 50px;">Tham gia ngay</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <a href="#" class="logo" style="color: white; font-size: 2rem;">AUREUM BOOKS</a>
+        <p style="margin-top: 1.5rem;">Hành trình đi tìm tri thức bắt đầu từ một trang sách tuyệt mỹ. Aureum Books đồng
+          hành cùng bạn trên con đường kiến tạo di sản cá nhân.</p>
+        <div class="social-links" style="display: flex; gap: 1rem; margin-top: 2rem;">
+          <!-- Social Icons (SVG placeholders) -->
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Về Chúng Tôi</h4>
+        <ul class="footer-links">
+          <li><a href="#">Câu chuyện thương hiệu</a></li>
+          <li><a href="#">Tầm nhìn & Sứ mệnh</a></li>
+          <li><a href="#">Đối tác xuất bản</a></li>
+          <li><a href="#">Chính sách bảo mật</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hỗ Trợ Khách Hàng</h4>
+        <ul class="footer-links">
+          <li><a href="#">Hướng dẫn mua hàng</a></li>
+          <li><a href="#">Chính sách đổi trả</a></li>
+          <li><a href="#">Vận chuyển & Giao nhận</a></li>
+          <li><a href="#">Câu hỏi thường gặp</a></li>
+        </ul>
+      </div>
+      <div class="footer-col" id="contact">
+        <h4>Liên Hệ</h4>
+        <p>Địa chỉ: 123 Đường Sách, TP. Hồ Chí Minh</p>
+        <p>Email: contact@aureumbooks.com</p>
+        <p>Hotline: 1900 1234</p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Aureum Books. Tất cả quyền được bảo lưu.</p>
+      <p>Thiết kế bởi Antigravity</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>
