@@ -1,25 +1,25 @@
 :root {
-  /* Design System: Fonts (Modern) */
-  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Design System: Fonts (Intellectual + Modern) */
+  --font-heading: 'Merriweather', Georgia, serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Design System: Colors (Royal Blue Theme) */
-  --color-primary: #2563EB;
-  /* Royal Blue */
-  --color-primary-hover: #1D4ED8;
-  /* Darker Blue */
-  --color-secondary: #3B82F6;
-  /* Light Blue */
-  --color-cta: #2563EB;
-  /* CTA Blue */
+  /* Design System: Colors (Bookstore Premium) */
+  --color-primary: #0F172A;
+  /* Deep Blue Text */
+  --color-primary-hover: #1E293B;
+  /* Hover state */
+  --color-secondary: #475569;
+  /* Muted text */
+  --color-cta: #10B981;
+  /* Emerald Green CTA */
   --color-bg: #FFFFFF;
   /* White Background */
-  --color-surface: #F9FAFB;
-  /* Light Gray Surface */
-  --color-text: #111827;
-  /* Dark Text */
-  --color-text-muted: #6B7280;
-  /* Muted Text */
+  --color-surface: #F8FAFC;
+  /* Light Surface */
+  --color-text: #0F172A;
+  /* Deep Blue Text */
+  --color-text-muted: #64748B;
+  /* Slate muted */
   /* Status Colors */
   --color-success: #10B981;
   /* Green */
