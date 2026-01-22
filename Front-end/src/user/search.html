@@ -34,6 +34,7 @@
 
         <!-- Filter Sidebar -->
         <aside class="search-sidebar" id="filter-sidebar" aria-label="Bộ lọc tìm kiếm">
+          <button class="search-sidebar__close" id="close-filters" aria-label="Đóng">✕</button>
           <div class="search-sidebar__header">
             <h2>Bộ lọc</h2>
             <button class="btn-text" id="clear-all-filters">Xóa tất cả</button>
@@ -41,7 +42,10 @@
 
           <!-- Filter Group: Category -->
           <div class="filter-group">
-            <h3 class="filter-group__title">Danh mục</h3>
+            <h3 class="filter-group__title">
+              Danh mục
+              <span class="count-badge">5</span>
+            </h3>
             <div class="filter-group__content">
               <label class="filter-radio">
                 <input type="radio" name="category" value="" checked />
@@ -88,7 +92,10 @@
 
           <!-- Filter Group: Author -->
           <div class="filter-group">
-            <h3 class="filter-group__title">Tác giả</h3>
+            <h3 class="filter-group__title">
+              Tác giả
+              <span class="count-badge">12</span>
+            </h3>
             <div class="filter-group__content">
               <input type="text" class="filter-search" placeholder="Tìm tác giả..." />
               <div class="filter-checkboxes" id="author-filters">

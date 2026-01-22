@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trả hàng & Hoàn tiền - Nhà Sách</title>
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+</head>
+
+<body>
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header__logo"><a href="../index.html">Nhà Sách</a></div>
+            <nav class="header__nav">
+                <a href="../search.html">Tìm kiếm</a>
+                <a href="../cart.html">Giỏ hàng</a>
+                <a href="index.html">Tài khoản</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="section" role="main">
+        <div class="container">
+            <div class="account-layout">
+                <aside class="account-sidebar">
+                    <nav class="account-nav">
+                        <a href="index.html">Tổng quan</a>
+                        <a href="profile.html">Hồ sơ</a>
+                        <a href="orders.html">Đơn hàng</a>
+                        <a href="addresses.html">Địa chỉ</a>
+                        <a href="loyalty.html">Thành viên</a>
+                        <a href="rewards.html">Điểm thưởng</a>
+                        <a href="vouchers.html">Voucher</a>
+                        <a href="notifications.html">Thông báo</a>
+                        <a href="returns.html" aria-current="page">Trả hàng</a>
+                    </nav>
+                </aside>
+
+                <div class="account-content">
+                    <h1>Trả hàng & Hoàn tiền</h1>
+
+                    <div class="tabs">
+                        <button class="tab tab--active" data-tab="new">Tạo yêu cầu</button>
+                        <button class="tab" data-tab="processing">Đang xử lý (1)</button>
+                        <button class="tab" data-tab="completed">Hoàn thành (0)</button>
+                    </div>
+
+                    <!-- Tab: New Request -->
+                    <div class="tab-content tab-content--active" id="new">
+                        <form class="return-form">
+                            <div class="return-form__group">
+                                <label class="return-form__label" for="order-id">Mã đơn hàng *</label>
+                                <select class="return-form__select" id="order-id" required>
+                                    <option value="">-- Chọn đơn hàng --</option>
+                                    <option value="ORD202601220001">ORD202601220001 - 2 sản phẩm</option>
+                                    <option value="ORD202601210003">ORD202601210003 - 1 sản phẩm</option>
+                                </select>
+                            </div>
+
+                            <div class="return-form__group">
+                                <label class="return-form__label" for="reason">Lý do trả hàng *</label>
+                                <select class="return-form__select" id="reason" required>
+                                    <option value="">-- Chọn lý do --</option>
+                                    <option value="wrong_item">Giao sai sản phẩm</option>
+                                    <option value="damaged">Sản phẩm bị hỏng</option>
+                                    <option value="not_as_described">Không giống mô tả</option>
+                                    <option value="change_mind">Đổi ý không mua nữa</option>
+                                    <option value="other">Lý do khác</option>
+                                </select>
+                            </div>
+
+                            <div class="return-form__group">
+                                <label class="return-form__label" for="description">Mô tả chi tiết *</label>
+                                <textarea class="return-form__textarea" id="description" required
+                                    placeholder="Vui lòng mô tả chi tiết lý do trả hàng..."></textarea>
+                            </div>
+
+                            <div class="return-form__group">
+                                <label class="return-form__label">Hình ảnh minh chứng (Tối đa 5 ảnh)</label>
+                                <div class="image-uploader" onclick="document.getElementById('image-upload').click()">
+                                    <input type="file" id="image-upload" class="image-uploader__input" multiple
+                                        accept="image/*" max="5" />
+                                    <svg class="image-uploader__icon" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                    <p class="image-uploader__text">Nhấn để tải ảnh lên</p>
+                                </div>
+                                <div class="image-preview" id="image-preview"></div>
+                            </div>
+
+                            <button type="submit" class="btn btn--primary">Gửi yêu cầu</button>
+                        </form>
+                    </div>
+
+                    <!-- Tab: Processing -->
+                    <div class="tab-content" id="processing">
+                        <div class="notification-card">
+                            <div style="flex: 1;">
+                                <h3 style="margin: 0 0 8px 0;">Yêu cầu #RET20260122001</h3>
+                                <p style="font-size: 14px; color: #64748b; margin-bottom: 8px;">
+                                    Đơn hàng: <strong>ORD202601220001</strong><br />
+                                    Lý do: Sản phẩm bị hỏng<br />
+                                    Ngày gửi: 22/01/2026
+                                </p>
+                                <div class="timeline">
+                                    <div class="timeline-item timeline-item--completed">
+                                        <div class="timeline-marker"></div>
+                                        <div class="timeline-content">
+                                            <strong>Đã gửi yêu cầu</strong>
+                                            <time>22/01/2026 10:30</time>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item timeline-item--current">
+                                        <div class="timeline-marker"></div>
+                                        <div class="timeline-content">
+                                            <strong>Đang xử lý</strong>
+                                            <time>22/01/2026 14:00</time>
+                                            <p style="margin-top: 4px; font-size: 13px;">Yêu cầu đang được kiểm tra bởi
+                                                bộ phận chăm sóc khách hàng</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-marker"></div>
+                                        <div class="timeline-content">
+                                            <strong>Chờ xác nhận</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Completed -->
+                    <div class="tab-content" id="completed">
+                        <div class="empty-state">
+                            <svg class="empty-state__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <h3 class="empty-state__title">Chưa có yêu cầu hoàn thành</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="meta">© Nhà Sách</p>
+        </div>
+    </footer>
+
+    <script type="module" src="../../assets/js/main.js"></script>
+    <script>
+        // Tab switching
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('tab--active'));
+                tabContents.forEach(tc => tc.classList.remove('tab-content--active'));
+
+                tab.classList.add('tab--active');
+                document.getElementById(tab.dataset.tab).classList.add('tab-content--active');
+            });
+        });
+
+        // Image upload preview
+        document.getElementById('image-upload').addEventListener('change', function (e) {
+            const preview = document.getElementById('image-preview');
+            preview.innerHTML = '';
+
+            const files = Array.from(e.target.files).slice(0, 5);
+            files.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const div = document.createElement('div');
+                    div.className = 'image-preview__item';
+                    div.innerHTML = `
+            <img src="${e.target.result}" class="image-preview__img" alt="Preview ${index + 1}" />
+            <button type="button" class="image-preview__remove" onclick="this.parentElement.remove()">×</button>
+          `;
+                    preview.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+        // Form submit
+        document.querySelector('.return-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Yêu cầu trả hàng đã được gửi! Chúng tôi sẽ xử lý trong vòng 24-48h.');
+        });
+    </script>
+</body>
+
+</html>

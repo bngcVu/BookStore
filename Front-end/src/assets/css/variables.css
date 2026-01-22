@@ -1,20 +1,35 @@
 :root {
-  /* Design System: Fonts (Classic) */
-  --font-heading: 'Cormorant Garamond', serif;
-  --font-body: 'Libre Baskerville', serif;
+  /* Design System: Fonts (Modern) */
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Design System: Colors (Classic) */
-  --color-primary: #0F172A;     /* Navy Primary */
-  --color-secondary: #334155;   /* Professional Grey/Navy */
-  --color-cta: #0369A1;         /* High-contrast CTA Blue */
-  --color-bg: #F8FAFC;          /* Background */
-  --color-text: #020617;        /* Near-black Text */
+  /* Design System: Colors (Royal Blue Theme) */
+  --color-primary: #2563EB;
+  /* Royal Blue */
+  --color-primary-hover: #1D4ED8;
+  /* Darker Blue */
+  --color-secondary: #3B82F6;
+  /* Light Blue */
+  --color-cta: #2563EB;
+  /* CTA Blue */
+  --color-bg: #FFFFFF;
+  /* White Background */
+  --color-surface: #F9FAFB;
+  /* Light Gray Surface */
+  --color-text: #111827;
+  /* Dark Text */
+  --color-text-muted: #6B7280;
+  /* Muted Text */
   /* Status Colors */
-  --color-success: #0F766E;     /* Teal */
-  --color-warning: #F59E0B;     /* Amber */
-  --color-error: #DC2626;       /* Red */
+  --color-success: #10B981;
+  /* Green */
+  --color-warning: #F59E0B;
+  /* Amber - Best Seller */
+  --color-error: #EF4444;
+  /* Red - Flash Sale */
   /* Border */
-  --color-border: #E2E8F0;      /* Stronger light border */
+  --color-border: #E5E7EB;
+  /* Light Border */
 }
 
 /* Legacy tokens retained for backward compatibility */

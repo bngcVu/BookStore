@@ -1,15 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import url('./variables.css');
 @import url('./reset.css');
 @import url('./components.css');
 @import url('./layout.css');
 @import url('./search-filters.css');
+@import url('./search-v2.css');
 @import url('./tiers.css');
 @import url('./rewards.css');
 @import url('./product-detail.css');
 @import url('./shipping-flash.css');
 @import url('./vouchers.css');
 @import url('./notifications.css');
+@import url('./returns-reviews.css');
 
 /* Global text styles */
 body {
