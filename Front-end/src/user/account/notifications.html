@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thông báo - Nhà Sách</title>
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+</head>
+
+<body>
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header__logo"><a href="../index.html">Nhà Sách</a></div>
+            <nav class="header__nav" aria-label="Chính">
+                <a href="../search.html">Tìm kiếm</a>
+                <a href="../cart.html">Giỏ hàng</a>
+                <a href="index.html">Tài khoản</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="section" role="main">
+        <div class="container">
+            <div class="account-layout">
+                <aside class="account-sidebar">
+                    <nav class="account-nav">
+                        <a href="index.html">Tổng quan</a>
+                        <a href="profile.html">Hồ sơ</a>
+                        <a href="orders.html">Đơn hàng</a>
+                        <a href="addresses.html">Địa chỉ</a>
+                        <a href="loyalty.html">Thành viên</a>
+                        <a href="rewards.html">Điểm thưởng</a>
+                        <a href="vouchers.html">Voucher</a>
+                        <a href="notifications.html" aria-current="page">Thông báo</a>
+                    </nav>
+                </aside>
+
+                <div class="account-content">
+                    <div class="notification-header">
+                        <h1>Thông báo</h1>
+                        <button class="mark-all-read-btn">Đánh dấu tất cả đã đọc</button>
+                    </div>
+
+                    <div class="tabs">
+                        <button class="tab tab--active" data-tab="all">Tất cả (5)</button>
+                        <button class="tab" data-tab="order">Đơn hàng (2)</button>
+                        <button class="tab" data-tab="promotion">Khuyến mãi (2)</button>
+                        <button class="tab" data-tab="system">Hệ thống (1)</button>
+                    </div>
+
+                    <!-- Tab: All -->
+                    <div class="tab-content tab-content--active" id="all">
+                        <!-- Notification 1: Order -->
+                        <div class="notification-card notification-card--unread">
+                            <div class="notification-icon notification-icon--order">
+                                <svg fill="currentColor" viewBox="0 0 20 20" style="width: 20px; height: 20px;">
+                                    <path
+                                        d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z M16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                                </svg>
+                            </div>
+                            <div class="notification-content">
+                                <h3 class="notification-title">Đơn hàng đã được giao</h3>
+                                <p class="notification-message">
+                                    Đơn hàng #ORD202601220001 đã được giao thành công. Cảm ơn bạn đã mua sắm tại Nhà
+                                    Sách!
+                                </p>
+                                <time class="notification-time">2 giờ trước</time>
+                            </div>
+                        </div>
+
+                        <!-- Notification 2: Promotion -->
+                        <div class="notification-card notification-card--unread">
+                            <div class="notification-icon notification-icon--promotion">
+                                <svg fill="currentColor" viewBox="0 0 20 20" style="width: 20px; height: 20px;">
+                                    <path fill-rule="evenodd"
+                                        d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="notification-content">
+                                <h3 class="notification-title">Flash Sale 22h - Giảm đến 50%!</h3>
+                                <p class="notification-message">
+                                    Hàng ngàn đầu sách giảm giá sốc. Chỉ diễn ra trong 2 giờ. Mua ngay!
+                                </p>
+                                <time class="notification-time">5 giờ trước</time>
+                            </div>
+                        </div>
+
+                        <!-- Notification 3: Order -->
+                        <div class="notification-card">
+                            <div class="notification-icon notification-icon--order">
+                                <svg fill="currentColor" viewBox="0 0 20 20" style="width: 20px; height: 20px;">
+                                    <path
+                                        d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z M16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                                </svg>
+                            </div>
+                            <div class="notification-content">
+                                <h3 class="notification-title">Đơn hàng đang được vận chuyển</h3>
+                                <p class="notification-message">
+                                    Đơn hàng #ORD202601210003 đang trên đường giao đến bạn. Dự kiến giao hàng trong 1-2
+                                    ngày.
+                                </p>
+                                <time class="notification-time">1 ngày trước</time>
+                            </div>
+                        </div>
+
+                        <!-- Notification 4: Reward -->
+                        <div class="notification-card">
+                            <div class="notification-icon notification-icon--reward">
+                                <svg fill="currentColor" viewBox="0 0 20 20" style="width: 20px; height: 20px;">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="notification-content">
+                                <h3 class="notification-title">Bạn nhận được 120 điểm thưởng</h3>
+                                <p class="notification-message">
+                                    Cảm ơn bạn đã mua sắm. 120 điểm đã được cộng vào tài khoản của bạn.
+                                </p>
+                                <time class="notification-time">2 ngày trước</time>
+                            </div>
+                        </div>
+
+                        <!-- Notification 5: System -->
+                        <div class="notification-card">
+                            <div class="notification-icon notification-icon--system">
+                                <svg fill="currentColor" viewBox="0 0 20 20" style="width: 20px; height: 20px;">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="notification-content">
+                                <h3 class="notification-title">Cập nhật chính sách bảo mật</h3>
+                                <p class="notification-message">
+                                    Chúng tôi đã cập nhật chính sách bảo mật. Vui lòng xem lại để biết thêm chi tiết.
+                                </p>
+                                <time class="notification-time">3 ngày trước</time>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Order -->
+                    <div class="tab-content" id="order">
+                        <div class="empty-state">
+                            <svg class="empty-state__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                            <h3 class="empty-state__title">Không có thông báo đơn hàng</h3>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Promotion -->
+                    <div class="tab-content" id="promotion">
+                        <div class="empty-state">
+                            <svg class="empty-state__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+                            </svg>
+                            <h3 class="empty-state__title">Không có thông báo khuyến mãi</h3>
+                        </div>
+                    </div>
+
+                    <!-- Tab: System -->
+                    <div class="tab-content" id="system">
+                        <div class="empty-state">
+                            <svg class="empty-state__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <h3 class="empty-state__title">Không có thông báo hệ thống</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="meta">© Nhà Sách</p>
+        </div>
+    </footer>
+
+    <script type="module" src="../../assets/js/main.js"></script>
+    <script>
+        // Tab switching (reuse from vouchers)
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('tab--active'));
+                tabContents.forEach(tc => tc.classList.remove('tab-content--active'));
+
+                tab.classList.add('tab--active');
+                document.getElementById(tab.dataset.tab).classList.add('tab-content--active');
+            });
+        });
+
+        // Mark all as read
+        document.querySelector('.mark-all-read-btn').addEventListener('click', () => {
+            document.querySelectorAll('.notification-card--unread').forEach(card => {
+                card.classList.remove('notification-card--unread');
+            });
+            alert('Đã đánh dấu tất cả là đã đọc');
+        });
+    </script>
+</body>
+
+</html>

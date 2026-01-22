@@ -29,15 +29,229 @@
     </div>
   </header>
 
-  <main id="product-detail" class="section" role="main"></main>
+  <main class="section" role="main">
+    <div class="container">
+      <div class="product-detail">
+        <!-- Product Images -->
+        <div class="product-detail__images">
+          <div class="product-main-image">
+            <img id="main-image" src="https://via.placeholder.com/500x750?text=Book+Cover" alt="Tên sách" />
+          </div>
+          <div class="product-thumbnails">
+            <button class="product-thumbnail product-thumbnail--active"
+              data-image="https://via.placeholder.com/500x750?text=Book+Cover">
+              <img src="https://via.placeholder.com/100x150?text=1" alt="Ảnh 1" />
+            </button>
+            <button class="product-thumbnail" data-image="https://via.placeholder.com/500x750?text=Back+Cover">
+              <img src="https://via.placeholder.com/100x150?text=2" alt="Ảnh 2" />
+            </button>
+            <button class="product-thumbnail" data-image="https://via.placeholder.com/500x750?text=Inside">
+              <img src="https://via.placeholder.com/100x150?text=3" alt="Ảnh 3" />
+            </button>
+          </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="product-detail__info">
+          <h1 class="product-title">To Kill a Mockingbird</h1>
+
+          <!-- Breadcrumb -->
+          <nav class="breadcrumb" aira-label="Breadcrumb">
+            <a href="index.html">Trang chủ</a>
+            <span>›</span>
+            <a href="search.html?category=classics">Classics</a>
+            <span>›</span>
+            <span>To Kill a Mockingbird</span>
+          </nav>
+
+          <!-- Author & Publisher -->
+          <div class="product-meta">
+            <span class="product-meta__item">
+              Tác giả: <a href="search.html?author=harper-lee" class="link-primary">Harper Lee</a>
+            </span>
+            <span class="product-meta__separator">|</span>
+            <span class="product-meta__item">
+              NXB: <a href="search.html?publisher=penguin" class="link-primary">Penguin Books</a>
+            </span>
+          </div>
+
+          <!-- Rating & Social Proof -->
+          <div class="product-rating">
+            <div class="stars">
+              <span class="star star--filled">★</span>
+              <span class="star star--filled">★</span>
+              <span class="star star--filled">★</span>
+              <span class="star star--filled">★</span>
+              <span class="star star--half">★</span>
+            </div>
+            <span class="product-rating__score">4.5</span>
+            <span class="product-rating__count">(234 đánh giá)</span>
+            <span class="product-rating__separator">|</span>
+            <span class="product-sold">Đã bán <strong>1,234</strong> cuốn</span>
+            <span class="product-rating__separator">|</span>
+            <span class="product-views">8,567 lượt xem</span>
+          </div>
+
+          <!-- Variant Selector -->
+          <div class="variant-selector">
+            <label for="variant-select" class="variant-selector__label">Chọn phiên bản:</label>
+            <select id="variant-select" class="variant-selector__dropdown">
+              <option value="1" data-price="120000" data-compare="150000" data-cover="soft">
+                Bìa mềm - 2020 - 120.000₫
+              </option>
+              <option value="2" data-price="180000" data-compare="220000" data-cover="hard">
+                Bìa cứng - 2020 - 180.000₫
+              </option>
+              <option value="3" data-price="95000" data-compare="120000" data-cover="soft">
+                Bìa mềm - 2015 (Cũ) - 95.000₫
+              </option>
+            </select>
+          </div>
+
+          <!-- Price -->
+          <div class="product-price">
+            <span class="product-price__current" id="current-price">120.000₫</span>
+            <span class="product-price__compare" id="compare-price">150.000₫</span>
+            <span class="product-price__discount">-20%</span>
+          </div>
+
+          <!-- Cover Type Badge -->
+          <div class="product-badges">
+            <span class="badge badge--cover" id="cover-badge">Bìa mềm</span>
+            <span class="badge badge--new">Mới</span>
+          </div>
+
+          <!-- Quantity Selector -->
+          <div class="quantity-selector">
+            <label for="quantity" class="quantity-selector__label">Số lượng:</label>
+            <div class="quantity-selector__controls">
+              <button class="quantity-btn quantity-btn--minus" aria-label="Giảm số lượng">−</button>
+              <input type="number" id="quantity" value="1" min="1" max="99" class="quantity-input" />
+              <button class="quantity-btn quantity-btn--plus" aria-label="Tăng số lượng">+</button>
+            </div>
+            <span class="stock-status stock-status--available">Còn 48 sản phẩm</span>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="product-actions">
+            <button class="btn btn--primary btn--large">
+              <svg fill="currentColor" viewBox="0 0 20 20" style="width: 20px; height: 20px; margin-right: 8px;">
+                <path
+                  d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+              </svg>
+              Thêm vào giỏ hàng
+            </button>
+            <button class="btn btn--outline btn--icon" aria-label="Thêm vào yêu thích">
+              <svg fill="currentColor" viewBox="0 0 20 20" style="width: 20px; height: 20px;">
+                <path fill-rule="evenodd"
+                  d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                  clip-rule="evenodd" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Specifications -->
+          <div class="product-specs">
+            <h3 class="product-specs__title">Thông tin sản phẩm</h3>
+            <table class="specs-table">
+              <tr>
+                <th>Số trang:</th>
+                <td>324</td>
+              </tr>
+              <tr>
+                <th>Kích thước:</th>
+                <td>14 x 20.5 cm</td>
+              </tr>
+              <tr>
+                <th>Trọng lượng:</th>
+                <td>350g</td>
+              </tr>
+              <tr>
+                <th>Ngôn ngữ:</th>
+                <td>Tiếng Việt</td>
+              </tr>
+              <tr>
+                <th>Năm xuất bản:</th>
+                <td>2020</td>
+              </tr>
+              <tr>
+                <th>ISBN:</th>
+                <td>978-0-06-112008-4</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="product-description card">
+        <h2>Mô tả sản phẩm</h2>
+        <p>
+          "To Kill a Mockingbird" là một tiểu thuyết kinh điển của văn học Mỹ, được xuất bản lần đầu năm 1960.
+          Tác phẩm kể về câu chuyện ở một thị trấn nhỏ ở miền Nam nước Mỹ qua con mắt của cô bé Scout Finch.
+          Cuốn sách đề cập đến các vấn đề nghiêm trọng như bất công chủng tộc và phá hủy sự ngây thơ,
+          đồng thời tôn vinh sự ấm áp và hài hước.
+        </p>
+        <p>
+          Cuốn sách đã giành giải Pulitzer năm 1961 và trở thành tác phẩm kinh điển của văn học Mỹ hiện đại,
+          được đưa vào chương trình giảng dạy ở nhiều trường học trên khắp thế giới.
+        </p>
+      </div>
+    </div>
+  </main>
 
   <footer class="footer" role="contentinfo">
     <div class="container">
-      <p class="meta">© BookStore</p>
+      <p class="meta">© Nhà Sách</p>
     </div>
   </footer>
 
   <script type="module" src="../assets/js/main.js"></script>
+  <script>
+    // Variant selector
+    const variantSelect = document.getElementById('variant-select');
+    const currentPrice = document.getElementById('current-price');
+    const comparePrice = document.getElementById('compare-price');
+    const coverBadge = document.getElementById('cover-badge');
+
+    variantSelect.addEventListener('change', function () {
+      const selected = this.options[this.selectedIndex];
+      const price = parseInt(selected.dataset.price);
+      const compare = parseInt(selected.dataset.compare);
+      const cover = selected.dataset.cover;
+
+      currentPrice.textContent = price.toLocaleString('vi-VN') + '₫';
+      comparePrice.textContent = compare.toLocaleString('vi-VN') + '₫';
+      coverBadge.textContent = cover === 'soft' ? 'Bìa mềm' : 'Bìa cứng';
+    });
+
+    // Quantity controls
+    const quantityInput = document.getElementById('quantity');
+    const minusBtn = document.querySelector('.quantity-btn--minus');
+    const plusBtn = document.querySelector('.quantity-btn--plus');
+
+    minusBtn.addEventListener('click', () => {
+      const current = parseInt(quantityInput.value);
+      if (current > 1) quantityInput.value = current - 1;
+    });
+
+    plusBtn.addEventListener('click', () => {
+      const current = parseInt(quantityInput.value);
+      if (current < 99) quantityInput.value = current + 1;
+    });
+
+    // Image gallery
+    const thumbnails = document.querySelectorAll('.product-thumbnail');
+    const mainImage = document.getElementById('main-image');
+
+    thumbnails.forEach(thumb => {
+      thumb.addEventListener('click', function () {
+        thumbnails.forEach(t => t.classList.remove('product-thumbnail--active'));
+        this.classList.add('product-thumbnail--active');
+        mainImage.src = this.dataset.image;
+      });
+    });
+  </script>
 </body>
 
 </html>

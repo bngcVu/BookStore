@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Điểm thưởng - Nhà Sách</title>
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+</head>
+
+<body>
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header__logo"><a href="../index.html">Nhà Sách</a></div>
+            <nav class="header__nav" aria-label="Chính">
+                <a href="../search.html">Tìm kiếm</a>
+                <a href="../cart.html">Giỏ hàng</a>
+                <a href="index.html">
+                    <span class="points-badge">
+                        <svg class="points-badge__icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span class="points-badge__value">3,850</span>
+                    </span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="section" role="main">
+        <div class="container">
+            <div class="account-layout">
+                <!-- Sidebar -->
+                <aside class="account-sidebar">
+                    <nav class="account-nav" aria-label="Tài khoản">
+                        <a href="index.html">Tổng quan</a>
+                        <a href="profile.html">Hồ sơ</a>
+                        <a href="orders.html">Đơn hàng</a>
+                        <a href="addresses.html">Địa chỉ</a>
+                        <a href="loyalty.html">Thành viên</a>
+                        <a href="rewards.html" aria-current="page">Điểm thưởng</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="account-content">
+                    <h1>Điểm thưởng của tôi</h1>
+
+                    <!-- Points Hero -->
+                    <div class="points-hero">
+                        <div class="points-hero__label">Số dư điểm hiện tại</div>
+                        <div class="points-hero__balance">3,850</div>
+                        <div class="points-hero__value">≈ 38,500₫</div>
+                        <p style="margin-top: var(--space-md); opacity: 0.9;">1 điểm = 10₫</p>
+                    </div>
+
+                    <!-- Expiration Warning -->
+                    <div class="points-expiration">
+                        <svg class="points-expiration__icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <div class="points-expiration__content">
+                            <div class="points-expiration__title">Điểm sắp hết hạn</div>
+                            <p class="points-expiration__message">
+                                <strong>250 điểm</strong> sẽ hết hạn vào 31/01/2026. Sử dụng ngay để không bỏ lỡ!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Points History -->
+                    <h2 style="margin-top: var(--space-xl);">Lịch sử điểm</h2>
+                    <div class="points-history">
+                        <table class="points-history__table">
+                            <thead>
+                                <tr>
+                                    <th>Ngày</th>
+                                    <th>Mô tả</th>
+                                    <th>Loại</th>
+                                    <th style="text-align: right;">Điểm</th>
+                                    <th style="text-align: right;">Số dư</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>22/01/2026</td>
+                                    <td>Mua đơn hàng #ORD202601220001</td>
+                                    <td><span class="badge badge--success">Tích lũy</span></td>
+                                    <td style="text-align: right;" class="points-amount points-amount--earn">+120</td>
+                                    <td style="text-align: right;">3,850</td>
+                                </tr>
+                                <tr>
+                                    <td>20/01/2026</td>
+                                    <td>Đánh giá sản phẩm</td>
+                                    <td><span class="badge badge--success">Tích lũy</span></td>
+                                    <td style="text-align: right;" class="points-amount points-amount--earn">+50</td>
+                                    <td style="text-align: right;">3,730</td>
+                                </tr>
+                                <tr>
+                                    <td>18/01/2026</td>
+                                    <td>Sử dụng điểm mua sắm</td>
+                                    <td><span class="badge badge--warning">Đổi điểm</span></td>
+                                    <td style="text-align: right;" class="points-amount points-amount--redeem">-200</td>
+                                    <td style="text-align: right;">3,680</td>
+                                </tr>
+                                <tr>
+                                    <td>15/01/2026</td>
+                                    <td>Mua đơn hàng #ORD202601150003</td>
+                                    <td><span class="badge badge--success">Tích lũy</span></td>
+                                    <td style="text-align: right;" class="points-amount points-amount--earn">+85</td>
+                                    <td style="text-align: right;">3,880</td>
+                                </tr>
+                                <tr>
+                                    <td>10/01/2026</td>
+                                    <td>Điểm hết hạn</td>
+                                    <td><span class="badge">Hết hạn</span></td>
+                                    <td style="text-align: right;" class="points-amount points-amount--expire">-100</td>
+                                    <td style="text-align: right;">3,795</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- How to Earn Points -->
+                    <h2 style="margin-top: var(--space-xl);">Cách tích điểm</h2>
+                    <div class="earn-methods">
+                        <div class="earn-method">
+                            <div class="earn-method__icon">
+                                <svg fill="currentColor" viewBox="0 0 20 20" style="width: 24px; height: 24px;">
+                                    <path
+                                        d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                                </svg>
+                            </div>
+                            <div class="earn-method__title">Mua sắm</div>
+                            <div class="earn-method__points">1-3%</div>
+                            <p class="earn-method__description">Tích điểm theo hạng thành viên</p>
+                        </div>
+
+                        <div class="earn-method">
+                            <div class="earn-method__icon">
+                                <svg fill="currentColor" viewBox="0 0 20 20" style="width: 24px; height: 24px;">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="earn-method__title">Đánh giá</div>
+                            <div class="earn-method__points">+50</div>
+                            <p class="earn-method__description">Mỗi đánh giá có ảnh</p>
+                        </div>
+
+                        <div class="earn-method">
+                            <div class="earn-method__icon">
+                                <svg fill="currentColor" viewBox="0 0 20 20" style="width: 24px; height: 24px;">
+                                    <path
+                                        d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                                </svg>
+                            </div>
+                            <div class="earn-method__title">Giới thiệu</div>
+                            <div class="earn-method__points">+200</div>
+                            <p class="earn-method__description">Bạn bè mua đơn đầu tiên</p>
+                        </div>
+
+                        <div class="earn-method">
+                            <div class="earn-method__icon">
+                                <svg fill="currentColor" viewBox="0 0 20 20" style="width: 24px; height: 24px;">
+                                    <path fill-rule="evenodd"
+                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="earn-method__title">Sinh nhật</div>
+                            <div class="earn-method__points">+500</div>
+                            <p class="earn-method__description">Quà tặng sinh nhật</p>
+                        </div>
+                    </div>
+
+                    <!-- Terms -->
+                    <div
+                        style="margin-top: var(--space-xl); padding: var(--space-md); background: var(--color-gray-50); border-radius: 6px;">
+                        <h3 style="font-size: var(--text-base); margin-bottom: var(--space-sm);">Quy định điểm thưởng
+                        </h3>
+                        <ul style="font-size: var(--text-sm); color: var(--color-gray-600); line-height: 1.6;">
+                            <li>Điểm có giá trị trong 12 tháng kể từ ngày tích</li>
+                            <li>1 điểm = 10₫ khi sử dụng</li>
+                            <li>Tối thiểu 100 điểm mới được đổi</li>
+                            <li>Điểm không được chuyển nhượng</li>
+                            <li>Điểm tích lũy theo giá trị đơn hàng sau giảm giá</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p class="meta">© Nhà Sách</p>
+        </div>
+    </footer>
+
+    <script type="module" src="../../assets/js/main.js"></script>
+</body>
+
+</html>

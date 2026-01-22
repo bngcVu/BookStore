@@ -4,6 +4,12 @@
 @import url('./components.css');
 @import url('./layout.css');
 @import url('./search-filters.css');
+@import url('./tiers.css');
+@import url('./rewards.css');
+@import url('./product-detail.css');
+@import url('./shipping-flash.css');
+@import url('./vouchers.css');
+@import url('./notifications.css');
 
 /* Global text styles */
 body {

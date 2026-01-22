@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voucher của tôi - Nhà Sách</title>
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+</head>
+
+<body>
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header__logo"><a href="../index.html">Nhà Sách</a></div>
+            <nav class="header__nav" aria-label="Chính">
+                <a href="../search.html">Tìm kiếm</a>
+                <a href="../cart.html">Giỏ hàng</a>
+                <a href="../auth/login.html">Đăng xuất</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="section" role="main">
+        <div class="container">
+            <div class="account-layout">
+                <!-- Sidebar -->
+                <aside class="account-sidebar">
+                    <nav class="account-nav" aria-label="Tài khoản">
+                        <a href="index.html">Tổng quan</a>
+                        <a href="profile.html">Hồ sơ</a>
+                        <a href="orders.html">Đơn hàng</a>
+                        <a href="addresses.html">Địa chỉ</a>
+                        <a href="loyalty.html">Thành viên</a>
+                        <a href="rewards.html">Điểm thưởng</a>
+                        <a href="vouchers.html" aria-current="page">Voucher</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="account-content">
+                    <h1>Voucher của tôi</h1>
+
+                    <!-- Tabs -->
+                    <div class="tabs" role="tablist">
+                        <button class="tab tab--active" role="tab" aria-selected="true" data-tab="available">
+                            Khả dụng (3)
+                        </button>
+                        <button class="tab" role="tab" aria-selected="false" data-tab="used">
+                            Đã sử dụng (5)
+                        </button>
+                        <button class="tab" role="tab" aria-selected="false" data-tab="expired">
+                            Hết hạn (2)
+                        </button>
+                    </div>
+
+                    <!-- Tab Content: Available -->
+                    <div class="tab-content tab-content--active" id="available" role="tabpanel">
+                        <!-- Voucher Card 1 -->
+                        <div class="voucher-card">
+                            <div class="voucher-card__header">
+                                <div class="voucher-card__code">
+                                    FREESHIP50
+                                    <button class="voucher-copy-btn" onclick="copyVoucherCode('FREESHIP50')">
+                                        <svg fill="currentColor" viewBox="0 0 20 20" style="width: 16px; height: 16px;">
+                                            <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
+                                            <path
+                                                d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z" />
+                                        </svg>
+                                        Sao chép
+                                    </button>
+                                </div>
+                                <span class="voucher-expiry">
+                                    <svg fill="currentColor" viewBox="0 0 20 20" style="width: 14px; height: 14px;">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Hết hạn 31/01/2026
+                                </span>
+                            </div>
+
+                            <h3 class="voucher-card__name">Freeship đơn từ 300K</h3>
+                            <p class="voucher-card__description">
+                                Miễn phí vận chuyển cho đơn hàng từ 300.000₫. Áp dụng cho tất cả các sản phẩm.
+                            </p>
+
+                            <div class="voucher-card__details">
+                                <div class="voucher-detail">
+                                    <span class="voucher-detail__label">Loại giảm giá</span>
+                                    <span class="voucher-detail__value">Fixed</span>
+                                </div>
+                                <div class="voucher-detail">
+                                    <span class="voucher-detail__label">Giá trị</span>
+                                    <span class="voucher-detail__value">50.000₫</span>
+                                </div>
+                                <div class="voucher-detail">
+                                    <span class="voucher-detail__label">Đơn tối thiểu</span>
+                                    <span class="voucher-detail__value">300.000₫</span>
+                                </div>
+                                <div class="voucher-detail">
+                                    <span class="voucher-detail__label">Giới hạn</span>
+                                    <span class="voucher-detail__value">1 lần/người</span>
+                                </div>
+                            </div>
+
+                            <div class="voucher-usage">
+                                <div class="voucher-usage__label">
+                                    <span>Đã sử dụng</span>
+                                    <span><strong>245/500</strong></span>
+                                </div>
+                                <div class="voucher-usage__bar">
+                                    <div class="voucher-usage__fill" style="width: 49%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Voucher Card 2 -->
+                        <div class="voucher-card">
+                            <div class="voucher-card__header">
+                                <div class="voucher-card__code">
+                                    NEWMEMBER20
+                                    <button class="voucher-copy-btn" onclick="copyVoucherCode('NEWMEMBER20')">
+                                        <svg fill="currentColor" viewBox="0 0 20 20" style="width: 16px; height: 16px;">
+                                            <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
+                                            <path
+                                                d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z" />
+                                        </svg>
+                                        Sao chép
+                                    </button>
+                                </div>
+                                <span class="voucher-expiry voucher-expiry--soon">
+                                    <svg fill="currentColor" viewBox="0 0 20 20" style="width: 14px; height: 14px;">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Còn 2 ngày
+                                </span>
+                            </div>
+
+                            <h3 class="voucher-card__name">Giảm 20% cho thành viên mới</h3>
+                            <p class="voucher-card__description">
+                                Giảm 20% cho đơn hàng đầu tiên, tối đa 100.000₫. Chỉ dành cho thành viên mới.
+                            </p>
+
+                            <div class="voucher-card__details">
+                                <div class="voucher-detail">
+                                    <span class="voucher-detail__label">Loại giảm giá</span>
+                                    <span class="voucher-detail__value">Percent</span>
+                                </div>
+                                <div class="voucher-detail">
+                                    <span class="voucher-detail__label">Giá trị</span>
+                                    <span class="voucher-detail__value">20%</span>
+                                </div>
+                                <div class="voucher-detail">
+                                    <span class="voucher-detail__label">Giảm tối đa</span>
+                                    <span class="voucher-detail__value">100.000₫</span>
+                                </div>
+                                <div class="voucher-detail">
+                                    <span class="voucher-detail__label">Đơn tối thiểu</span>
+                                    <span class="voucher-detail__value">0₫</span>
+                                </div>
+                            </div>
+
+                            <div class="voucher-usage">
+                                <div class="voucher-usage__label">
+                                    <span>Đã sử dụng</span>
+                                    <span><strong>890/1000</strong></span>
+                                </div>
+                                <div class="voucher-usage__bar">
+                                    <div class="voucher-usage__fill" style="width: 89%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Voucher Card 3 -->
+                        <div class="voucher-card">
+                            <div class="voucher-card__header">
+                                <div class="voucher-card__code">
+                                    TETHOLIDAY
+                                    <button class="voucher-copy-btn" onclick="copyVoucherCode('TETHOLIDAY')">
+                                        <svg fill="currentColor" viewBox="0 0 20 20" style="width: 16px; height: 16px;">
+                                            <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
+                                            <path
+                                                d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z" />
+                                        </svg>
+                                        Sao chép
+                                    </button>
+                                </div>
+                                <span class="voucher-expiry">
+                                    <svg fill="currentColor" viewBox="0 0 20 20" style="width: 14px; height: 14px;">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Hết hạn 10/02/2026
+                                </span>
+                            </div>
+
+                            <h3 class="voucher-card__name">Tết Sale - Giảm 150K</h3>
+                            <p class="voucher-card__description">
+                                Giảm ngay 150.000₫ cho đơn hàng từ 1.000.000₫ trong dịp Tết Nguyên Đán.
+                            </p>
+
+                            <div class="voucher-card__details">
+                                <div class="voucher-detail">
+                                    <span class="voucher-detail__label">Loại giảm giá</span>
+                                    <span class="voucher-detail__value">Fixed</span>
+                                </div>
+                                <div class="voucher-detail">
+                                    <span class="voucher-detail__label">Giá trị</span>
+                                    <span class="voucher-detail__value">150.000₫</span>
+                                </div>
+                                <div class="voucher-detail">
+                                    <span class="voucher-detail__label">Đơn tối thiểu</span>
+                                    <span class="voucher-detail__value">1.000.000₫</span>
+                                </div>
+                                <div class="voucher-detail">
+                                    <span class="voucher-detail__label">Giới hạn</span>
+                                    <span class="voucher-detail__value">Không giới hạn</span>
+                                </div>
+                            </div>
+
+                            <div class="voucher-usage">
+                                <div class="voucher-usage__label">
+                                    <span>Đã sử dụng</span>
+                                    <span><strong>125/200</strong></span>
+                                </div>
+                                <div class="voucher-usage__bar">
+                                    <div class="voucher-usage__fill" style="width: 62.5%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content: Used -->
+                    <div class="tab-content" id="used" role="tabpanel">
+                        <div class="empty-state">
+                            <svg class="empty-state__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <h3 class="empty-state__title">Chưa sử dụng voucher nào</h3>
+                            <p class="empty-state__description">
+                                Các voucher đã sử dụng sẽ hiển thị ở đây
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content: Expired -->
+                    <div class="tab-content" id="expired" role="tabpanel">
+                        <div class="empty-state">
+                            <svg class="empty-state__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <h3 class="empty-state__title">Không có voucher hết hạn</h3>
+                            <p class="empty-state__description">
+                                Các voucher hết hạn sẽ hiển thị ở đây
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p class="meta">© Nhà Sách</p>
+        </div>
+    </footer>
+
+    <script type="module" src="../../assets/js/main.js"></script>
+    <script>
+        // Tab switching
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.dataset.tab;
+
+                // Remove active class from all tabs
+                tabs.forEach(t => {
+                    t.classList.remove('tab--active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+
+                // Remove active class from all tab contents
+                tabContents.forEach(tc => {
+                    tc.classList.remove('tab-content--active');
+                });
+
+                // Add active class to clicked tab
+                tab.classList.add('tab--active');
+                tab.setAttribute('aria-selected', 'true');
+
+                // Show target tab content
+                document.getElementById(targetTab).classList.add('tab-content--active');
+            });
+        });
+
+        // Copy voucher code
+        function copyVoucherCode(code) {
+            navigator.clipboard.writeText(code).then(() => {
+                alert(`Đã sao chép mã: ${code}`);
+            });
+        }
+    </script>
+</body>
+
+</html>

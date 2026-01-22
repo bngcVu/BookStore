@@ -53,6 +53,88 @@
             </div>
           </div>
         </fieldset>
+
+        <!-- Shipping Section -->
+        <div class="shipping-section">
+          <h3 class="shipping-section__title">
+            <svg fill="currentColor" viewBox="0 0 20 20" style="width: 20px; height: 20px;">
+              <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+              <path
+                d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z" />
+            </svg>
+            Phương thức vận chuyển
+          </h3>
+
+          <div class="shipping-carriers">
+            <label class="shipping-carrier">
+              <input type="radio" name="carrier" value="GHTK" checked />
+              <div class="shipping-carrier__content">
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='40' viewBox='0 0 60 40'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='12' fill='%23FF6B00'%3EGHTK%3C/text%3E%3C/svg%3E"
+                  alt="GHTK" class="shipping-carrier__logo" />
+                <div class="shipping-carrier__info">
+                  <div class="shipping-carrier__name">Giao Hàng Tiết Kiệm</div>
+                  <div class="shipping-carrier__delivery">Giao trong 2-3 ngày</div>
+                </div>
+                <div class="shipping-carrier__price">25.000₫</div>
+              </div>
+            </label>
+
+            <label class="shipping-carrier">
+              <input type="radio" name="carrier" value="GHN" />
+              <div class="shipping-carrier__content">
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='40' viewBox='0 0 60 40'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='12' fill='%23E63946'%3EGHN%3C/text%3E%3C/svg%3E"
+                  alt="GHN" class="shipping-carrier__logo" />
+                <div class="shipping-carrier__info">
+                  <div class="shipping-carrier__name">Giao Hàng Nhanh</div>
+                  <div class="shipping-carrier__delivery">Giao trong 1-2 ngày</div>
+                </div>
+                <div class="shipping-carrier__price">30.000₫</div>
+              </div>
+            </label>
+
+            <label class="shipping-carrier">
+              <input type="radio" name="carrier" value="VTP" />
+              <div class="shipping-carrier__content">
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='40' viewBox='0 0 60 40'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='12' fill='%23007BFF'%3EVTP%3C/text%3E%3C/svg%3E"
+                  alt="VTP" class="shipping-carrier__logo" />
+                <div class="shipping-carrier__info">
+                  <div class="shipping-carrier__name">Viettel Post</div>
+                  <div class="shipping-carrier__delivery">Giao trong 2-4 ngày</div>
+                </div>
+                <div class="shipping-carrier__price">22.000₫</div>
+              </div>
+            </label>
+          </div>
+
+          <!-- Free Shipping Progress -->
+          <div class="free-shipping-progress">
+            <p class="free-shipping-progress__text">
+              Thêm <strong>120.000₫</strong> để được miễn phí vận chuyển!
+            </p>
+            <div class="free-shipping-progress__bar">
+              <div class="free-shipping-progress__fill" style="width: 60%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Points Redemption -->
+        <div class="points-redeem">
+          <label style="font-weight: 600; margin-bottom: var(--space-sm); display: block;">
+            Sử dụng điểm thưởng (1 điểm = 10₫)
+          </label>
+          <div class="points-redeem__row">
+            <span class="points-redeem__label">Số dư điểm:</span>
+            <span class="points-redeem__value">3,850 điểm (≈ 38,500₫)</span>
+          </div>
+          <div class="points-redeem__input-group">
+            <input type="number" class="points-redeem__input" placeholder="Nhập số điểm" max="3850" min="0" />
+            <button type="button" class="points-redeem__button">Áp dụng</button>
+          </div>
+        </div>
+
         <fieldset style="border:none;padding:0;margin:0 0 16px;">
           <legend class="meta" style="margin-bottom:8px;">Phương thức thanh toán</legend>
           <label style="display:flex;gap:8px;align-items:center;">

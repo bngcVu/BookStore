@@ -1,0 +1,287 @@
+/* ===================================
+   REWARD POINTS STYLES
+   =================================== */
+
+/* Points Badge */
+.points-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: linear-gradient(135deg, #FF9500 0%, #FF6B00 100%);
+    color: white;
+    border-radius: 20px;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(255, 149, 0, 0.3);
+    cursor: pointer;
+    transition: all 200ms ease;
+}
+
+.points-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 149, 0, 0.4);
+}
+
+.points-badge__icon {
+    width: 18px;
+    height: 18px;
+}
+
+.points-badge__value {
+    font-weight: 700;
+}
+
+/* Points Hero Card */
+.points-hero {
+    background: linear-gradient(135deg, #FF9500 0%, #FF6B00 100%);
+    color: white;
+    padding: var(--space-xl);
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(255, 149, 0, 0.3);
+    margin-bottom: var(--space-xl);
+}
+
+.points-hero__balance {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: var(--space-md) 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.points-hero__label {
+    font-size: var(--text-lg);
+    opacity: 0.9;
+}
+
+.points-hero__value {
+    font-size: var(--text-base);
+    opacity: 0.8;
+    margin-top: var(--space-xs);
+}
+
+/* Points History Table */
+.points-history {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.points-history__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.points-history__table thead {
+    background: var(--color-gray-50);
+}
+
+.points-history__table th {
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-gray-600);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.points-history__table td {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-sm);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.points-history__table tr:last-child td {
+    border-bottom: none;
+}
+
+.points-history__table tr:hover {
+    background: var(--color-gray-50);
+}
+
+/* Points Amount */
+.points-amount {
+    font-weight: 600;
+    font-size: var(--text-base);
+}
+
+.points-amount--earn {
+    color: var(--color-success);
+}
+
+.points-amount--redeem {
+    color: var(--color-error);
+}
+
+.points-amount--expire {
+    color: var(--color-gray-600);
+}
+
+/* Points Expiration Warning */
+.points-expiration {
+    background: #FFF4E6;
+    border: 1px solid #FFB84D;
+    border-left: 4px solid #FF9500;
+    padding: var(--space-md);
+    border-radius: 6px;
+    margin-bottom: var(--space-md);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+}
+
+.points-expiration__icon {
+    width: 20px;
+    height: 20px;
+    color: #FF9500;
+    flex-shrink: 0;
+}
+
+.points-expiration__content {
+    flex: 1;
+}
+
+.points-expiration__title {
+    font-weight: 600;
+    color: #5C3A00;
+    margin-bottom: var(--space-xs);
+}
+
+.points-expiration__message {
+    font-size: var(--text-sm);
+    color: #8B5E00;
+}
+
+/* How to Earn Section */
+.earn-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.earn-method {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: var(--space-md);
+    text-align: center;
+    transition: all 200ms ease;
+}
+
+.earn-method:hover {
+    border-color: #FF9500;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 149, 0, 0.15);
+}
+
+.earn-method__icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto var(--space-sm);
+    background: #FFF4E6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FF9500;
+}
+
+.earn-method__title {
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+}
+
+.earn-method__points {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: #FF9500;
+    margin: var(--space-xs) 0;
+}
+
+.earn-method__description {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+}
+
+/* Points Redemption */
+.points-redeem {
+    background: var(--color-gray-50);
+    padding: var(--space-md);
+    border-radius: 8px;
+    margin-top: var(--space-md);
+}
+
+.points-redeem__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+}
+
+.points-redeem__label {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+}
+
+.points-redeem__value {
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.points-redeem__input-group {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+}
+
+.points-redeem__input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-size: var(--text-sm);
+}
+
+.points-redeem__button {
+    padding: 10px 20px;
+    background: #FF9500;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 200ms ease;
+}
+
+.points-redeem__button:hover {
+    background: #FF6B00;
+}
+
+.points-redeem__button:disabled {
+    background: var(--color-gray-200);
+    color: var(--color-gray-600);
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .points-hero__balance {
+        font-size: 2.5rem;
+    }
+
+    .points-history__table {
+        font-size: var(--text-xs);
+    }
+
+    .points-history__table th,
+    .points-history__table td {
+        padding: var(--space-xs) var(--space-sm);
+    }
+
+    .earn-methods {
+        grid-template-columns: 1fr;
+    }
+}
