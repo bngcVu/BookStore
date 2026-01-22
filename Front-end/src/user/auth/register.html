@@ -1,50 +1,58 @@
 <!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Đăng ký - BookStore</title>
-    <link rel="stylesheet" href="../../assets/css/main.css" />
-  </head>
-  <body>
-    <header class="header" role="banner">
-      <div class="container">
-        <div class="header__logo"><a href="/user/index.html">BookStore</a></div>
-        <nav class="header__nav" aria-label="Chính">
-          <a href="/user/auth/login.html">Sign In</a>
-          <a href="/user/search.html">Search</a>
-          <a href="/user/cart.html">Basket</a>
-        </nav>
-      </div>
-    </header>
-    <main class="section" role="main">
-      <div class="container" style="max-width:520px;">
-        <form class="product-card" aria-labelledby="register-title">
-          <h1 id="register-title" style="margin:0 0 16px;">Đăng ký</h1>
-          <label style="display:block;margin-bottom:8px;">
-            <span class="meta">Họ và tên</span>
-            <input required style="width:100%;padding:10px;border:1px solid var(--color-gray-100);border-radius:4px;" />
-          </label>
-          <label style="display:block;margin-bottom:8px;">
-            <span class="meta">Email</span>
-            <input type="email" required style="width:100%;padding:10px;border:1px solid var(--color-gray-100);border-radius:4px;" />
-          </label>
-          <label style="display:block;margin-bottom:8px;">
-            <span class="meta">Mật khẩu</span>
-            <input type="password" required style="width:100%;padding:10px;border:1px solid var(--color-gray-100);border-radius:4px;" />
-          </label>
-          <label style="display:block;margin-bottom:16px;">
-            <span class="meta">Nhập lại mật khẩu</span>
-            <input type="password" required style="width:100%;padding:10px;border:1px solid var(--color-gray-100);border-radius:4px;" />
-          </label>
-          <button class="btn-primary" type="submit">Đăng ký</button>
-          <p class="meta" style="margin-top:12px;">Đã có tài khoản? <a href="/user/auth/login.html">Đăng nhập</a></p>
-        </form>
-      </div>
-    </main>
-    <footer class="footer" role="contentinfo">
-      <div class="container"><p class="meta">© BookStore</p></div>
-    </footer>
-    <script type="module" src="../../assets/js/main.js"></script>
-  </body>
-  </html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng ký - Nhà Sách</title>
+  <link rel="stylesheet" href="../../assets/css/main.css" />
+</head>
+
+<body>
+  <header class="header" role="banner">
+    <div class="container">
+      <div class="header__logo"><a href="../index.html">Nhà Sách</a></div>
+      <nav class="header__nav" aria-label="Chính">
+        <a href="login.html">Đăng nhập</a>
+        <a href="../search.html">Tìm kiếm</a>
+        <a href="../cart.html">Giỏ hàng</a>
+      </nav>
+    </div>
+  </header>
+  <main class="section" role="main">
+    <div class="container" style="max-width:520px;">
+      <form class="product-card" aria-labelledby="register-title">
+        <h1 id="register-title" style="margin:0 0 16px;">Đăng ký</h1>
+        <label style="display:block;margin-bottom:8px;">
+          <span class="meta">Họ và tên</span>
+          <input required style="width:100%;padding:10px;border:1px solid var(--color-gray-100);border-radius:4px;" />
+        </label>
+        <label style="display:block;margin-bottom:8px;">
+          <span class="meta">Email</span>
+          <input type="email" required
+            style="width:100%;padding:10px;border:1px solid var(--color-gray-100);border-radius:4px;" />
+        </label>
+        <label style="display:block;margin-bottom:8px;">
+          <span class="meta">Mật khẩu</span>
+          <input type="password" required
+            style="width:100%;padding:10px;border:1px solid var(--color-gray-100);border-radius:4px;" />
+        </label>
+        <label style="display:block;margin-bottom:16px;">
+          <span class="meta">Nhập lại mật khẩu</span>
+          <input type="password" required
+            style="width:100%;padding:10px;border:1px solid var(--color-gray-100);border-radius:4px;" />
+        </label>
+        <button class="btn-primary" type="submit">Đăng ký</button>
+        <p class="meta" style="margin-top:12px;">Đã có tài khoản? <a href="login.html">Đăng nhập</a></p>
+      </form>
+    </div>
+  </main>
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <p class="meta">© BookStore</p>
+    </div>
+  </footer>
+  <script type="module" src="../../assets/js/main.js"></script>
+</body>
+
+</html>

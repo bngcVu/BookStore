@@ -1,4 +1,5 @@
 const KEY = 'bookstore_cart';
+const WL_KEY = 'bookstore_wishlist';
 
 function read() {
   try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; }
@@ -22,4 +23,20 @@ export const Cart = {
   },
   clear() { write([]); },
   total() { return read().reduce((sum, i) => sum + i.price * i.qty, 0); }
+};
+
+function wlRead() {
+  try { return JSON.parse(localStorage.getItem(WL_KEY) || '[]'); } catch { return []; }
+}
+function wlWrite(items) { localStorage.setItem(WL_KEY, JSON.stringify(items)); }
+
+export const Wishlist = {
+  all() { return wlRead(); },
+  add(item) {
+    const items = wlRead();
+    if (!items.find(i => i.id === item.id)) { items.push(item); wlWrite(items); }
+  },
+  remove(id) { wlWrite(wlRead().filter(i => i.id !== id)); },
+  clear() { wlWrite([]); },
+  has(id) { return !!wlRead().find(i => i.id === id); }
 };

@@ -1,76 +1,100 @@
 <!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thanh toán - BookStore</title>
-    <link rel="stylesheet" href="../assets/css/main.css" />
-  </head>
-  <body>
-    <header class="header" role="banner">
-      <div class="container">
-        <div class="header__logo"><a href="/user/index.html">BookStore</a></div>
-        <nav class="header__nav" aria-label="Chính">
-          <a href="/user/cart.html">Basket</a>
-          <a href="#">Help</a>
-        </nav>
-      </div>
-    </header>
 
-    <main class="section" role="main">
-      <div class="container" style="display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start;">
-        <form id="checkout-form" class="product-card">
-          <h1 style="margin:0 0 16px;">Thanh toán</h1>
-          <fieldset style="border:none;padding:0;margin:0 0 16px;">
-            <legend class="meta" style="margin-bottom:8px;">Địa chỉ giao hàng</legend>
-            <div style="display:grid;gap:8px;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thanh toán - Nhà Sách</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+
+<body>
+  <header class="header" role="banner">
+    <div class="container">
+      <div class="header__logo"><a href="index.html">Nhà Sách</a></div>
+      <nav class="header__nav" aria-label="Chính">
+        <a href="search.html">Tìm kiếm</a>
+        <a href="account/index.html">Tài khoản</a>
+        <a href="wishlist.html">Yêu thích</a>
+        <a href="cart.html">Giỏ hàng</a>
+        <a href="#">Trợ giúp</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section" role="main">
+    <div class="container" style="display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start;">
+      <form id="checkout-form" class="product-card">
+        <h1 style="margin:0 0 16px;">Thanh toán</h1>
+        <fieldset style="border:none;padding:0;margin:0 0 16px;">
+          <legend class="meta" style="margin-bottom:8px;">Địa chỉ giao hàng</legend>
+          <div style="display:grid;gap:8px;">
+            <label>
+              <span class="meta">Họ và tên</span>
+              <input name="name" required
+                style="width:100%;padding:8px;border:1px solid var(--color-gray-100);border-radius:4px;">
+            </label>
+            <label>
+              <span class="meta">Địa chỉ</span>
+              <input name="address" required
+                style="width:100%;padding:8px;border:1px solid var(--color-gray-100);border-radius:4px;">
+            </label>
+            <div style="display:grid;grid-template-columns:2fr 1fr;gap:8px;">
               <label>
-                <span class="meta">Họ và tên</span>
-                <input name="name" required style="width:100%;padding:8px;border:1px solid var(--color-gray-100);border-radius:4px;">
+                <span class="meta">Thành phố</span>
+                <input name="city" required
+                  style="width:100%;padding:8px;border:1px solid var(--color-gray-100);border-radius:4px;">
               </label>
               <label>
-                <span class="meta">Địa chỉ</span>
-                <input name="address" required style="width:100%;padding:8px;border:1px solid var(--color-gray-100);border-radius:4px;">
+                <span class="meta">Mã bưu chính</span>
+                <input name="zip" required
+                  style="width:100%;padding:8px;border:1px solid var(--color-gray-100);border-radius:4px;">
               </label>
-              <div style="display:grid;grid-template-columns:2fr 1fr;gap:8px;">
-                <label>
-                  <span class="meta">Thành phố</span>
-                  <input name="city" required style="width:100%;padding:8px;border:1px solid var(--color-gray-100);border-radius:4px;">
-                </label>
-                <label>
-                  <span class="meta">Mã bưu chính</span>
-                  <input name="zip" required style="width:100%;padding:8px;border:1px solid var(--color-gray-100);border-radius:4px;">
-                </label>
-              </div>
             </div>
-          </fieldset>
-          <fieldset style="border:none;padding:0;margin:0 0 16px;">
-            <legend class="meta" style="margin-bottom:8px;">Phương thức thanh toán</legend>
-            <label style="display:flex;gap:8px;align-items:center;">
-              <input type="radio" name="method" value="cod" checked> Thanh toán khi nhận hàng (COD)
-            </label>
-            <label style="display:flex;gap:8px;align-items:center;margin-top:8px;">
-              <input type="radio" name="method" value="card"> Thẻ (giả lập)
-            </label>
-          </fieldset>
-          <button class="btn-primary" type="submit">Đặt hàng</button>
-        </form>
-        <aside class="product-card">
-          <h2 style="margin:0 0 12px;">Tổng cộng</h2>
-          <div style="display:flex;justify-content:space-between;">
-            <span>Tổng</span>
-            <strong id="checkout-summary">$0.00</strong>
           </div>
-        </aside>
-      </div>
-    </main>
+        </fieldset>
+        <fieldset style="border:none;padding:0;margin:0 0 16px;">
+          <legend class="meta" style="margin-bottom:8px;">Phương thức thanh toán</legend>
+          <label style="display:flex;gap:8px;align-items:center;">
+            <input type="radio" name="method" value="cod" checked> Thanh toán khi nhận hàng (COD)
+          </label>
+          <label style="display:flex;gap:8px;align-items:center;margin-top:8px;">
+            <input type="radio" name="method" value="card"> Thẻ (giả lập)
+          </label>
+        </fieldset>
+        <button class="btn-primary" type="submit">Đặt hàng</button>
+      </form>
+      <aside class="product-card">
+        <h2 style="margin:0 0 12px;">Tổng cộng</h2>
+        <div style="display:flex;justify-content:space-between;">
+          <span>Tổng</span>
+          <strong id="checkout-summary">$0.00</strong>
+        </div>
+        <div style="margin-top:12px;display:grid;gap:8px;">
+          <label class="meta" for="voucher-code">Mã giảm giá</label>
+          <input id="voucher-code" type="text" placeholder="Ví dụ: SAVE10"
+            style="width:100%;padding:8px;border:1px solid var(--color-gray-100);border-radius:4px;" />
+          <small id="voucher-msg" class="meta"></small>
+          <div style="display:flex;justify-content:space-between;">
+            <span>Giảm giá</span>
+            <strong id="voucher-discount">-$0.00</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;">
+            <span>Thành tiền</span>
+            <strong id="grand-total">$0.00</strong>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
 
-    <footer class="footer" role="contentinfo">
-      <div class="container">
-        <p class="meta">© BookStore</p>
-      </div>
-    </footer>
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <p class="meta">© BookStore</p>
+    </div>
+  </footer>
 
-    <script type="module" src="../assets/js/main.js"></script>
-  </body>
-  </html>
+  <script type="module" src="../assets/js/main.js"></script>
+</body>
+
+</html>

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chi tiết sách - Nhà Sách</title>
+  <title>Yêu thích - Nhà Sách</title>
   <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 
@@ -12,24 +12,22 @@
   <header class="header" role="banner">
     <div class="container">
       <div class="header__logo"><a href="index.html">Nhà Sách</a></div>
-      <div class="header__search">
-        <form action="search.html" method="get">
-          <label class="visually-hidden" for="search">Tìm kiếm</label>
-          <input id="search" name="q" type="text" placeholder="Tác giả / Tiêu đề / Từ khóa hoặc ISBN"
-            aria-label="Tìm kiếm sách" />
-        </form>
-      </div>
       <nav class="header__nav" aria-label="Chính">
         <a href="search.html">Tìm kiếm</a>
         <a href="account/index.html">Tài khoản</a>
-        <a href="wishlist.html">Yêu thích</a>
+        <a href="wishlist.html" aria-current="page">Yêu thích</a>
         <a href="cart.html">Giỏ hàng</a>
         <a href="#">Trợ giúp</a>
       </nav>
     </div>
   </header>
 
-  <main id="product-detail" class="section" role="main"></main>
+  <main class="section" role="main">
+    <div class="container">
+      <h1 style="margin:0 0 16px;">Danh sách yêu thích</h1>
+      <div id="wishlist-page" aria-live="polite"></div>
+    </div>
+  </main>
 
   <footer class="footer" role="contentinfo">
     <div class="container">

@@ -1,39 +1,198 @@
 <!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tìm kiếm - BookStore</title>
-    <link rel="stylesheet" href="../assets/css/main.css" />
-  </head>
-  <body>
-    <header class="header" role="banner">
-      <div class="container">
-        <div class="header__logo"><a href="/user/index.html">BookStore</a></div>
-        <div class="header__search">
-          <label class="visually-hidden" for="search-input">Tìm kiếm</label>
-          <input id="search-input" type="text" placeholder="Author / Title / Keyword or ISBN" aria-label="Tìm kiếm sách" />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tìm kiếm - Nhà Sách</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+
+<body>
+  <header class="header" role="banner">
+    <div class="container">
+      <div class="header__logo"><a href="index.html">Nhà Sách</a></div>
+      <div class="header__search">
+        <label class="visually-hidden" for="search-input">Tìm kiếm</label>
+        <input id="search-input" type="text" placeholder="Tác giả / Tiêu đề / Từ khóa hoặc ISBN"
+          aria-label="Tìm kiếm sách" />
+      </div>
+      <nav class="header__nav" aria-label="Chính">
+        <a href="search.html" aria-current="page">Tìm kiếm</a>
+        <a href="account/index.html">Tài khoản</a>
+        <a href="wishlist.html">Yêu thích</a>
+        <a href="cart.html">Giỏ hàng</a>
+        <a href="#">Trợ giúp</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section" role="main">
+    <div class="container">
+      <!-- Search Layout: Sidebar + Content -->
+      <div class="search-layout">
+
+        <!-- Filter Sidebar -->
+        <aside class="search-sidebar" id="filter-sidebar" aria-label="Bộ lọc tìm kiếm">
+          <div class="search-sidebar__header">
+            <h2>Bộ lọc</h2>
+            <button class="btn-text" id="clear-all-filters">Xóa tất cả</button>
+          </div>
+
+          <!-- Filter Group: Category -->
+          <div class="filter-group">
+            <h3 class="filter-group__title">Danh mục</h3>
+            <div class="filter-group__content">
+              <label class="filter-radio">
+                <input type="radio" name="category" value="" checked />
+                <span>Tất cả</span>
+              </label>
+              <label class="filter-radio">
+                <input type="radio" name="category" value="classics" />
+                <span>Classics</span>
+              </label>
+              <label class="filter-radio">
+                <input type="radio" name="category" value="dystopian" />
+                <span>Dystopian</span>
+              </label>
+              <label class="filter-radio">
+                <input type="radio" name="category" value="literature" />
+                <span>Literature</span>
+              </label>
+              <label class="filter-radio">
+                <input type="radio" name="category" value="fiction" />
+                <span>Fiction</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Filter Group: Price Range -->
+          <div class="filter-group">
+            <h3 class="filter-group__title">Khoảng giá</h3>
+            <div class="filter-group__content">
+              <div class="price-range">
+                <div class="price-range__inputs">
+                  <input type="number" id="price-min" placeholder="Từ" min="0" />
+                  <span>—</span>
+                  <input type="number" id="price-max" placeholder="Đến" min="0" />
+                </div>
+                <div class="price-range__presets">
+                  <button class="price-preset" data-min="0" data-max="100000">
+                    < 100k</button>
+                      <button class="price-preset" data-min="100000" data-max="300000">100k - 300k</button>
+                      <button class="price-preset" data-min="300000" data-max="999999999">> 300k</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filter Group: Author -->
+          <div class="filter-group">
+            <h3 class="filter-group__title">Tác giả</h3>
+            <div class="filter-group__content">
+              <input type="text" class="filter-search" placeholder="Tìm tác giả..." />
+              <div class="filter-checkboxes" id="author-filters">
+                <label class="filter-checkbox">
+                  <input type="checkbox" value="harper-lee" />
+                  <span>Harper Lee</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" value="george-orwell" />
+                  <span>George Orwell</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" value="aldous-huxley" />
+                  <span>Aldous Huxley</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filter Group: Publisher -->
+          <div class="filter-group">
+            <h3 class="filter-group__title">Nhà xuất bản</h3>
+            <div class="filter-group__content">
+              <input type="text" class="filter-search" placeholder="Tìm NXB..." />
+              <div class="filter-checkboxes" id="publisher-filters">
+                <label class="filter-checkbox">
+                  <input type="checkbox" value="penguin" />
+                  <span>Penguin Books</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" value="random-house" />
+                  <span>Random House</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filter Group: Condition -->
+          <div class="filter-group">
+            <h3 class="filter-group__title">Tình trạng</h3>
+            <div class="filter-group__content">
+              <div class="filter-badges">
+                <label class="filter-badge">
+                  <input type="checkbox" value="new" />
+                  <span>Mới</span>
+                </label>
+                <label class="filter-badge">
+                  <input type="checkbox" value="like-new" />
+                  <span>Như mới</span>
+                </label>
+                <label class="filter-badge">
+                  <input type="checkbox" value="good" />
+                  <span>Tốt</span>
+                </label>
+                <label class="filter-badge">
+                  <input type="checkbox" value="fair" />
+                  <span>Khá</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="search-content">
+          <!-- Active Filters Bar -->
+          <div class="active-filters" id="active-filters" style="display: none;">
+            <span class="active-filters__label">Đang lọc:</span>
+            <div class="active-filters__tags" id="active-filter-tags">
+              <!-- Dynamic filter tags will be inserted here -->
+            </div>
+          </div>
+
+          <!-- Top Bar: Results + Sort -->
+          <div class="search-topbar">
+            <div class="search-topbar__results">
+              <span id="results-count">Tìm thấy 0 kết quả</span>
+            </div>
+            <div class="search-topbar__controls">
+              <label for="sort-by" class="visually-hidden">Sắp xếp</label>
+              <select id="sort-by" class="sort-select">
+                <option value="relevance">Mặc định</option>
+                <option value="price-asc">Giá tăng dần</option>
+                <option value="price-desc">Giá giảm dần</option>
+                <option value="title-asc">Tiêu đề A-Z</option>
+                <option value="newest">Mới nhất</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Product Grid -->
+          <div id="search-grid" class="product-grid" aria-live="polite"></div>
         </div>
-        <nav class="header__nav" aria-label="Chính">
-          <a href="/user/cart.html">Basket</a>
-          <a href="#">Help</a>
-        </nav>
       </div>
-    </header>
+    </div>
+  </main>
 
-    <main class="section" role="main">
-      <div class="container">
-        <h1 style="margin:0 0 16px;">Kết quả tìm kiếm</h1>
-        <div id="search-grid" class="product-grid" aria-live="polite"></div>
-      </div>
-    </main>
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <p class="meta">© Nhà Sách</p>
+    </div>
+  </footer>
 
-    <footer class="footer" role="contentinfo">
-      <div class="container">
-        <p class="meta">© BookStore</p>
-      </div>
-    </footer>
+  <script type="module" src="../assets/js/main.js"></script>
+</body>
 
-    <script type="module" src="../assets/js/main.js"></script>
-  </body>
-  </html>
+</html>
