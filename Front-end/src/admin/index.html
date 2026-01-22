@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Nhà Sách</title>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+
+<body>
+    <div class="admin-layout">
+        <!-- Dark Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-header">
+                <a href="index.html" class="admin-logo">
+                    <div class="admin-logo-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <span class="admin-logo-text">Nhà Sách</span>
+                    <span class="admin-logo-badge">Admin</span>
+                </a>
+            </div>
+
+            <nav class="admin-nav">
+                <div class="admin-nav-section">
+                    <p class="admin-nav-label">Menu chính</p>
+                    <ul class="admin-nav-list">
+                        <li>
+                            <a href="index.html" class="admin-nav-link active">
+                                <svg class="admin-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                </svg>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="products.html" class="admin-nav-link">
+                                <svg class="admin-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                </svg>
+                                <span>Sản phẩm</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="orders.html" class="admin-nav-link">
+                                <svg class="admin-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                </svg>
+                                <span>Đơn hàng</span>
+                                <span class="admin-nav-badge">12</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="customers.html" class="admin-nav-link">
+                                <svg class="admin-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                                <span>Khách hàng</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="admin-nav-section">
+                    <p class="admin-nav-label">Marketing</p>
+                    <ul class="admin-nav-list">
+                        <li>
+                            <a href="flash-sales.html" class="admin-nav-link">
+                                <svg class="admin-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                                <span>Flash Sale</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="vouchers.html" class="admin-nav-link">
+                                <svg class="admin-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                                </svg>
+                                <span>Vouchers</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="admin-nav-section">
+                    <p class="admin-nav-label">Hệ thống</p>
+                    <ul class="admin-nav-list">
+                        <li>
+                            <a href="reports.html" class="admin-nav-link">
+                                <svg class="admin-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                </svg>
+                                <span>Báo cáo</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="settings.html" class="admin-nav-link">
+                                <svg class="admin-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                <span>Cài đặt</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="admin-sidebar-footer">
+                <div class="admin-user">
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=10B981&color=fff&size=80" alt="Admin"
+                        class="admin-user-avatar" />
+                    <div>
+                        <p class="admin-user-name">Admin</p>
+                        <p class="admin-user-role">Super Admin</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <div>
+                    <h1 class="admin-header-title">Dashboard</h1>
+                    <p class="admin-header-subtitle">Chào mừng trở lại! Đây là tổng quan hoạt động hôm nay.</p>
+                </div>
+                <div class="admin-header-actions">
+                    <div class="admin-search">
+                        <svg class="admin-search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <input type="text" placeholder="Tìm kiếm..." />
+                    </div>
+                    <button class="admin-notification-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                        </svg>
+                        <span class="admin-notification-dot"></span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <!-- KPI Cards -->
+                <div class="kpi-grid">
+                    <!-- Total Revenue -->
+                    <div class="kpi-card kpi-card--revenue">
+                        <div class="kpi-header">
+                            <div class="kpi-icon kpi-icon--revenue">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <span class="kpi-change kpi-change--up">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                                </svg>
+                                +12.5%
+                            </span>
+                        </div>
+                        <p class="kpi-value">15,420,000₫</p>
+                        <p class="kpi-label">Doanh thu hôm nay</p>
+                    </div>
+
+                    <!-- New Orders -->
+                    <div class="kpi-card kpi-card--orders">
+                        <div class="kpi-header">
+                            <div class="kpi-icon kpi-icon--orders">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                </svg>
+                            </div>
+                            <span class="kpi-change kpi-change--up">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                                </svg>
+                                +8.2%
+                            </span>
+                        </div>
+                        <p class="kpi-value">47</p>
+                        <p class="kpi-label">Đơn hàng mới</p>
+                    </div>
+
+                    <!-- New Users -->
+                    <div class="kpi-card kpi-card--users">
+                        <div class="kpi-header">
+                            <div class="kpi-icon kpi-icon--users">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                </svg>
+                            </div>
+                            <span class="kpi-change kpi-change--up">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                                </svg>
+                                +24.3%
+                            </span>
+                        </div>
+                        <p class="kpi-value">128</p>
+                        <p class="kpi-label">Người dùng mới</p>
+                    </div>
+
+                    <!-- Low Stock Alert -->
+                    <div class="kpi-card kpi-card--alert">
+                        <div class="kpi-header">
+                            <div class="kpi-icon kpi-icon--alert">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                            </div>
+                            <span class="kpi-change kpi-change--down">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                </svg>
+                                -5 since yesterday
+                            </span>
+                        </div>
+                        <p class="kpi-value">8</p>
+                        <p class="kpi-label">Sản phẩm sắp hết hàng</p>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="charts-grid">
+                    <!-- Line Chart: Revenue vs Orders -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3 class="chart-title">Doanh thu & Đơn hàng</h3>
+                            <div class="chart-period">
+                                <button class="chart-period-btn">7 ngày</button>
+                                <button class="chart-period-btn active">30 ngày</button>
+                                <button class="chart-period-btn">90 ngày</button>
+                            </div>
+                        </div>
+                        <div class="chart-body">
+                            <div class="line-chart-placeholder">
+                                <svg class="line-chart-svg" viewBox="0 0 600 250" preserveAspectRatio="none">
+                                    <!-- Grid lines -->
+                                    <line x1="40" y1="20" x2="40" y2="220" stroke="#E5E7EB" stroke-width="1" />
+                                    <line x1="40" y1="220" x2="580" y2="220" stroke="#E5E7EB" stroke-width="1" />
+                                    <line x1="40" y1="170" x2="580" y2="170" stroke="#E5E7EB" stroke-width="1"
+                                        stroke-dasharray="4" />
+                                    <line x1="40" y1="120" x2="580" y2="120" stroke="#E5E7EB" stroke-width="1"
+                                        stroke-dasharray="4" />
+                                    <line x1="40" y1="70" x2="580" y2="70" stroke="#E5E7EB" stroke-width="1"
+                                        stroke-dasharray="4" />
+
+                                    <!-- Revenue Line (Green) -->
+                                    <path
+                                        d="M 40 180 L 90 160 L 140 170 L 190 130 L 240 110 L 290 90 L 340 100 L 390 70 L 440 85 L 490 60 L 540 50 L 580 55"
+                                        fill="none" stroke="#10B981" stroke-width="3" stroke-linecap="round" />
+                                    <path
+                                        d="M 40 180 L 90 160 L 140 170 L 190 130 L 240 110 L 290 90 L 340 100 L 390 70 L 440 85 L 490 60 L 540 50 L 580 55 L 580 220 L 40 220 Z"
+                                        fill="url(#greenGradient)" opacity="0.2" />
+
+                                    <!-- Orders Line (Blue) -->
+                                    <path
+                                        d="M 40 200 L 90 185 L 140 190 L 190 165 L 240 150 L 290 140 L 340 145 L 390 125 L 440 130 L 490 115 L 540 105 L 580 100"
+                                        fill="none" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" />
+
+                                    <!-- Data points -->
+                                    <circle cx="580" cy="55" r="5" fill="#10B981" />
+                                    <circle cx="580" cy="100" r="5" fill="#3B82F6" />
+
+                                    <!-- Gradient definition -->
+                                    <defs>
+                                        <linearGradient id="greenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#10B981;stop-opacity:0.3" />
+                                            <stop offset="100%" style="stop-color:#10B981;stop-opacity:0" />
+                                        </linearGradient>
+                                    </defs>
+
+                                    <!-- Y-axis labels -->
+                                    <text x="35" y="225" text-anchor="end" fill="#64748B" font-size="10">0</text>
+                                    <text x="35" y="175" text-anchor="end" fill="#64748B" font-size="10">5M</text>
+                                    <text x="35" y="125" text-anchor="end" fill="#64748B" font-size="10">10M</text>
+                                    <text x="35" y="75" text-anchor="end" fill="#64748B" font-size="10">15M</text>
+                                    <text x="35" y="25" text-anchor="end" fill="#64748B" font-size="10">20M</text>
+                                </svg>
+
+                                <!-- Legend -->
+                                <div style="display: flex; gap: 24px; justify-content: center; margin-top: 16px;">
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <div
+                                            style="width: 12px; height: 12px; background: #10B981; border-radius: 2px;">
+                                        </div>
+                                        <span style="font-size: 0.875rem; color: #64748B;">Doanh thu</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <div
+                                            style="width: 12px; height: 12px; background: #3B82F6; border-radius: 2px;">
+                                        </div>
+                                        <span style="font-size: 0.875rem; color: #64748B;">Đơn hàng</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pie Chart: Sales by Category -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3 class="chart-title">Doanh số theo danh mục</h3>
+                        </div>
+                        <div class="chart-body">
+                            <div class="pie-chart-container">
+                                <svg class="pie-chart-svg" viewBox="0 0 100 100">
+                                    <!-- Pie slices -->
+                                    <circle cx="50" cy="50" r="40" fill="transparent" stroke="#10B981" stroke-width="20"
+                                        stroke-dasharray="75.4 175.9" stroke-dashoffset="0"
+                                        transform="rotate(-90 50 50)" />
+                                    <circle cx="50" cy="50" r="40" fill="transparent" stroke="#3B82F6" stroke-width="20"
+                                        stroke-dasharray="50.3 200.9" stroke-dashoffset="-75.4"
+                                        transform="rotate(-90 50 50)" />
+                                    <circle cx="50" cy="50" r="40" fill="transparent" stroke="#8B5CF6" stroke-width="20"
+                                        stroke-dasharray="37.7 213.6" stroke-dashoffset="-125.7"
+                                        transform="rotate(-90 50 50)" />
+                                    <circle cx="50" cy="50" r="40" fill="transparent" stroke="#F59E0B" stroke-width="20"
+                                        stroke-dasharray="25.1 226.2" stroke-dashoffset="-163.4"
+                                        transform="rotate(-90 50 50)" />
+                                    <circle cx="50" cy="50" r="40" fill="transparent" stroke="#EC4899" stroke-width="20"
+                                        stroke-dasharray="62.8 188.5" stroke-dashoffset="-188.5"
+                                        transform="rotate(-90 50 50)" />
+                                    <!-- Center circle -->
+                                    <circle cx="50" cy="50" r="25" fill="white" />
+                                    <text x="50" y="46" text-anchor="middle" fill="#0F172A" font-size="10"
+                                        font-weight="700">Tổng</text>
+                                    <text x="50" y="58" text-anchor="middle" fill="#0F172A" font-size="8">456
+                                        cuốn</text>
+                                </svg>
+                                <div class="pie-chart-legend">
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #10B981;"></div>
+                                        <span class="legend-label">Văn học</span>
+                                        <span class="legend-value">30%</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #3B82F6;"></div>
+                                        <span class="legend-label">Kinh tế</span>
+                                        <span class="legend-value">20%</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #8B5CF6;"></div>
+                                        <span class="legend-label">Thiếu nhi</span>
+                                        <span class="legend-value">15%</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #F59E0B;"></div>
+                                        <span class="legend-label">Kỹ năng</span>
+                                        <span class="legend-value">10%</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #EC4899;"></div>
+                                        <span class="legend-label">Khác</span>
+                                        <span class="legend-value">25%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Panels -->
+                <div class="activity-grid">
+                    <!-- Latest Orders -->
+                    <div class="activity-panel">
+                        <div class="activity-header">
+                            <h3 class="activity-title">Đơn hàng mới nhất</h3>
+                            <a href="orders.html" class="activity-link">Xem tất cả</a>
+                        </div>
+                        <ul class="activity-list">
+                            <li class="activity-item">
+                                <img src="https://ui-avatars.com/api/?name=Tran+Van&background=random&size=80"
+                                    alt="Customer" class="activity-avatar" />
+                                <div class="activity-info">
+                                    <p class="activity-primary">Trần Văn Minh</p>
+                                    <p class="activity-secondary">#ORD-2024-1052 • 3 sản phẩm</p>
+                                </div>
+                                <div class="activity-meta">
+                                    <p class="activity-amount">485,000₫</p>
+                                    <span class="admin-status admin-status--pending">Pending</span>
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <img src="https://ui-avatars.com/api/?name=Le+Thi&background=random&size=80"
+                                    alt="Customer" class="activity-avatar" />
+                                <div class="activity-info">
+                                    <p class="activity-primary">Lê Thị Hương</p>
+                                    <p class="activity-secondary">#ORD-2024-1051 • 2 sản phẩm</p>
+                                </div>
+                                <div class="activity-meta">
+                                    <p class="activity-amount">298,000₫</p>
+                                    <span class="admin-status admin-status--paid">Paid</span>
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <img src="https://ui-avatars.com/api/?name=Nguyen+Duc&background=random&size=80"
+                                    alt="Customer" class="activity-avatar" />
+                                <div class="activity-info">
+                                    <p class="activity-primary">Nguyễn Đức Anh</p>
+                                    <p class="activity-secondary">#ORD-2024-1050 • 5 sản phẩm</p>
+                                </div>
+                                <div class="activity-meta">
+                                    <p class="activity-amount">752,000₫</p>
+                                    <span class="admin-status admin-status--paid">Paid</span>
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <img src="https://ui-avatars.com/api/?name=Pham+Hong&background=random&size=80"
+                                    alt="Customer" class="activity-avatar" />
+                                <div class="activity-info">
+                                    <p class="activity-primary">Phạm Hồng Nhung</p>
+                                    <p class="activity-secondary">#ORD-2024-1049 • 1 sản phẩm</p>
+                                </div>
+                                <div class="activity-meta">
+                                    <p class="activity-amount">199,000₫</p>
+                                    <span class="admin-status admin-status--pending">Pending</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Recent Reviews -->
+                    <div class="activity-panel">
+                        <div class="activity-header">
+                            <h3 class="activity-title">Đánh giá cần duyệt</h3>
+                            <a href="reviews.html" class="activity-link">Xem tất cả</a>
+                        </div>
+                        <ul class="activity-list">
+                            <li class="activity-item">
+                                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=80&h=100&fit=crop"
+                                    alt="Book" class="activity-product-img" />
+                                <div class="activity-info">
+                                    <p class="activity-primary">To Kill a Mockingbird</p>
+                                    <p class="activity-secondary">bởi Trần Văn A</p>
+                                    <p class="review-stars">★★★★★</p>
+                                </div>
+                                <div class="activity-meta">
+                                    <span class="admin-status admin-status--review">Chờ duyệt</span>
+                                    <p class="activity-time" style="margin-top: 4px;">5 phút trước</p>
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=80&h=100&fit=crop"
+                                    alt="Book" class="activity-product-img" />
+                                <div class="activity-info">
+                                    <p class="activity-primary">Đắc Nhân Tâm</p>
+                                    <p class="activity-secondary">bởi Lê Thị B</p>
+                                    <p class="review-stars">★★★★☆</p>
+                                </div>
+                                <div class="activity-meta">
+                                    <span class="admin-status admin-status--review">Chờ duyệt</span>
+                                    <p class="activity-time" style="margin-top: 4px;">12 phút trước</p>
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=80&h=100&fit=crop"
+                                    alt="Book" class="activity-product-img" />
+                                <div class="activity-info">
+                                    <p class="activity-primary">Nhà Giả Kim</p>
+                                    <p class="activity-secondary">bởi Nguyễn Văn C</p>
+                                    <p class="review-stars">★★★☆☆</p>
+                                </div>
+                                <div class="activity-meta">
+                                    <span class="admin-status admin-status--warning">Báo cáo</span>
+                                    <p class="activity-time" style="margin-top: 4px;">25 phút trước</p>
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=80&h=100&fit=crop"
+                                    alt="Book" class="activity-product-img" />
+                                <div class="activity-info">
+                                    <p class="activity-primary">Sapiens</p>
+                                    <p class="activity-secondary">bởi Phạm Văn D</p>
+                                    <p class="review-stars">★★★★★</p>
+                                </div>
+                                <div class="activity-meta">
+                                    <span class="admin-status admin-status--review">Chờ duyệt</span>
+                                    <p class="activity-time" style="margin-top: 4px;">1 giờ trước</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

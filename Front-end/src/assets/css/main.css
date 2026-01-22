@@ -16,6 +16,9 @@
 @import url('./notifications.css');
 @import url('./returns-reviews.css');
 @import url('./account-dashboard.css');
+@import url('./admin-dashboard.css');
+@import url('./admin-forms.css');
+@import url('./admin-order-detail.css');
 
 /* Global text styles */
 body {

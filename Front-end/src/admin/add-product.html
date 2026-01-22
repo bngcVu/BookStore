@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thêm sản phẩm mới - Admin Nhà Sách</title>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+
+<body>
+    <div class="admin-layout">
+        <!-- Dark Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-header">
+                <a href="index.html" class="admin-logo">
+                    <div class="admin-logo-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <span class="admin-logo-text">Nhà Sách</span>
+                    <span class="admin-logo-badge">Admin</span>
+                </a>
+            </div>
+
+            <nav class="admin-nav">
+                <div class="admin-nav-section">
+                    <p class="admin-nav-label">Menu chính</p>
+                    <ul class="admin-nav-list">
+                        <li>
+                            <a href="index.html" class="admin-nav-link">
+                                <svg class="admin-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                </svg>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="products.html" class="admin-nav-link active">
+                                <svg class="admin-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                </svg>
+                                <span>Sản phẩm</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="orders.html" class="admin-nav-link">
+                                <svg class="admin-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                </svg>
+                                <span>Đơn hàng</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="customers.html" class="admin-nav-link">
+                                <svg class="admin-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                                <span>Khách hàng</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="admin-nav-section">
+                    <p class="admin-nav-label">Marketing</p>
+                    <ul class="admin-nav-list">
+                        <li>
+                            <a href="flash-sales.html" class="admin-nav-link">
+                                <svg class="admin-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                                <span>Flash Sale</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="vouchers.html" class="admin-nav-link">
+                                <svg class="admin-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                                </svg>
+                                <span>Vouchers</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="admin-nav-section">
+                    <p class="admin-nav-label">Hệ thống</p>
+                    <ul class="admin-nav-list">
+                        <li>
+                            <a href="reports.html" class="admin-nav-link">
+                                <svg class="admin-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                </svg>
+                                <span>Báo cáo</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="settings.html" class="admin-nav-link">
+                                <svg class="admin-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                <span>Cài đặt</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="admin-sidebar-footer">
+                <div class="admin-user">
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=10B981&color=fff&size=80" alt="Admin"
+                        class="admin-user-avatar" />
+                    <div>
+                        <p class="admin-user-name">Admin</p>
+                        <p class="admin-user-role">Super Admin</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <div>
+                    <h1 class="admin-header-title">Thêm sản phẩm mới</h1>
+                    <p class="admin-header-subtitle">Điền đầy đủ thông tin để thêm sách vào cửa hàng</p>
+                </div>
+                <div class="admin-header-actions">
+                    <button class="btn-form btn-form--secondary">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        Xem trước
+                    </button>
+                    <button class="btn-form btn-form--primary">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Lưu sản phẩm
+                    </button>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <form class="admin-form-layout">
+                    <!-- Main Content -->
+                    <div class="admin-form-main">
+                        <!-- General Info -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <h3 class="form-section-title">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    Thông tin chung
+                                </h3>
+                            </div>
+                            <div class="form-section-body">
+                                <div class="form-group">
+                                    <label class="form-label">Tên sách <span class="required">*</span></label>
+                                    <input type="text" class="form-input" placeholder="VD: Đắc Nhân Tâm" />
+                                    <p class="form-hint">Tên hiển thị trên trang sản phẩm</p>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Slug</label>
+                                        <input type="text" class="form-input" placeholder="dac-nhan-tam" />
+                                        <p class="form-hint">URL thân thiện, tự động tạo từ tên</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">ISBN</label>
+                                        <input type="text" class="form-input" placeholder="978-604-XXX-XXX-X" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Mô tả <span class="required">*</span></label>
+                                    <div class="rich-editor">
+                                        <div class="rich-editor-toolbar">
+                                            <button type="button" class="rich-editor-btn" title="Bold">
+                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                    <path
+                                                        d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z" />
+                                                </svg>
+                                            </button>
+                                            <button type="button" class="rich-editor-btn" title="Italic">
+                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                    <path d="M10 4v3h2.21l-3.42 8H6v3h8v-3h-2.21l3.42-8H18V4z" />
+                                                </svg>
+                                            </button>
+                                            <button type="button" class="rich-editor-btn" title="Underline">
+                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                    <path
+                                                        d="M12 17c3.31 0 6-2.69 6-6V3h-2.5v8c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11V3H6v8c0 3.31 2.69 6 6 6zm-7 2v2h14v-2H5z" />
+                                                </svg>
+                                            </button>
+                                            <div class="rich-editor-divider"></div>
+                                            <button type="button" class="rich-editor-btn" title="Bullet List">
+                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                    <path
+                                                        d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z" />
+                                                </svg>
+                                            </button>
+                                            <button type="button" class="rich-editor-btn" title="Numbered List">
+                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                    <path
+                                                        d="M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z" />
+                                                </svg>
+                                            </button>
+                                            <div class="rich-editor-divider"></div>
+                                            <button type="button" class="rich-editor-btn" title="Link">
+                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                    <path
+                                                        d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="rich-editor-content" contenteditable="true">
+                                            <p>Nhập mô tả chi tiết về cuốn sách...</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Danh mục <span class="required">*</span></label>
+                                        <select class="form-select">
+                                            <option value="">Chọn danh mục...</option>
+                                            <option value="1">📚 Văn học</option>
+                                            <option value="1-1">&nbsp;&nbsp;└ Tiểu thuyết</option>
+                                            <option value="1-2">&nbsp;&nbsp;└ Truyện ngắn</option>
+                                            <option value="1-3">&nbsp;&nbsp;└ Thơ ca</option>
+                                            <option value="2">📈 Kinh tế</option>
+                                            <option value="2-1">&nbsp;&nbsp;└ Quản trị</option>
+                                            <option value="2-2">&nbsp;&nbsp;└ Marketing</option>
+                                            <option value="3">👶 Thiếu nhi</option>
+                                            <option value="4">🎯 Kỹ năng sống</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Nhà xuất bản</label>
+                                        <select class="form-select">
+                                            <option value="">Chọn NXB...</option>
+                                            <option value="1">NXB Kim Đồng</option>
+                                            <option value="2">NXB Trẻ</option>
+                                            <option value="3">NXB Văn Học</option>
+                                            <option value="4">NXB Lao Động</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Tác giả <span class="required">*</span></label>
+                                    <div class="tree-select">
+                                        <div class="tree-select-trigger">
+                                            <div class="tree-select-value">
+                                                <span class="tree-select-tag">
+                                                    Dale Carnegie
+                                                    <button type="button" class="tree-select-tag-remove">×</button>
+                                                </span>
+                                                <span class="tree-select-tag">
+                                                    Nguyễn Văn A (Dịch)
+                                                    <button type="button" class="tree-select-tag-remove">×</button>
+                                                </span>
+                                            </div>
+                                            <svg width="16" height="16" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Variants -->
+                        <div class="form-section variants-section">
+                            <div class="form-section-header">
+                                <h3 class="form-section-title">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                                    </svg>
+                                    Phiên bản sản phẩm (Variants)
+                                </h3>
+                            </div>
+                            <div class="variants-table-wrap">
+                                <table class="variants-table">
+                                    <thead>
+                                        <tr>
+                                            <th>SKU</th>
+                                            <th>Loại bìa</th>
+                                            <th>Giá bán</th>
+                                            <th>Giá gốc</th>
+                                            <th>Trọng lượng</th>
+                                            <th>Tồn kho</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="variant-sku">DNT-SOFT-001</span></td>
+                                            <td>
+                                                <select class="form-select">
+                                                    <option value="soft" selected>Bìa mềm</option>
+                                                    <option value="hard">Bìa cứng</option>
+                                                </select>
+                                            </td>
+                                            <td><input type="text" class="form-input" value="89,000"
+                                                    style="width: 100px;" /></td>
+                                            <td><input type="text" class="form-input" value="120,000"
+                                                    style="width: 100px;" /></td>
+                                            <td><input type="text" class="form-input" value="350g"
+                                                    style="width: 80px;" /></td>
+                                            <td><input type="number" class="form-input" value="150"
+                                                    style="width: 80px;" /></td>
+                                            <td>
+                                                <div class="variant-actions">
+                                                    <button type="button" class="btn-variant-action" title="Nhân bản">
+                                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                                        </svg>
+                                                    </button>
+                                                    <button type="button"
+                                                        class="btn-variant-action btn-variant-action--delete"
+                                                        title="Xóa">
+                                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="variant-sku">DNT-HARD-001</span></td>
+                                            <td>
+                                                <select class="form-select">
+                                                    <option value="soft">Bìa mềm</option>
+                                                    <option value="hard" selected>Bìa cứng</option>
+                                                </select>
+                                            </td>
+                                            <td><input type="text" class="form-input" value="149,000"
+                                                    style="width: 100px;" /></td>
+                                            <td><input type="text" class="form-input" value="180,000"
+                                                    style="width: 100px;" /></td>
+                                            <td><input type="text" class="form-input" value="450g"
+                                                    style="width: 80px;" /></td>
+                                            <td><input type="number" class="form-input" value="50"
+                                                    style="width: 80px;" /></td>
+                                            <td>
+                                                <div class="variant-actions">
+                                                    <button type="button" class="btn-variant-action" title="Nhân bản">
+                                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                                        </svg>
+                                                    </button>
+                                                    <button type="button"
+                                                        class="btn-variant-action btn-variant-action--delete"
+                                                        title="Xóa">
+                                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="form-section-body" style="padding-top: 0;">
+                                <button type="button" class="btn-add-variant">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    Thêm phiên bản mới
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Attributes -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <h3 class="form-section-title">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                    </svg>
+                                    Thuộc tính sách
+                                </h3>
+                            </div>
+                            <div class="form-section-body">
+                                <div class="form-row--4">
+                                    <div class="form-group">
+                                        <label class="form-label">Năm xuất bản</label>
+                                        <input type="number" class="form-input" placeholder="2024" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Số trang</label>
+                                        <input type="number" class="form-input" placeholder="320" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Kích thước</label>
+                                        <input type="text" class="form-input" placeholder="13 x 20.5 cm" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Ngôn ngữ</label>
+                                        <select class="form-select">
+                                            <option value="vi">Tiếng Việt</option>
+                                            <option value="en">Tiếng Anh</option>
+                                            <option value="bilingual">Song ngữ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="admin-form-sidebar">
+                        <!-- Images -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <h3 class="form-section-title">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                    Hình ảnh sản phẩm
+                                </h3>
+                            </div>
+                            <div class="form-section-body">
+                                <div class="image-uploader-zone">
+                                    <svg class="image-uploader-icon" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                    </svg>
+                                    <p class="image-uploader-title">Kéo thả ảnh vào đây</p>
+                                    <p class="image-uploader-subtitle">hoặc <span class="image-uploader-browse">chọn từ
+                                            máy tính</span></p>
+                                </div>
+
+                                <div class="image-grid">
+                                    <div class="image-item is-primary">
+                                        <span class="primary-badge">Chính</span>
+                                        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=200&h=280&fit=crop"
+                                            alt="Book cover" />
+                                        <div class="image-item-overlay"></div>
+                                        <div class="image-item-actions">
+                                            <button type="button"
+                                                class="btn-image-action btn-image-action--delete">Xóa</button>
+                                        </div>
+                                    </div>
+                                    <div class="image-item">
+                                        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=200&h=280&fit=crop"
+                                            alt="Book back" />
+                                        <div class="image-item-overlay"></div>
+                                        <div class="image-item-actions">
+                                            <button type="button" class="btn-image-action btn-image-action--primary">Đặt
+                                                chính</button>
+                                            <button type="button"
+                                                class="btn-image-action btn-image-action--delete">Xóa</button>
+                                        </div>
+                                    </div>
+                                    <div class="image-item">
+                                        <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=200&h=280&fit=crop"
+                                            alt="Book inside" />
+                                        <div class="image-item-overlay"></div>
+                                        <div class="image-item-actions">
+                                            <button type="button" class="btn-image-action btn-image-action--primary">Đặt
+                                                chính</button>
+                                            <button type="button"
+                                                class="btn-image-action btn-image-action--delete">Xóa</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Settings -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <h3 class="form-section-title">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                    Cài đặt
+                                </h3>
+                            </div>
+                            <div class="form-section-body">
+                                <div class="toggle-group">
+                                    <div class="toggle-info">
+                                        <p class="toggle-label">Kích hoạt sản phẩm</p>
+                                        <p class="toggle-desc">Hiển thị trên cửa hàng</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+
+                                <div class="toggle-group">
+                                    <div class="toggle-info">
+                                        <p class="toggle-label">Sản phẩm nổi bật</p>
+                                        <p class="toggle-desc">Hiển thị ở trang chủ</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+
+                                <div class="toggle-group">
+                                    <div class="toggle-info">
+                                        <p class="toggle-label">Cho phép đánh giá</p>
+                                        <p class="toggle-desc">Khách có thể review</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <h3 class="form-section-title">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                    </svg>
+                                    Thống kê nhanh
+                                </h3>
+                            </div>
+                            <div class="form-section-body">
+                                <div style="text-align: center; padding: 24px; color: var(--color-secondary);">
+                                    <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        style="margin: 0 auto 12px; opacity: 0.5;">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                                    </svg>
+                                    <p style="font-size: 0.875rem;">Thống kê sẽ hiển thị sau khi lưu sản phẩm</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
