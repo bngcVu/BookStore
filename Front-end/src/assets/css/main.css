@@ -15,6 +15,7 @@
 @import url('./vouchers.css');
 @import url('./notifications.css');
 @import url('./returns-reviews.css');
+@import url('./account-dashboard.css');
 
 /* Global text styles */
 body {
