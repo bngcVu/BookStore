@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tài khoản của tôi - BookStore</title>
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+  </head>
+  <body>
+    <header class="header" role="banner">
+      <div class="container">
+        <div class="header__logo"><a href="/user/index.html">BookStore</a></div>
+        <nav class="header__nav" aria-label="Chính">
+          <a href="/user/search.html">Search</a>
+          <a href="/user/cart.html">Basket</a>
+          <a href="/user/auth/login.html">Sign Out</a>
+        </nav>
+      </div>
+    </header>
+    <main class="section" role="main">
+      <div class="container" style="display:grid;grid-template-columns:240px 1fr;gap:24px;align-items:start;">
+        <aside class="product-card" id="account-sidebar"></aside>
+        <section class="product-card">
+          <h1 style="margin:0 0 12px;">Tổng quan tài khoản</h1>
+          <p class="meta">Xem nhanh hồ sơ, địa chỉ và các đơn hàng gần đây.</p>
+        </section>
+      </div>
+    </main>
+    <footer class="footer" role="contentinfo">
+      <div class="container"><p class="meta">© BookStore</p></div>
+    </footer>
+    <script type="module" src="../../assets/js/main.js"></script>
+    <script type="module" src="../../assets/js/account.js"></script>
+  </body>
+  </html>

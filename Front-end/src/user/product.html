@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết sách - BookStore</title>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+  </head>
+  <body>
+    <header class="header" role="banner">
+      <div class="container">
+        <div class="header__logo"><a href="/user/index.html">BookStore</a></div>
+        <div class="header__search">
+          <form action="/user/search.html" method="get">
+            <label class="visually-hidden" for="search">Tìm kiếm</label>
+            <input id="search" name="q" type="text" placeholder="Author / Title / Keyword or ISBN" aria-label="Tìm kiếm sách" />
+          </form>
+        </div>
+        <nav class="header__nav" aria-label="Chính">
+          <a href="/user/cart.html">Basket</a>
+          <a href="#">Help</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="product-detail" class="section" role="main"></main>
+
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <p class="meta">© BookStore</p>
+      </div>
+    </footer>
+
+    <script type="module" src="../assets/js/main.js"></script>
+  </body>
+  </html>

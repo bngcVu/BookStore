@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookStore - Rare Books, First Editions & Collectibles</title>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header" role="banner">
+      <div class="container">
+        <div class="header__logo">BookStore</div>
+        <div class="header__search">
+          <form action="/user/search.html" method="get" style="display:flex;gap:8px;align-items:center;">
+            <label class="visually-hidden" for="search">Tìm kiếm</label>
+            <input id="search" name="q" type="text" placeholder="Author / Title / Keyword or ISBN" aria-label="Tìm kiếm sách" />
+            <button class="btn-primary" type="submit">Search</button>
+          </form>
+        </div>
+        <nav class="header__nav" aria-label="Chính">
+          <a href="/user/search.html">Search</a>
+          <a href="/user/auth/login.html">Sign In</a>
+          <a href="/user/account/index.html">My Account</a>
+          <a href="/user/cart.html">Basket</a>
+          <a href="#">Help</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" role="region" aria-labelledby="hero-title">
+      <div class="container">
+        <h1 id="hero-title">Discover Rare Books, First Editions & Collectibles</h1>
+        <p>Millions of books from trusted sellers worldwide</p>
+        <div style="margin-top:16px;">
+          <a class="btn-primary" href="/user/search.html">Tìm kiếm ngay</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Books -->
+    <section class="section" role="region" aria-labelledby="featured-title">
+      <div class="container">
+        <h2 id="featured-title">Trending Books</h2>
+        <div id="featured-grid" class="product-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footer__columns">
+          <div class="footer__column">
+            <h4>About</h4>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Careers</a></li>
+            </ul>
+          </div>
+          <div class="footer__column">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer__column">
+            <h4>Policies</h4>
+            <ul>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Terms</a></li>
+            </ul>
+          </div>
+          <div class="footer__column">
+            <h4>Follow</h4>
+            <ul>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">X/Twitter</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="../assets/js/main.js"></script>
+  </body>
+  </html>

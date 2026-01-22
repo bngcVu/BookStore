@@ -1,0 +1,66 @@
+/* Button Primary */
+.btn-primary {
+  background: var(--color-primary-dark-red);
+  color: var(--color-white);
+  padding: 10px 24px;
+  font-family: var(--font-sans);
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 200ms, box-shadow 200ms;
+}
+.btn-primary:hover { background: #6B0000; }
+.btn-primary:focus { outline: 2px solid var(--color-primary-gold); outline-offset: 2px; }
+
+/* Product Card */
+.product-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-100);
+  padding: var(--space-md);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 200ms, box-shadow 200ms;
+}
+.product-card:hover { border-color: var(--color-gray-200); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.product-card__title { font-family: var(--font-serif); font-size: var(--text-lg); margin: var(--space-sm) 0 4px; }
+.product-card__author { font-family: var(--font-serif); font-size: var(--text-base); color: var(--color-gray-600); margin: 0 0 6px; }
+.product-card__price { font-family: var(--font-sans); font-weight: bold; color: var(--color-primary-dark-red); margin: 6px 0; }
+.product-card__seller { font-family: var(--font-sans); font-size: var(--text-sm); color: var(--color-gray-600); }
+
+/* Badge Fine */
+.badge-fine {
+  background: rgba(5, 150, 105, 0.1);
+  color: #059669;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  border-radius: 12px;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+/* Header */
+.header { position: sticky; top: 0; background: var(--color-white); border-bottom: 1px solid var(--color-gray-100); z-index: 10; }
+.header .container { display: grid; grid-template-columns: 200px 1fr auto; gap: var(--space-lg); align-items: center; padding: var(--space-md) 0; }
+.header__logo { font-family: var(--font-serif); font-size: var(--text-2xl); color: var(--color-primary-dark-red); }
+.header__search input { width: 100%; padding: 10px 12px; border: 1px solid var(--color-gray-100); border-radius: 4px; }
+.header__nav a { margin-left: var(--space-md); font-family: var(--font-sans); }
+.header__nav a:hover { color: var(--color-primary-dark-red); }
+
+/* Hero */
+.hero { background: linear-gradient(180deg, #faf7f5, #fff); padding: var(--space-xl) 0; border-bottom: 1px solid var(--color-gray-100); }
+.hero h1 { font-family: var(--font-serif); font-size: 2rem; margin: 0 0 var(--space-sm); }
+.hero p { font-family: var(--font-sans); color: var(--color-gray-600); margin: 0; }
+
+/* Footer */
+.footer { border-top: 1px solid var(--color-gray-100); padding: var(--space-xl) 0; margin-top: var(--space-xl); }
+.footer__columns { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-lg); }
+.footer__column h4 { font-family: var(--font-serif); margin: 0 0 var(--space-sm); }
+.footer__column a { color: var(--color-gray-600); }
+.footer__column a:hover { color: var(--color-primary-dark-red); }
+
+/* Account Sidebar */
+.account-sidebar { padding: var(--space-md); }
+.account-sidebar .nav-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.account-sidebar .nav-link { display: block; padding: 10px 12px; border-radius: 6px; border: 1px solid transparent; font-family: var(--font-sans); }
+.account-sidebar .nav-link:hover { background: #fafafa; border-color: var(--color-gray-100); }
+.account-sidebar .nav-link.active { background: var(--color-gray-50); border-color: var(--color-gray-100); color: var(--color-primary-dark-red); }
