@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý Đơn hàng - Admin</title>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/admin-table.css" />
+</head>
+
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+                <!-- Sidebar Component -->
+        <div id="admin-sidebar-mount"></div>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <div>
+                    <h1 class="admin-header-title">Quản lý Đơn hàng</h1>
+                    <p class="admin-header-subtitle">Theo dõi và xử lý đơn hàng từ khách hàng</p>
+                </div>
+                <div class="admin-header-actions">
+                    <button class="btn-outline">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Export CSV
+                    </button>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <!-- Filters -->
+                <div class="table-filters">
+                    <div class="filter-group">
+                        <label>Trạng thái</label>
+                        <select class="filter-select">
+                            <option value="">Tất cả</option>
+                            <option value="pending">Chờ xử lý</option>
+                            <option value="processing">Đang xử lý</option>
+                            <option value="shipped">Đang giao</option>
+                            <option value="delivered">Đã giao</option>
+                            <option value="cancelled">Đã hủy</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Từ ngày</label>
+                        <input type="date" class="filter-select" />
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Đến ngày</label>
+                        <input type="date" class="filter-select" />
+                    </div>
+
+                    <button class="btn-outline btn-sm" style="margin-top: 22px;">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        Xóa bộ lọc
+                    </button>
+                </div>
+
+                <!-- Search -->
+                <div class="table-search">
+                    <div class="search-box">
+                        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <input type="text" placeholder="Tìm theo mã đơn, tên khách hàng, số điện thoại..." />
+                    </div>
+                    <span class="result-count">Hiển thị 1-20 trong 324 đơn hàng</span>
+                </div>
+
+                <!-- Orders Table -->
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" /></th>
+                                <th>Mã đơn</th>
+                                <th>Khách hàng</th>
+                                <th class="sortable">Ngày đặt</th>
+                                <th class="sortable">Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Row 1 -->
+                            <tr onclick="window.location.href='order-detail.html'" style="cursor: pointer;">
+                                <td onclick="event.stopPropagation()"><input type="checkbox" /></td>
+                                <td><span class="order-id">#ORD-2024-001847</span></td>
+                                <td><span class="customer-name">Nguyễn Văn An</span></td>
+                                <td>23/01/2026 14:30</td>
+                                <td><span class="total-amount">1,250,000₫</span></td>
+                                <td><span class="status-badge status-processing">Đang xử lý</span></td>
+                                <td onclick="event.stopPropagation()">
+                                    <div class="action-buttons">
+                                        <button class="action-btn" title="Xem chi tiết">
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Row 2 -->
+                            <tr onclick="window.location.href='order-detail.html'" style="cursor: pointer;">
+                                <td onclick="event.stopPropagation()"><input type="checkbox" /></td>
+                                <td><span class="order-id">#ORD-2024-001846</span></td>
+                                <td><span class="customer-name">Lê Thị Bình</span></td>
+                                <td>23/01/2026 12:15</td>
+                                <td><span class="total-amount">850,000₫</span></td>
+                                <td><span class="status-badge status-active">Đã giao</span></td>
+                                <td onclick="event.stopPropagation()">
+                                    <div class="action-buttons">
+                                        <button class="action-btn" title="Xem chi tiết">
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Row 3 -->
+                            <tr onclick="window.location.href='order-detail.html'" style="cursor: pointer;">
+                                <td onclick="event.stopPropagation()"><input type="checkbox" /></td>
+                                <td><span class="order-id">#ORD-2024-001845</span></td>
+                                <td><span class="customer-name">Trần Văn Cường</span></td>
+                                <td>22/01/2026 18:45</td>
+                                <td><span class="total-amount">450,000₫</span></td>
+                                <td><span class="status-badge status-pending">Chờ xử lý</span></td>
+                                <td onclick="event.stopPropagation()">
+                                    <div class="action-buttons">
+                                        <button class="action-btn" title="Xem chi tiết">
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Row 4 -->
+                            <tr onclick="window.location.href='order-detail.html'" style="cursor: pointer;">
+                                <td onclick="event.stopPropagation()"><input type="checkbox" /></td>
+                                <td><span class="order-id">#ORD-2024-001844</span></td>
+                                <td><span class="customer-name">Phạm Thị Dung</span></td>
+                                <td>22/01/2026 10:20</td>
+                                <td><span class="total-amount">2,100,000₫</span></td>
+                                <td><span class="status-badge status-inactive">Đã hủy</span></td>
+                                <td onclick="event.stopPropagation()">
+                                    <div class="action-buttons">
+                                        <button class="action-btn" title="Xem chi tiết">
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="table-pagination">
+                    <span class="pagination-info">Hiển thị 1-20 trong tổng số 324 đơn hàng</span>
+                    <div class="pagination-controls">
+                        <button class="pagination-btn" disabled>Trước</button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn">...</button>
+                        <button class="pagination-btn">17</button>
+                        <button class="pagination-btn">Sau</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../assets/js/admin-sidebar.js"></script>
+</body>
+
+</html>

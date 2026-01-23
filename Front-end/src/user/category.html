@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sách Văn học - Nhà Sách</title>
+    <meta name="description"
+        content="Khám phá bộ sưu tập sách văn học phong phú với hàng ngàn đầu sách từ các tác giả nổi tiếng trong và ngoài nước." />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/category.css" />
+</head>
+
+<body>
+    <!-- Header (reuse from existing) -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-top">
+                <a href="../index.html" class="site-logo">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <span>Nhà Sách</span>
+                </a>
+
+                <div class="header-search">
+                    <input type="search" placeholder="Tìm kiếm sách, tác giả, nhà xuất bản..." />
+                    <button type="submit">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="header-actions">
+                    <a href="login.html" class="header-link">Đăng nhập</a>
+                    <a href="#" class="header-icon-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </a>
+                    <a href="#" class="header-icon-btn header-cart">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span class="cart-count">3</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">Trang chủ</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="#">Danh mục</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Văn học</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="category-page">
+        <div class="container">
+            <div class="category-layout">
+                <!-- Sidebar Filters -->
+                <aside class="category-sidebar">
+                    <div class="sidebar-header">
+                        <h3>Bộ lọc</h3>
+                        <button class="clear-filters">Xóa bộ lọc</button>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="filter-section">
+                        <button class="filter-toggle active" data-filter="category">
+                            <span>Danh mục</span>
+                            <svg class="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="filter-content active" id="filter-category">
+                            <ul class="category-list">
+                                <li><a href="#" class="active">Văn học</a></li>
+                                <li><a href="#">Văn học Việt Nam</a></li>
+                                <li><a href="#">Văn học nước ngoài</a></li>
+                                <li><a href="#">Tiểu thuyết</a></li>
+                                <li><a href="#">Thơ ca</a></li>
+                                <li><a href="#">Truyện ngắn</a></li>
+                                <li><a href="#">Kịch</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Price Filter -->
+                    <div class="filter-section">
+                        <button class="filter-toggle active" data-filter="price">
+                            <span>Khoảng giá</span>
+                            <svg class="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="filter-content active" id="filter-price">
+                            <div class="price-range">
+                                <div class="price-inputs">
+                                    <input type="number" placeholder="Từ" value="0" />
+                                    <span>-</span>
+                                    <input type="number" placeholder="Đến" value="500000" />
+                                </div>
+                                <div class="price-slider">
+                                    <div class="slider-track"></div>
+                                    <div class="slider-range"></div>
+                                    <input type="range" min="0" max="1000000" value="0" class="slider-min" />
+                                    <input type="range" min="0" max="1000000" value="500000" class="slider-max" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Author Filter -->
+                    <div class="filter-section">
+                        <button class="filter-toggle" data-filter="author">
+                            <span>Tác giả</span>
+                            <svg class="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="filter-content" id="filter-author">
+                            <div class="filter-search">
+                                <input type="text" placeholder="Tìm tác giả..." />
+                            </div>
+                            <div class="checkbox-list">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" />
+                                    <span>Nguyễn Nhật Ánh</span>
+                                    <span class="count">(24)</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" />
+                                    <span>Tô Hoài</span>
+                                    <span class="count">(18)</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" />
+                                    <span>Nam Cao</span>
+                                    <span class="count">(15)</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" />
+                                    <span>Ngô Tất Tố</span>
+                                    <span class="count">(12)</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" />
+                                    <span>Vũ Trọng Phụng</span>
+                                    <span class="count">(10)</span>
+                                </label>
+                            </div>
+                            <button class="show-more">Xem thêm</button>
+                        </div>
+                    </div>
+
+                    <!-- Publisher Filter -->
+                    <div class="filter-section">
+                        <button class="filter-toggle" data-filter="publisher">
+                            <span>Nhà xuất bản</span>
+                            <svg class="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="filter-content" id="filter-publisher">
+                            <select class="filter-select">
+                                <option value="">Tất cả nhà xuất bản</option>
+                                <option value="nxb-tre">NXB Trẻ</option>
+                                <option value="nxb-kim-dong">NXB Kim Đồng</option>
+                                <option value="nxb-van-hoc">NXB Văn học</option>
+                                <option value="nxb-lao-dong">NXB Lao Động</option>
+                                <option value="nxb-tong-hop">NXB Tổng hợp TPHCM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Rating Filter -->
+                    <div class="filter-section">
+                        <button class="filter-toggle" data-filter="rating">
+                            <span>Đánh giá</span>
+                            <svg class="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="filter-content" id="filter-rating">
+                            <div class="rating-list">
+                                <label class="rating-item">
+                                    <input type="radio" name="rating" value="5" />
+                                    <span class="stars">
+                                        ★★★★★
+                                    </span>
+                                    <span class="rating-text">5 sao</span>
+                                </label>
+                                <label class="rating-item">
+                                    <input type="radio" name="rating" value="4" />
+                                    <span class="stars">
+                                        ★★★★☆
+                                    </span>
+                                    <span class="rating-text">4 sao trở lên</span>
+                                </label>
+                                <label class="rating-item">
+                                    <input type="radio" name="rating" value="3" />
+                                    <span class="stars">
+                                        ★★★☆☆
+                                    </span>
+                                    <span class="rating-text">3 sao trở lên</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stock Filter -->
+                    <div class="filter-section">
+                        <label class="toggle-switch-label">
+                            <input type="checkbox" class="toggle-checkbox" />
+                            <span class="toggle-slider-inline"></span>
+                            <span class="toggle-label-text">Chỉ hiện sách còn hàng</span>
+                        </label>
+                    </div>
+                </aside>
+
+                <!-- Product Area -->
+                <div class="category-content">
+                    <!-- Toolbar -->
+                    <div class="category-toolbar">
+                        <div class="toolbar-left">
+                            <h1 class="category-title">Văn học</h1>
+                            <span class="result-count">Hiển thị 1-20 trong 456 kết quả</span>
+                        </div>
+                        <div class="toolbar-right">
+                            <select class="sort-select">
+                                <option value="">Sắp xếp: Mặc định</option>
+                                <option value="bestseller">Bán chạy nhất</option>
+                                <option value="price-asc">Giá thấp đến cao</option>
+                                <option value="price-desc">Giá cao đến thấp</option>
+                                <option value="newest">Mới nhất</option>
+                                <option value="rating">Đánh giá cao nhất</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Product Grid -->
+                    <div class="product-grid">
+                        <!-- Product Card 1 -->
+                        <div class="product-card">
+                            <div class="product-badge bestseller">Bán chạy</div>
+                            <a href="product-detail.html" class="product-image">
+                                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=300&h=400&fit=crop"
+                                    alt="Đắc Nhân Tâm" />
+                            </a>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="product-detail.html">Đắc Nhân Tâm</a>
+                                </h3>
+                                <p class="product-author">Dale Carnegie</p>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="rating-count">(2,547)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="price-current">120,000₫</span>
+                                    <span class="price-original">180,000₫</span>
+                                    <span class="price-discount">-33%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 2 -->
+                        <div class="product-card">
+                            <a href="product-detail.html" class="product-image">
+                                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=300&h=400&fit=crop"
+                                    alt="Nhà Giả Kim" />
+                            </a>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="product-detail.html">Nhà Giả Kim</a>
+                                </h3>
+                                <p class="product-author">Paulo Coelho</p>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="rating-count">(1,832)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="price-current">95,000₫</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 3 -->
+                        <div class="product-card">
+                            <div class="product-badge new">Mới</div>
+                            <a href="product-detail.html" class="product-image">
+                                <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=300&h=400&fit=crop"
+                                    alt="Tôi Thấy Hoa Vàng Trên Cỏ Xanh" />
+                            </a>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="product-detail.html">Tôi Thấy Hoa Vàng Trên Cỏ Xanh</a>
+                                </h3>
+                                <p class="product-author">Nguyễn Nhật Ánh</p>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span class="rating-count">(945)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="price-current">110,000₫</span>
+                                    <span class="price-original">130,000₫</span>
+                                    <span class="price-discount">-15%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 4 -->
+                        <div class="product-card">
+                            <div class="product-badge bestseller">Bán chạy</div>
+                            <a href="product-detail.html" class="product-image">
+                                <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=300&h=400&fit=crop"
+                                    alt="Sapiens" />
+                            </a>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="product-detail.html">Sapiens: Lược Sử Loài Người</a>
+                                </h3>
+                                <p class="product-author">Yuval Noah Harari</p>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="rating-count">(3,215)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="price-current">195,000₫</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Repeat similar cards... -->
+                        <div class="product-card">
+                            <a href="product-detail.html" class="product-image">
+                                <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=300&h=400&fit=crop"
+                                    alt="Product" />
+                            </a>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="product-detail.html">Cà Phê Cùng Tony</a>
+                                </h3>
+                                <p class="product-author">Tony Buổi Sáng</p>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span class="rating-count">(682)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="price-current">85,000₫</span>
+                                    <span class="price-original">100,000₫</span>
+                                    <span class="price-discount">-15%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="product-detail.html" class="product-image">
+                                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&h=400&fit=crop"
+                                    alt="Product" />
+                            </a>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="product-detail.html">1984</a>
+                                </h3>
+                                <p class="product-author">George Orwell</p>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="rating-count">(1,456)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="price-current">115,000₫</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="product-detail.html" class="product-image">
+                                <img src="https://images.unsplash.com/photo-151282079003-83ca734da794?w=300&h=400&fit=crop"
+                                    alt="Product" />
+                            </a>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="product-detail.html">Tuổi Trẻ Đáng Giá Bao Nhiêu</a>
+                                </h3>
+                                <p class="product-author">Rosie Nguyễn</p>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span class="rating-count">(892)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="price-current">88,000₫</span>
+                                    <span class="price-original">110,000₫</span>
+                                    <span class="price-discount">-20%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="product-detail.html" class="product-image">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop"
+                                    alt="Product" />
+                            </a>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a href="product-detail.html">Mắt Biếc</a>
+                                </h3>
+                                <p class="product-author">Nguyễn Nhật Ánh</p>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="rating-count">(2,134)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="price-current">105,000₫</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="pagination-btn" disabled>
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn">4</button>
+                        <button class="pagination-btn">5</button>
+                        <span class="pagination-dots">...</span>
+                        <button class="pagination-btn">23</button>
+                        <button class="pagination-btn">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/category.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý Voucher - Marketing Admin</title>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/vouchers.css" />
+</head>
+
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+                <!-- Sidebar Component -->
+        <div id="admin-sidebar-mount"></div>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <header class="vouchers-header">
+                <div class="vouchers-breadcrumb">
+                    <span>Marketing</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    <span class="active">Voucher Campaigns</span>
+                </div>
+                <div class="vouchers-header-actions">
+                    <button class="btn-primary" onclick="openVoucherModal()">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        Create New Voucher
+                    </button>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <!-- Quick Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-blue">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Active Vouchers</p>
+                            <h3 class="stat-value">24</h3>
+                            <p class="stat-change positive">+3 from last month</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-green">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Total Used</p>
+                            <h3 class="stat-value">12,547</h3>
+                            <p class="stat-change positive">+18% this month</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-purple">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Total Discounted</p>
+                            <h3 class="stat-value">$245,680</h3>
+                            <p class="stat-change negative">-5% vs last month</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vouchers Table -->
+                <div class="vouchers-table-wrapper">
+                    <table class="vouchers-table">
+                        <thead>
+                            <tr>
+                                <th>Campaign Info</th>
+                                <th>Discount Detail</th>
+                                <th>Conditions</th>
+                                <th>Usage Progress</th>
+                                <th>Validity</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Voucher Row 1 -->
+                            <tr class="voucher-row">
+                                <td>
+                                    <div class="campaign-info">
+                                        <p class="voucher-code">SUMMER2026</p>
+                                        <p class="voucher-name">Summer Sale 2026</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="discount-badge discount-percentage">10% OFF</span>
+                                </td>
+                                <td>
+                                    <div class="conditions">
+                                        <p class="condition-text">Min Order: $200</p>
+                                        <p class="condition-text">Max Reduce: $50</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="usage-progress">
+                                        <span class="usage-text">450 / 1000 Used</span>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 45%"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="validity">
+                                        <p class="date-range">01/06/2026 - 31/08/2026</p>
+                                        <span class="status-pill status-active">Active</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn" onclick="editVoucher(this)" title="Edit">
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            </svg>
+                                        </button>
+                                        <button class="action-btn" onclick="deleteVoucher(this)" title="Delete">
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Voucher Row 2 -->
+                            <tr class="voucher-row">
+                                <td>
+                                    <div class="campaign-info">
+                                        <p class="voucher-code">NEWUSER50</p>
+                                        <p class="voucher-name">New User Discount</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="discount-badge discount-fixed">-$50.00</span>
+                                </td>
+                                <td>
+                                    <div class="conditions">
+                                        <p class="condition-text">Min Order: $100</p>
+                                        <p class="condition-text">First order only</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="usage-progress">
+                                        <span class="usage-text">∞ Unlimited</span>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill progress-unlimited"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="validity">
+                                        <p class="date-range">01/01/2026 - No expiry</p>
+                                        <span class="status-pill status-active">Active</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn" onclick="editVoucher(this)" title="Edit">
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            </svg>
+                                        </button>
+                                        <button class="action-btn" onclick="deleteVoucher(this)" title="Delete">
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Voucher Row 3 -->
+                            <tr class="voucher-row">
+                                <td>
+                                    <div class="campaign-info">
+                                        <p class="voucher-code">FLASHSALE</p>
+                                        <p class="voucher-name">Flash Sale Weekend</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="discount-badge discount-percentage">25% OFF</span>
+                                </td>
+                                <td>
+                                    <div class="conditions">
+                                        <p class="condition-text">Min Order: $150</p>
+                                        <p class="condition-text">Max Reduce: $75</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="usage-progress">
+                                        <span class="usage-text">200 / 200 Used</span>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill progress-full" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="validity">
+                                        <p class="date-range">15/05/2026 - 17/05/2026</p>
+                                        <span class="status-pill status-expired">Expired</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn" onclick="editVoucher(this)" title="Edit">
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            </svg>
+                                        </button>
+                                        <button class="action-btn" onclick="deleteVoucher(this)" title="Delete">
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create/Edit Voucher Modal -->
+    <div class="modal" id="voucher-modal">
+        <div class="modal-overlay" onclick="closeVoucherModal()"></div>
+        <div class="modal-content modal-voucher">
+            <div class="modal-header">
+                <h3 class="modal-title">Create New Voucher</h3>
+                <button class="modal-close" onclick="closeVoucherModal()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form class="voucher-form">
+                    <!-- Code & Name -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Voucher Code</label>
+                            <input type="text" class="form-input" placeholder="e.g., SUMMER2026" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Campaign Name</label>
+                            <input type="text" class="form-input" placeholder="e.g., Summer Sale 2026" required />
+                        </div>
+                    </div>
+
+                    <!-- Discount Logic -->
+                    <div class="form-group">
+                        <label class="form-label">Discount Type</label>
+                        <div class="segmented-control">
+                            <input type="radio" name="discount_type" id="type-percentage" value="percentage" checked />
+                            <label for="type-percentage" class="segment-btn">Percentage</label>
+
+                            <input type="radio" name="discount_type" id="type-fixed" value="fixed" />
+                            <label for="type-fixed" class="segment-btn">Fixed Amount</label>
+                        </div>
+                    </div>
+
+                    <!-- Value Inputs -->
+                    <div class="form-row" id="percentage-inputs">
+                        <div class="form-group">
+                            <label class="form-label">Discount Percentage (%)</label>
+                            <div class="input-addon">
+                                <input type="number" class="form-input" placeholder="10" min="1" max="100" />
+                                <span class="addon">%</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Max Discount Amount</label>
+                            <div class="input-addon">
+                                <span class="addon">$</span>
+                                <input type="number" class="form-input" placeholder="50" min="0" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row" id="fixed-inputs" style="display: none;">
+                        <div class="form-group">
+                            <label class="form-label">Fixed Discount Amount</label>
+                            <div class="input-addon">
+                                <span class="addon">$</span>
+                                <input type="number" class="form-input" placeholder="50" min="0" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Limits -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Total Usage Limit</label>
+                            <input type="number" class="form-input" placeholder="1000" min="1" />
+                            <p class="form-hint">Leave empty for unlimited</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Limit Per User</label>
+                            <input type="number" class="form-input" placeholder="1" min="1" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Min Order Value</label>
+                        <div class="input-addon">
+                            <span class="addon">$</span>
+                            <input type="number" class="form-input" placeholder="200" min="0" />
+                        </div>
+                    </div>
+
+                    <!-- Duration -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Start Date</label>
+                            <input type="date" class="form-input" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">End Date</label>
+                            <input type="date" class="form-input" />
+                            <p class="form-hint">Leave empty for no expiry</p>
+                        </div>
+                    </div>
+
+                    <!-- Active Status -->
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" checked />
+                            <span>Activate voucher immediately</span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-outline" onclick="closeVoucherModal()">Cancel</button>
+                <button class="btn-primary">Create Voucher</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/vouchers.js"></script>
+
+    <script src="../assets/js/admin-sidebar.js"></script>
+</body>
+
+</html>

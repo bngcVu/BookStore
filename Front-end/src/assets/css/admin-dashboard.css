@@ -12,9 +12,17 @@
 
 /* ============ DARK SIDEBAR ============ */
 
+/* 🎨 VIBRANT SIDEBAR - Purple Gradient */
 .admin-sidebar {
     width: 260px;
-    background: #0F172A;
+    background: linear-gradient(180deg,
+            #7C3AED 0%,
+            /* Vivid Purple top */
+            #6D28D9 50%,
+            /* Deep Purple middle */
+            #5B21B6 100%
+            /* Darker Purple bottom */
+        );
     color: white;
     position: fixed;
     top: 0;
@@ -23,6 +31,7 @@
     display: flex;
     flex-direction: column;
     z-index: 100;
+    box-shadow: 4px 0 20px rgba(124, 58, 237, 0.15);
 }
 
 .admin-sidebar-header {
@@ -38,14 +47,16 @@
     color: white;
 }
 
+/* 🎨 Vibrant logo với glow */
 .admin-logo-icon {
     width: 40px;
     height: 40px;
-    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    background: linear-gradient(135deg, #10B981 0%, #14B8A6 100%);
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.5);
 }
 
 .admin-logo-icon svg {
@@ -82,12 +93,19 @@
 
 .admin-nav-label {
     font-size: 0.6875rem;
-    font-weight: 600;
+    font-weight: 700;
+    /* Bolder */
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.4);
-    padding: 0 24px;
-    margin-bottom: 8px;
+    letter-spacing: 1.5px;
+    /* Wider tracking */
+    color: rgba(255, 255, 255, 0.5);
+    /* Brighter */
+    padding: 0 24px 12px;
+    /* Bottom padding */
+    margin-bottom: 12px;
+    /* More space */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    /* Divider */
 }
 
 .admin-nav-list {
@@ -96,6 +114,7 @@
     padding: 0;
 }
 
+/* ⭐ Phase 2: Polished sidebar hover */
 .admin-nav-link {
     display: flex;
     align-items: center;
@@ -104,19 +123,51 @@
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     font-weight: 500;
-    transition: all 200ms ease;
+    transition: all 0.2s ease;
     border-left: 3px solid transparent;
+    position: relative;
+}
+
+.admin-nav-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background: linear-gradient(180deg, #10B981, #34D399);
+    transition: height 0.2s ease;
 }
 
 .admin-nav-link:hover {
     background: rgba(255, 255, 255, 0.05);
     color: white;
+    padding-left: 28px;
+    /* Shift right */
 }
 
+.admin-nav-link:hover::before {
+    height: 60%;
+    /* Animated height */
+}
+
+.admin-nav-link:hover .admin-nav-icon {
+    transform: translateX(4px);
+    /* Icon shift */
+}
+
+/* 🎨 Vibrant active link với glow */
 .admin-nav-link.active {
-    background: rgba(16, 185, 129, 0.1);
-    color: #10B981;
+    background: rgba(16, 185, 129, 0.25);
+    color: #34D399;
     border-left-color: #10B981;
+    border-left-width: 4px;
+    box-shadow: inset 4px 0 12px rgba(16, 185, 129, 0.3);
+}
+
+.admin-nav-icon {
+    transition: transform 0.2s ease;
 }
 
 .admin-nav-icon {
@@ -127,24 +178,49 @@
 
 .admin-nav-badge {
     margin-left: auto;
-    background: #EF4444;
+    background: linear-gradient(135deg, #EF4444, #DC2626);
+    /* Gradient */
     color: white;
     font-size: 0.6875rem;
     font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 10px;
+    padding: 3px 10px;
+    /* Better padding */
+    border-radius: 12px;
+    /* More rounded */
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.4);
+    /* Glow effect */
+    min-width: 24px;
+    text-align: center;
 }
 
-/* Sidebar Footer */
+/* Sidebar Footer - Premium card */
 .admin-sidebar-footer {
-    padding: 16px 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    /* More padding */
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    /* Brighter */
+    background: rgba(0, 0, 0, 0.15);
+    /* Subtle dark overlay */
+    backdrop-filter: blur(10px);
+    /* Glass effect */
 }
 
 .admin-user {
     display: flex;
     align-items: center;
     gap: 12px;
+    padding: 12px;
+    /* Inner padding */
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    /* Subtle bg */
+    transition: all 0.2s ease;
+}
+
+.admin-user:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px);
+    /* Subtle shift */
 }
 
 .admin-user-avatar {
@@ -166,11 +242,30 @@
 
 /* ============ MAIN CONTENT ============ */
 
+/* 🎨 VIBRANT Main - Animated gradient background */
 .admin-main {
     flex: 1;
     margin-left: 260px;
-    background: #F1F5F9;
+    background: linear-gradient(-45deg,
+            #FAFBFC,
+            #F0F9FF,
+            #FDF4FF,
+            #F0FDF4);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
     min-height: 100vh;
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
 }
 
 .admin-header {
@@ -185,12 +280,19 @@
     z-index: 50;
 }
 
+/* ⭐ Phase 2: Gradient text for header */
 .admin-header-title {
     font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-primary);
+    font-size: 1.75rem;
+    /* Increased from 1.5rem */
+    font-weight: 800;
+    /* Bolder */
     margin: 0;
+
+    background: linear-gradient(135deg, #1F2937 0%, #3B82F6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .admin-header-subtitle {
@@ -254,6 +356,7 @@
     color: var(--color-secondary);
 }
 
+/* ⭐ Phase 2: Notification dot with pulse animation */
 .admin-notification-dot {
     position: absolute;
     top: 8px;
@@ -263,10 +366,50 @@
     background: #EF4444;
     border-radius: 50%;
     border: 2px solid white;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(1.15);
+    }
+}
+
+/* ⭐ Ring effect */
+.admin-notification-dot::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid #EF4444;
+    opacity: 0;
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+
+    75%,
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* ⭐ Phase 1: Refined spacing system */
 .admin-content {
-    padding: 32px;
+    padding: 40px 48px;
+    /* Increased from 32px for breathing room */
+    max-width: 1600px;
+    /* Prevent too wide on ultrawide screens */
+    margin: 0 auto;
 }
 
 /* ============ KPI CARDS ============ */
@@ -274,17 +417,41 @@
 .kpi-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    margin-bottom: 32px;
+    gap: 32px;
+    /* Increased from 24px for breathing room */
+    margin-bottom: 40px;
+    /* Increased from 32px */
 }
 
 .kpi-card {
     background: white;
-    border-radius: 16px;
+    border-radius: 20px;
+    /* Softer corners from 16px */
     padding: 24px;
-    border: 1px solid var(--color-border);
+    border: none;
+    /* Removed 1px border */
     position: relative;
     overflow: hidden;
+
+    /* ⭐ Phase 1: Multi-layer elevated shadow */
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.05),
+        0 10px 20px -5px rgba(0, 0, 0, 0.04),
+        0 0 0 1px rgba(0, 0, 0, 0.02);
+
+    /* ⭐ Phase 1: Smooth transitions */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: default;
+}
+
+/* ⭐ Phase 1: Hover lift effect */
+.kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        0 16px 32px -8px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(59, 130, 246, 0.15);
+    /* Blue glow on hover */
 }
 
 .kpi-card::before {
@@ -296,16 +463,45 @@
     height: 4px;
 }
 
+/* 🎨 VIBRANT KPI Cards - Colorful backgrounds */
+.kpi-card--revenue {
+    background: linear-gradient(135deg,
+            rgba(16, 185, 129, 0.12) 0%,
+            rgba(16, 185, 129, 0.04) 100%);
+    border: 2px solid rgba(16, 185, 129, 0.3);
+}
+
 .kpi-card--revenue::before {
     background: linear-gradient(90deg, #10B981, #059669);
+}
+
+.kpi-card--orders {
+    background: linear-gradient(135deg,
+            rgba(59, 130, 246, 0.12) 0%,
+            rgba(99, 102, 241, 0.04) 100%);
+    border: 2px solid rgba(59, 130, 246, 0.3);
 }
 
 .kpi-card--orders::before {
     background: linear-gradient(90deg, #3B82F6, #2563EB);
 }
 
+.kpi-card--users {
+    background: linear-gradient(135deg,
+            rgba(124, 58, 237, 0.12) 0%,
+            rgba(139, 92, 246, 0.04) 100%);
+    border: 2px solid rgba(124, 58, 237, 0.3);
+}
+
 .kpi-card--users::before {
     background: linear-gradient(90deg, #8B5CF6, #7C3AED);
+}
+
+.kpi-card--alert {
+    background: linear-gradient(135deg,
+            rgba(245, 158, 11, 0.12) 0%,
+            rgba(251, 191, 36, 0.04) 100%);
+    border: 2px solid rgba(245, 158, 11, 0.3);
 }
 
 .kpi-card--alert::before {
@@ -320,9 +516,11 @@
 }
 
 .kpi-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
+    width: 56px;
+    /* Increased from 48px */
+    height: 56px;
+    border-radius: 14px;
+    /* Softer from 12px */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -349,8 +547,9 @@
 }
 
 .kpi-icon svg {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    /* Increased from 24px */
+    height: 28px;
 }
 
 .kpi-change {
@@ -378,16 +577,34 @@
     height: 14px;
 }
 
+/* ⭐ Phase 1: Enhanced Typography Hierarchy */
 .kpi-value {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin-bottom: 4px;
+    font-size: 2.5rem;
+    /* Increased from 2rem (32px → 40px) */
+    font-weight: 800;
+    /* Bolder from 700 */
+    letter-spacing: -0.02em;
+    /* Tighter tracking */
+    margin-bottom: 6px;
+    /* Increased from 4px */
+
+    /* ⭐ Gradient text effect (subtle) */
+    background: linear-gradient(135deg, #1F2937 0%, #4B5563 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .kpi-label {
-    font-size: 0.875rem;
-    color: var(--color-secondary);
+    font-size: 0.8125rem;
+    /* Slightly adjusted from 0.875rem */
+    font-weight: 600;
+    /* Increased from normal */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    /* Wider tracking for uppercase */
+    color: #6B7280;
+    /* More muted */
 }
 
 /* ============ CHARTS ============ */
@@ -395,28 +612,50 @@
 .charts-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 24px;
-    margin-bottom: 32px;
+    gap: 32px;
+    /* Increased from 24px */
+    margin-bottom: 40px;
+    /* Increased from 32px */
 }
 
 .chart-card {
     background: white;
-    border-radius: 16px;
-    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    /* Softer from 16px */
+    border: none;
+    /* Removed border */
     overflow: hidden;
+
+    /* ⭐ Phase 1: Elevated shadow system */
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.05),
+        0 10px 20px -5px rgba(0, 0, 0, 0.04),
+        0 0 0 1px rgba(0, 0, 0, 0.02);
+
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chart-card:hover {
+    transform: translateY(-1px);
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        0 12px 24px -6px rgba(0, 0, 0, 0.06);
 }
 
 .chart-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--color-border);
+    padding: 24px;
+    /* Increased from 20px 24px */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    /* Lighter border */
 }
 
 .chart-title {
     font-family: var(--font-heading);
-    font-size: 1rem;
+    font-size: 1.125rem;
+    /* Increased from 1rem */
     font-weight: 700;
     color: var(--color-primary);
     margin: 0;
@@ -449,8 +688,10 @@
 }
 
 .chart-body {
-    padding: 24px;
-    height: 300px;
+    padding: 28px;
+    /* Increased from 24px */
+    height: 380px;
+    /* Increased to show legend */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -520,26 +761,47 @@
 .activity-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    gap: 32px;
+    /* Increased from 24px */
 }
 
 .activity-panel {
     background: white;
-    border-radius: 16px;
-    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    /* Softer from 16px */
+    border: none;
+    /* Removed border */
+
+    /* ⭐ Phase 1: Consistent elevation */
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.05),
+        0 10px 20px -5px rgba(0, 0, 0, 0.04),
+        0 0 0 1px rgba(0, 0, 0, 0.02);
+
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.activity-panel:hover {
+    transform: translateY(-1px);
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        0 12px 24px -6px rgba(0, 0, 0, 0.06);
 }
 
 .activity-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--color-border);
+    padding: 24px;
+    /* Increased from 20px 24px */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    /* Lighter */
 }
 
 .activity-title {
     font-family: var(--font-heading);
-    font-size: 1rem;
+    font-size: 1.125rem;
+    /* Increased from 1rem */
     font-weight: 700;
     color: var(--color-primary);
     margin: 0;
@@ -568,11 +830,34 @@
     gap: 16px;
     padding: 16px 24px;
     border-bottom: 1px solid var(--color-border);
-    transition: background 200ms ease;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+/* ⭐ Phase 3: Gradient border effect */
+.activity-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #3B82F6, #8B5CF6);
+    transform: scaleY(0);
+    transition: transform 0.2s ease;
 }
 
 .activity-item:hover {
-    background: var(--color-surface);
+    background: linear-gradient(90deg,
+            rgba(59, 130, 246, 0.03) 0%,
+            transparent 100%);
+    padding-left: 28px;
+    /* Shift content right */
+}
+
+.activity-item:hover::before {
+    transform: scaleY(1);
+    /* Expand border */
 }
 
 .activity-item:last-child {

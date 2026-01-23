@@ -19,6 +19,12 @@
 @import url('./admin-dashboard.css');
 @import url('./admin-forms.css');
 @import url('./admin-order-detail.css');
+@import url('./accessibility.css');
+@import url('./admin-table.css');
+@import url('./loading-toast.css');
+@import url('./validation-empty-confirm.css');
+@import url('./dark-mode-bulk-mobile.css');
+@import url('./option-c-enhancements.css');
 
 /* Global text styles */
 body {

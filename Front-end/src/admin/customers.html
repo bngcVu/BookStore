@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý Khách hàng - Admin</title>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/admin-table.css" />
+</head>
+
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+                <!-- Sidebar Component -->
+        <div id="admin-sidebar-mount"></div>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <div>
+                    <h1 class="admin-header-title">Quản lý Khách hàng</h1>
+                    <p class="admin-header-subtitle">Quản lý thông tin khách hàng và tier membership</p>
+                </div>
+                <div class="admin-header-actions">
+                    <button class="btn-outline">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Export CSV
+                    </button>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <!-- Filters -->
+                <div class="table-filters">
+                    <div class="filter-group">
+                        <label>Tier Level</label>
+                        <select class="filter-select">
+                            <option value="">Tất cả tier</option>
+                            <option value="bronze">Bronze</option>
+                            <option value="silver">Silver</option>
+                            <option value="gold">Gold</option>
+                            <option value="diamond">Diamond</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Trạng thái</label>
+                        <select class="filter-select">
+                            <option value="">Tất cả</option>
+                            <option value="active">Active</option>
+                            <option value="banned">Banned</option>
+                        </select>
+                    </div>
+
+                    <button class="btn-outline btn-sm" style="margin-top: 22px;">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        Xóa bộ lọc
+                    </button>
+                </div>
+
+                <!-- Search -->
+                <div class="table-search">
+                    <div class="search-box">
+                        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <input type="text" placeholder="Tìm theo tên, email, số điện thoại..." />
+                    </div>
+                    <span class="result-count">Hiển thị 1-20 trong 1,847 khách hàng</span>
+                </div>
+
+                <!-- Customers Table -->
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" /></th>
+                                <th>Khách hàng</th>
+                                <th>Email</th>
+                                <th class="sortable">Tổng đơn</th>
+                                <th class="sortable">Tổng chi</th>
+                                <th>Tier</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Row 1 - simplification, status pills only -->
+                            <tr>
+                                <td><input type="checkbox" /></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <img src="https://ui-avatars.com/api/?name=Nguyen+Van+A&background=random&size=80"
+                                            alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;" />
+                                        <div>
+                                            <p style="font-weight: 600; margin: 0 0 2px 0;">Nguyễn Văn An</p>
+                                            <p style="font-size: 0.75rem; color: #475569; margin: 0;">#CUS-001847</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="color: #475569;">nguyen.van.a@email.com</td>
+                                <td>24</td>
+                                <td><span style="font-weight: 600;">24,580,000₫</span></td>
+                                <td><span class="category-badge"
+                                        style="background: rgba(59, 130, 246, 0.1); color: #3B82F6; border: 1px solid #3B82F6;">Diamond</span>
+                                </td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                            </tr>
+
+                            <!-- Row 2 -->
+                            <tr>
+                                <td><input type="checkbox" /></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <img src="https://ui-avatars.com/api/?name=Le+Thi+B&background=random&size=80"
+                                            alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;" />
+                                        <div>
+                                            <p style="font-weight: 600; margin: 0 0 2px 0;">Lê Thị Bình</p>
+                                            <p style="font-size: 0.75rem; color: #475569; margin: 0;">#CUS-001846</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="color: #475569;">le.thi.binh@email.com</td>
+                                <td>18</td>
+                                <td><span style="font-weight: 600;">15,240,000₫</span></td>
+                                <td><span class="category-badge"
+                                        style="background: rgba(212, 160, 23, 0.1); color: #D4A017; border: 1px solid #D4A017;">Gold</span>
+                                </td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                            </tr>
+
+                            <!-- Row 3 -->
+                            <tr>
+                                <td><input type="checkbox" /></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <img src="https://ui-avatars.com/api/?name=Tran+Van+C&background=random&size=80"
+                                            alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;" />
+                                        <div>
+                                            <p style="font-weight: 600; margin: 0 0 2px 0;">Trần Văn Cường</p>
+                                            <p style="font-size: 0.75rem; color: #475569; margin: 0;">#CUS-001845</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="color: #475569;">tran.van.cuong@email.com</td>
+                                <td>9</td>
+                                <td><span style="font-weight: 600;">8,450,000₫</span></td>
+                                <td><span class="category-badge"
+                                        style="background: rgba(148, 163, 184, 0.1); color: #64748B; border: 1px solid #64748B;">Silver</span>
+                                </td>
+                                <td><span class="status-badge status-inactive">Banned</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="table-pagination">
+                    <span class="pagination-info">Hiển thị 1-20 trong tổng số 1,847 khách hàng</span>
+                    <div class="pagination-controls">
+                        <button class="pagination-btn" disabled>Trước</button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn">...</button>
+                        <button class="pagination-btn">93</button>
+                        <button class="pagination-btn">Sau</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../assets/js/admin-sidebar.js"></script>
+</body>
+
+</html>

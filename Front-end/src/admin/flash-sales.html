@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flash Sale - Admin</title>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/admin-table.css" />
+</head>
+
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+                <!-- Sidebar Component -->
+        <div id="admin-sidebar-mount"></div>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <div>
+                    <h1 class="admin-header-title">Flash Sale Campaigns</h1>
+                    <p class="admin-header-subtitle">Quản lý các chương trình flash sale và sản phẩm giảm giá đột biến
+                    </p>
+                </div>
+                <div class="admin-header-actions">
+                    <button class="btn-primary">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        Tạo Flash Sale
+                    </button>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <!-- Filters -->
+                <div class="table-filters">
+                    <div class="filter-group">
+                        <label>Trạng thái</label>
+                        <select class="filter-select">
+                            <option value="">Tất cả</option>
+                            <option value="upcoming">Sắp diễn ra</option>
+                            <option value="active">Đang diễn ra</option>
+                            <option value="ended">Đã kết thúc</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Tháng</label>
+                        <select class="filter-select">
+                            <option value="">Tất cả</option>
+                            <option value="01">Tháng 1</option>
+                            <option value="02">Tháng 2</option>
+                            <option value="03">Tháng 3</option>
+                        </select>
+                    </div>
+
+                    <button class="btn-outline btn-sm" style="margin-top: 22px;">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        Xóa bộ lọc
+                    </button>
+                </div>
+
+                <!-- Flash Sales Table -->
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Campaign</th>
+                                <th>Thời gian</th>
+                                <th>Sản phẩm</th>
+                                <th>Giảm giá</th>
+                                <th>Đã bán</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Row 1 -->
+                            <tr>
+                                <td>
+                                    <p style="font-weight: 600; margin: 0 0 4px 0;">Weekend Flash Sale</p>
+                                    <p style="font-size: 0.75rem; color: #475569; margin: 0;">23-24 Jan 2026</p>
+                                </td>
+                                <td>
+                                    <p style="margin: 0;">14:00 - 18:00</p>
+                                    <p style="font-size: 0.75rem; color: #475569; margin: 0;">4 tiếng</p>
+                                </td>
+                                <td>12 sản phẩm</td>
+                                <td><span style="color: #DC2626; font-weight: 600;">-25%</span></td>
+                                <td><span style="font-weight: 600;">145 / 500</span></td>
+                                <td><span class="status-badge status-processing">Đang diễn ra</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn" title="Sửa">
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            </svg>
+                                        </button>
+                                        <button class="action-btn" title="Xóa">
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Row 2 -->
+                            <tr>
+                                <td>
+                                    <p style="font-weight: 600; margin: 0 0 4px 0;">Midnight Flash Sale</p>
+                                    <p style="font-size: 0.75rem; color: #475569; margin: 0;">25 Jan 2026</p>
+                                </td>
+                                <td>
+                                    <p style="margin: 0;">00:00 - 02:00</p>
+                                    <p style="font-size: 0.75rem; color: #475569; margin: 0;">2 tiếng</p>
+                                </td>
+                                <td>8 sản phẩm</td>
+                                <td><span style="color: #DC2626; font-weight: 600;">-50%</span></td>
+                                <td><span style="font-weight: 600;">0 / 200</span></td>
+                                <td><span class="status-badge status-pending">Sắp diễn ra</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn" title="Sửa">
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            </svg>
+                                        </button>
+                                        <button class="action-btn" title="Xóa">
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Row 3 -->
+                            <tr>
+                                <td>
+                                    <p style="font-weight: 600; margin: 0 0 4px 0;">Morning Flash Sale</p>
+                                    <p style="font-size: 0.75rem; color: #475569; margin: 0;">22 Jan 2026</p>
+                                </td>
+                                <td>
+                                    <p style="margin: 0;">09:00 - 12:00</p>
+                                    <p style="font-size: 0.75rem; color: #475569; margin: 0;">3 tiếng</p>
+                                </td>
+                                <td>15 sản phẩm</td>
+                                <td><span style="color: #DC2626; font-weight: 600;">-30%</span></td>
+                                <td><span style="font-weight: 600;">300 / 300</span></td>
+                                <td><span class="status-badge status-inactive">Đã kết thúc</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn" title="Xem">
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="table-pagination">
+                    <span class="pagination-info">Hiển thị 1-3 trong tổng số 3 flash sales</span>
+                    <div class="pagination-controls">
+                        <button class="pagination-btn active">1</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../assets/js/admin-sidebar.js"></script>
+</body>
+
+</html>
