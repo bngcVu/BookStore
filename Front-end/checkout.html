@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thanh Toán - BookStore</title>
+    <link href="./assets/css/style.css" rel="stylesheet" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body class="bg-background text-text-main antialiased flex flex-col min-h-screen">
+
+    <!-- Minimal Header for Checkout -->
+    <header class="bg-white border-b border-slate-200">
+        <div class="container-custom h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <i data-lucide="book-open" class="w-8 h-8 text-secondary"></i>
+                <div class="flex flex-col">
+                    <span class="font-serif font-bold text-2xl text-primary leading-none">BookStore</span>
+                    <span class="text-xs text-slate-500 font-medium tracking-widest uppercase">Thanh Toán An Toàn</span>
+                </div>
+            </a>
+            <a href="cart.html" class="text-sm font-medium text-slate-500 hover:text-secondary flex items-center gap-1">
+                <i data-lucide="shopping-bag" class="w-4 h-4"></i> Giỏ hàng của bạn
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow py-8 bg-slate-50" x-data="{
+        paymentMethod: 'cod',
+        cities: ['Hà Nội', 'TP. Hồ Chí Minh', 'Đà Nẵng'],
+        selectedCity: '',
+    }">
+        <div class="container-custom">
+
+            <div class="flex flex-col lg:flex-row gap-8">
+
+                <!-- Left Column: Forms -->
+                <div class="lg:w-2/3 space-y-6">
+
+                    <!-- Section A: Delivery Address -->
+                    <div class="bg-white rounded-xl shadow-card p-6">
+                        <h2 class="font-bold text-lg text-primary mb-6 flex items-center gap-2">
+                            <span
+                                class="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-xs">1</span>
+                            Thông Tin Vận Chuyển
+                        </h2>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-sm font-medium text-slate-700">Họ và tên <span
+                                        class="text-red-500">*</span></label>
+                                <input type="text"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition-all"
+                                    placeholder="Ví dụ: Nguyễn Văn A">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-sm font-medium text-slate-700">Số điện thoại <span
+                                        class="text-red-500">*</span></label>
+                                <input type="tel"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition-all"
+                                    placeholder="Ví dụ: 0912345678">
+                            </div>
+                            <div class="space-y-1 md:col-span-2">
+                                <label class="text-sm font-medium text-slate-700">Email (để nhận thông tin đơn
+                                    hàng)</label>
+                                <input type="email"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition-all"
+                                    placeholder="email@example.com">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-sm font-medium text-slate-700">Tỉnh / Thành phố <span
+                                        class="text-red-500">*</span></label>
+                                <div class="relative">
+                                    <select x-model="selectedCity"
+                                        class="w-full appearance-none bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 pr-8 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition-all cursor-pointer">
+                                        <option value="" disabled selected>Chọn Tỉnh/Thành</option>
+                                        <template x-for="city in cities">
+                                            <option x-text="city"></option>
+                                        </template>
+                                    </select>
+                                    <i data-lucide="chevron-down"
+                                        class="absolute right-3 top-3 w-4 h-4 text-slate-400 pointer-events-none"></i>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-sm font-medium text-slate-700">Quận / Huyện <span
+                                        class="text-red-500">*</span></label>
+                                <div class="relative">
+                                    <select
+                                        class="w-full appearance-none bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 pr-8 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition-all cursor-pointer"
+                                        :disabled="!selectedCity">
+                                        <option value="" disabled selected>Chọn Quận/Huyện</option>
+                                        <option>Quận 1</option>
+                                        <option>Quận 3</option>
+                                    </select>
+                                    <i data-lucide="chevron-down"
+                                        class="absolute right-3 top-3 w-4 h-4 text-slate-400 pointer-events-none"></i>
+                                </div>
+                            </div>
+                            <div class="space-y-1 md:col-span-2">
+                                <label class="text-sm font-medium text-slate-700">Địa chỉ cụ thể <span
+                                        class="text-red-500">*</span></label>
+                                <input type="text"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition-all"
+                                    placeholder="Số nhà, tên đường, phường/xã...">
+                            </div>
+                            <div class="space-y-1 md:col-span-2">
+                                <label class="text-sm font-medium text-slate-700">Ghi chú giao hàng</label>
+                                <textarea rows="2"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition-all"
+                                    placeholder="Ví dụ: Giao giờ hành chính, gọi trước khi giao..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section B: Payment Method -->
+                    <div class="bg-white rounded-xl shadow-card p-6">
+                        <h2 class="font-bold text-lg text-primary mb-6 flex items-center gap-2">
+                            <span
+                                class="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-xs">2</span>
+                            Phương Thức Thanh Toán
+                        </h2>
+
+                        <div class="space-y-3">
+                            <!-- COD -->
+                            <label
+                                class="flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all hover:bg-slate-50"
+                                :class="paymentMethod === 'cod' ? 'border-secondary ring-1 ring-secondary/20 bg-secondary/5' : 'border-slate-200'">
+                                <input type="radio" name="payment" value="cod" x-model="paymentMethod"
+                                    class="w-5 h-5 text-secondary focus:ring-secondary">
+                                <div class="flex-1">
+                                    <div class="font-bold text-primary flex items-center gap-2">
+                                        <i data-lucide="banknote" class="w-5 h-5 text-slate-500"></i> Thanh toán khi
+                                        nhận hàng (COD)
+                                    </div>
+                                    <p class="text-xs text-slate-500 mt-1">Bạn sẽ thanh toán tiền mặt cho shipper khi
+                                        nhận được hàng.</p>
+                                </div>
+                            </label>
+
+                            <!-- Bank Transfer -->
+                            <label
+                                class="flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all hover:bg-slate-50"
+                                :class="paymentMethod === 'bank' ? 'border-secondary ring-1 ring-secondary/20 bg-secondary/5' : 'border-slate-200'">
+                                <input type="radio" name="payment" value="bank" x-model="paymentMethod"
+                                    class="w-5 h-5 text-secondary focus:ring-secondary">
+                                <div class="flex-1">
+                                    <div class="font-bold text-primary flex items-center gap-2">
+                                        <i data-lucide="credit-card" class="w-5 h-5 text-slate-500"></i> Chuyển khoản
+                                        ngân hàng (QR Code)
+                                    </div>
+                                    <p class="text-xs text-slate-500 mt-1">Giảm ngay <span
+                                            class="font-bold text-green-500">5%</span> (tối đa 50k) khi thanh toán
+                                        trước.</p>
+                                </div>
+                            </label>
+
+                            <!-- MOMO / E-Wallet -->
+                            <label
+                                class="flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all hover:bg-slate-50"
+                                :class="paymentMethod === 'momo' ? 'border-secondary ring-1 ring-secondary/20 bg-secondary/5' : 'border-slate-200'">
+                                <input type="radio" name="payment" value="momo" x-model="paymentMethod"
+                                    class="w-5 h-5 text-secondary focus:ring-secondary">
+                                <div class="flex-1">
+                                    <div class="font-bold text-primary flex items-center gap-2">
+                                        <i data-lucide="smartphone" class="w-5 h-5 text-slate-500"></i> Ví điện tử MoMo
+                                        / ZaloPay
+                                    </div>
+                                    <p class="text-xs text-slate-500 mt-1">Thanh toán nhanh chóng qua ứng dụng ví điện
+                                        tử.</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Order Review -->
+                <div class="lg:w-1/3">
+                    <div class="bg-white rounded-xl shadow-card p-6 sticky top-8">
+                        <h2 class="font-bold text-lg text-primary mb-4 border-b border-slate-100 pb-4">Đơn Hàng (2)</h2>
+
+                        <!-- Order Items Scrollable -->
+                        <div class="max-h-60 overflow-y-auto custom-scrollbar mb-4 pr-2 space-y-4">
+                            <div class="flex gap-3">
+                                <div
+                                    class="w-12 h-16 bg-slate-100 rounded border border-slate-200 overflow-hidden shrink-0">
+                                    <img src="https://images.unsplash.com/photo-1592496431122-2349e0fbc666?auto=format&fit=crop&q=80&w=200"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="text-sm font-bold text-primary line-clamp-2">Tâm Lý Học Về Tiền</h4>
+                                    <div class="flex justify-between items-center mt-1">
+                                        <span class="text-xs text-slate-500">x1</span>
+                                        <span class="text-sm font-medium text-primary">159.000₫</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex gap-3">
+                                <div
+                                    class="w-12 h-16 bg-slate-100 rounded border border-slate-200 overflow-hidden shrink-0">
+                                    <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&q=80&w=200"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="text-sm font-bold text-primary line-clamp-2">Nhà Giả Kim</h4>
+                                    <div class="flex justify-between items-center mt-1">
+                                        <span class="text-xs text-slate-500">x2</span>
+                                        <span class="text-sm font-medium text-primary">79.000₫</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-4 space-y-3 text-sm text-slate-600 mb-6">
+                            <div class="flex justify-between">
+                                <span>Tạm tính</span>
+                                <span class="font-bold text-primary">317.000₫</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Giảm giá</span>
+                                <span class="font-bold text-green-500">-15.000₫</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Phí vận chuyển</span>
+                                <span class="text-green-500 font-bold">Miễn phí</span>
+                            </div>
+                            <div class="flex justify-between pt-3 border-t border-slate-100 items-center">
+                                <span class="font-bold text-primary font-serif">Tổng Cộng</span>
+                                <span class="text-2xl font-bold text-secondary">302.000₫</span>
+                            </div>
+                        </div>
+
+                        <button
+                            onclick="alert('Đặt hàng thành công! Đơn hàng của bạn đang được xử lý.'); window.location.href='index.html'"
+                            class="btn btn-secondary w-full py-3 text-lg shadow-lg shadow-secondary/20 hover:scale-[1.02] transition-transform">
+                            Đặt Hàng Ngay
+                        </button>
+
+                        <p class="text-xs text-center text-slate-400 mt-4">
+                            Bằng việc đặt hàng, bạn đồng ý với <a href="#" class="underline hover:text-primary">Điều
+                                khoản dịch vụ</a> của chúng tôi.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-400">
+        &copy; 2026 BookStore. Secure Checkout System.
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

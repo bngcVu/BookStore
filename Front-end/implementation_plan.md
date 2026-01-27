@@ -45,25 +45,23 @@ Dưới đây là các task nhỏ để bạn dễ dàng review và đánh giá 
 ### Phase 2: Storefront - Discovery (Khám phá)
 - [x] **TASK-S01**: Thiết kế **Trang chủ (Home Page)** (Banner, Featured, Best Sellers).
 - [x] **TASK-S02**: Thiết kế **Component Sách (Book Card)** (Hiển thị ảnh, giá, rating, badge Sale).
-- [ ] **TASK-S03**: Thiết kế **Trang Danh sách (Category/Search)** với bộ lọc (Filter) bên trái.
-- [ ] **TASK-S04**: Thiết kế **Trang Chi tiết Sách (Product Detail)** (Gallery ảnh, chọn phiên bản bìa, thông tin chi tiết, Reviews).
+- [x] **TASK-S03**: Thiết kế **Trang Danh sách (Category/Search)** với bộ lọc (Filter) bên trái.
+- [x] **TASK-S04**: Thiết kế **Trang Chi tiết Sách (Product Detail)** (Gallery ảnh, chọn phiên bản bìa, thông tin chi tiết, Reviews).
 
-### Phase 3: Storefront - Commerce (Mua sắm)
-- [ ] **TASK-C01**: Xây dựng **Trang Giỏ hàng (Cart)** (Tăng giảm số lượng, tạm tính).
-- [ ] **TASK-C02**: Thiết kế **Checkout Step 1 - Địa chỉ** (CRUD địa chỉ nhận hàng).
-- [ ] **TASK-C03**: Thiết kế **Checkout Step 2 - Thanh toán & Vận chuyển** (Chọn phương thức, áp mã Voucher).
-- [ ] **TASK-C04**: Trang **Order Success** (Cảm ơn & Mã đơn hàng).
+### Phase 3: Shopping Experience (Mua sắm)
+- [x] **TASK-S05**: Thiết kế **Trang Giỏ hàng (Cart)** (Table sản phẩm, Tăng giảm số lượng, Mã giảm giá).
+- [x] **TASK-S06**: Thiết kế **Trang Thanh toán (Checkout)** (Địa chỉ, Phương thức vận chuyển, Thanh toán).
 
-### Phase 4: User Account (Thành viên)
-- [ ] **TASK-U01**: Các trang **Auth** (Login, Register, Forgot Password) - Style Glassmorphism.
-- [ ] **TASK-U02**: Dashboard thành viên (Tổng quan, hạng thành viên, điểm thưởng).
-- [ ] **TASK-U03**: Quản lý **Đơn hàng của tôi** (Danh sách, Chi tiết, Tracking).
-- [ ] **TASK-U04**: Quản lý **Sổ địa chỉ** & **Sách yêu thích**.
+### Phase 4: User Account & Admin (Tài khoản & Quản trị)
+- [x] **TASK-U01**: Các trang **Auth** (Login, Register).
+- [x] **TASK-U02**: **Dashboard thành viên** (Profile, Lịch sử đơn hàng, Điểm thưởng).
+- [x] **TASK-A01**: **Admin Dashboard** (Tổng quan, Sidebar, Thống kê).
+- [x] **TASK-A02**: Trang **Quản lý** (Sản phẩm, Đơn hàng).
+- [x] **TASK-A03**: Trang Quản lý Đơn hàng (Quy trình xử lý trạng thái).
 
-### Phase 5: Admin Panel (Quản trị) - *Nếu cần*
-- [ ] **TASK-A01**: Admin Dashboard Layout (Sidebar, Topbar).
-- [ ] **TASK-A02**: Trang Quản lý Sách (Table list, Form thêm/sửa).
-- [ ] **TASK-A03**: Trang Quản lý Đơn hàng (Quy trình xử lý trạng thái).
+### Phase 5: Polish & Integration (Hoàn thiện)
+- [x] **TASK-P01**: Kiểm tra và liên kết tất cả các trang (`href`).
+- [x] **TASK-P02**: Rà soát giao diện và trải nghiệm người dùng (Mobile Responsive).
 
 ## 4. Hướng dẫn Review
 Sau khi hoàn thành mỗi task, tôi sẽ:

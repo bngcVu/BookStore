@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng Nhập - BookStore</title>
+    <link href="./assets/css/style.css" rel="stylesheet" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+
+<body
+    class="bg-background text-text-main antialiased min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-900 via-primary to-slate-900">
+
+    <!-- Animated Background Elements -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+        <div
+            class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-secondary/20 rounded-full blur-3xl opacity-50 animate-pulse">
+        </div>
+        <div
+            class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-blue-500/20 rounded-full blur-3xl opacity-50 animate-pulse delay-1000">
+        </div>
+    </div>
+
+    <!-- Main Card -->
+    <div
+        class="relative z-10 w-full max-w-4xl bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row m-4 h-[600px]">
+
+        <!-- Left Side: Image & Branding -->
+        <div class="hidden md:flex md:w-1/2 bg-slate-100 relative items-center justify-center overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=800"
+                class="absolute inset-0 w-full h-full object-cover opacity-80">
+            <div class="absolute inset-0 bg-primary/40"></div>
+            <div class="relative z-10 text-white p-12 text-center">
+                <div class="flex justify-center mb-6">
+                    <i data-lucide="book-open" class="w-16 h-16 text-secondary"></i>
+                </div>
+                <h2 class="font-serif font-bold text-4xl mb-4">BookStore</h2>
+                <p class="text-slate-100 text-lg">Khám phá tri thức, mở rộng tầm nhìn của bạn ngay hôm nay.</p>
+            </div>
+        </div>
+
+        <!-- Right Side: Login Form -->
+        <div class="w-full md:w-1/2 p-10 md:p-12 flex flex-col justify-center">
+            <div class="text-center mb-8">
+                <h1 class="font-serif font-bold text-3xl text-primary mb-2">Đăng Nhập</h1>
+                <p class="text-slate-500">Chào mừng trở lại! Vui lòng nhập thông tin.</p>
+            </div>
+
+            <form action="index.html" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-1">Email</label>
+                    <div class="relative">
+                        <input type="email" placeholder="mail@example.com"
+                            class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition-all">
+                        <i data-lucide="mail" class="absolute left-3 top-3.5 w-5 h-5 text-slate-400"></i>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="block text-sm font-bold text-slate-700">Mật khẩu</label>
+                        <a href="#" class="text-xs text-secondary font-bold hover:underline">Quên mật khẩu?</a>
+                    </div>
+                    <div class="relative">
+                        <input type="password" placeholder="••••••••"
+                            class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition-all">
+                        <i data-lucide="lock" class="absolute left-3 top-3.5 w-5 h-5 text-slate-400"></i>
+                    </div>
+                </div>
+
+                <button
+                    class="btn btn-secondary w-full py-3 text-lg shadow-lg shadow-secondary/20 hover:scale-[1.02] transition-transform rounded-xl">
+                    Đăng Nhập
+                </button>
+            </form>
+
+            <div class="flex items-center gap-4 my-8">
+                <div class="h-px bg-slate-200 flex-1"></div>
+                <span class="text-xs text-slate-400 font-bold uppercase">Hoặc</span>
+                <div class="h-px bg-slate-200 flex-1"></div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <button
+                    class="flex items-center justify-center gap-2 border border-slate-200 p-2.5 rounded-xl hover:bg-slate-50 transition-colors">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5">
+                    <span class="text-sm font-medium text-slate-600">Google</span>
+                </button>
+                <button
+                    class="flex items-center justify-center gap-2 border border-slate-200 p-2.5 rounded-xl hover:bg-slate-50 transition-colors">
+                    <img src="https://www.svgrepo.com/show/475647/facebook-color.svg" class="w-5 h-5">
+                    <span class="text-sm font-medium text-slate-600">Facebook</span>
+                </button>
+            </div>
+
+            <p class="text-center mt-8 text-sm text-slate-500">
+                Chưa có tài khoản? <a href="#" class="font-bold text-primary hover:text-secondary hover:underline">Đăng
+                    ký ngay</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

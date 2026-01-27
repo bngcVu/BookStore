@@ -21,23 +21,47 @@
                 @click="mobileMenuOpen = !mobileMenuOpen">
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
-            <a href="/" class="flex-shrink-0 flex items-center gap-2 group">
+            <a href="index.html" class="flex-shrink-0 flex items-center gap-2 group">
                 <i data-lucide="book-open"
                     class="w-8 h-8 text-secondary group-hover:scale-110 transition-transform"></i>
                 <span class="font-serif font-bold text-2xl text-primary tracking-tight">BookStore</span>
             </a>
             <nav class="hidden md:flex items-center gap-8">
-                <a href="/" class="text-sm font-medium text-text-muted hover:text-secondary transition-colors">Trang
+                <a href="index.html"
+                    class="text-sm font-medium text-text-muted hover:text-secondary transition-colors">Trang
                     chủ</a>
                 <div class="relative group py-6">
-                    <a href="#"
+                    <a href="products.html"
                         class="text-sm font-bold text-primary hover:text-secondary flex items-center gap-1 transition-colors border-b-2 border-secondary py-1">
                         Danh mục <i data-lucide="chevron-down" class="w-4 h-4"></i>
                     </a>
+                    <!-- Mega Menu Dropdown -->
+                    <div
+                        class="absolute top-full left-0 w-64 bg-white shadow-xl rounded-xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-200 z-50 border border-slate-100">
+                        <ul class="space-y-2">
+                            <li><a href="products.html"
+                                    class="block px-3 py-2 hover:bg-slate-50 rounded-lg text-sm text-text-main hover:text-secondary">Văn
+                                    học</a></li>
+                            <li><a href="products.html"
+                                    class="block px-3 py-2 hover:bg-slate-50 rounded-lg text-sm text-text-main hover:text-secondary">Kinh
+                                    tế</a></li>
+                            <li><a href="products.html"
+                                    class="block px-3 py-2 hover:bg-slate-50 rounded-lg text-sm text-text-main hover:text-secondary">Tâm
+                                    lý - Kỹ năng</a></li>
+                            <li><a href="products.html"
+                                    class="block px-3 py-2 hover:bg-slate-50 rounded-lg text-sm text-text-main hover:text-secondary">Thiếu
+                                    nhi</a></li>
+                            <li><a href="products.html"
+                                    class="block px-3 py-2 hover:bg-slate-50 rounded-lg text-sm text-text-main hover:text-secondary">Sách
+                                    Ngoại văn</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <a href="#" class="text-sm font-medium text-text-muted hover:text-secondary transition-colors">Bán
+                <a href="products.html"
+                    class="text-sm font-medium text-text-muted hover:text-secondary transition-colors">Bán
                     chạy</a>
-                <a href="#" class="text-sm font-medium text-text-muted hover:text-secondary transition-colors">Khuyến
+                <a href="products.html"
+                    class="text-sm font-medium text-text-muted hover:text-secondary transition-colors">Khuyến
                     mãi</a>
             </nav>
             <div class="hidden lg:flex flex-1 max-w-md mx-8 relative">
@@ -53,12 +77,13 @@
                     @click="searchOpen = !searchOpen">
                     <i data-lucide="search" class="w-5 h-5"></i>
                 </button>
-                <button
+                <a href="login.html"
                     class="hidden sm:flex items-center gap-2 px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-full transition-colors">
                     <i data-lucide="user" class="w-5 h-5"></i>
                     <span class="text-sm font-medium hidden lg:inline">Tài khoản</span>
-                </button>
-                <a href="#" class="relative p-2 text-slate-600 hover:bg-slate-100 rounded-full transition-colors group">
+                </a>
+                <a href="cart.html"
+                    class="relative p-2 text-slate-600 hover:bg-slate-100 rounded-full transition-colors group">
                     <i data-lucide="shopping-bag" class="w-5 h-5 group-hover:text-secondary transition-colors"></i>
                     <span
                         class="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-[10px] font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-red-500 rounded-full border-2 border-white">2</span>
@@ -240,22 +265,25 @@
                         <!-- Product 1 -->
                         <div class="bg-surface rounded-xl shadow-card overflow-hidden card-hover group relative">
                             <div class="relative aspect-[2/3] bg-slate-200 overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1592496431122-2349e0fbc666?auto=format&fit=crop&q=80&w=600"
-                                    class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
+                                <a href="product_detail.html"><img
+                                        src="https://images.unsplash.com/photo-1592496431122-2349e0fbc666?auto=format&fit=crop&q=80&w=600"
+                                        class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"></a>
                                 <div class="absolute top-2 left-2 flex flex-col gap-1">
                                     <span
                                         class="px-2 py-1 bg-red-500 text-white text-[10px] font-bold rounded shadow-sm">-25%</span>
                                 </div>
                                 <div
                                     class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-black/60 to-transparent flex justify-center opacity-0 group-hover:opacity-100">
-                                    <button class="btn btn-secondary w-full text-xs py-2 shadow-lg">Thêm vào
-                                        giỏ</button>
+                                    <a href="cart.html"
+                                        class="btn btn-secondary w-full text-xs py-2 shadow-lg text-center">Thêm vào
+                                        giỏ</a>
                                 </div>
                             </div>
                             <div class="p-4">
                                 <h3
                                     class="font-serif font-bold text-base leading-tight mb-1 truncate text-primary group-hover:text-secondary transition-colors">
-                                    Tâm Lý Học Về Tiền</h3>
+                                    <a href="product_detail.html">Tâm Lý Học Về Tiền</a>
+                                </h3>
                                 <div class="flex items-baseline gap-2">
                                     <span class="text-base font-bold text-primary">159.000₫</span>
                                     <span class="text-xs text-slate-400 line-through">199.000₫</span>
@@ -389,14 +417,16 @@
                                     class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
                                 <div
                                     class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-black/60 to-transparent flex justify-center opacity-0 group-hover:opacity-100">
-                                    <button class="btn btn-secondary w-full text-xs py-2 shadow-lg">Thêm vào
-                                        giỏ</button>
+                                    <a href="cart.html"
+                                        class="btn btn-secondary w-full text-xs py-2 shadow-lg text-center">Thêm vào
+                                        giỏ</a>
                                 </div>
                             </div>
                             <div class="p-4">
                                 <h3
                                     class="font-serif font-bold text-base leading-tight mb-1 truncate text-primary group-hover:text-secondary transition-colors">
-                                    Tuổi Trẻ Đáng Giá Bao Nhiêu</h3>
+                                    <a href="product_detail.html">Tuổi Trẻ Đáng Giá Bao Nhiêu</a>
+                                </h3>
                                 <div class="flex items-baseline gap-2">
                                     <span class="text-base font-bold text-primary">72.000₫</span>
                                 </div>
