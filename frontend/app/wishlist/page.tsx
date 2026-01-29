@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { WishlistSection } from '@/components/features/WishlistSection';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -10,6 +10,7 @@ import { wishlistAPI } from '@/lib/api-mock';
 export default function WishlistPage() {
     const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
     const [loading, setLoading] = useState(true);
+    const [filter, setFilter] = useState('all');
 
     useEffect(() => {
         async function loadWishlist() {
@@ -28,7 +29,6 @@ export default function WishlistPage() {
     }, []);
 
     const handleRemove = async (id: number) => {
-        // Trong thực tế sẽ gọi API xóa bằng book_id, ở đây demo local
         setWishlist(prev => prev.filter(item => item.id !== id));
     };
 
@@ -38,21 +38,44 @@ export default function WishlistPage() {
         ));
     };
 
+    const handleAddAllToCart = () => {
+        alert("Đã thêm tất cả sách yêu thích vào giỏ hàng!");
+    };
+
+    const filteredWishlist = useMemo(() => {
+        let result = [...wishlist];
+
+        if (filter === 'dropped') {
+            result = result.filter(item => item.book.min_price < item.added_price);
+        } else if (filter === 'priority') {
+            result = result.filter(item => item.priority > 0);
+        } else if (filter === 'recent') {
+            result.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        }
+
+        return result;
+    }, [wishlist, filter]);
+
     return (
         <div className="min-h-screen bg-[#F8FAFC]">
             <Header />
 
-            <main className="container mx-auto px-4 pt-32 pb-24">
+            <main className="container mx-auto px-4 pt-40 pb-24">
                 <div className="max-w-7xl mx-auto">
                     {loading ? (
-                        <div className="flex items-center justify-center py-48">
-                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                            {[1, 2, 3, 4].map(i => (
+                                <div key={i} className="aspect-[3/5] bg-slate-100 rounded-[32px] animate-pulse"></div>
+                            ))}
                         </div>
                     ) : (
                         <WishlistSection
-                            items={wishlist}
+                            items={filteredWishlist}
                             onRemove={handleRemove}
                             onToggleNotify={handleToggleNotify}
+                            onAddAllToCart={handleAddAllToCart}
+                            filter={filter}
+                            onFilterChange={setFilter}
                         />
                     )}
 
@@ -63,7 +86,6 @@ export default function WishlistPage() {
                                 <h2 className="text-4xl font-black text-slate-900 uppercase tracking-tight mb-4">Khám phá thêm đầu sách hay</h2>
                                 <p className="text-slate-500 font-medium">Bổ sung ngay vào bộ sưu tập của bạn những tác phẩm bestseller mới nhất</p>
                             </div>
-                            {/* Ở đây có thể render thêm ProductCarousel nếu cần */}
                         </div>
                     )}
                 </div>

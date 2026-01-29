@@ -1,4 +1,4 @@
-import { Book, Category, FlashSaleItem, WishlistItem, Voucher, CustomerTier } from '@/types';
+import { Book, Category, FlashSaleItem, WishlistItem, Voucher, CustomerTier, Notification } from '@/types';
 
 // ==========================================
 // MOCK CATEGORIES (Hierarchical - Level 0 & 1)
@@ -53,7 +53,13 @@ export const MOCK_BOOKS: Book[] = [
         view_count: 12000,
         is_active: true,
         is_featured: true,
-        created_at: '2025-01-15T10:30:00Z'
+        created_at: '2025-01-15T10:30:00Z',
+        publication_year: 2023,
+        pages: 360,
+        dimensions: '14,5x20,5 cm',
+        weight_grams: 436,
+        cover_type: 'Bìa mềm',
+        language: 'Tiếng Việt'
     },
     {
         id: 2,
@@ -76,7 +82,12 @@ export const MOCK_BOOKS: Book[] = [
         view_count: 45000,
         is_active: true,
         is_featured: true,
-        created_at: '2025-01-10T08:00:00Z'
+        created_at: '2025-01-10T08:00:00Z',
+        publication_year: 2021,
+        pages: 228,
+        dimensions: '13x20 cm',
+        cover_type: 'Bìa mềm',
+        language: 'Tiếng Việt'
     },
     {
         id: 3,
@@ -98,7 +109,12 @@ export const MOCK_BOOKS: Book[] = [
         view_count: 32000,
         is_active: true,
         is_featured: false,
-        created_at: '2025-01-05T14:20:00Z'
+        created_at: '2025-01-05T14:20:00Z',
+        publication_year: 2020,
+        pages: 560,
+        dimensions: '15x24 cm',
+        cover_type: 'Bìa cứng',
+        language: 'Tiếng Việt'
     },
     {
         id: 4,
@@ -119,7 +135,12 @@ export const MOCK_BOOKS: Book[] = [
         view_count: 80000,
         is_active: true,
         is_featured: true,
-        created_at: '2024-12-20T09:15:00Z'
+        created_at: '2024-12-20T09:15:00Z',
+        publication_year: 2022,
+        pages: 320,
+        dimensions: '13x20,5 cm',
+        cover_type: 'Bìa mềm',
+        language: 'Tiếng Việt'
     },
     {
         id: 5,
@@ -141,7 +162,12 @@ export const MOCK_BOOKS: Book[] = [
         view_count: 150000,
         is_active: true,
         is_featured: false,
-        created_at: '2025-01-20T16:00:00Z'
+        created_at: '2025-01-20T16:00:00Z',
+        publication_year: 2024,
+        pages: 180,
+        dimensions: '11,3x17,6 cm',
+        cover_type: 'Bìa mềm',
+        language: 'Tiếng Việt'
     },
     {
         id: 6,
@@ -162,7 +188,12 @@ export const MOCK_BOOKS: Book[] = [
         view_count: 5000,
         is_active: true,
         is_featured: true,
-        created_at: '2025-01-25T10:00:00Z'
+        created_at: '2025-01-25T10:00:00Z',
+        publication_year: 2018,
+        pages: 1200,
+        dimensions: '16x24 cm',
+        cover_type: 'Bìa cứng',
+        language: 'Tiếng Việt'
     },
     {
         id: 7,
@@ -183,7 +214,12 @@ export const MOCK_BOOKS: Book[] = [
         view_count: 8500,
         is_active: true,
         is_featured: false,
-        created_at: '2025-01-22T11:00:00Z'
+        created_at: '2025-01-22T11:00:00Z',
+        publication_year: 2015,
+        pages: 1200,
+        dimensions: '14x20 cm',
+        cover_type: 'Bìa mềm',
+        language: 'Tiếng Việt'
     },
     {
         id: 8,
@@ -204,7 +240,12 @@ export const MOCK_BOOKS: Book[] = [
         view_count: 12000,
         is_active: true,
         is_featured: true,
-        created_at: '2025-01-21T09:00:00Z'
+        created_at: '2025-01-21T09:00:00Z',
+        publication_year: 2021,
+        pages: 600,
+        dimensions: '15x23 cm',
+        cover_type: 'Bìa mềm',
+        language: 'Tiếng Việt'
     }
 ];
 
@@ -431,5 +472,56 @@ export const wishlistAPI = {
     },
     async isInWishlist(userId: number, bookId: number): Promise<boolean> {
         return mockWishlist.includes(bookId);
+    }
+};
+
+// Notification Mock Data
+export const MOCK_NOTIFICATIONS: Notification[] = [
+    {
+        id: 1,
+        user_id: 1,
+        title: '📉 Giá cực hời cho sách bạn thích!',
+        content: 'Cuốn sách "Cây Cam Ngọt Của Tôi" hiện đã giảm xuống còn 60.000đ. Mua ngay kẻo lỡ!',
+        type: 'promotion',
+        is_read: false,
+        reference_type: 'book',
+        reference_id: 1,
+        created_at: new Date(Date.now() - 3600000 * 2).toISOString()
+    },
+    {
+        id: 2,
+        user_id: 1,
+        title: '📦 Đơn hàng đang trên đường giao',
+        content: 'Đơn hàng #BK9928 của bạn đã được đối tác vận chuyển tiếp nhận.',
+        type: 'order',
+        is_read: false,
+        reference_type: 'order',
+        reference_id: 9928,
+        created_at: new Date(Date.now() - 3600000 * 5).toISOString()
+    },
+    {
+        id: 3,
+        user_id: 1,
+        title: '✨ Chúc mừng! Bạn đã thăng hạng',
+        content: 'Bạn đã chính thức trở thành thành viên Kim Cương của BookStore.',
+        type: 'reward',
+        is_read: true,
+        created_at: new Date(Date.now() - 86400000).toISOString()
+    }
+];
+
+export const notificationAPI = {
+    getNotifications: async (): Promise<Notification[]> => {
+        await new Promise(r => setTimeout(r, 400));
+        return MOCK_NOTIFICATIONS;
+    },
+    markAsRead: async (id: number) => {
+        const notif = MOCK_NOTIFICATIONS.find(n => n.id === id);
+        if (notif) notif.is_read = true;
+        return { success: true };
+    },
+    markAllAsRead: async () => {
+        MOCK_NOTIFICATIONS.forEach(n => n.is_read = true);
+        return { success: true };
     }
 };

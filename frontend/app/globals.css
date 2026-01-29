@@ -56,7 +56,7 @@
     @apply px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all duration-300;
   }
 
-  /* Hide scrollbar utility */
+  /* Scrollbar utilities */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -65,4 +65,49 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Custom Animations */
+@keyframes ring {
+  0% {
+    transform: rotate(0);
+  }
+
+  5% {
+    transform: rotate(15deg);
+  }
+
+  10% {
+    transform: rotate(-12deg);
+  }
+
+  15% {
+    transform: rotate(10deg);
+  }
+
+  20% {
+    transform: rotate(-8deg);
+  }
+
+  25% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}
+
+.animate-ring {
+  animation: ring 2s ease infinite;
+  transform-origin: top center;
 }

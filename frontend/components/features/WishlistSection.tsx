@@ -11,10 +11,13 @@ interface WishlistSectionProps {
     items: WishlistItem[];
     onRemove: (id: number) => void;
     onToggleNotify: (id: number) => void;
+    onAddAllToCart?: () => void;
+    filter: string;
+    onFilterChange: (filter: string) => void;
 }
 
-export function WishlistSection({ items, onRemove, onToggleNotify }: WishlistSectionProps) {
-    if (items.length === 0) {
+export function WishlistSection({ items, onRemove, onToggleNotify, onAddAllToCart, filter, onFilterChange }: WishlistSectionProps) {
+    if (items.length === 0 && filter === 'all') {
         return (
             <div className="flex flex-col items-center justify-center py-24 px-4 bg-white rounded-[40px] border border-slate-100 shadow-sm">
                 <div className="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mb-6">
@@ -33,32 +36,77 @@ export function WishlistSection({ items, onRemove, onToggleNotify }: WishlistSec
         );
     }
 
+    const filters = [
+        { id: 'all', label: 'Tất cả' },
+        { id: 'dropped', label: 'Đang giảm giá', icon: TrendingDown },
+        { id: 'priority', label: 'Ưu tiên cao', icon: Star },
+        { id: 'recent', label: 'Mới thêm' }
+    ];
+
     return (
         <section className="space-y-8">
-            <div className="flex items-center justify-between mb-10">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
                 <div>
-                    <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tight flex items-center gap-3">
+                    <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tighter flex items-center gap-3">
                         <Heart className="w-8 h-8 text-primary fill-primary" />
-                        <span>Sách yêu thích của bạn</span>
+                        <span>Sách <span className="text-primary italic">yêu thích</span></span>
                     </h2>
-                    <p className="text-slate-500 font-medium mt-1">Lưu trữ cảm hứng, đón chờ ưu đãi</p>
+                    <p className="text-slate-500 font-medium mt-1">Lưu trữ cảm hứng, không bỏ lỡ deal hời</p>
                 </div>
-                <div className="hidden md:flex items-center gap-2 px-4 py-2 bg-cta/10 text-cta rounded-full text-[10px] font-black uppercase tracking-wider border border-cta/10">
-                    <TrendingDown className="w-3.5 h-3.5" />
-                    <span>Chúng tôi sẽ báo khi có giá tốt</span>
+
+                <div className="flex flex-wrap items-center gap-3">
+                    {onAddAllToCart && items.length > 0 && (
+                        <button
+                            onClick={onAddAllToCart}
+                            className="bg-cta text-white px-6 py-3.5 rounded-2xl font-black text-[11px] uppercase tracking-widest flex items-center gap-2 hover:shadow-xl hover:shadow-cta/20 transition-all active:scale-95"
+                        >
+                            <ShoppingCart className="w-4 h-4" />
+                            Mua tất cả
+                        </button>
+                    )}
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {items.map((item) => (
-                    <WishlistCard
-                        key={item.id}
-                        item={item}
-                        onRemove={onRemove}
-                        onToggleNotify={onToggleNotify}
-                    />
+            {/* Filter Bar */}
+            <div className="flex items-center gap-3 overflow-x-auto pb-4 scrollbar-hide">
+                {filters.map((f) => (
+                    <button
+                        key={f.id}
+                        onClick={() => onFilterChange(f.id)}
+                        className={cn(
+                            "flex items-center gap-2 px-5 py-3 rounded-2xl font-black text-[11px] uppercase tracking-widest border transition-all whitespace-nowrap",
+                            filter === f.id
+                                ? "bg-slate-900 text-white border-slate-900 shadow-lg shadow-slate-900/10"
+                                : "bg-white text-slate-500 border-slate-100 hover:border-slate-300"
+                        )}
+                    >
+                        {f.icon && <f.icon className="w-3.5 h-3.5" />}
+                        {f.label}
+                    </button>
                 ))}
+
+                <div className="ml-auto text-[11px] font-bold text-slate-400 uppercase tracking-widest hidden lg:block">
+                    Hiển thị <span className="text-slate-900 font-black">{items.length}</span> sản phẩm
+                </div>
             </div>
+
+            {items.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    {items.map((item) => (
+                        <WishlistCard
+                            key={item.id}
+                            item={item}
+                            onRemove={onRemove}
+                            onToggleNotify={onToggleNotify}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <div className="py-20 text-center bg-slate-50/50 rounded-[40px] border border-dashed border-slate-200">
+                    <p className="text-slate-400 font-bold uppercase tracking-widest text-sm">Không có sản phẩm nào khớp với bộ lọc</p>
+                    <button onClick={() => onFilterChange('all')} className="mt-4 text-primary font-black uppercase text-xs hover:underline">Xóa bộ lọc</button>
+                </div>
+            )}
         </section>
     );
 }

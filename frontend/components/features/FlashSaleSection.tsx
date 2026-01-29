@@ -1,7 +1,9 @@
-import { useRef, useState, useEffect } from "react";
-import { Zap, Clock, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { cn, formatCurrency } from "@/lib/utils";
+"use client";
+
+import { useEffect, useState } from "react";
 import { FlashSaleItem } from "@/types";
+import { ProductCard } from "./ProductCard";
+import { Zap, Timer, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 interface FlashSaleSectionProps {
@@ -9,136 +11,103 @@ interface FlashSaleSectionProps {
 }
 
 export function FlashSaleSection({ items }: FlashSaleSectionProps) {
-    const [timeLeft, setTimeLeft] = useState({ hours: "05", minutes: "42", seconds: "10" });
-    const scrollRef = useRef<HTMLDivElement>(null);
-    const [showLeft, setShowLeft] = useState(false);
-    const [showRight, setShowRight] = useState(true);
-
-    const checkScroll = () => {
-        if (!scrollRef.current) return;
-        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-        setShowLeft(scrollLeft > 10);
-        setShowRight(scrollLeft < scrollWidth - clientWidth - 10);
-    };
-
-    useEffect(() => {
-        checkScroll();
-        window.addEventListener("resize", checkScroll);
-        return () => window.removeEventListener("resize", checkScroll);
-    }, [items]);
-
-    const scroll = (direction: "left" | "right") => {
-        if (!scrollRef.current) return;
-        const scrollAmount = scrollRef.current.clientWidth * 0.8;
-        scrollRef.current.scrollBy({
-            left: direction === "left" ? -scrollAmount : scrollAmount,
-            behavior: "smooth",
-        });
-    };
+    const [timeLeft, setTimeLeft] = useState({
+        hours: 0,
+        minutes: 0,
+        seconds: 0
+    });
 
     useEffect(() => {
         const timer = setInterval(() => {
-            // Simulate countdown for demo
-            setTimeLeft((prev: { hours: string; minutes: string; seconds: string }) => {
-                let s = parseInt(prev.seconds) - 1;
-                let m = parseInt(prev.minutes);
-                let h = parseInt(prev.hours);
+            const now = new Date().getTime();
+            const end = new Date(items[0]?.end_time || "").getTime();
+            const distance = end - now;
 
-                if (s < 0) { s = 59; m -= 1; }
-                if (m < 0) { m = 59; h -= 1; }
-                if (h < 0) { h = 0; m = 0; s = 0; }
-
-                return {
-                    hours: h.toString().padStart(2, '0'),
-                    minutes: m.toString().padStart(2, '0'),
-                    seconds: s.toString().padStart(2, '0')
-                };
-            });
+            if (distance < 0) {
+                clearInterval(timer);
+                setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
+            } else {
+                setTimeLeft({
+                    hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                    minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+                    seconds: Math.floor((distance % (1000 * 60)) / 1000)
+                });
+            }
         }, 1000);
+
         return () => clearInterval(timer);
-    }, []);
+    }, [items]);
+
+    if (!items || items.length === 0) return null;
 
     return (
-        <div className="bg-white rounded-[32px] border border-cta/10 overflow-hidden shadow-xl shadow-cta/5 px-6 py-8 md:px-10 md:py-8 group/flash">
-            <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-6">
-                <div className="flex items-center gap-5">
-                    <div className="flex items-center gap-2.5 bg-cta text-white px-4 py-2 rounded-xl shadow-lg shadow-cta/20">
-                        <Zap className="w-5 h-5 fill-current animate-pulse" />
-                        <span className="font-heading font-black text-lg uppercase tracking-tighter italic">FLASH SALE</span>
-                    </div>
+        <section className="bg-white rounded-[40px] p-8 md:p-12 shadow-2xl shadow-primary/5 border border-slate-50 relative overflow-hidden group">
+            {/* Background Accent */}
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-cta/5 rounded-full blur-3xl group-hover:bg-cta/10 transition-colors duration-700"></div>
 
-                    <div className="flex items-center gap-2 font-heading font-black text-xl text-slate-900">
-                        <span className="bg-slate-900 text-white w-10 h-10 flex items-center justify-center rounded-lg">{timeLeft.hours}</span>
-                        <span className="text-slate-300">:</span>
-                        <span className="bg-slate-900 text-white w-10 h-10 flex items-center justify-center rounded-lg">{timeLeft.minutes}</span>
-                        <span className="text-slate-300">:</span>
-                        <span className="bg-slate-900 text-white w-10 h-10 flex items-center justify-center rounded-lg">{timeLeft.seconds}</span>
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-10 gap-6 relative z-10">
+                <div className="space-y-2">
+                    <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 bg-cta rounded-2xl flex items-center justify-center text-white shadow-lg shadow-cta/20 animate-pulse">
+                            <Zap className="w-6 h-6 fill-current" />
+                        </div>
+                        <h2 className="text-3xl font-heading font-black text-slate-900 tracking-tighter uppercase italic">
+                            Flash <span className="text-cta">Sale</span>
+                        </h2>
                     </div>
+                    <p className="text-slate-500 font-medium pl-1">Săn deal chớp nhoáng, số lượng có hạn!</p>
                 </div>
 
-                <Link href="/flash-sale" className="text-cta hover:text-slate-900 font-bold uppercase tracking-widest text-[11px] flex items-center gap-1.5 transition-colors">
-                    Xem tất cả <ArrowRight className="w-4 h-4" />
-                </Link>
+                <div className="flex items-center gap-4 bg-slate-900 text-white px-8 py-4 rounded-[28px] shadow-xl">
+                    <div className="flex items-center gap-2 text-primary-light">
+                        <Timer className="w-5 h-5" />
+                        <span className="text-xs font-black uppercase tracking-widest opacity-70">Kết thúc sau:</span>
+                    </div>
+                    <div className="flex items-center gap-3 font-heading font-black text-2xl tracking-tight">
+                        <div className="flex flex-col items-center">
+                            <span className="w-10 text-center">{timeLeft.hours.toString().padStart(2, '0')}</span>
+                        </div>
+                        <span className="text-primary opacity-50">:</span>
+                        <div className="flex flex-col items-center">
+                            <span className="w-10 text-center">{timeLeft.minutes.toString().padStart(2, '0')}</span>
+                        </div>
+                        <span className="text-primary opacity-50">:</span>
+                        <div className="flex flex-col items-center text-cta">
+                            <span className="w-10 text-center">{timeLeft.seconds.toString().padStart(2, '0')}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div className="relative">
-                {/* Navigation Buttons */}
-                {showLeft && (
-                    <button
-                        onClick={() => scroll("left")}
-                        className="absolute left-2 top-1/2 -translate-y-1/2 z-40 w-11 h-11 bg-white rounded-full shadow-2xl border border-slate-100 flex items-center justify-center text-cta hover:bg-cta hover:text-white transition-all opacity-0 group-hover/flash:opacity-100 hidden md:flex"
-                    >
-                        <ChevronLeft className="w-7 h-7" />
-                    </button>
-                )}
-
-                {showRight && (
-                    <button
-                        onClick={() => scroll("right")}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 z-40 w-11 h-11 bg-white rounded-full shadow-2xl border border-slate-100 flex items-center justify-center text-cta hover:bg-cta hover:text-white transition-all opacity-0 group-hover/flash:opacity-100 hidden md:flex"
-                    >
-                        <ChevronRight className="w-7 h-7" />
-                    </button>
-                )}
-
-                <div
-                    ref={scrollRef}
-                    onScroll={checkScroll}
-                    className="flex gap-4 md:gap-6 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory pb-4 px-1"
-                >
-                    {items.map((item) => (
-                        <div key={item.item_id} className="w-[180px] md:w-[220px] shrink-0 snap-start group flex flex-col gap-4">
-                            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-slate-50 border border-slate-100 group-hover:shadow-xl transition-all duration-500">
-                                <img src={item.book?.primary_image} alt={item.book_title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                <div className="absolute top-3 left-3 bg-cta text-white font-black px-2 py-1 rounded-lg text-[10px] shadow-lg">
-                                    -{item.discount_percent}%
-                                </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                {items.slice(0, 6).map((item) => (
+                    <div key={item.item_id} className="space-y-3">
+                        <ProductCard
+                            book={{ ...item.book!, is_flash_sale: true, min_price: item.sale_price, base_price: item.original_price }}
+                        />
+                        {/* Sold Progress Bar */}
+                        <div className="space-y-1.5 px-1">
+                            <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-wider">
+                                <span className="text-slate-400">Đã bán {item.sold_count}</span>
+                                <span className="text-cta">{Math.round((item.sold_count / item.quantity_limit) * 100)}%</span>
                             </div>
-
-                            <div className="space-y-3 px-1">
-                                <h4 className="font-heading font-extrabold text-slate-800 text-sm line-clamp-1 group-hover:text-cta transition-colors">
-                                    {item.book_title}
-                                </h4>
-                                <div className="flex items-end gap-2">
-                                    <span className="text-cta font-black text-lg leading-none">{formatCurrency(item.sale_price)}</span>
-                                    <span className="text-slate-300 text-[10px] line-through font-bold">{formatCurrency(item.original_price)}</span>
-                                </div>
-
-                                {/* Progress Bar */}
-                                <div className="relative w-full h-4 bg-slate-100 rounded-full overflow-hidden border border-slate-50">
-                                    <div
-                                        className="absolute inset-y-0 left-0 bg-gradient-to-r from-cta to-orange-400 rounded-full transition-all duration-1000"
-                                        style={{ width: `${(item.sold_count / item.quantity_limit) * 100}%` }}
-                                    ></div>
-                                    <div className="absolute inset-0 flex items-center justify-center text-[9px] font-black text-white uppercase tracking-widest drop-shadow-sm">
-                                        Đã bán {item.sold_count}
-                                    </div>
-                                </div>
+                            <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden border border-slate-50">
+                                <div
+                                    className="h-full bg-cta rounded-full transition-all duration-1000 shadow-[0_0_10px_rgba(255,59,48,0.3)]"
+                                    style={{ width: `${(item.sold_count / item.quantity_limit) * 100}%` }}
+                                ></div>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
-        </div>
+
+            <div className="mt-12 flex justify-center">
+                <Link href="/flash-sale" className="group flex items-center gap-3 bg-white border-2 border-slate-100 hover:border-cta hover:text-cta px-10 py-4 rounded-2xl transition-all duration-300 font-black text-sm uppercase tracking-widest shadow-sm hover:shadow-xl hover:shadow-cta/10">
+                    Xem tất cả deal
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                </Link>
+            </div>
+        </section>
     );
 }

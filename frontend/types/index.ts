@@ -36,10 +36,18 @@ export interface Book {
     // Images
     primary_image: string;
 
-    // Category Info
+    // Taxonomy
     category_id?: number;
     category_name: string;
     category_slug: string;
+
+    // Detailed Metadata
+    publication_year?: number;
+    pages?: number;
+    dimensions?: string;
+    weight_grams?: number;
+    cover_type?: string;
+    language?: string;
 
     // Pricing (From variants)
     base_price: number;
@@ -146,4 +154,20 @@ export interface Voucher {
     start_date: string;
     end_date: string;
     is_active: boolean;
+}
+
+// ==========================================
+// NOTIFICATION TYPES
+// ==========================================
+
+export interface Notification {
+    id: number;
+    user_id: number;
+    title: string;
+    content: string;
+    type: 'order' | 'promotion' | 'system' | 'reward';
+    is_read: boolean;
+    reference_type?: 'order' | 'book' | 'voucher';
+    reference_id?: number;
+    created_at: string;
 }
