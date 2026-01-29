@@ -1,4 +1,4 @@
-import { Book, Category, FlashSaleItem, WishlistItem, Voucher } from '@/types';
+import { Book, Category, FlashSaleItem, WishlistItem, Voucher, CustomerTier } from '@/types';
 
 // ==========================================
 // MOCK CATEGORIES (Hierarchical - Level 0 & 1)
@@ -211,6 +211,31 @@ export const MOCK_BOOKS: Book[] = [
 // In-memory wishlist for front-end demo
 let mockWishlist: number[] = [1, 3];
 
+// Customer Tiers Mock Data
+export const MOCK_TIERS: CustomerTier[] = [
+    {
+        id: 1,
+        name: 'Bạc',
+        min_spent: 0,
+        discount_percent: 0,
+        benefits: 'Thành viên mới, tích điểm 1% giá trị đơn hàng'
+    },
+    {
+        id: 2,
+        name: 'Vàng',
+        min_spent: 2000000,
+        discount_percent: 3,
+        benefits: 'Tích điểm 2%, ưu tiên hỗ trợ, freeship đơn từ 300K'
+    },
+    {
+        id: 3,
+        name: 'Kim cương',
+        min_spent: 10000000,
+        discount_percent: 5,
+        benefits: 'Tích điểm 3%, freeship mọi đơn, quà sinh nhật, sale riêng'
+    }
+];
+
 // Voucher Mock Data
 export const MOCK_VOUCHERS: Voucher[] = [
     {
@@ -278,6 +303,7 @@ export const homeAPI = {
         return {
             categories: MOCK_CATEGORIES,
             vouchers: MOCK_VOUCHERS,
+            tiers: MOCK_TIERS,
             flashSales: [
                 {
                     flash_sale_id: 1,

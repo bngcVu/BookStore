@@ -86,12 +86,10 @@ export function Footer() {
                     </div>
                 </div>
 
-                <div className="border-t border-slate-100 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <p className="text-slate-400 text-[10px] font-black tracking-[0.2em] uppercase">© 2026 BOOKSTORE VIETNAM. ALL RIGHTS RESERVED.</p>
-                    <div className="flex gap-10 grayscale opacity-50">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" className="h-4" alt="Visa" />
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" className="h-6" alt="Mastercard" />
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" className="h-5" alt="Paypal" />
+                <div className="border-t border-slate-100 pt-10 flex flex-col md:flex-row justify-end items-center gap-6">
+                    <div className="flex gap-10 items-center">
+                        <img src="/vnpay_logo.jpg" className="h-8" alt="VNPAY" />
+                        <img src="/momo_logo.webp" className="h-10" alt="MoMo" />
                     </div>
                 </div>
             </div>

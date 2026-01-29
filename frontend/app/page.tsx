@@ -2,17 +2,20 @@
 
 import { useEffect, useState } from "react";
 import { homeAPI } from "@/lib/api-mock";
-import { Book, Category, FlashSaleItem, Voucher } from "@/types";
+import { Book, Category, FlashSaleItem, Voucher, CustomerTier } from "@/types";
 import { ProductCard } from "@/components/features/ProductCard";
 import { FlashSaleSection } from "@/components/features/FlashSaleSection";
 import { ProductCarousel } from "@/components/features/ProductCarousel";
 import { VoucherSection } from "@/components/features/VoucherSection";
+import { VIPMembershipBanner } from "@/components/features/VIPMembershipBanner";
+import { TestimonialSection } from "@/components/features/TestimonialSection";
 import { Sparkles, ArrowRight, ShieldCheck, Truck, Trophy, Bookmark } from "lucide-react";
 
 export default function Home() {
   const [data, setData] = useState<{
     categories: Category[];
     vouchers: Voucher[];
+    tiers: CustomerTier[];
     flashSales: FlashSaleItem[];
     featuredBooks: Book[];
     bestsellers: Book[];
@@ -34,8 +37,8 @@ export default function Home() {
   );
 
   return (
-    <main className="min-h-screen pb-24 bg-background">
-      {/* 1. Hero Section - Top Priority - Clear View Under Fixed Header */}
+    <main className="min-h-screen pb-24 bg-background pt-20">
+      {/* 1. Hero Section - Primary Viewport */}
       <section className="relative pt-28 pb-20 px-4 overflow-hidden bg-white">
         <div className="absolute top-0 right-0 w-1/4 h-full bg-primary/5 -skew-x-12 translate-x-1/4 -z-10 blur-3xl"></div>
 
@@ -144,6 +147,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* VIP Membership Banner - Subscription Drive */}
+      <VIPMembershipBanner tiers={data.tiers || []} />
+
       {/* 6. New Arrivals - ProductCarousel */}
       <section className="container mx-auto px-4 py-24">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
@@ -157,6 +163,8 @@ export default function Home() {
 
         <ProductCarousel books={data.newArrivals} />
       </section>
+
+      <TestimonialSection />
     </main>
   );
 }
