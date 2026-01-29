@@ -412,6 +412,9 @@ export const wishlistAPI = {
                 id: Math.random(),
                 user_id: userId,
                 book_id: b.id,
+                added_price: b.base_price * 1.2, // Giả lập giá lúc thêm cao hơn hiện tại để test thông báo
+                notify_on_price_drop: true,
+                priority: b.is_featured ? 1 : 0,
                 book: b,
                 created_at: new Date().toISOString()
             }));

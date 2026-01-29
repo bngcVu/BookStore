@@ -113,6 +113,9 @@ export interface WishlistItem {
     id: number;
     user_id: number;
     book_id: number;
+    added_price: number;
+    notify_on_price_drop: boolean;
+    priority: number;
     book: Book;
     created_at: string;
 }
