@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản phẩm - BookStore</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --color-violet-500: #8b5cf6;
+            --color-violet-600: #7c3aed;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen pb-20">
+
+    <div id="header-placeholder"></div>
+
+    <div class="pt-[100px] max-w-7xl mx-auto px-4 sm:px-6">
+        <!-- Breadcrumbs -->
+        <div class="flex items-center gap-2 text-sm text-slate-500 mb-8">
+            <a href="index.html" class="hover:text-violet-600">Trang chủ</a>
+            <span>/</span>
+            <span class="text-slate-800 font-bold">Tất cả sách</span>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Sidebar Filter -->
+            <aside class="w-full lg:w-64 flex-shrink-0 space-y-6 hidden lg:block">
+                <div class="glass p-6 rounded-2xl bg-white/60">
+                    <h3 class="font-bold text-slate-800 mb-4 font-display">Danh mục</h3>
+                    <ul class="space-y-3 text-sm" id="category-filter">
+                        <!-- JS Inject -->
+                    </ul>
+                </div>
+
+                <div class="glass p-6 rounded-2xl bg-white/60">
+                    <h3 class="font-bold text-slate-800 mb-4 font-display">Khoảng giá</h3>
+                    <div class="space-y-3">
+                        <label class="flex items-center gap-3 cursor-pointer group">
+                            <input type="radio" name="price" class="text-violet-600 focus:ring-violet-500">
+                            <span class="text-slate-600 group-hover:text-violet-600 transition-colors">Tất cả</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer group">
+                            <input type="radio" name="price" class="text-violet-600 focus:ring-violet-500">
+                            <span class="text-slate-600 group-hover:text-violet-600 transition-colors">Dưới 100k</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer group">
+                            <input type="radio" name="price" class="text-violet-600 focus:ring-violet-500">
+                            <span class="text-slate-600 group-hover:text-violet-600 transition-colors">100k -
+                                300k</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer group">
+                            <input type="radio" name="price" class="text-violet-600 focus:ring-violet-500">
+                            <span class="text-slate-600 group-hover:text-violet-600 transition-colors">Trên 300k</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="glass p-6 rounded-2xl bg-white/60">
+                    <h3 class="font-bold text-slate-800 mb-4 font-display">Đánh giá</h3>
+                    <div class="space-y-3">
+                        <label class="flex items-center gap-3 cursor-pointer group">
+                            <input type="checkbox" class="text-violet-600 rounded focus:ring-violet-500">
+                            <span class="text-slate-600 flex items-center gap-1">
+                                <span class="text-amber-400">★★★★</span>★ (4+)
+                            </span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer group">
+                            <input type="checkbox" class="text-violet-600 rounded focus:ring-violet-500">
+                            <span class="text-slate-600 flex items-center gap-1">
+                                <span class="text-amber-400">★★★★★</span> (5)
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Product Grid -->
+            <div class="flex-1">
+                <!-- Toolbar -->
+                <div class="flex justify-between items-center mb-6">
+                    <p class="text-sm text-slate-500">Hiển thị <span class="font-bold text-slate-800">4</span> sản phẩm
+                    </p>
+                    <div class="flex gap-4">
+                        <select
+                            class="bg-white border border-slate-200 text-slate-600 text-sm rounded-lg px-3 py-2 outline-none focus:border-violet-500">
+                            <option>Mới nhất</option>
+                            <option>Bán chạy nhất</option>
+                            <option>Giá tăng dần</option>
+                            <option>Giá giảm dần</option>
+                        </select>
+                        <button class="lg:hidden p-2 bg-white border border-slate-200 rounded-lg text-slate-600">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="product-grid">
+                    <!-- JS Inject -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="mt-12 flex justify-center gap-2">
+                    <button
+                        class="w-10 h-10 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:border-violet-500 hover:text-violet-600 transition-colors">
+                        << /button>
+                            <button
+                                class="w-10 h-10 rounded-lg bg-violet-600 text-white font-bold flex items-center justify-center shadow-lg shadow-violet-200">1</button>
+                            <button
+                                class="w-10 h-10 rounded-lg border border-slate-200 flex items-center justify-center text-slate-600 hover:border-violet-500 hover:text-violet-600 transition-colors font-medium">2</button>
+                            <button
+                                class="w-10 h-10 rounded-lg border border-slate-200 flex items-center justify-center text-slate-600 hover:border-violet-500 hover:text-violet-600 transition-colors font-medium">3</button>
+                            <span class="w-10 h-10 flex items-center justify-center text-slate-400">...</span>
+                            <button
+                                class="w-10 h-10 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:border-violet-500 hover:text-violet-600 transition-colors">></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/mock_data.js"></script>
+    <script src="js/layout.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const categories = window.MOCK_DATA.categories;
+            const books = window.MOCK_DATA.books;
+
+            // Render Categories in Sidebar
+            const catFilter = document.getElementById('category-filter');
+            if (catFilter) {
+                catFilter.innerHTML = categories.map(cat => `
+                    <li>
+                        <label class="flex items-center gap-3 cursor-pointer group">
+                            <input type="checkbox" class="text-violet-600 rounded focus:ring-violet-500">
+                            <span class="text-slate-600 group-hover:text-violet-600 transition-colors">${cat.name}</span>
+                        </label>
+                    </li>
+                `).join('');
+            }
+
+            // Render Product Grid
+            const grid = document.getElementById('product-grid');
+            if (grid) {
+                grid.innerHTML = books.map(book => `
+                    <div class="glass-card bg-white flex flex-col h-full rounded-2xl overflow-hidden group">
+                        <div class="relative aspect-[3/4] p-4 flex items-center justify-center bg-slate-50 overflow-hidden">
+                            <img src="${book.image}" alt="${book.title}" class="h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-500">
+                            ${book.is_flash_sale ? `<span class="absolute top-3 left-3 bg-rose-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-lg">- ${book.discount}%</span>` : ''}
+                            
+                            <!-- Quick Action Overlay -->
+                            <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-3 translate-y-20 group-hover:translate-y-0 transition-transform duration-300">
+                                <button class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-slate-800 hover:text-violet-600 hover:bg-violet-50" title="Thêm vào giỏ">
+                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                                </button>
+                                <button class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-slate-800 hover:text-rose-500 hover:bg-rose-50" title="Yêu thích">
+                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col">
+                            <p class="text-xs text-slate-500 mb-1">${book.category}</p>
+                            <h3 class="font-bold text-slate-800 text-sm leading-tight mb-2 line-clamp-2 hover:text-violet-600 cursor-pointer transition-colors">
+                                <a href="product_detail.html?id=${book.id}">${book.title}</a>
+                            </h3>
+                            <div class="flex items-center gap-1 mb-2">
+                                <div class="flex text-amber-400 text-xs">
+                                    ${'★'.repeat(Math.round(book.rating))}${'☆'.repeat(5 - Math.round(book.rating))}
+                                </div>
+                                <span class="text-xs text-slate-400">(${book.reviews_count})</span>
+                            </div>
+                            <div class="mt-auto">
+                                <span class="block text-violet-600 font-bold text-lg">${window.formatPrice(book.price)}</span>
+                                ${book.original_price ? `<span class="text-xs text-slate-400 line-through">${window.formatPrice(book.original_price)}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        });
+    </script>
+</body>
+
+</html>
