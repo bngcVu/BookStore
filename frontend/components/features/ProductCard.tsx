@@ -14,6 +14,7 @@ interface ProductCardProps {
 
 export function ProductCard({ book, className, onWishlistToggle }: ProductCardProps) {
     const isDiscounted = !!book.discount_percent && book.discount_percent > 0;
+    const productLink = `/product/${book.slug || book.id}`;
 
     return (
         <div className={cn("group card relative p-0 overflow-hidden flex flex-col h-full bg-white border-slate-100 rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-primary/5", className)}>
@@ -35,14 +36,16 @@ export function ProductCard({ book, className, onWishlistToggle }: ProductCardPr
 
             {/* Image Section - Standardized Aspect */}
             <div className="relative aspect-[1/1.3] bg-slate-50 overflow-hidden border-b border-slate-50">
-                <img
-                    src={book.primary_image}
-                    alt={book.title}
-                    className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
-                />
+                <Link href={productLink}>
+                    <img
+                        src={book.primary_image}
+                        alt={book.title}
+                        className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110 cursor-pointer"
+                    />
+                </Link>
 
                 {/* Metadata Overlay - Hidden by default, shown on hover */}
-                <div className="absolute inset-x-0 bottom-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
+                <div className="absolute inset-x-0 bottom-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-slate-900/80 to-transparent z-10 pointer-events-none">
                     <div className="flex items-center gap-3 text-[10px] text-white font-medium">
                         {book.pages && (
                             <div className="flex items-center gap-1">
@@ -60,11 +63,11 @@ export function ProductCard({ book, className, onWishlistToggle }: ProductCardPr
                 </div>
 
                 {/* Overlay Actions - Smaller circles */}
-                <div className="absolute inset-x-0 top-0 h-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 backdrop-blur-[1px] z-20">
-                    <button className="w-10 h-10 bg-white text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all shadow-lg transform translate-y-4 group-hover:translate-y-0 duration-300">
+                <div className="absolute inset-x-0 top-0 h-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 backdrop-blur-[1px] z-20 pointer-events-none">
+                    <Link href={productLink} className="pointer-events-auto w-10 h-10 bg-white text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all shadow-lg transform translate-y-4 group-hover:translate-y-0 duration-300">
                         <Maximize className="w-5 h-5" />
-                    </button>
-                    <button className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-white hover:text-primary transition-all shadow-lg transform translate-y-4 group-hover:translate-y-0 duration-300 delay-[50ms]">
+                    </Link>
+                    <button className="pointer-events-auto w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-white hover:text-primary transition-all shadow-lg transform translate-y-4 group-hover:translate-y-0 duration-300 delay-[50ms]">
                         <ShoppingCart className="w-5 h-5" />
                     </button>
                 </div>
@@ -79,9 +82,11 @@ export function ProductCard({ book, className, onWishlistToggle }: ProductCardPr
                     {book.authors}
                 </Link>
 
-                <h3 className="font-heading font-black text-[14px] text-slate-800 line-clamp-2 min-h-[40px] group-hover:text-primary transition-colors leading-snug mb-auto">
-                    {book.title}
-                </h3>
+                <Link href={productLink} className="group-hover:text-primary transition-colors mb-auto">
+                    <h3 className="font-heading font-black text-[14px] text-slate-800 line-clamp-2 min-h-[40px] leading-snug">
+                        {book.title}
+                    </h3>
+                </Link>
 
                 {/* Rating - Tiny */}
                 <div className="flex items-center justify-between mt-1">
