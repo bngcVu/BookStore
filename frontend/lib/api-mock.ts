@@ -525,3 +525,53 @@ export const notificationAPI = {
         return { success: true };
     }
 };
+
+// User Profile Mock
+export const MOCK_USER: import('@/types').User = {
+    id: 1,
+    email: 'user@example.com',
+    full_name: 'Nguyễn Văn A',
+    avatar_url: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=200',
+    tier_id: 2,
+    tier: MOCK_TIERS[1], // Vàng
+    total_spent: 8500000,
+    reward_points: 12500
+};
+
+export const userAPI = {
+    getProfile: async () => {
+        await new Promise(r => setTimeout(r, 300));
+        return MOCK_USER;
+    },
+    getLoyaltyHistory: async () => {
+        await new Promise(r => setTimeout(r, 400));
+        return [
+            { id: 1, points: 500, type: 'earn', description: 'Tích điểm đơn hàng #ORD-2023-001', created_at: new Date(Date.now() - 86400000 * 2).toISOString(), reference_id: 2023001 },
+            { id: 2, points: 200, type: 'redeem', description: 'Đổi mã giảm giá 20K', created_at: new Date(Date.now() - 86400000 * 5).toISOString() },
+            { id: 3, points: 1000, type: 'earn', description: 'Thưởng thăng hạng Gold', created_at: new Date(Date.now() - 86400000 * 10).toISOString() },
+            { id: 4, points: 50, type: 'earn', description: 'Đánh giá sản phẩm', created_at: new Date(Date.now() - 86400000 * 12).toISOString(), reference_id: 101 },
+        ] as any[];
+    },
+    getMyVouchers: async () => {
+        await new Promise(r => setTimeout(r, 350));
+        // Lấy 2 voucher đầu tiên làm ví dụ đã sở hữu
+        return MOCK_VOUCHERS.slice(0, 2).map(v => ({ ...v, status: 'active', expiry_date: '2025-12-31' }));
+    }
+};
+
+export const redeemAPI = {
+    getRewards: async () => {
+        await new Promise(r => setTimeout(r, 300));
+        return [
+            { id: 1, name: 'Voucher 20K', description: 'Giảm 20K cho đơn từ 100K', points_cost: 200, image_url: 'https://cdn-icons-png.flaticon.com/512/726/726448.png' },
+            { id: 2, name: 'Freeship 30K', description: 'Giảm 30K phí ship', points_cost: 300, image_url: 'https://cdn-icons-png.flaticon.com/512/411/411763.png' },
+            { id: 3, name: 'Túi Tote BookStore', description: 'Túi vải Canvas thời trang', points_cost: 1500, image_url: 'https://cdn-icons-png.flaticon.com/512/2662/2662503.png' },
+            { id: 4, name: 'Voucher 100K', description: 'Giảm 100K cho đơn từ 500K', points_cost: 1000, image_url: 'https://cdn-icons-png.flaticon.com/512/879/879757.png' }
+        ];
+    },
+    redeem: async (userId: number, rewardId: number) => {
+        await new Promise(r => setTimeout(r, 600));
+        return { success: true, message: 'Đổi quà thành công!' };
+    }
+};
+
