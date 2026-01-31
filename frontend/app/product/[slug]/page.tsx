@@ -171,13 +171,16 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                                 </div>
 
                                 <div className="flex-1 flex gap-3">
-                                    <button className="flex-1 bg-slate-900 text-white py-4 rounded-xl font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-primary transition-all shadow-lg hover:shadow-primary/30 active:scale-95 text-sm">
+                                    <button
+                                        className="flex-1 bg-slate-900 text-white py-4 rounded-xl font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-primary transition-all shadow-lg hover:shadow-primary/30 active:scale-95 text-sm"
+                                        onClick={() => alert('Đã thêm vào giỏ hàng!')}
+                                    >
                                         <ShoppingCart className="w-5 h-5" />
                                         Thêm vào giỏ
                                     </button>
-                                    <button className="flex-1 bg-rose-50 text-rose-600 border border-rose-100 py-4 rounded-xl font-black uppercase tracking-widest hover:bg-rose-100 transition-all active:scale-95 text-sm">
+                                    <Link href="/cart" className="flex-1 bg-rose-50 text-rose-600 border border-rose-100 py-4 rounded-xl font-black uppercase tracking-widest hover:bg-rose-100 transition-all active:scale-95 text-sm flex items-center justify-center">
                                         Mua ngay
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
 

@@ -335,6 +335,151 @@ export const MOCK_VOUCHERS: Voucher[] = [
         start_date: '2025-01-01',
         end_date: '2025-12-31',
         is_active: true
+    },
+    // --- NEW VOUCHERS ---
+    {
+        id: 5,
+        code: 'VANHOC50',
+        name: 'Mê Văn Học',
+        description: 'Giảm 50K cho đơn sách Văn Học từ 400K',
+        discount_type: 'fixed',
+        discount_value: 50000,
+        min_order_value: 400000,
+        used_count: 5,
+        usage_limit: 50,
+        start_date: '2025-02-01',
+        end_date: '2025-02-28',
+        is_active: true
+    },
+    {
+        id: 6,
+        code: 'KINH_TE_VIP',
+        name: 'Doanh Nhân Đọc',
+        description: 'Giảm 15% tối đa 200K cho sách Kinh Tế',
+        discount_type: 'percent',
+        discount_value: 15,
+        max_discount: 200000,
+        min_order_value: 500000,
+        used_count: 2,
+        usage_limit: 20,
+        start_date: '2025-02-01',
+        end_date: '2025-03-31',
+        is_active: true
+    },
+    {
+        id: 7,
+        code: 'FREESHIP_EXTRA',
+        name: 'Freeship Extra',
+        description: 'Miễn phí vận chuyển cho đơn từ 150K',
+        discount_type: 'fixed',
+        discount_value: 30000,
+        min_order_value: 150000,
+        used_count: 850,
+        usage_limit: 5000,
+        start_date: '2025-01-01',
+        end_date: '2025-12-31',
+        is_active: true
+    },
+    {
+        id: 8,
+        code: 'FLASH_SALE_T5',
+        name: 'Flash Sale Thứ 5',
+        description: 'Giảm ngay 25K cho đơn từ 199K',
+        discount_type: 'fixed',
+        discount_value: 25000,
+        min_order_value: 199000,
+        used_count: 45,
+        usage_limit: 100,
+        start_date: '2025-01-01',
+        end_date: '2025-12-31',
+        is_active: true
+    },
+    {
+        id: 9,
+        code: 'MEMBER_GOLD',
+        name: 'Đặc Quyền Gold',
+        description: 'Giảm 20% tối đa 500K cho thành viên Vàng',
+        discount_type: 'percent',
+        discount_value: 20,
+        max_discount: 500000,
+        min_order_value: 1000000,
+        used_count: 10,
+        usage_limit: 999,
+        start_date: '2025-01-01',
+        end_date: '2025-12-31',
+        is_active: true
+    },
+    {
+        id: 10,
+        code: 'BIRTHDAY_GIFT',
+        name: 'Quà Sinh Nhật',
+        description: 'Giảm 100K cho đơn hàng sinh nhật từ 500K',
+        discount_type: 'fixed',
+        discount_value: 100000,
+        min_order_value: 500000,
+        used_count: 1,
+        usage_limit: 1,
+        start_date: '2025-01-01',
+        end_date: '2025-12-31',
+        is_active: true
+    },
+    {
+        id: 11,
+        code: 'PAYDAY_SALE',
+        name: 'Lương Về',
+        description: 'Giảm 8% cho đơn từ 600K',
+        discount_type: 'percent',
+        discount_value: 8,
+        max_discount: 100000,
+        min_order_value: 600000,
+        used_count: 120,
+        usage_limit: 1000,
+        start_date: '2025-01-25',
+        end_date: '2025-02-05',
+        is_active: true
+    },
+    {
+        id: 12,
+        code: 'SACH_THIEU_NHI',
+        name: 'Bé Vui Đọc Sách',
+        description: 'Giảm 15K cho đơn sách Thiếu Nhi',
+        discount_type: 'fixed',
+        discount_value: 15000,
+        min_order_value: 150000,
+        used_count: 30,
+        usage_limit: 200,
+        start_date: '2025-01-01',
+        end_date: '2025-12-31',
+        is_active: true
+    },
+    {
+        id: 13,
+        code: 'HELLO_SUMMER',
+        name: 'Chào Hè Rực Rỡ',
+        description: 'Giảm 12% tối đa 50K',
+        discount_type: 'percent',
+        discount_value: 12,
+        max_discount: 50000,
+        min_order_value: 200000,
+        used_count: 0,
+        usage_limit: 500,
+        start_date: '2025-05-01',
+        end_date: '2025-08-31',
+        is_active: true
+    },
+    {
+        id: 14,
+        code: 'BOOKWORM',
+        name: 'Mọt Sách',
+        description: 'Giảm 50K cho đơn từ 1 triệu đồng',
+        discount_type: 'fixed',
+        discount_value: 50000,
+        min_order_value: 1000000,
+        used_count: 5,
+        usage_limit: 50,
+        start_date: '2025-01-01',
+        end_date: '2025-12-31',
+        is_active: true
     }
 ];
 
@@ -572,6 +717,43 @@ export const redeemAPI = {
     redeem: async (userId: number, rewardId: number) => {
         await new Promise(r => setTimeout(r, 600));
         return { success: true, message: 'Đổi quà thành công!' };
+    }
+};
+
+// --- MOCK CART ---
+export const MOCK_CART = [
+    {
+        id: 1,
+        book_id: 1,
+        title: "Nhà Giả Kim",
+        author: "Paulo Coelho",
+        price: 79000,
+        original_price: 100000,
+        image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=300",
+        quantity: 2,
+        slug: "nha-gia-kim"
+    },
+    {
+        id: 2,
+        book_id: 2,
+        title: "Đắc Nhân Tâm",
+        author: "Dale Carnegie",
+        price: 86000,
+        original_price: 0,
+        image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=300",
+        quantity: 1,
+        slug: "dac-nhan-tam"
+    }
+];
+
+export const cartAPI = {
+    getCart: async () => {
+        await new Promise(r => setTimeout(r, 400));
+        return [...MOCK_CART];
+    },
+    getAvailableVouchers: async () => {
+        await new Promise(r => setTimeout(r, 300));
+        return [...MOCK_VOUCHERS];
     }
 };
 

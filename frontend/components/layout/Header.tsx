@@ -129,10 +129,10 @@ export function Header() {
                         <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-[10px] font-black flex items-center justify-center rounded-full ring-4 ring-white shadow-sm transition-transform group-hover:scale-110">2</span>
                     </Link>
 
-                    <button className="p-3 hover:bg-slate-50 rounded-2xl text-slate-600 hover:text-primary transition-all relative group">
+                    <Link href="/cart" className="p-3 hover:bg-slate-50 rounded-2xl text-slate-600 hover:text-primary transition-all relative group">
                         <ShoppingBag className="w-6 h-6 group-hover:scale-110 transition-all" />
                         <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-white text-[10px] font-black flex items-center justify-center rounded-full ring-4 ring-white shadow-sm transition-transform group-hover:scale-110">3</span>
-                    </button>
+                    </Link>
 
                     <div className="w-px h-8 bg-slate-100 mx-1 hidden sm:block"></div>
 
