@@ -295,9 +295,9 @@ export default function CartPage() {
 
 
 
-                                <button className="w-full bg-primary text-white py-4 rounded-xl font-black uppercase tracking-widest text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary/30 hover:bg-primary-dark hover:shadow-xl hover:shadow-primary/40 transition-all active:scale-95 group">
+                                <Link href="/checkout" className="w-full bg-primary text-white py-4 rounded-xl font-black uppercase tracking-widest text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary/30 hover:bg-primary-dark hover:shadow-xl hover:shadow-primary/40 transition-all active:scale-95 group">
                                     Thanh toán ngay <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                </button>
+                                </Link>
 
                                 <div className="mt-4 flex items-center justify-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                                     <ShieldCheck className="w-4 h-4" />

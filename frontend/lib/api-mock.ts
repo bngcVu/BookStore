@@ -589,6 +589,34 @@ export const homeAPI = {
     }
 };
 
+// Address Mock Data
+export const MOCK_ADDRESSES = [
+    {
+        id: 1,
+        name: "Nhà Riêng",
+        recipient: "Nguyễn Văn A",
+        phone: "0987654321",
+        address: "123 Đường Sách, Phường Bến Nghé, Quận 1, TP.HCM",
+        isDefault: true
+    },
+    {
+        id: 2,
+        name: "Công Ty",
+        recipient: "Nguyễn Văn A",
+        phone: "0987654321",
+        address: "Tòa nhà Bitexco, 2 Hải Triều, Q.1, TP.HCM",
+        isDefault: false
+    },
+    {
+        id: 3,
+        name: "Nhà Bố Mẹ",
+        recipient: "Ông Bà B",
+        phone: "0909123456",
+        address: "456 Lê Văn Sỹ, P.14, Q.3, TP.HCM",
+        isDefault: false
+    }
+];
+
 export const wishlistAPI = {
     async getWishlist(userId: number): Promise<WishlistItem[]> {
         await new Promise(r => setTimeout(r, 300));
