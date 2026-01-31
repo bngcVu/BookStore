@@ -159,12 +159,17 @@ export default function CheckoutPage() {
                                     />
                                     <div className="flex-1">
                                         <div className="flex justify-between mb-1">
-                                            <span className="font-bold text-slate-900">Giao Hàng Tiêu Chuẩn</span>
+                                            <div className="flex items-center gap-2">
+                                                <span className="font-bold text-slate-900">Giao Hàng Tiêu Chuẩn</span>
+                                                <div className="flex items-center gap-1 px-2 py-0.5 bg-blue-50 text-blue-700 rounded text-[10px] font-bold border border-blue-100 uppercase tracking-wider">
+                                                    <Truck className="w-3 h-3" />
+                                                    PRO
+                                                </div>
+                                            </div>
                                             <span className="font-bold text-slate-900">{formatCurrency(30000)}</span>
                                         </div>
                                         <p className="text-xs text-slate-500">Dự kiến giao: 3-5 ngày</p>
                                     </div>
-                                    <Image src="https://cdn.haitrieu.com/wp-content/uploads/2022/05/Logo-Giao-Hang-Tiet-Kiem-GHTK-Green.png" alt="GHTK" width={40} height={40} className="object-contain opacity-80" />
                                 </label>
 
                                 <label className={`flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${shippingMethod === 'express' ? 'border-primary bg-primary/5' : 'border-slate-100 hover:border-slate-200'}`}>
@@ -178,12 +183,17 @@ export default function CheckoutPage() {
                                     />
                                     <div className="flex-1">
                                         <div className="flex justify-between mb-1">
-                                            <span className="font-bold text-slate-900">Giao Hàng Hỏa Tốc</span>
+                                            <div className="flex items-center gap-2">
+                                                <span className="font-bold text-slate-900">Giao Hàng Hỏa Tốc</span>
+                                                <div className="flex items-center gap-1 px-2 py-0.5 bg-amber-50 text-amber-700 rounded text-[10px] font-bold border border-amber-100 uppercase tracking-wider">
+                                                    <Sparkles className="w-3 h-3" />
+                                                    FAST
+                                                </div>
+                                            </div>
                                             <span className="font-bold text-slate-900">{formatCurrency(50000)}</span>
                                         </div>
                                         <p className="text-xs text-slate-500">Dự kiến giao: 1-2 ngày</p>
                                     </div>
-                                    <Image src="https://cdn.haitrieu.com/wp-content/uploads/2022/05/Logo-GHN-S.png" alt="GHN" width={40} height={40} className="object-contain opacity-80" />
                                 </label>
                             </div>
                         </div>
@@ -239,8 +249,8 @@ export default function CheckoutPage() {
                                     className="w-5 h-5 accent-primary"
                                 />
                                 <div className="flex-1">
-                                    <p className="font-bold text-slate-900">Chuyển khoản ngân hàng (QR Code)</p>
-                                    <p className="text-xs text-slate-500">Quét mã QR để thanh toán nhanh chóng.</p>
+                                    <p className="font-bold text-slate-900">Chuyển khoản ngân hàng (VietQR)</p>
+                                    <p className="text-xs text-slate-500">Quét mã QR, tự động điền số tiền và nội dung.</p>
                                 </div>
                                 <div className="flex -space-x-2">
                                     <div className="w-8 h-8 rounded-full bg-white border border-slate-100 flex items-center justify-center text-[10px] font-bold shadow-sm">QR</div>
@@ -249,29 +259,45 @@ export default function CheckoutPage() {
 
                             {paymentMethod === 'banking' && (
                                 <div className="ml-9 p-4 bg-slate-50 rounded-xl border border-dashed border-slate-300 animate-in fade-in slide-in-from-top-2">
-                                    <div className="flex items-start gap-4">
-                                        <div className="bg-white p-2 rounded-lg border border-slate-200 shadow-sm shrink-0">
-                                            {/* Placeholder QR */}
-                                            <div className="w-24 h-24 bg-slate-900 flex items-center justify-center text-white text-xs font-bold">QR CODE</div>
+                                    <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+                                        <div className="bg-white p-2 rounded-xl border border-slate-200 shadow-sm shrink-0">
+                                            {/* Dynamic VietQR Image */}
+                                            <div className="w-40 h-40 relative">
+                                                <Image
+                                                    src={`https://img.vietqr.io/image/MB-999988886666-compact2.png?amount=${total}&addInfo=ORD8829&accountName=BOOKSTORE VN`}
+                                                    alt="VietQR Payment"
+                                                    fill
+                                                    className="object-contain rounded-lg"
+                                                    unoptimized // Required for external CDN if not configured
+                                                />
+                                            </div>
                                         </div>
-                                        <div className="flex-1 space-y-2 text-sm">
-                                            <div className="flex justify-between border-b border-slate-200 pb-2">
+                                        <div className="flex-1 space-y-3 text-sm w-full">
+                                            <div className="p-3 bg-blue-50 text-blue-700 rounded-lg text-xs leading-relaxed border border-blue-100">
+                                                <span className="font-bold">💡 Lưu ý:</span> Vui lòng giữ nguyên nội dung chuyển khoản để hệ thống tự động xác nhận đơn hàng.
+                                            </div>
+                                            <div className="flex justify-between border-b border-slate-200 pb-2 border-dashed">
                                                 <span className="text-slate-500">Ngân hàng</span>
                                                 <span className="font-bold text-slate-900">MB Bank</span>
                                             </div>
-                                            <div className="flex justify-between border-b border-slate-200 pb-2">
+                                            <div className="flex justify-between border-b border-slate-200 pb-2 border-dashed">
                                                 <span className="text-slate-500">Số tài khoản</span>
-                                                <span className="font-bold text-slate-900 flex items-center gap-2">
+                                                <span className="font-bold text-slate-900 flex items-center gap-2 group cursor-pointer" onClick={() => navigator.clipboard.writeText("999988886666")}>
                                                     999988886666
-                                                    <Copy className="w-3 h-3 text-slate-400 cursor-pointer hover:text-primary" />
+                                                    <Copy className="w-3 h-3 text-slate-400 group-hover:text-primary transition-colors" />
                                                 </span>
                                             </div>
-                                            <div className="flex justify-between">
+                                            <div className="flex justify-between border-b border-slate-200 pb-2 border-dashed">
                                                 <span className="text-slate-500">Chủ tài khoản</span>
                                                 <span className="font-bold text-slate-900">BOOKSTORE VN</span>
                                             </div>
-                                            <div className="p-2 bg-amber-50 text-amber-700 text-xs rounded-lg mt-2">
-                                                Nội dung CK: <strong>ORD-8829</strong>
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-slate-500">Số tiền</span>
+                                                <span className="font-black text-lg text-primary">{formatCurrency(total)}</span>
+                                            </div>
+                                            <div className="flex justify-between items-center bg-yellow-50 p-2 rounded border border-yellow-100">
+                                                <span className="text-slate-600 text-xs">Nội dung</span>
+                                                <span className="font-bold text-slate-900">ORD8829</span>
                                             </div>
                                         </div>
                                     </div>
