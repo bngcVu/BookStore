@@ -1,93 +1,95 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import React, { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import {
-    Bell, Package, Tag, Award, Info,
-    CheckCircle2, Clock, Trash2, Filter,
-    ChevronRight, ArrowLeft
-} from "lucide-react";
-import { Notification } from "@/types";
-import { notificationAPI } from "@/lib/api-mock";
-import { cn } from "@/lib/utils";
+import { Bell, ShoppingBag, Tag, Star, Clock, CheckCircle2, ChevronRight, Package } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
+
+// Mock Notification Data
+const MOCK_NOTIFICATIONS = [
+    {
+        id: 1,
+        title: "Đơn hàng #ORD-8829 đang được giao",
+        message: "Đơn hàng của bạn đã được bàn giao cho đơn vị vận chuyển Viettel Post. Dự kiến giao hàng vào ngày mai.",
+        type: "order",
+        is_read: false,
+        created_at: "2024-02-03T08:30:00Z",
+        link: "/profile?tab=orders"
+    },
+    {
+        id: 2,
+        title: "Săn sale giờ vàng - Giảm 50%",
+        message: "Duy nhất khung giờ 12h-14h hôm nay. Nhập mã FLASH50 để được giảm 50% tối đa 100k.",
+        type: "promotion",
+        is_read: false,
+        created_at: "2024-02-03T07:00:00Z",
+        link: "/flash-sale"
+    },
+    {
+        id: 3,
+        title: "Bạn nhận được 500 điểm thưởng",
+        message: "Chúc mừng bạn đã hoàn thành thử thách 'Đọc sách mỗi ngày'. Điểm đã được cộng vào ví.",
+        type: "reward",
+        is_read: true,
+        created_at: "2024-02-02T20:15:00Z",
+        link: "/profile?tab=membership"
+    },
+    {
+        id: 4,
+        title: "Sách 'Nhà Giả Kim' đang giảm giá sâu",
+        message: "Sản phẩm trong Wishlist của bạn đang có giá tốt nhất lịch sử. Mua ngay kẻo lỡ!",
+        type: "price_drop",
+        is_read: true,
+        created_at: "2024-02-01T10:00:00Z",
+        link: "/product/nha-gia-kim"
+    },
+    {
+        id: 5,
+        title: "Tài khoản của bạn đã được nâng hạng Vàng",
+        message: "Cảm ơn bạn đã gắn bó. Tận hưởng ưu đãi freeship và giảm 10% trọn đời.",
+        type: "system",
+        is_read: true,
+        created_at: "2024-01-30T09:00:00Z",
+        link: "/profile?tab=membership"
+    }
+];
 
 export default function NotificationsPage() {
-    const [notifications, setNotifications] = useState<Notification[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [activeFilter, setActiveFilter] = useState<'all' | 'order' | 'promotion' | 'reward' | 'system'>('all');
-
-    useEffect(() => {
-        const loadNotifications = async () => {
-            setLoading(true);
-            try {
-                const data = await notificationAPI.getNotifications();
-                setNotifications(data);
-            } catch (error) {
-                console.error("Failed to fetch notifications", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        loadNotifications();
-    }, []);
-
-    const markAsRead = async (id: number) => {
-        await notificationAPI.markAsRead(id);
-        setNotifications(prev => prev.map(n => n.id === id ? { ...n, is_read: true } : n));
-    };
-
-    const markAllRead = async () => {
-        await notificationAPI.markAllAsRead();
-        setNotifications(prev => prev.map(n => ({ ...n, is_read: true })));
-    };
-
-    const handleDelete = (id: number) => {
-        // In a real app, call a delete API
-        setNotifications(prev => prev.filter(n => n.id !== id));
-    };
-
-    const filteredNotifications = useMemo(() => {
-        if (activeFilter === 'all') return notifications;
-        return notifications.filter(n => n.type === activeFilter);
-    }, [notifications, activeFilter]);
+    const [notifications, setNotifications] = useState(MOCK_NOTIFICATIONS);
+    const [filter, setFilter] = useState("all");
 
     const getIcon = (type: string) => {
         switch (type) {
-            case 'order': return <Package className="w-5 h-5" />;
-            case 'promotion': return <Tag className="w-5 h-5" />;
-            case 'reward': return <Award className="w-5 h-5" />;
-            default: return <Info className="w-5 h-5" />;
+            case "order": return <Package className="w-5 h-5 text-blue-500" />;
+            case "promotion": return <Tag className="w-5 h-5 text-rose-500" />;
+            case "reward": return <Star className="w-5 h-5 text-amber-500" />;
+            case "price_drop": return <ShoppingBag className="w-5 h-5 text-emerald-500" />;
+            default: return <Bell className="w-5 h-5 text-slate-500" />;
         }
     };
 
-    const getColorClass = (type: string) => {
+    const getColors = (type: string) => {
         switch (type) {
-            case 'order': return "bg-blue-50 text-blue-500 border-blue-100";
-            case 'promotion': return "bg-orange-50 text-orange-500 border-orange-100";
-            case 'reward': return "bg-amber-50 text-amber-500 border-amber-100";
-            default: return "bg-slate-50 text-slate-500 border-slate-100";
+            case "order": return "bg-blue-50 border-blue-100";
+            case "promotion": return "bg-rose-50 border-rose-100";
+            case "reward": return "bg-amber-50 border-amber-100";
+            case "price_drop": return "bg-emerald-50 border-emerald-100";
+            default: return "bg-slate-50 border-slate-100";
         }
     };
 
-    const formatTime = (dateString: string) => {
-        const date = new Date(dateString);
-        return date.toLocaleString('vi-VN', {
-            hour: '2-digit',
-            minute: '2-digit',
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-        });
+    const handleMarkAllRead = () => {
+        setNotifications(prev => prev.map(n => ({ ...n, is_read: true })));
     };
 
-    const filters = [
-        { id: 'all', label: 'Tất cả', count: notifications.length },
-        { id: 'order', label: 'Đơn hàng', count: notifications.filter(n => n.type === 'order').length },
-        { id: 'promotion', label: 'Khuyến mãi', count: notifications.filter(n => n.type === 'promotion').length },
-        { id: 'reward', label: 'Ưu đãi', count: notifications.filter(n => n.type === 'reward').length },
-    ];
+    const handleRead = (id: number) => {
+        setNotifications(prev => prev.map(n => n.id === id ? { ...n, is_read: true } : n));
+    };
+
+    const filtered = filter === "all" ? notifications : notifications.filter(n => n.type === filter);
+    const unreadCount = notifications.filter(n => !n.is_read).length;
 
     return (
         <div className="min-h-screen bg-[#F8FAFC]">
@@ -95,169 +97,125 @@ export default function NotificationsPage() {
 
             <main className="container mx-auto px-4 pt-32 pb-24">
                 <div className="max-w-4xl mx-auto">
-                    {/* Breadcrumb / Back */}
-                    <Link href="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-primary font-bold text-xs uppercase tracking-widest mb-8 transition-colors group">
-                        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                        Quay lại trang chủ
-                    </Link>
 
                     {/* Page Header */}
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
                         <div>
-                            <h1 className="text-4xl font-black text-slate-900 uppercase tracking-tighter flex items-center gap-4">
-                                <div className="w-12 h-12 bg-white rounded-2xl shadow-sm border border-slate-100 flex items-center justify-center text-primary">
-                                    <Bell className="w-6 h-6" />
-                                </div>
-                                Trung tâm <span className="text-primary italic">Thông báo</span>
+                            <div className="flex items-center gap-2 mb-2">
+                                <Link href="/" className="text-slate-500 hover:text-primary transition-colors text-sm font-bold">Trang chủ</Link>
+                                <ChevronRight className="w-4 h-4 text-slate-300" />
+                                <span className="text-slate-900 text-sm font-bold">Thông báo</span>
+                            </div>
+                            <h1 className="text-3xl font-black text-slate-900 uppercase tracking-tight flex items-center gap-3">
+                                <Bell className="w-8 h-8 text-slate-900" />
+                                Thông báo của tôi
+                                {unreadCount > 0 && (
+                                    <span className="inline-flex items-center justify-center px-2.5 py-1 text-sm font-bold text-white bg-red-500 rounded-full align-middle transform translate-y-[-2px]">
+                                        {unreadCount}
+                                    </span>
+                                )}
                             </h1>
-                            <p className="text-slate-500 font-medium mt-2">Theo dõi ưu đãi và hành trình đơn hàng của bạn</p>
                         </div>
 
-                        <div className="flex items-center gap-3">
+                        <div className="flex gap-3">
                             <button
-                                onClick={markAllRead}
-                                className="px-5 py-3 bg-white border border-slate-200 rounded-2xl text-slate-600 font-black text-[11px] uppercase tracking-widest flex items-center gap-2 hover:border-primary hover:text-primary transition-all shadow-sm"
+                                onClick={handleMarkAllRead}
+                                className="px-5 py-2.5 bg-white text-slate-600 border border-slate-200 rounded-xl font-bold text-sm uppercase tracking-wider hover:bg-slate-50 hover:text-primary transition-all shadow-sm"
                             >
-                                <CheckCircle2 className="w-4 h-4" />
-                                Đọc tất cả
+                                Đánh dấu đã xem
                             </button>
                         </div>
                     </div>
 
-                    {/* Filter Bar */}
-                    <div className="flex items-center gap-2 overflow-x-auto pb-6 scrollbar-hide mb-4">
-                        <div className="flex items-center gap-2 bg-white p-1.5 rounded-[20px] border border-slate-100 shadow-sm">
-                            {filters.map((f) => (
+                    <div className="flex flex-col lg:flex-row gap-8 items-start">
+
+                        {/* Filter Sidebar */}
+                        <div className="w-full lg:w-64 shrink-0 space-y-2 sticky top-28">
+                            {[
+                                { id: "all", label: "Tất cả", icon: Bell },
+                                { id: "order", label: "Đơn hàng", icon: Package },
+                                { id: "promotion", label: "Khuyến mãi", icon: Tag },
+                                { id: "reward", label: "Điểm thưởng", icon: Star },
+                                { id: "system", label: "Hệ thống", icon: CheckCircle2 },
+                            ].map((item) => (
                                 <button
-                                    key={f.id}
-                                    onClick={() => setActiveFilter(f.id as any)}
+                                    key={item.id}
+                                    onClick={() => setFilter(item.id)}
                                     className={cn(
-                                        "px-5 py-2.5 rounded-2xl font-black text-[10px] uppercase tracking-[0.1em] transition-all flex items-center gap-2",
-                                        activeFilter === f.id
-                                            ? "bg-slate-900 text-white shadow-lg shadow-slate-900/10"
-                                            : "text-slate-500 hover:bg-slate-50"
+                                        "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all",
+                                        filter === item.id
+                                            ? "bg-slate-900 text-white shadow-lg shadow-slate-900/20"
+                                            : "bg-white text-slate-500 hover:bg-slate-50 hover:text-slate-900 border border-transparent hover:border-slate-100"
                                     )}
                                 >
-                                    {f.label}
-                                    <span className={cn(
-                                        "px-1.5 py-0.5 rounded-md text-[9px]",
-                                        activeFilter === f.id ? "bg-white/20 text-white" : "bg-slate-100 text-slate-400"
-                                    )}>
-                                        {f.count}
-                                    </span>
+                                    <item.icon className={cn("w-4 h-4", filter === item.id ? "text-white" : "text-slate-400")} />
+                                    {item.label}
                                 </button>
                             ))}
                         </div>
-                    </div>
 
-                    {/* Content Section */}
-                    {loading ? (
-                        <div className="space-y-4">
-                            {[1, 2, 3, 4].map(i => (
-                                <div key={i} className="h-24 bg-white rounded-3xl border border-slate-100 animate-pulse"></div>
-                            ))}
-                        </div>
-                    ) : filteredNotifications.length > 0 ? (
-                        <div className="space-y-4">
-                            {filteredNotifications.map((n) => (
-                                <div
-                                    key={n.id}
-                                    className={cn(
-                                        "group relative bg-white rounded-[32px] border transition-all duration-300 flex items-start gap-6 p-6 md:p-8",
-                                        n.is_read ? "border-slate-100 opacity-70" : "border-primary/20 shadow-xl shadow-primary/5 ring-1 ring-primary/5"
-                                    )}
-                                >
-                                    {/* Unread indicator */}
-                                    {!n.is_read && (
-                                        <div className="absolute top-8 left-0 w-1.5 h-8 bg-primary rounded-r-full shadow-[2px_0_8px_rgba(var(--primary-rgb),0.3)]"></div>
-                                    )}
-
-                                    {/* Icon Container */}
-                                    <div className={cn(
-                                        "w-14 h-14 rounded-2xl border flex items-center justify-center shrink-0 transition-transform group-hover:scale-110 md:w-16 md:h-16",
-                                        getColorClass(n.type)
-                                    )}>
-                                        {getIcon(n.type)}
-                                    </div>
-
-                                    {/* Text Content */}
-                                    <div className="flex-1 space-y-2">
-                                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
-                                            <h3 className={cn(
-                                                "text-lg transition-colors group-hover:text-primary",
-                                                n.is_read ? "font-bold text-slate-700" : "font-black text-slate-900"
+                        {/* Notification List */}
+                        <div className="flex-1 space-y-4 w-full">
+                            {filtered.length > 0 ? (
+                                filtered.map((notification) => (
+                                    <Link
+                                        href={notification.link}
+                                        key={notification.id}
+                                        onClick={() => handleRead(notification.id)}
+                                        className={cn(
+                                            "group block p-5 rounded-[24px] border transition-all duration-300 relative overflow-hidden",
+                                            notification.is_read
+                                                ? "bg-white border-slate-100 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+                                                : "bg-white border-primary/20 shadow-md shadow-primary/5 hover:shadow-xl hover:shadow-primary/10"
+                                        )}
+                                    >
+                                        <div className="flex gap-5">
+                                            {/* Icon Box */}
+                                            <div className={cn(
+                                                "w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 border transition-transform group-hover:scale-110",
+                                                getColors(notification.type)
                                             )}>
-                                                {n.title}
-                                            </h3>
-                                            <span className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                                                <Clock className="w-3.5 h-3.5" />
-                                                {formatTime(n.created_at)}
-                                            </span>
-                                        </div>
-                                        <p className="text-slate-500 leading-relaxed font-medium">
-                                            {n.content}
-                                        </p>
+                                                {getIcon(notification.type)}
+                                            </div>
 
-                                        {/* Action Links based on reference */}
-                                        <div className="pt-4 flex items-center gap-3">
-                                            {!n.is_read && (
-                                                <button
-                                                    onClick={() => markAsRead(n.id)}
-                                                    className="text-[10px] font-black text-primary uppercase tracking-widest flex items-center gap-1.5 hover:underline"
-                                                >
-                                                    <CheckCircle2 className="w-3.5 h-3.5" />
-                                                    Đánh dấu đã đọc
-                                                </button>
-                                            )}
-                                            {n.reference_type === 'book' && (
-                                                <Link
-                                                    href={`/product/${n.reference_id}`}
-                                                    className="text-[10px] font-black text-slate-900 uppercase tracking-widest flex items-center gap-1.5 hover:text-primary group/link"
-                                                >
-                                                    Xem chi tiết sách
-                                                    <ChevronRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
-                                                </Link>
-                                            )}
-                                            {n.reference_type === 'order' && (
-                                                <Link
-                                                    href={`/account/orders/${n.reference_id}`}
-                                                    className="text-[10px] font-black text-slate-900 uppercase tracking-widest flex items-center gap-1.5 hover:text-primary group/link"
-                                                >
-                                                    Kiểm tra đơn hàng
-                                                    <ChevronRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
-                                                </Link>
-                                            )}
+                                            {/* Content */}
+                                            <div className="flex-1 min-w-0 pt-0.5">
+                                                <div className="flex justify-between items-start mb-1">
+                                                    <h3 className={cn(
+                                                        "text-base leading-tight pr-4 transition-colors",
+                                                        notification.is_read ? "font-bold text-slate-700 group-hover:text-primary" : "font-black text-slate-900 group-hover:text-primary"
+                                                    )}>
+                                                        {notification.title}
+                                                    </h3>
+                                                    {!notification.is_read && (
+                                                        <span className="w-2.5 h-2.5 rounded-full bg-primary shrink-0 animate-pulse" title="Chưa xem"></span>
+                                                    )}
+                                                </div>
+                                                <p className={cn(
+                                                    "text-sm mb-3 line-clamp-2",
+                                                    notification.is_read ? "text-slate-400" : "text-slate-600 font-medium"
+                                                )}>
+                                                    {notification.message}
+                                                </p>
+                                                <span className="text-[11px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1">
+                                                    <Clock className="w-3 h-3" />
+                                                    {new Date(notification.created_at).toLocaleDateString("vi-VN", { hour: '2-digit', minute: '2-digit' })}
+                                                </span>
+                                            </div>
                                         </div>
+                                    </Link>
+                                ))
+                            ) : (
+                                <div className="flex flex-col items-center justify-center py-20 bg-white rounded-[32px] border border-slate-100 border-dashed">
+                                    <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
+                                        <Bell className="w-8 h-8 text-slate-300" />
                                     </div>
-
-                                    {/* Item Options */}
-                                    <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <button
-                                            onClick={() => handleDelete(n.id)}
-                                            className="p-2 text-slate-300 hover:text-red-500 transition-colors"
-                                            title="Xóa thông báo"
-                                        >
-                                            <Trash2 className="w-4 h-4" />
-                                        </button>
-                                    </div>
+                                    <h3 className="text-lg font-bold text-slate-900 mb-1">Không có thông báo</h3>
+                                    <p className="text-slate-400 text-sm">Bạn chưa có thông báo nào trong mục này.</p>
                                 </div>
-                            ))}
+                            )}
                         </div>
-                    ) : (
-                        <div className="bg-white rounded-[40px] border border-slate-100 p-24 flex flex-col items-center justify-center text-center shadow-sm">
-                            <div className="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mb-8">
-                                <Bell className="w-12 h-12 text-slate-200" />
-                            </div>
-                            <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight mb-2">Hộp thư trống</h2>
-                            <p className="text-slate-500 max-w-sm font-medium mb-10">Bạn chưa có bất kỳ thông báo nào. Hãy tiếp tục mua sắm và theo dõi thêm các tác phẩm tuyệt vời!</p>
-                            <Link
-                                href="/products"
-                                className="px-8 py-4 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-primary transition-all shadow-lg shadow-slate-900/10 active:scale-95"
-                            >
-                                Khám phá ngay
-                            </Link>
-                        </div>
-                    )}
+                    </div>
                 </div>
             </main>
 

@@ -7,8 +7,9 @@ import { RedeemSection } from '@/components/user/RedeemSection';
 import { MyVouchers } from '@/components/user/MyVouchers';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { User, CustomerTier, Voucher } from '@/types';
-import { userAPI, redeemAPI, MOCK_TIERS } from '@/lib/api-mock';
+import { userAPI, redeemAPI, MOCK_TIERS, wishlistAPI } from '@/lib/api-mock';
+import { WishlistSection } from '@/components/features/WishlistSection';
+import { User, CustomerTier, Voucher, WishlistItem } from '@/types';
 import { User as UserIcon, Package, Heart, LogOut, Settings, Shield, Bell, Ticket } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
@@ -19,6 +20,7 @@ export default function ProfilePage() {
     const [history, setHistory] = useState<any[]>([]);
     const [myVouchers, setMyVouchers] = useState<Voucher[]>([]);
     const [rewards, setRewards] = useState<any[]>([]);
+    const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('membership');
 
@@ -26,17 +28,19 @@ export default function ProfilePage() {
         async function loadData() {
             setLoading(true);
             try {
-                const [userData, historyData, voucherData, rewardData] = await Promise.all([
+                const [userData, historyData, voucherData, rewardData, wishlistData] = await Promise.all([
                     userAPI.getProfile(),
                     userAPI.getLoyaltyHistory(),
                     userAPI.getMyVouchers(),
-                    redeemAPI.getRewards()
+                    redeemAPI.getRewards(),
+                    wishlistAPI.getWishlist(1) // Mock user ID 1
                 ]);
 
                 setUser(userData);
                 setHistory(historyData);
                 setMyVouchers(voucherData);
                 setRewards(rewardData);
+                setWishlistItems(wishlistData);
             } catch (error) {
                 console.error("Failed to load profile", error);
             } finally {
@@ -222,7 +226,19 @@ export default function ProfilePage() {
                             </div>
                         )}
 
-                        {(activeTab !== 'membership' && activeTab !== 'orders' && activeTab !== 'wallet') && (
+                        {(activeTab === 'wishlist') && (
+                            <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                                <WishlistSection
+                                    items={wishlistItems}
+                                    onRemove={(id) => setWishlistItems(prev => prev.filter(i => i.id !== id))}
+                                    onToggleNotify={(id) => setWishlistItems(prev => prev.map(i => i.id === id ? { ...i, notify_on_price_drop: !i.notify_on_price_drop } : i))}
+                                    filter="all"
+                                    onFilterChange={() => { }} // No filter in profile view for simplicity
+                                />
+                            </div>
+                        )}
+
+                        {(activeTab !== 'membership' && activeTab !== 'orders' && activeTab !== 'wallet' && activeTab !== 'wishlist') && (
                             <div className="flex flex-col items-center justify-center py-20 bg-white rounded-[32px] border border-slate-100 shadow-sm">
                                 <Settings className="w-16 h-16 text-slate-200 mb-4 animate-spin-slow" />
                                 <h3 className="text-xl font-bold text-slate-900 mb-2">Tính năng đang phát triển</h3>

@@ -9,6 +9,8 @@ import Link from "next/link";
 import { cartAPI, MOCK_ADDRESSES } from "@/lib/api-mock";
 import Image from "next/image";
 import { AddressListModal } from "@/components/features/AddressListModal";
+import { VoucherListModal } from "@/components/features/VoucherListModal";
+import { Voucher } from "@/types";
 
 export default function CheckoutPage() {
     const [cartItems, setCartItems] = useState<any[]>([]);
@@ -22,9 +24,21 @@ export default function CheckoutPage() {
     const [selectedAddress, setSelectedAddress] = useState(MOCK_ADDRESSES[0]);
     const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
 
+    // Voucher State
+    const [isVoucherModalOpen, setIsVoucherModalOpen] = useState(false);
+    const [selectedVoucher, setSelectedVoucher] = useState<Voucher | null>(null);
+
+    // Mock Vouchers (Should be API)
+    const MOCK_VOUCHERS: Voucher[] = [
+        { id: 1, code: "WELCOME50", name: "Giảm 50K cho bạn mới", description: "Đơn từ 200K", discount_type: "fixed", discount_value: 50000, min_order_value: 200000, start_date: "2024-01-01", end_date: "2024-12-31", is_active: true, used_count: 0 },
+        { id: 2, code: "FREESHIP", name: "Mã Freeship", description: "Giảm tối đa 30K phí ship", discount_type: "fixed", discount_value: 30000, min_order_value: 150000, start_date: "2024-01-01", end_date: "2024-12-31", is_active: true, used_count: 0 },
+        { id: 3, code: "WEEKEND", name: "Cuối tuần vui vẻ", description: "Giảm 10%", discount_type: "percent", discount_value: 0, min_order_value: 500000, start_date: "2024-01-01", end_date: "2024-12-31", is_active: true, used_count: 0 }, // Percent logic needs backend, simplified here
+        { id: 4, code: "VIPMEMBER", name: "Đặc quyền VIP", description: "Giảm 100K đơn 1 triệu", discount_type: "fixed", discount_value: 100000, min_order_value: 1000000, start_date: "2024-01-01", end_date: "2024-12-31", is_active: true, used_count: 0 },
+    ];
+
     // Mock calculations
     const SHIPPING_FEE = shippingMethod === 'express' ? 50000 : 30000;
-    const DISCOUNT = 20000; // Mock voucher discount
+    const DISCOUNT = selectedVoucher ? selectedVoucher.discount_value : 0;
     const POINTS_DISCOUNT = usePoints ? 15000 : 0;
 
     useEffect(() => {
@@ -195,6 +209,36 @@ export default function CheckoutPage() {
                                         <p className="text-xs text-slate-500">Dự kiến giao: 1-2 ngày</p>
                                     </div>
                                 </label>
+                            </div>
+                        </div>
+
+
+                        {/* Section: Voucher / Promotion */}
+                        <div className="bg-white p-6 md:p-8 rounded-[24px] border border-slate-100 shadow-sm">
+                            <div className="flex items-center justify-between mb-2">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-rose-50 rounded-xl flex items-center justify-center text-rose-500">
+                                        <Truck className="w-5 h-5 hidden" /> {/* Hidden hack to keep import valid if needed, utilizing Ticket below */}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-ticket"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" /><path d="M13 5v2" /><path d="M13 17v2" /><path d="M13 11v2" /></svg>
+                                    </div>
+                                    <div>
+                                        <h2 className="text-xl font-black text-slate-900">Mã giảm giá</h2>
+                                        {selectedVoucher ? (
+                                            <p className="text-sm text-emerald-600 font-bold flex items-center gap-1">
+                                                <CheckCircle2 className="w-3 h-3" />
+                                                Đã áp dụng: {selectedVoucher.code}
+                                            </p>
+                                        ) : (
+                                            <p className="text-sm text-slate-500">Chọn voucher để tiết kiệm hơn</p>
+                                        )}
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={() => setIsVoucherModalOpen(true)}
+                                    className="text-primary font-bold text-sm hover:underline"
+                                >
+                                    {selectedVoucher ? 'Thay đổi' : 'Chọn Voucher'}
+                                </button>
                             </div>
                         </div>
 
@@ -372,9 +416,21 @@ export default function CheckoutPage() {
                         </div>
                     </div>
                 </div>
-            </main>
+            </main >
 
             <Footer />
-        </div>
+
+            <VoucherListModal
+                isOpen={isVoucherModalOpen}
+                onClose={() => setIsVoucherModalOpen(false)}
+                vouchers={MOCK_VOUCHERS}
+                cartTotal={subtotal}
+                currentVoucherCode={selectedVoucher?.code}
+                onApply={(voucher) => {
+                    setSelectedVoucher(voucher);
+                    setIsVoucherModalOpen(false);
+                }}
+            />
+        </div >
     );
 }
