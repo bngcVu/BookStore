@@ -253,6 +253,7 @@ export default function CheckoutPage() {
                                     <p className="text-xs text-slate-500">Quét mã QR, tự động điền số tiền và nội dung.</p>
                                 </div>
                                 <div className="flex -space-x-2">
+
                                     <div className="w-8 h-8 rounded-full bg-white border border-slate-100 flex items-center justify-center text-[10px] font-bold shadow-sm">QR</div>
                                 </div>
                             </label>
