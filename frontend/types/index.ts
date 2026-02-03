@@ -65,6 +65,7 @@ export interface Book {
     is_active: boolean;
     is_featured: boolean;
     is_flash_sale?: boolean; // UI flag
+    badges?: string[]; // e.g. ["Mua 2 tặng 1", "Best Seller"]
 
     created_at: string;
 }

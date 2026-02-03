@@ -59,7 +59,8 @@ export const MOCK_BOOKS: Book[] = [
         dimensions: '14,5x20,5 cm',
         weight_grams: 436,
         cover_type: 'Bìa mềm',
-        language: 'Tiếng Việt'
+        language: 'Tiếng Việt',
+        badges: ["Mua 2 tặng 1", "Best Seller"]
     },
     {
         id: 2,
@@ -87,7 +88,8 @@ export const MOCK_BOOKS: Book[] = [
         pages: 228,
         dimensions: '13x20 cm',
         cover_type: 'Bìa mềm',
-        language: 'Tiếng Việt'
+        language: 'Tiếng Việt',
+        badges: ["Chỉ bán online"]
     },
     {
         id: 3,
@@ -114,7 +116,8 @@ export const MOCK_BOOKS: Book[] = [
         pages: 560,
         dimensions: '15x24 cm',
         cover_type: 'Bìa cứng',
-        language: 'Tiếng Việt'
+        language: 'Tiếng Việt',
+        badges: ["Tích 2x Điểm"]
     },
     {
         id: 4,
@@ -797,6 +800,52 @@ export const redeemAPI = {
     }
 };
 
+// Mock Reviews
+export const MOCK_REVIEWS = [
+    {
+        id: 1,
+        user_name: "Nguyễn Văn Tuấn",
+        avatar_url: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100",
+        rating: 5,
+        title: "Sách rất hay, đóng gói đẹp!",
+        comment: "Mình mua cuốn này tặng bạn, nội dung rất ý nghĩa. Shop đóng gói cẩn thận, sách đến tay không bị quăn mép.",
+        is_verified: true,
+        created_at: "2024-01-20",
+        helpful_count: 12,
+        images: [
+            "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=200",
+            "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=200"
+        ]
+    },
+    {
+        id: 2,
+        user_name: "Lê Thị Hồng",
+        rating: 4,
+        title: "Giao hàng hơi chậm nhưng sách chất lượng",
+        comment: "Nội dung sách thì khỏi bàn, kinh điển rồi. Nhưng bên vận chuyển giao hơi lâu một chút.",
+        is_verified: true,
+        created_at: "2024-01-25",
+        helpful_count: 5
+    },
+    {
+        id: 3,
+        user_name: "Trần Minh",
+        rating: 5,
+        title: "Tuyệt phẩm!",
+        comment: "Đã đọc đi đọc lại nhiều lần. Mỗi lần đọc là một cảm nhận khác nhau. Rất đáng mua.",
+        is_verified: false,
+        created_at: "2024-02-01",
+        helpful_count: 20
+    }
+];
+
+export const reviewsAPI = {
+    async getBookReviews(bookId: number) {
+        await new Promise(r => setTimeout(r, 400));
+        // Return dummy data for any book
+        return MOCK_REVIEWS;
+    }
+};
 // --- MOCK CART ---
 export const MOCK_CART = [
     {

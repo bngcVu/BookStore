@@ -6,6 +6,9 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { VoucherCollector } from '@/components/features/VoucherCollector';
 import { ProductCard } from '@/components/features/ProductCard';
+import { ReviewList } from '@/components/reviews/ReviewList';
+import { ReviewForm } from '@/components/reviews/ReviewForm';
+import { reviewsAPI } from '@/lib/api-mock';
 import { Star, ShoppingCart, Heart, Share2, ChevronRight, Truck, ShieldCheck, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
@@ -29,6 +32,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
     const [quantity, setQuantity] = useState(1);
     const [mainImage, setMainImage] = useState('');
     const [isWishlisted, setIsWishlisted] = useState(false);
+    const [reviews, setReviews] = useState<any[]>([]);
 
     useEffect(() => {
         async function load() {
@@ -40,6 +44,10 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                 // Check wishlist status
                 const wished = await wishlistAPI.isInWishlist(1, data.id);
                 setIsWishlisted(wished);
+
+                // Fetch reviews
+                const reviewData = await reviewsAPI.getBookReviews(data.id);
+                setReviews(reviewData);
             } catch (e) {
                 console.error(e);
             } finally {
@@ -208,6 +216,38 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                     <div className="prose prose-slate max-w-none text-slate-600 leading-loose">
                         <p>{book.description}</p>
                         <p>Nội dung chi tiết đang được cập nhật...</p>
+                    </div>
+                </div>
+
+                {/* Reviews Section */}
+                <div className="mt-8 bg-white rounded-[32px] p-8 md:p-12 border border-slate-100 shadow-sm" id="reviews">
+                    <div className="flex items-center justify-between mb-8">
+                        <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight">Đánh giá từ khách hàng</h2>
+                        <div className="flex items-center gap-2">
+                            <span className="text-4xl font-black text-slate-900">{book.avg_rating}</span>
+                            <div className="text-right">
+                                <div className="flex text-amber-400">
+                                    {[...Array(5)].map((_, i) => (
+                                        <Star key={i} className={cn("w-4 h-4", i < Math.floor(book.avg_rating) ? "fill-current" : "text-slate-200 fill-slate-200")} />
+                                    ))}
+                                </div>
+                                <span className="text-xs font-bold text-slate-500">{book.review_count} nhận xét</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                        {/* Review List */}
+                        <div className="lg:col-span-7 order-2 lg:order-1">
+                            <ReviewList reviews={reviews} />
+                        </div>
+
+                        {/* Review Form */}
+                        <div className="lg:col-span-5 order-1 lg:order-2">
+                            <div className="sticky top-24">
+                                <ReviewForm />
+                            </div>
+                        </div>
                     </div>
                 </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { homeAPI } from "@/lib/api-mock";
 import { Book, Category, FlashSaleItem, Voucher, CustomerTier } from "@/types";
 import { ProductCard } from "@/components/features/ProductCard";
@@ -57,12 +58,12 @@ export default function Home() {
               </h1>
 
               <div className="flex flex-wrap gap-4 mb-10">
-                <button className="btn-primary flex items-center gap-2 text-xs font-bold px-7 py-3.5 rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 active:scale-95 transition-all uppercase tracking-wider">
+                <Link href="/products" className="btn-primary flex items-center gap-2 text-xs font-bold px-7 py-3.5 rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 active:scale-95 transition-all uppercase tracking-wider">
                   Mua Sách Ngay <ArrowRight className="w-4 h-4" />
-                </button>
-                <button className="btn-secondary flex items-center gap-2 text-xs font-bold px-7 py-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 active:scale-95 transition-all uppercase tracking-wider">
+                </Link>
+                <Link href="/products" className="btn-secondary flex items-center gap-2 text-xs font-bold px-7 py-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 active:scale-95 transition-all uppercase tracking-wider">
                   Xem Khuyến Mãi
-                </button>
+                </Link>
               </div>
 
               <div className="flex items-center gap-8 border-t border-slate-100 pt-8">
@@ -138,9 +139,9 @@ export default function Home() {
                 BÁN <span className="bg-cta/10 text-cta px-3 py-1 rounded-xl italic">CHẠY</span> NHẤT
               </h2>
             </div>
-            <button className="text-cta hover:text-slate-900 transition-colors font-bold text-xs uppercase tracking-widest flex items-center gap-2 group">
+            <Link href="/products" className="text-cta hover:text-slate-900 transition-colors font-bold text-xs uppercase tracking-widest flex items-center gap-2 group">
               Xem bảng xếp hạng <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
-            </button>
+            </Link>
           </div>
 
           <ProductCarousel books={data.bestsellers} />
@@ -156,9 +157,9 @@ export default function Home() {
           <h2 className="text-2xl md:text-3xl font-heading font-extrabold text-slate-900 tracking-tight flex items-center gap-3">
             MỚI <span className="bg-primary/10 text-primary px-3 py-1 rounded-xl italic">CẬP NHẬT</span>
           </h2>
-          <button className="text-primary hover:text-cta transition-colors font-black text-sm uppercase tracking-widest flex items-center gap-2 group">
+          <Link href="/products" className="text-primary hover:text-cta transition-colors font-black text-sm uppercase tracking-widest flex items-center gap-2 group">
             Xem tất cả sách mới <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
-          </button>
+          </Link>
         </div>
 
         <ProductCarousel books={data.newArrivals} />

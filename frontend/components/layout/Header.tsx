@@ -94,7 +94,7 @@ export function Header() {
                                         <span className="w-1 h-1 rounded-full bg-slate-300"></span>
                                         <Link href="/new-arrivals" className="text-primary hover:underline">Sách mới về</Link>
                                     </div>
-                                    <Link href="/all-categories" className="text-xs font-black text-slate-900 hover:text-primary flex items-center gap-2 group uppercase tracking-widest">
+                                    <Link href="/products" className="text-xs font-black text-slate-900 hover:text-primary flex items-center gap-2 group uppercase tracking-widest">
                                         Tất cả danh mục
                                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                     </Link>

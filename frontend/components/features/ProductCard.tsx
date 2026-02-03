@@ -18,12 +18,30 @@ export function ProductCard({ book, className, onWishlistToggle }: ProductCardPr
 
     return (
         <div className={cn("group card relative p-0 overflow-hidden flex flex-col h-full bg-white border-slate-100 rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-primary/5", className)}>
-            {/* Badge Flash Sale / Discount - Smaller & Slimmer */}
-            {(book.is_flash_sale || isDiscounted) && (
-                <span className="absolute top-2 left-2 z-10 bg-cta text-white text-[9px] font-black px-1.5 py-0.5 rounded-md shadow-sm uppercase tracking-tight">
-                    {book.is_flash_sale ? 'Flash' : `-${book.discount_percent}%`}
-                </span>
-            )}
+            {/* BADGES & RIBBONS */}
+            <div className="absolute top-2 left-2 z-10 flex flex-col items-start gap-1">
+                {/* 1. Flash Sale / Discount Ribbon */}
+                {(book.is_flash_sale || isDiscounted) && (
+                    <span className={cn(
+                        "text-[10px] font-black px-2 py-0.5 rounded-r-md shadow-sm uppercase tracking-tight relative -left-2 pl-3",
+                        book.is_flash_sale ? "bg-rose-600 text-white" : "bg-cta text-white"
+                    )}>
+                        {book.is_flash_sale ? '⚡ Flash' : `Save ${book.discount_percent}%`}
+                        <div className={cn(
+                            "absolute top-full left-0 w-2 h-2",
+                            book.is_flash_sale ? "bg-rose-800" : "bg-orange-600"
+                        )} style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }}></div>
+                    </span>
+                )}
+
+                {/* 2. Custom Badges (Buy 2 Get 1, etc.) */}
+                {book.badges && book.badges.map((badge, idx) => (
+                    <span key={idx} className="bg-slate-900/90 backdrop-blur-sm text-white text-[9px] font-bold px-2 py-0.5 rounded-full border border-white/10 shadow-lg flex items-center gap-1">
+                        <Star className="w-2 h-2 text-yellow-400 fill-yellow-400" />
+                        {badge}
+                    </span>
+                ))}
+            </div>
 
             {/* Wishlist Button - Scaled down */}
             <div className="absolute top-2 right-2 z-20 scale-90">
