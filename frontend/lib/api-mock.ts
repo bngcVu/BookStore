@@ -729,8 +729,57 @@ export const userAPI = {
         await new Promise(r => setTimeout(r, 350));
         // Lấy 2 voucher đầu tiên làm ví dụ đã sở hữu
         return MOCK_VOUCHERS.slice(0, 2).map(v => ({ ...v, status: 'active', expiry_date: '2025-12-31' }));
+    },
+    getOrders: async () => {
+        await new Promise(r => setTimeout(r, 500));
+        return MOCK_ORDERS;
+    },
+    getOrderById: async (id: number) => {
+        await new Promise(r => setTimeout(r, 400));
+        return MOCK_ORDERS.find(o => o.id === id) || null;
     }
 };
+
+// Mock Orders Data
+export const MOCK_ORDERS: import('@/types').Order[] = [
+    {
+        id: 1,
+        order_number: "ORD-2023-001",
+        status: "delivered",
+        total_amount: 520000,
+        created_at: "2024-01-15T10:30:00Z",
+        payment_method: "COD",
+        shipping_address: "123 Đường Sách, Q1, TP.HCM",
+        items: [
+            { id: 101, quantity: 2, price: 95000, book: MOCK_BOOKS[1] },
+            { id: 102, quantity: 1, price: 330000, book: MOCK_BOOKS[0] } // Giả lập price
+        ]
+    },
+    {
+        id: 2,
+        order_number: "ORD-2023-002",
+        status: "shipping",
+        total_amount: 155000,
+        created_at: "2024-02-01T14:20:00Z",
+        payment_method: "BANKING",
+        shipping_address: "123 Đường Sách, Q1, TP.HCM",
+        items: [
+            { id: 103, quantity: 1, price: 155000, book: MOCK_BOOKS[2] }
+        ]
+    },
+    {
+        id: 3,
+        order_number: "ORD-2023-003",
+        status: "pending",
+        total_amount: 86000,
+        created_at: "2024-02-03T09:00:00Z",
+        payment_method: "COD",
+        shipping_address: "123 Đường Sách, Q1, TP.HCM",
+        items: [
+            { id: 104, quantity: 1, price: 86000, book: MOCK_BOOKS[3] }
+        ]
+    }
+];
 
 export const redeemAPI = {
     getRewards: async () => {

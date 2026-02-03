@@ -171,3 +171,25 @@ export interface Notification {
     reference_id?: number;
     created_at: string;
 }
+
+// ==========================================
+// ORDER TYPES
+// ==========================================
+
+export interface OrderItem {
+    id: number;
+    book: Book;
+    quantity: number;
+    price: number;
+}
+
+export interface Order {
+    id: number;
+    order_number: string;
+    status: 'pending' | 'processing' | 'shipping' | 'delivered' | 'cancelled' | 'refunded';
+    total_amount: number;
+    created_at: string;
+    items: OrderItem[];
+    payment_method: string;
+    shipping_address: string;
+}

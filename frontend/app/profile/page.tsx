@@ -5,6 +5,7 @@ import { MembershipCard } from '@/components/user/MembershipCard';
 import { PointsHistoryTable } from '@/components/user/PointsHistoryTable';
 import { RedeemSection } from '@/components/user/RedeemSection';
 import { MyVouchers } from '@/components/user/MyVouchers';
+import { OrderHistoryList } from '@/components/user/OrderHistoryList';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { userAPI, redeemAPI, MOCK_TIERS, wishlistAPI } from '@/lib/api-mock';
@@ -18,6 +19,7 @@ import confetti from 'canvas-confetti';
 export default function ProfilePage() {
     const [user, setUser] = useState<User | null>(null);
     const [history, setHistory] = useState<any[]>([]);
+    const [orders, setOrders] = useState<any[]>([]);
     const [myVouchers, setMyVouchers] = useState<Voucher[]>([]);
     const [rewards, setRewards] = useState<any[]>([]);
     const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([]);
@@ -28,12 +30,13 @@ export default function ProfilePage() {
         async function loadData() {
             setLoading(true);
             try {
-                const [userData, historyData, voucherData, rewardData, wishlistData] = await Promise.all([
+                const [userData, historyData, voucherData, rewardData, wishlistData, ordersData] = await Promise.all([
                     userAPI.getProfile(),
                     userAPI.getLoyaltyHistory(),
                     userAPI.getMyVouchers(),
                     redeemAPI.getRewards(),
-                    wishlistAPI.getWishlist(1) // Mock user ID 1
+                    wishlistAPI.getWishlist(1), // Mock user ID 1
+                    userAPI.getOrders()
                 ]);
 
                 setUser(userData);
@@ -41,6 +44,7 @@ export default function ProfilePage() {
                 setMyVouchers(voucherData);
                 setRewards(rewardData);
                 setWishlistItems(wishlistData);
+                setOrders(ordersData);
             } catch (error) {
                 console.error("Failed to load profile", error);
             } finally {
@@ -216,13 +220,14 @@ export default function ProfilePage() {
                         )}
 
                         {activeTab === 'orders' && (
-                            <div className="flex flex-col items-center justify-center py-20 bg-white rounded-[32px] border border-slate-100 shadow-sm">
-                                <Package className="w-16 h-16 text-slate-200 mb-4" />
-                                <h3 className="text-xl font-bold text-slate-900 mb-2">Chưa có đơn hàng nào</h3>
-                                <p className="text-slate-500 mb-6">Hãy đặt mua cuốn sách đầu tiên của bạn ngay hôm nay.</p>
-                                <Link href="/products" className="px-6 py-3 bg-primary text-white rounded-xl font-bold hover:shadow-lg transition-all">
-                                    Khám phá sách hay
-                                </Link>
+                            <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                                <div className="flex items-center justify-between">
+                                    <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight flex items-center gap-3">
+                                        <Package className="w-8 h-8 text-blue-500" />
+                                        Quản lý đơn hàng
+                                    </h2>
+                                </div>
+                                <OrderHistoryList orders={orders} />
                             </div>
                         )}
 
