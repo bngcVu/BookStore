@@ -17,7 +17,7 @@ export function ProductCard({ book, className, onWishlistToggle }: ProductCardPr
     const productLink = `/product/${book.slug || book.id}`;
 
     return (
-        <div className={cn("group card relative p-0 overflow-hidden flex flex-col h-full bg-white border-slate-100 rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-primary/5", className)}>
+        <div className={cn("group card relative p-0 overflow-hidden flex flex-col h-full bg-white border-slate-100 rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:z-10", className)}>
             {/* BADGES & RIBBONS */}
             <div className="absolute top-2 left-2 z-10 flex flex-col items-start gap-1">
                 {/* 1. Flash Sale / Discount Ribbon */}

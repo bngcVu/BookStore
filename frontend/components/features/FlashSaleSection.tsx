@@ -41,9 +41,9 @@ export function FlashSaleSection({ items }: FlashSaleSectionProps) {
     if (!items || items.length === 0) return null;
 
     return (
-        <section className="bg-white rounded-[40px] p-8 md:p-12 shadow-2xl shadow-primary/5 border border-slate-50 relative overflow-hidden group">
+        <section className="bg-white rounded-[40px] p-8 md:p-12 shadow-2xl shadow-primary/5 border border-slate-50 relative overflow-hidden group/section">
             {/* Background Accent */}
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-cta/5 rounded-full blur-3xl group-hover:bg-cta/10 transition-colors duration-700"></div>
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-cta/5 rounded-full blur-3xl group-hover/section:bg-cta/10 transition-colors duration-700"></div>
 
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-10 gap-6 relative z-10">
                 <div className="space-y-2">

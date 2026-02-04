@@ -22,9 +22,9 @@ async function getProduct(slug: string) {
     return book;
 }
 
-export default function ProductDetailPage({ params }: { params: { slug: string } }) {
-    // Unwrapping params for Next.js 15+ compatibility if needed, but standard prop access works for 14
-    const { slug } = params;
+export default function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+    // Unwrapping params for Next.js 15+ compatibility
+    const { slug } = React.use(params);
 
     // State
     const [book, setBook] = useState<any>(null);

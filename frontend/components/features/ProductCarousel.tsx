@@ -63,7 +63,7 @@ export function ProductCarousel({ books, className }: ProductCarouselProps) {
             <div
                 ref={scrollRef}
                 onScroll={checkScroll}
-                className="flex gap-4 md:gap-6 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory pb-4 px-1"
+                className="flex gap-4 md:gap-6 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-6 px-4"
             >
                 {books.map((book) => (
                     <div
