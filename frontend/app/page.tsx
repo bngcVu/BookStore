@@ -1,5 +1,3 @@
-"use client";
-
 import { HeroSection } from "@/components/home/HeroSection";
 import { TrendingCategories, TopAuthors, BookClubPromo } from "@/components/home/SidebarWidgets";
 import { FlashSale } from "@/components/home/FlashSale";
@@ -159,6 +157,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-slate-50 pt-24 pb-20">
+
       <div className="container mx-auto px-4 max-w-7xl">
 
         {/* Navigation / Breadcrumbs style links */}
@@ -175,6 +174,7 @@ export default function Home() {
         <div className="mb-12">
           <HeroSection />
         </div>
+
 
         {/* Main Grid: Content + Sidebar */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
@@ -196,7 +196,10 @@ export default function Home() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {recommendedBooks.map((book) => (
-                  <ProductCard key={book.id} book={book} />
+                  <ProductCard
+                    key={book.id}
+                    book={book}
+                  />
                 ))}
               </div>
             </section>

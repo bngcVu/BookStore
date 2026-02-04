@@ -15,7 +15,7 @@ export function ProductCard({ book }: ProductCardProps) {
     return (
         <div className="group bg-white rounded-2xl p-4 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 relative hover:-translate-y-1 h-full flex flex-col">
             {/* Discount / Status Badge */}
-            <div className="absolute top-4 left-4 z-10 flex flex-col gap-1.5">
+            <div className="absolute top-4 left-4 z-10 flex flex-col gap-1.5 pointer-events-none">
                 {discountPercent > 0 && (
                     <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-lg shadow-sm">
                         -{discountPercent}%
@@ -34,7 +34,7 @@ export function ProductCard({ book }: ProductCardProps) {
             </button>
 
             {/* Image */}
-            <div className="relative aspect-[2/3] w-full mb-4 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800">
+            <div className="relative aspect-[2/3] w-full mb-4 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 group-image">
                 <img
                     src={book.image_url || "/placeholder-book.jpg"}
                     alt={book.title}

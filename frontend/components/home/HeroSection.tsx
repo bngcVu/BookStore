@@ -1,19 +1,13 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 export function HeroSection() {
     return (
-        <section className="relative w-full rounded-3xl overflow-hidden bg-[#B4ACA3] h-[400px] shadow-lg">
-            {/* Background Image / Texture mockup */}
-            <div className="absolute inset-0 bg-gradient-to-r from-stone-600/80 to-transparent z-10" />
-
-            {/* In a real app, use an Image component here for the books background */}
-            <div className="absolute inset-0 z-0">
-                <div className="w-full h-full bg-stone-300 relative">
-                    {/* Placeholder for the books stack image */}
-                    <div className="absolute right-0 bottom-0 w-1/2 h-full bg-[url('https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=2998&auto=format&fit=crop')] bg-cover bg-center mix-blend-multiply opacity-80"></div>
-                </div>
+        <div className="relative w-full h-[400px] bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/20 group">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-10">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+                <div className="absolute bottom-0 left-0 w-72 h-72 bg-orange-400 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
             </div>
 
             <div className="relative z-20 h-full flex flex-col justify-center px-12 max-w-2xl text-white">
@@ -35,6 +29,11 @@ export function HeroSection() {
                     </button>
                 </div>
             </div>
-        </section>
+
+            {/* Decorative Image */}
+            <div className="absolute top-1/2 -translate-y-1/2 -right-12 w-[500px] h-[500px] hidden lg:block transform group-hover:scale-105 transition-transform duration-700">
+                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=800" alt="Book cover" className="w-full h-full object-cover rounded-l-3xl shadow-2xl rotate-[-5deg] border-8 border-white/10" />
+            </div>
+        </div>
     );
 }
