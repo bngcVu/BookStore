@@ -7,8 +7,8 @@
 ---
 
 **Project:** BookStore
-**Generated:** 2026-01-29 18:01:28
-**Category:** E-commerce
+**Generated:** 2026-02-04 20:53:04
+**Category:** Biotech / Life Sciences
 
 ---
 
@@ -24,7 +24,7 @@
 | Background | `#F8FAFC` | `--color-background` |
 | Text | `#1E293B` | `--color-text` |
 
-**Color Notes:** Brand colors + Metallic accents + Dark/Light
+**Color Notes:** Blue (#2563EB) + Orange (tracking) + Green (delivered)
 
 ### Typography
 
@@ -163,10 +163,11 @@
 
 ### Page Pattern
 
-**Pattern Name:** Feature-Rich Showcase
+**Pattern Name:** Minimal Single Column
 
-- **CTA Placement:** Above fold
-- **Section Order:** Hero > Features > CTA
+- **Conversion Strategy:** Single CTA focus. Large typography. Lots of whitespace. No nav clutter. Mobile-first.
+- **CTA Placement:** Center, large CTA button
+- **Section Order:** 1. Hero headline, 2. Short description, 3. Benefit bullets (3 max), 4. CTA, 5. Footer
 
 ---
 

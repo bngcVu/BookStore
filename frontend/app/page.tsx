@@ -1,171 +1,220 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { HeroSection } from "@/components/home/HeroSection";
+import { TrendingCategories, TopAuthors, BookClubPromo } from "@/components/home/SidebarWidgets";
+import { FlashSale } from "@/components/home/FlashSale";
+import { ProductCard } from "@/components/product/ProductCard";
 import Link from "next/link";
-import { homeAPI } from "@/lib/api-mock";
-import { Book, Category, FlashSaleItem, Voucher, CustomerTier } from "@/types";
-import { ProductCard } from "@/components/features/ProductCard";
-import { FlashSaleSection } from "@/components/features/FlashSaleSection";
-import { ProductCarousel } from "@/components/features/ProductCarousel";
-import { VoucherSection } from "@/components/features/VoucherSection";
-import { VIPMembershipBanner } from "@/components/features/VIPMembershipBanner";
-import { TestimonialSection } from "@/components/features/TestimonialSection";
-import { Sparkles, ArrowRight, ShieldCheck, Truck, Trophy, Bookmark } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { Book, FlashSaleItem } from "@/types";
 
 export default function Home() {
-  const [data, setData] = useState<{
-    categories: Category[];
-    vouchers: Voucher[];
-    tiers: CustomerTier[];
-    flashSales: FlashSaleItem[];
-    featuredBooks: Book[];
-    bestsellers: Book[];
-    newArrivals: Book[];
-  } | null>(null);
+  // MOCK DATA matching DB structure
+  const recommendedBooks: Book[] = [
+    {
+      id: 1,
+      title: "The Midnight Library",
+      slug: "the-midnight-library",
+      authors: ["Matt Haig"],
+      base_price: 14.99,
+      avg_rating: 4.8,
+      review_count: 120,
+      sold_count: 500,
+      image_url: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=600",
+      is_active: true,
+      is_featured: true,
+    },
+    {
+      id: 2,
+      title: "Project Hail Mary",
+      slug: "project-hail-mary",
+      authors: ["Andy Weir"],
+      base_price: 16.50,
+      avg_rating: 4.9,
+      review_count: 350,
+      sold_count: 800,
+      image_url: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&q=80&w=600",
+      is_active: true,
+      is_featured: true,
+    },
+    {
+      id: 3,
+      title: "Dune",
+      slug: "dune",
+      authors: ["Frank Herbert"],
+      base_price: 11.99,
+      original_price: 18.00,
+      avg_rating: 4.7,
+      review_count: 999,
+      sold_count: 5000,
+      image_url: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&q=80&w=600",
+      is_active: true,
+      is_featured: true,
+    },
+    {
+      id: 4,
+      title: "1984",
+      slug: "1984",
+      authors: ["George Orwell"],
+      base_price: 9.99,
+      avg_rating: 4.9,
+      review_count: 2000,
+      sold_count: 10000,
+      image_url: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=600",
+      is_active: true,
+      is_featured: true,
+    },
+  ];
 
-  useEffect(() => {
-    async function loadData() {
-      const res = await homeAPI.getHomeData();
-      setData(res);
+  const flashSaleItems: FlashSaleItem[] = [
+    {
+      id: 101,
+      flash_sale_id: 1,
+      variant_id: 201,
+      sale_price: 10.99,
+      original_price: 16.99,
+      quantity_limit: 100,
+      sold_count: 12,
+      book: {
+        id: 5,
+        title: "Silent Patient",
+        slug: "silent-patient",
+        authors: ["Alex Michaelides"],
+        base_price: 16.99,
+        avg_rating: 4.5,
+        review_count: 220,
+        sold_count: 12,
+        image_url: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=300",
+        is_active: true,
+        is_featured: false,
+      }
+    },
+    {
+      id: 102,
+      flash_sale_id: 1,
+      variant_id: 202,
+      sale_price: 11.50,
+      original_price: 16.00,
+      quantity_limit: 50,
+      sold_count: 5,
+      book: {
+        id: 6,
+        title: "Normal People",
+        slug: "normal-people",
+        authors: ["Sally Rooney"],
+        base_price: 16.00,
+        avg_rating: 4.2,
+        review_count: 150,
+        sold_count: 85,
+        image_url: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&q=80&w=300",
+        is_active: true,
+        is_featured: true,
+      }
+    },
+    {
+      id: 103,
+      flash_sale_id: 1,
+      variant_id: 203,
+      sale_price: 9.00,
+      original_price: 18.00,
+      quantity_limit: 200,
+      sold_count: 180,
+      book: {
+        id: 7,
+        title: "Educated",
+        slug: "educated",
+        authors: ["Tara Westover"],
+        base_price: 18.00,
+        avg_rating: 4.8,
+        review_count: 500,
+        sold_count: 800,
+        image_url: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=300",
+        is_active: true,
+        is_featured: true,
+      }
+    },
+    {
+      id: 104,
+      flash_sale_id: 1,
+      variant_id: 204,
+      sale_price: 13.50,
+      original_price: 18.00,
+      quantity_limit: 20,
+      sold_count: 2,
+      book: {
+        id: 8,
+        title: "Thinking, Fast and Slow",
+        slug: "thinking-fast-and-slow",
+        authors: ["Daniel Kahneman"],
+        base_price: 18.00,
+        avg_rating: 4.6,
+        review_count: 300,
+        sold_count: 1500,
+        image_url: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=300",
+        is_active: true,
+        is_featured: false,
+      }
     }
-    loadData();
-  }, []);
-
-  if (!data) return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
-      <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-    </div>
-  );
+  ];
 
   return (
-    <main className="min-h-screen pb-24 bg-background pt-20">
-      {/* 1. Hero Section - Primary Viewport */}
-      <section className="relative pt-28 pb-20 px-4 overflow-hidden bg-white">
-        <div className="absolute top-0 right-0 w-1/4 h-full bg-primary/5 -skew-x-12 translate-x-1/4 -z-10 blur-3xl"></div>
+    <main className="min-h-screen bg-slate-50 pt-24 pb-20">
+      <div className="container mx-auto px-4 max-w-7xl">
 
-        <div className="container mx-auto">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            <div className="flex-1 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary text-[10px] font-black uppercase tracking-widest mb-6">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Thế giới tri thức trong tầm tay</span>
-              </div>
+        {/* Navigation / Breadcrumbs style links */}
+        <div className="flex items-center gap-6 mb-8 text-sm font-medium text-slate-500 overflow-x-auto no-scrollbar">
+          <Link href="/" className="text-blue-600 font-bold whitespace-nowrap">Trang chủ</Link>
+          <Link href="/literature" className="hover:text-blue-600 whitespace-nowrap">Văn học</Link>
+          <Link href="/non-fiction" className="hover:text-blue-600 whitespace-nowrap">Phi hư cấu</Link>
+          <Link href="/textbooks" className="hover:text-blue-600 whitespace-nowrap">Sách giáo khoa</Link>
+          <Link href="/kids" className="hover:text-blue-600 whitespace-nowrap">Thiếu nhi</Link>
+          <Link href="/sale" className="text-orange-500 font-bold whitespace-nowrap">Khuyến mãi</Link>
+        </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-black text-slate-900 leading-tight tracking-normal mb-8 uppercase">
-                Khám phá <br />
-                <span className="text-primary font-extrabold italic">Sách mới</span> <br />
-                Mỗi <span className="text-cta font-extrabold uppercase">Ngày</span>
-              </h1>
+        {/* Hero Section */}
+        <div className="mb-12">
+          <HeroSection />
+        </div>
 
-              <div className="flex flex-wrap gap-4 mb-10">
-                <Link href="/products" className="btn-primary flex items-center gap-2 text-xs font-bold px-7 py-3.5 rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 active:scale-95 transition-all uppercase tracking-wider">
-                  Mua Sách Ngay <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link href="/products" className="btn-secondary flex items-center gap-2 text-xs font-bold px-7 py-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 active:scale-95 transition-all uppercase tracking-wider">
-                  Xem Khuyến Mãi
-                </Link>
-              </div>
+        {/* Main Grid: Content + Sidebar */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
 
-              <div className="flex items-center gap-8 border-t border-slate-100 pt-8">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 bg-primary/5 rounded-xl flex items-center justify-center text-primary">
-                    <Truck className="w-4.5 h-4.5" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Vận chuyển</span>
-                    <span className="text-[11px] font-bold text-slate-700">Giao nhanh 2h</span>
-                  </div>
+          {/* Left Content Column */}
+          <div className="lg:col-span-9 space-y-12">
+
+            {/* Recommended Section */}
+            <section>
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-2xl font-bold text-slate-900">Gợi ý cho bạn</h2>
+                  <p className="text-slate-500 text-sm mt-1">Dựa trên các cuốn sách bạn đã xem gần đây</p>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 bg-primary/5 rounded-xl flex items-center justify-center text-primary">
-                    <ShieldCheck className="w-4.5 h-4.5" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Cam kết</span>
-                    <span className="text-[11px] font-bold text-slate-700">100% Sách Thật</span>
-                  </div>
-                </div>
+                <Link href="/products" className="text-blue-600 font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all">
+                  Xem tất cả <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
-            </div>
 
-            <div className="flex-1 relative hidden lg:flex justify-end">
-              <div className="relative w-[380px] h-[480px] bg-slate-100 rounded-[32px] rotate-2 overflow-hidden shadow-xl border-4 border-white">
-                <img
-                  src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800"
-                  className="w-full h-full object-cover -rotate-2 scale-110"
-                  alt="Hero Book"
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {recommendedBooks.map((book) => (
+                  <ProductCard key={book.id} book={book} />
+                ))}
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            </section>
 
-      {/* 2. Voucher Section - Promotion Stack */}
-      <VoucherSection vouchers={data.vouchers || []} />
-
-      {/* 3. Flash Sale Section - Clean Spacing - No Conflict */}
-      <section className="container mx-auto px-4 py-8 relative z-10">
-        <FlashSaleSection items={data.flashSales} />
-      </section>
-
-      {/* 4. Featured Products - ProductCarousel */}
-      <section className="container mx-auto px-4 py-24">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div>
-            <div className="flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-xs mb-3">
-              <Bookmark className="w-5 h-5 fill-current" />
-              Gợi ý cho bạn
-            </div>
-            <h2 className="text-2xl md:text-3xl font-heading font-extrabold text-slate-900 tracking-tight flex items-center gap-3">
-              SÁCH <span className="bg-primary/10 text-primary px-3 py-1 rounded-xl italic">NỔI BẬT</span>
-            </h2>
-          </div>
-        </div>
-
-        <ProductCarousel books={data.featuredBooks} />
-      </section>
-
-      {/* 5. Bestsellers Section - ProductCarousel */}
-      <section className="bg-cta/[0.03] py-24 border-y border-cta/5">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-            <div>
-              <div className="flex items-center gap-2 text-cta font-bold uppercase tracking-widest text-[10px] mb-3">
-                <Trophy className="w-4 h-4 fill-current" />
-                Được yêu thích nhất
-              </div>
-              <h2 className="text-2xl md:text-3xl font-heading font-extrabold text-slate-900 tracking-tight flex items-center gap-3">
-                BÁN <span className="bg-cta/10 text-cta px-3 py-1 rounded-xl italic">CHẠY</span> NHẤT
-              </h2>
-            </div>
-            <Link href="/products" className="text-cta hover:text-slate-900 transition-colors font-bold text-xs uppercase tracking-widest flex items-center gap-2 group">
-              Xem bảng xếp hạng <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
-            </Link>
+            {/* Flash Sale Banner */}
+            <section>
+              <FlashSale items={flashSaleItems} />
+            </section>
           </div>
 
-          <ProductCarousel books={data.bestsellers} />
+          {/* Right Sidebar Column */}
+          <div className="lg:col-span-3 space-y-6">
+            <TrendingCategories />
+            <TopAuthors />
+            <BookClubPromo />
+          </div>
         </div>
-      </section>
-
-      {/* VIP Membership Banner - Subscription Drive */}
-      <VIPMembershipBanner tiers={data.tiers || []} />
-
-      {/* 6. New Arrivals - ProductCarousel */}
-      <section className="container mx-auto px-4 py-24">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <h2 className="text-2xl md:text-3xl font-heading font-extrabold text-slate-900 tracking-tight flex items-center gap-3">
-            MỚI <span className="bg-primary/10 text-primary px-3 py-1 rounded-xl italic">CẬP NHẬT</span>
-          </h2>
-          <Link href="/products" className="text-primary hover:text-cta transition-colors font-black text-sm uppercase tracking-widest flex items-center gap-2 group">
-            Xem tất cả sách mới <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
-          </Link>
-        </div>
-
-        <ProductCarousel books={data.newArrivals} />
-      </section>
-
-      <TestimonialSection />
+      </div>
     </main>
   );
 }

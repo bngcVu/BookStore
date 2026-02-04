@@ -5,12 +5,17 @@
   --font-sans: "Nunito Sans", sans-serif;
   --font-heading: "Rubik", sans-serif;
 
-  /* Colors - Mapping from MASTER.md (Light Mode) */
-  --color-primary: #3B82F6;
-  --color-secondary: #60A5FA;
+  /* Colors - Summer Sale Theme */
+  --color-primary: #2563EB;
+  /* Blue 600 */
+  --color-secondary: #fff;
+  --color-accent: #F97316;
+  /* Orange 500 */
   --color-cta: #F97316;
   --color-background: #F8FAFC;
+  /* Slate 50 */
   --color-text: #1E293B;
+  /* Slate 800 */
 
   /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);

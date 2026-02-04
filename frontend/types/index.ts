@@ -21,86 +21,70 @@ export interface Category {
  * Book interface - Maps to vw_books_full View
  * Represents aggregated book data
  */
+/**
+ * Book interface - Maps to books table + derived active variant/image
+ */
 export interface Book {
-    id: number;               // From SQL 'id'
-    book_id?: number;         // Alias for stability
+    id: number;
     title: string;
     slug: string;
-    isbn?: string;
-    description?: string;
+    isbn?: string; // from books
+    description?: string; // from books
 
-    // Author & Publisher (Aggregated from View)
-    authors: string;          // CSV string from GROUP_CONCAT
-    publisher_name: string;
+    // Flattened / Derived from relations
+    authors: string[]; // ['Author 1', 'Author 2']
+    publisher_name?: string;
 
-    // Images
-    primary_image: string;
-
-    // Taxonomy
-    category_id?: number;
-    category_name: string;
-    category_slug: string;
-
-    // Detailed Metadata
-    publication_year?: number;
-    pages?: number;
-    dimensions?: string;
-    weight_grams?: number;
-    cover_type?: string;
-    language?: string;
-
-    // Pricing (From variants)
-    base_price: number;
-    min_price: number;
-    max_price: number;
-    discount_percent?: number;
+    // Display
+    image_url: string; // resolved primary image
+    base_price: number; // from books.base_price OR variants.price (min)
+    original_price?: number; // compare_at_price
 
     // Ratings & Stats
-    avg_rating: number;
-    review_count: number;
-    sold_count: number;
-    view_count: number;
+    avg_rating: number; // books.avg_rating
+    review_count: number; // books.review_count
+    sold_count: number; // books.sold_count
 
     // Status
     is_active: boolean;
     is_featured: boolean;
-    is_flash_sale?: boolean; // UI flag
-    badges?: string[]; // e.g. ["Mua 2 tặng 1", "Best Seller"]
-
-    created_at: string;
 }
 
 /**
- * Flash Sale Item - Maps to vw_active_flash_sales
+ * Flash Sale Item - Maps to flash_sale_items join book_variants
  */
 export interface FlashSaleItem {
+    id: number;
     flash_sale_id: number;
-    flash_sale_name: string;
-    start_time: string;
-    end_time: string;
-    item_id: number;
     variant_id: number;
-    sku: string;
-    book_title: string;
-    original_price: number;
+
+    // Item specific
     sale_price: number;
-    quantity_limit: number;
+    original_price: number; // from variant price
+    quantity_limit: number; // 0 = unlimited
     sold_count: number;
-    remaining_quantity: number;
-    discount_percent: number;
-    book?: Book; // Populated for UI
+
+    // Book Data (Joined)
+    book: Book;
+
+    // UI Helpers
+    discount_percent?: number;
 }
 
-// ==========================================
-// USER & LOYALTY TYPES
-// ==========================================
+export interface Author {
+    id: number;
+    name: string;
+    slug: string;
+    image_url?: string;
+    biography?: string;
+}
 
 export interface CustomerTier {
     id: number;
     name: string;
     min_spent: number;
     discount_percent: number;
-    benefits: string;
+    benefits: string; // TEXT
 }
 
 export interface User {
