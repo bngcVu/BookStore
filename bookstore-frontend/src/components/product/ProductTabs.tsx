@@ -16,6 +16,15 @@ interface ProductTabsProps {
 
 export function ProductTabs({ description }: ProductTabsProps) {
     const [activeTab, setActiveTab] = useState(TABS[0].id);
+    const [isWritingReview, setIsWritingReview] = useState(false);
+    const [visibleReviews, setVisibleReviews] = useState(2);
+
+    // Mock user submit review
+    const handleSubmitReview = (e: React.FormEvent) => {
+        e.preventDefault();
+        alert("Cảm ơn bạn đã đánh giá! (Tính năng Submit thực tế sẽ hoàn thiện ở Phase 4)");
+        setIsWritingReview(false);
+    };
 
     return (
         <div className="bg-white rounded-2xl shadow-sm border border-slate-100 max-w-6xl mx-auto overflow-hidden">
@@ -112,33 +121,62 @@ export function ProductTabs({ description }: ProductTabsProps) {
                             </div>
 
                             <div className="text-center w-full md:w-auto">
-                                <Button variant="accent" size="lg" className="w-full font-semibold">Viết đánh giá</Button>
+                                <Button
+                                    variant={isWritingReview ? "outline" : "accent"}
+                                    size="lg"
+                                    className="w-full font-semibold"
+                                    onClick={() => setIsWritingReview(!isWritingReview)}
+                                >
+                                    {isWritingReview ? "Hủy đánh giá" : "Viết đánh giá"}
+                                </Button>
                             </div>
                         </div>
 
+                        {/* Toggled Review Form */}
+                        {isWritingReview && (
+                            <form onSubmit={handleSubmitReview} className="bg-white p-6 border border-slate-200 rounded-xl space-y-4 animate-in fade-in slide-in-from-top-4 duration-300">
+                                <h4 className="font-bold text-slate-900">Đánh giá của bạn</h4>
+                                <div className="flex items-center gap-2 mb-2">
+                                    <span className="text-sm font-medium text-slate-700">Chất lượng:</span>
+                                    <div className="flex gap-1">
+                                        {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-6 h-6 text-slate-300 hover:text-accent hover:fill-accent cursor-pointer transition-colors" />)}
+                                    </div>
+                                </div>
+                                <textarea
+                                    rows={4}
+                                    placeholder="Chia sẻ cảm nhận của bạn về cuốn sách này..."
+                                    className="w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-y"
+                                    required
+                                ></textarea>
+                                <div className="flex justify-end">
+                                    <Button type="submit" variant="default">Gửi đánh giá</Button>
+                                </div>
+                            </form>
+                        )}
+
                         {/* Review List */}
                         <div className="space-y-6">
-                            {[1, 2].map(i => (
-                                <div key={i} className="flex gap-4 border-b border-slate-100 pb-6 last:border-0">
+                            {Array.from({ length: visibleReviews }).map((_, idx) => (
+                                <div key={idx} className="flex gap-4 border-b border-slate-100 pb-6 last:border-0">
                                     <div className="w-10 h-10 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0">
-                                        A{i}
+                                        A{idx + 1}
                                     </div>
                                     <div className="flex-1 space-y-2">
                                         <div className="flex items-center justify-between">
                                             <div>
-                                                <h4 className="font-semibold text-slate-900 text-sm">Nguyễn Văn A</h4>
+                                                <h4 className="font-semibold text-slate-900 text-sm">Người dùng ẩn danh #{idx + 1}</h4>
                                                 <div className="flex items-center text-accent mt-1">
                                                     {[1, 2, 3, 4, 5].map(s => <Star key={s} className="fill-accent w-3 h-3" />)}
                                                     <span className="text-green-600 px-2 py-0.5 bg-green-50 text-[10px] font-bold rounded flex items-center gap-1 ml-3"><ShieldCheck size={10} /> Đã mua hàng</span>
                                                 </div>
                                             </div>
-                                            <span className="text-xs text-slate-400">2 ngày trước</span>
+                                            <span className="text-xs text-slate-400">{idx * 2 + 1} ngày trước</span>
                                         </div>
-                                        <h5 className="font-bold text-slate-900 text-sm">Cực kỳ ý nghĩa</h5>
+                                        <h5 className="font-bold text-slate-900 text-sm">Trải nghiệm tuyệt vời</h5>
                                         <p className="text-slate-600 text-sm leading-relaxed">Sách nội dung sâu sắc, bìa đẹp, giao hàng cực kỳ nhanh chóng. Rất hài lòng với dịch vụ của BookStore!</p>
                                         <div className="flex items-center gap-4 mt-3 pt-3">
                                             <button className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-primary transition-colors font-medium">
-                                                <ThumbsUp size={14} /> Hữu ích (12)
+                                                <ThumbsUp size={14} /> Hữu ích ({12 - idx})
                                             </button>
                                             <button className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-primary transition-colors font-medium">
                                                 <MessageSquare size={14} /> Thảo luận
@@ -147,9 +185,17 @@ export function ProductTabs({ description }: ProductTabsProps) {
                                     </div>
                                 </div>
                             ))}
-                            <div className="pt-4 text-center">
-                                <Button variant="outline" className="text-primary border-primary/20 hover:bg-primary/5">Xem toàn bộ 1,250 đánh giá</Button>
-                            </div>
+                            {visibleReviews < 10 && (
+                                <div className="pt-4 text-center">
+                                    <Button
+                                        variant="outline"
+                                        className="text-primary border-primary/20 hover:bg-primary/5"
+                                        onClick={() => setVisibleReviews(prev => prev + 2)}
+                                    >
+                                        Xem thêm đánh giá cũ hơn...
+                                    </Button>
+                                </div>
+                            )}
                         </div>
 
                     </div>
