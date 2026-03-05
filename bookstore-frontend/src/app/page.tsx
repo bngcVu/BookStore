@@ -23,14 +23,7 @@ const BEST_SELLERS = [
   { id: "10", slug: "suoi-nguon", title: "Suối Nguồn", author: "Ayn Rand", category: "Tiểu thuyết", originalPrice: 320000, salePrice: 280000, imageUrl: "" },
 ];
 
-const CATEGORIES = [
-  { name: "Tiểu thuyết", count: 1250, icon: "📚", slug: "tieu-thuyet" },
-  { name: "Kinh doanh", count: 850, icon: "📈", slug: "kinh-doanh" },
-  { name: "Tâm lý học", count: 640, icon: "🧠", slug: "tam-ly-hoc" },
-  { name: "Thiếu nhi", count: 2100, icon: "🧸", slug: "thieu-nhi" },
-  { name: "Ngoại ngữ", count: 520, icon: "🌍", slug: "ngoai-ngu" },
-  { name: "Lịch sử", count: 480, icon: "🏺", slug: "lich-su" },
-];
+
 
 // Target flash sale end date: 24h from now
 const targetDate = new Date();
@@ -47,19 +40,7 @@ export default function Home() {
       {/* 1. Hero Carousel */}
       <BannerCarousel />
 
-      {/* 2. Categories Section */}
-      <section className="container mx-auto px-4">
-        <h2 className="text-xl font-bold text-slate-900 mb-6 tracking-tight">Danh mục Nổi bật</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {CATEGORIES.map((cat, i) => (
-            <a href={`/category/${cat.slug}`} key={i} className="flex flex-col items-center justify-center p-6 bg-white border border-slate-100 rounded-2xl hover:border-primary/30 hover:shadow-sm hover:-translate-y-1 transition-all duration-300 group cursor-pointer text-center">
-              <span className="text-4xl mb-3 grayscale group-hover:grayscale-0 transition-all duration-300">{cat.icon}</span>
-              <h3 className="font-semibold text-sm text-slate-900">{cat.name}</h3>
-              <p className="text-xs text-slate-400 mt-1">{cat.count.toLocaleString('vi-VN')} Sách</p>
-            </a>
-          ))}
-        </div>
-      </section>
+
 
       {/* 3. Flash Sale Block */}
       <section className="container mx-auto px-4">
