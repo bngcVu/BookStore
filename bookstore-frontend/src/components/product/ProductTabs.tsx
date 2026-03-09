@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Star, ThumbsUp, MessageSquare, ShieldCheck } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Star, ThumbsUp, MessageSquare, ShieldCheck, Image as ImageIcon, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const TABS = [
@@ -18,16 +18,54 @@ export function ProductTabs({ description }: ProductTabsProps) {
     const [activeTab, setActiveTab] = useState(TABS[0].id);
     const [isWritingReview, setIsWritingReview] = useState(false);
     const [visibleReviews, setVisibleReviews] = useState(2);
+    const [selectedRating, setSelectedRating] = useState(0);
+    const [hoverRating, setHoverRating] = useState(0);
+    const [reviewImages, setReviewImages] = useState<string[]>([]);
+
+    // Handle hash routing for reviews
+    useEffect(() => {
+        const handleHashChange = () => {
+            const hash = window.location.hash;
+            if (hash === '#review' || hash === '#reviews') {
+                setActiveTab('reviews');
+                setIsWritingReview(true);
+
+                // Smooth scroll to the tabs section
+                const element = document.getElementById('product-tabs');
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        };
+
+        // Check hash on initial load
+        handleHashChange();
+
+        // Listen for hash changes
+        window.addEventListener('hashchange', handleHashChange);
+        return () => window.removeEventListener('hashchange', handleHashChange);
+    }, []);
 
     // Mock user submit review
     const handleSubmitReview = (e: React.FormEvent) => {
         e.preventDefault();
+        if (selectedRating === 0) {
+            alert("Vui lòng chọn số sao đánh giá!");
+            return;
+        }
         alert("Cảm ơn bạn đã đánh giá! (Tính năng Submit thực tế sẽ hoàn thiện ở Phase 4)");
         setIsWritingReview(false);
+        setReviewImages([]);
+        setSelectedRating(0);
+    };
+
+    const handleUploadMock = () => {
+        if (reviewImages.length >= 3) return alert("Chỉ được tải lên tối đa 3 ảnh/video");
+        setReviewImages(prev => [...prev, "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=300"]);
     };
 
     return (
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 max-w-6xl mx-auto overflow-hidden">
+        <div id="product-tabs" className="bg-white rounded-2xl shadow-sm border border-slate-100 max-w-6xl mx-auto overflow-hidden">
             {/* Tab Headers */}
             <div className="flex border-b border-slate-100 overflow-x-auto custom-scrollbar bg-slate-50/50">
                 {TABS.map(tab => (
@@ -139,8 +177,22 @@ export function ProductTabs({ description }: ProductTabsProps) {
                                 <div className="flex items-center gap-2 mb-2">
                                     <span className="text-sm font-medium text-slate-700">Chất lượng:</span>
                                     <div className="flex gap-1">
-                                        {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-6 h-6 text-slate-300 hover:text-accent hover:fill-accent cursor-pointer transition-colors" />)}
+                                        {[1, 2, 3, 4, 5].map(s => (
+                                            <Star
+                                                key={s}
+                                                onClick={() => setSelectedRating(s)}
+                                                onMouseEnter={() => setHoverRating(s)}
+                                                onMouseLeave={() => setHoverRating(0)}
+                                                className={`w-6 h-6 cursor-pointer transition-colors ${s <= (hoverRating || selectedRating)
+                                                    ? 'text-accent fill-accent'
+                                                    : 'text-slate-200 fill-slate-200'
+                                                    }`}
+                                            />
+                                        ))}
                                     </div>
+                                    <span className="ml-2 text-sm font-semibold text-accent">
+                                        {selectedRating === 5 ? "Tuyệt vời" : selectedRating === 4 ? "Tốt" : selectedRating === 3 ? "Bình thường" : selectedRating === 2 ? "Tệ" : selectedRating === 1 ? "Rất tệ" : ""}
+                                    </span>
                                 </div>
                                 <textarea
                                     rows={4}
@@ -148,7 +200,37 @@ export function ProductTabs({ description }: ProductTabsProps) {
                                     className="w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-y"
                                     required
                                 ></textarea>
-                                <div className="flex justify-end">
+
+                                {/* Image Upload Component */}
+                                <div className="pt-2">
+                                    <div className="flex flex-wrap gap-3">
+                                        {reviewImages.map((img, i) => (
+                                            <div key={i} className="relative w-20 h-20 rounded-lg border border-slate-200 overflow-hidden group">
+                                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                <img src={img} alt="review image" className="object-cover w-full h-full" />
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setReviewImages(prev => prev.filter((_, idx) => idx !== i))}
+                                                    className="absolute top-1 right-1 bg-black/60 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                                                >
+                                                    <X size={14} />
+                                                </button>
+                                            </div>
+                                        ))}
+                                        {reviewImages.length < 3 && (
+                                            <button
+                                                type="button"
+                                                onClick={handleUploadMock}
+                                                className="w-20 h-20 rounded-lg border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-500 hover:text-primary hover:border-primary/50 hover:bg-primary/5 transition-all"
+                                            >
+                                                <ImageIcon size={20} className="mb-1" />
+                                                <span className="text-[10px] font-medium leading-tight">Thêm ảnh<br />(Tối đa 3)</span>
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="flex justify-end pt-2">
                                     <Button type="submit" variant="default">Gửi đánh giá</Button>
                                 </div>
                             </form>
@@ -174,6 +256,16 @@ export function ProductTabs({ description }: ProductTabsProps) {
                                         </div>
                                         <h5 className="font-bold text-slate-900 text-sm">Trải nghiệm tuyệt vời</h5>
                                         <p className="text-slate-600 text-sm leading-relaxed">Sách nội dung sâu sắc, bìa đẹp, giao hàng cực kỳ nhanh chóng. Rất hài lòng với dịch vụ của BookStore!</p>
+
+                                        {/* Mock Images for the first review */}
+                                        {idx === 0 && (
+                                            <div className="flex flex-wrap gap-2 mt-2">
+                                                <div className="w-20 h-20 rounded border border-slate-200 overflow-hidden cursor-pointer hover:border-primary transition-colors">
+                                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=200" alt="mock review" className="w-full h-full object-cover" />
+                                                </div>
+                                            </div>
+                                        )}
                                         <div className="flex items-center gap-4 mt-3 pt-3">
                                             <button className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-primary transition-colors font-medium">
                                                 <ThumbsUp size={14} /> Hữu ích ({12 - idx})

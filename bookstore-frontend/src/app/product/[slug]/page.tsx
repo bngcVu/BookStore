@@ -151,7 +151,7 @@ export default function ProductDetailPage() {
                 {/* Benefits Strip below main prod */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto mb-10">
                     <div className="bg-white p-4 rounded-xl border border-slate-100 flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-primary shrink-0"><ShieldCheck /></div>
+                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0"><ShieldCheck /></div>
                         <div>
                             <h4 className="font-bold text-slate-900 text-sm">Cam Kết Chính Hãng</h4>
                             <p className="text-xs text-slate-500">100% sách có bản quyền</p>
@@ -165,7 +165,7 @@ export default function ProductDetailPage() {
                         </div>
                     </div>
                     <div className="bg-white p-4 rounded-xl border border-slate-100 flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 shrink-0"><RefreshCw /></div>
+                        <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent shrink-0"><RefreshCw /></div>
                         <div>
                             <h4 className="font-bold text-slate-900 text-sm">Đổi Trả Dễ Dàng</h4>
                             <p className="text-xs text-slate-500">Từ 7 ngày đối với lỗi NSX</p>

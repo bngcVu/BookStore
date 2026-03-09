@@ -25,7 +25,7 @@ const BANNERS: BannerSlide[] = [
         subtitle: "Đánh thức tiềm năng.",
         description: "Hàng ngàn tựa sách chất lượng cao được tuyển chọn khắt khe. Trải nghiệm mua sắm tối giản và nhanh chóng nhất.",
         ctaText: "Khám phá ngay",
-        imageUrl: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=1200", // example placeholder
+        imageUrl: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=1200",
         colorClass: "bg-slate-50 border-b border-slate-100"
     },
     {
@@ -35,16 +35,25 @@ const BANNERS: BannerSlide[] = [
         description: "Săn deal sách HOT với giá cực sốc trong khung giờ vàng 12h - 14h hàng ngày. Đừng bỏ lỡ!",
         ctaText: "Săn Deal Ngay",
         imageUrl: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=1200",
-        colorClass: "bg-orange-50/50 border-b border-orange-100"
+        colorClass: "bg-accent/5 border-b border-accent/10"
     },
     {
         id: "slide-3",
+        title: "Tủ sách Kinh tế - Kinh doanh",
+        subtitle: "Ưu đãi lên tới 35%",
+        description: "Ưu đãi lên tới 35% cho các tựa sách khởi nghiệp & đầu tư.",
+        ctaText: "Xem ngay",
+        imageUrl: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=1200",
+        colorClass: "bg-primary/5 border-b border-primary/10"
+    },
+    {
+        id: "slide-4",
         title: "Thưởng Thức Sách Trẻ.",
         subtitle: "Phát triển tư duy",
         description: "Tuyển tập sách thiếu nhi hay nhất giúp bé phát triển trí tuệ, rèn luyện nhân cách từ sớm.",
         ctaText: "Đọc tủ sách Bé",
         imageUrl: "https://images.unsplash.com/photo-1585776466986-e82dfed6132d?auto=format&fit=crop&q=80&w=1200",
-        colorClass: "bg-blue-50/50 border-b border-blue-100"
+        colorClass: "bg-stone-50 border-b border-stone-100"
     }
 ];
 
@@ -75,10 +84,10 @@ export function BannerCarousel() {
                         <div key={slide.id} className={cn("flex-[0_0_100%] min-w-0 relative flex items-center min-h-[60vh]", slide.colorClass)}>
                             <div className="container mx-auto px-4 lg:grid lg:grid-cols-12 gap-8 items-center relative z-10 w-full">
                                 <div className="lg:col-span-6 space-y-6 py-20 px-4">
-                                    <h1 className="text-4xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-[1.1]">
+                                    <h2 className="text-4xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-[1.1]">
                                         {slide.title}<br />
                                         <span className="text-primary">{slide.subtitle}</span>
-                                    </h1>
+                                    </h2>
                                     <p className="text-lg text-slate-600 max-w-xl leading-relaxed">
                                         {slide.description}
                                     </p>

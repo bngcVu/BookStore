@@ -55,7 +55,11 @@ export function ProductCard({
             )}
 
             {/* Wishlist Button */}
-            <button className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm border border-slate-200 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500 transition-colors shadow-sm opacity-0 group-hover:opacity-100">
+            <button
+                className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm border border-slate-200 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500 transition-colors shadow-sm opacity-0 group-hover:opacity-100"
+                aria-label="Thêm vào danh sách yêu thích"
+                title="Thêm vào yêu thích"
+            >
                 <Heart size={16} />
             </button>
 

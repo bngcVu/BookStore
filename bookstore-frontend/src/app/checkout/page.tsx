@@ -189,15 +189,15 @@ export default function CheckoutPage() {
                                     </div>
                                 </label>
 
-                                <label className={`relative flex cursor-pointer rounded-xl border p-4 shadow-sm hover:border-orange-500/50 transition-colors ${shippingMethod === 'express' ? 'border-orange-500 ring-1 ring-orange-500/20 bg-orange-50' : 'border-slate-200'}`}>
+                                <label className={`relative flex cursor-pointer rounded-xl border p-4 shadow-sm hover:border-accent/50 transition-colors ${shippingMethod === 'express' ? 'border-accent ring-1 ring-accent/20 bg-accent/5' : 'border-slate-200'}`}>
                                     <input type="radio" name="shipping" value="express" className="sr-only" checked={shippingMethod === 'express'} onChange={() => setShippingMethod('express')} />
                                     <div className="flex w-full items-center justify-between">
                                         <div className="flex items-center gap-3">
                                             <div className="relative">
-                                                <Truck className={shippingMethod === 'express' ? 'text-orange-500' : 'text-slate-400'} size={24} />
+                                                <Truck className={shippingMethod === 'express' ? 'text-accent' : 'text-slate-400'} size={24} />
                                                 <span className="absolute -top-1 -right-1 flex h-2 w-2">
-                                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+                                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent/40 opacity-75"></span>
+                                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                                                 </span>
                                             </div>
                                             <div className="flex flex-col">
@@ -233,7 +233,7 @@ export default function CheckoutPage() {
                                 <label className={`relative flex cursor-pointer rounded-xl border p-4 shadow-sm hover:border-primary/50 transition-colors ${paymentMethod === 'vnpay' ? 'border-primary ring-1 ring-primary/20 bg-primary/5' : 'border-slate-200'}`}>
                                     <input type="radio" name="payment" value="vnpay" className="sr-only" checked={paymentMethod === 'vnpay'} onChange={() => setPaymentMethod('vnpay')} />
                                     <div className="flex w-full items-center gap-3">
-                                        <div className="w-10 h-10 rounded bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xs px-1 text-center">VNPay</div>
+                                        <div className="w-10 h-10 rounded bg-primary/10 text-primary flex items-center justify-center font-bold text-xs px-1 text-center">VNPay</div>
                                         <div className="flex flex-col">
                                             <span className="font-semibold text-slate-900">Thẻ ATM / Internet Banking</span>
                                             <span className="text-sm text-slate-500">Công cáng qua VNPAY an toàn, bảo mật nội bộ</span>

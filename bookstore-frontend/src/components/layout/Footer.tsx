@@ -25,7 +25,6 @@ export function Footer() {
                             <li><Link href="/about" className="hover:text-primary transition-colors">Điều khoản dịch vụ</Link></li>
                             <li><Link href="/privacy" className="hover:text-primary transition-colors">Chính sách bảo mật</Link></li>
                             <li><Link href="/shipping" className="hover:text-primary transition-colors">Giao hàng & Đổi trả</Link></li>
-                            <li><Link href="/loyalty" className="hover:text-primary transition-colors">BookStore Loyalty</Link></li>
                         </ul>
                     </div>
 
@@ -35,7 +34,6 @@ export function Footer() {
                         <ul className="flex flex-col gap-3 text-sm text-slate-600">
                             <li><Link href="/category/literature" className="hover:text-primary transition-colors">Văn Học Tác Phẩm</Link></li>
                             <li><Link href="/category/economy" className="hover:text-primary transition-colors">Kinh Tế - Kinh Doanh</Link></li>
-                            <li><Link href="/category/psychology" className="hover:text-primary transition-colors">Tâm Lý Học</Link></li>
                             <li><Link href="/category/children" className="hover:text-primary transition-colors">Sách Thiếu Nhi</Link></li>
                         </ul>
                     </div>
