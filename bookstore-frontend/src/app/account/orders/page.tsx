@@ -16,7 +16,9 @@ import {
     MapPin,
     ArrowRight,
     Loader2,
-    Star
+    Star,
+    AlertTriangle,
+    Upload
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -64,7 +66,8 @@ const MOCK_ORDERS = [
         statusLabel: "Hoàn thành",
         color: "text-emerald-500",
         bg: "bg-emerald-50",
-        address: "720A Điện Biên Phủ, P. 22, Q. Bình Thạnh, TP. HCM"
+        address: "720A Điện Biên Phủ, P. 22, Q. Bình Thạnh, TP. HCM",
+        canRefund: true
     },
     {
         id: "BS110293",
@@ -89,6 +92,8 @@ export default function OrderManagementPage() {
     const [selectedOrder, setSelectedOrder] = useState<any>(null);
     const [viewMode, setViewMode] = useState<'list' | 'detail' | 'tracking'>('list');
     const [actionLoading, setActionLoading] = useState<string | null>(null);
+    const [isRefundModalOpen, setIsRefundModalOpen] = useState(false);
+    const [refundForm, setRefundForm] = useState({ type: 'refund', reason: '', description: '' });
 
     const filteredOrders = MOCK_ORDERS.filter(order => {
         const matchesTab = activeTab === "all" || order.status === activeTab;
@@ -118,6 +123,11 @@ export default function OrderManagementPage() {
 
             setActionLoading(null);
         }, 600);
+    };
+
+    const handleRefundSubmit = () => {
+        alert("Đã gửi yêu cầu Đổi trả/Hoàn tiền thành công! Admin sẽ xem xét và phản hồi trong 24h.");
+        setIsRefundModalOpen(false);
     };
 
     return (
@@ -345,8 +355,79 @@ export default function OrderManagementPage() {
                                     </div>
                                 ))}
                             </div>
+
+                            {/* Nút Yêu cầu hoàn tiền nếu đơn hàng cho phép */}
+                            {selectedOrder.canRefund && (
+                                <div className="mt-8 pt-6 border-t border-slate-100 flex justify-end">
+                                    <Button
+                                        variant="outline"
+                                        className="gap-2 border-orange-200 text-orange-600 hover:bg-orange-50 hover:text-orange-700 font-bold"
+                                        onClick={() => setIsRefundModalOpen(true)}
+                                    >
+                                        <AlertTriangle size={16} /> Yêu cầu Đổi/Trả hàng
+                                    </Button>
+                                </div>
+                            )}
                         </div>
                     </div>
+
+                    {/* Popup Refund Form */}
+                    {isRefundModalOpen && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-300">
+                            <div className="bg-white rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden scale-in-95 duration-300">
+                                <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                                    <h3 className="font-bold text-slate-900">Yêu cầu Đổi / Trả hàng</h3>
+                                    <button onClick={() => setIsRefundModalOpen(false)} className="text-slate-400 hover:text-red-500"><XCircle size={20} /></button>
+                                </div>
+                                <div className="p-6 space-y-4">
+                                    <div className="space-y-1.5">
+                                        <label className="text-sm font-bold text-slate-700">Loại yêu cầu</label>
+                                        <select
+                                            className="w-full h-10 px-3 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary/20 outline-none"
+                                            value={refundForm.type}
+                                            onChange={e => setRefundForm({ ...refundForm, type: e.target.value })}
+                                        >
+                                            <option value="refund">Hoàn tiền (Trả hàng)</option>
+                                            <option value="exchange">Đổi hàng (Sản phẩm lỗi)</option>
+                                        </select>
+                                    </div>
+                                    <div className="space-y-1.5">
+                                        <label className="text-sm font-bold text-slate-700">Lý do</label>
+                                        <select
+                                            className="w-full h-10 px-3 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary/20 outline-none"
+                                            value={refundForm.reason}
+                                            onChange={e => setRefundForm({ ...refundForm, reason: e.target.value })}
+                                        >
+                                            <option value="">Chọn lý do...</option>
+                                            <option value="damaged">Sách rách vỡ / móp méo</option>
+                                            <option value="wrong_item">Giao sai sản phẩm</option>
+                                            <option value="missing_parts">Thiếu quà tặng kèm</option>
+                                        </select>
+                                    </div>
+                                    <div className="space-y-1.5">
+                                        <label className="text-sm font-bold text-slate-700">Mô tả chi tiết</label>
+                                        <textarea
+                                            className="w-full p-3 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary/20 outline-none min-h-[100px]"
+                                            placeholder="Mô tả cụ thể tình trạng sách bạn nhận được..."
+                                            value={refundForm.description}
+                                            onChange={e => setRefundForm({ ...refundForm, description: e.target.value })}
+                                        ></textarea>
+                                    </div>
+                                    <div className="space-y-1.5">
+                                        <label className="text-sm font-bold text-slate-700">Hình ảnh minh chứng</label>
+                                        <div className="w-full h-24 border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center text-slate-400 hover:bg-slate-50 hover:border-primary/50 cursor-pointer transition-colors">
+                                            <Upload size={24} className="mb-2" />
+                                            <span className="text-xs font-semibold">Nhấn để tải ảnh lên (Tối đa 3 ảnh)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="px-6 py-4 border-t border-slate-100 bg-slate-50/50 flex justify-end gap-3">
+                                    <Button variant="ghost" onClick={() => setIsRefundModalOpen(false)}>Hủy</Button>
+                                    <Button className="bg-orange-500 hover:bg-orange-600 shadow-lg shadow-orange-500/20 font-bold" onClick={handleRefundSubmit}>Gửi yêu cầu</Button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             ) : viewMode === 'tracking' && selectedOrder ? (
                 /* TRACKING VIEW */

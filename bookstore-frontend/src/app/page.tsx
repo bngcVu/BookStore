@@ -5,7 +5,7 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { ProductCarousel } from "@/components/product/ProductCarousel";
 import { BannerCarousel } from "@/components/ui/BannerCarousel";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Zap, ShieldCheck, Truck, Headphones, MessageSquare } from "lucide-react";
+import { ArrowRight, Zap, ShieldCheck, Truck, Headphones, MessageSquare, Sparkles, Clock, X, Gift } from "lucide-react";
 import Link from "next/link";
 import { FLASH_SALE_BOOKS, BEST_SELLERS } from "@/lib/mockData";
 import { ProductCarouselSkeleton } from "@/components/product/ProductSkeleton";
@@ -19,12 +19,28 @@ export default function Home() {
   const { hours, minutes, seconds } = useCountdown(targetDate);
   const [isLoading, setIsLoading] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
+  const [showGamificationBanner, setShowGamificationBanner] = useState(true);
+  const [showStickyViewed, setShowStickyViewed] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
     // Simulate initial data fetch
     const timer = setTimeout(() => setIsLoading(false), 1200);
-    return () => clearTimeout(timer);
+
+    // Show sticky widget after scroll
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setShowStickyViewed(true);
+      } else {
+        setShowStickyViewed(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   // Helper for 2 digits format
@@ -95,6 +111,19 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Phase 4: AI Recommendations (For You) */}
+        <section className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-8 border-b border-rose-100 pb-4">
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
+              <Sparkles size={24} className="text-rose-500" /> Dành Riêng Cho Bạn
+            </h2>
+          </div>
+
+          <div className="min-h-[400px]">
+            {isLoading ? <ProductCarouselSkeleton /> : <ProductCarousel products={[...BEST_SELLERS].reverse()} showArrows={true} />}
+          </div>
+        </section>
+
         {/* 5. Benefits Bar */}
         <section className="bg-primary/5 py-12">
           <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -132,6 +161,47 @@ export default function Home() {
           </div>
         </section>
       </div>
+
+      {/* Phase 4: Gamification Onboarding Popup */}
+      {showGamificationBanner && (
+        <div className="fixed bottom-6 left-6 z-50 bg-white rounded-2xl shadow-2xl border border-amber-100 p-5 max-w-sm animate-in slide-in-from-bottom-5 fade-in duration-500">
+          <button
+            onClick={() => setShowGamificationBanner(false)}
+            className="absolute top-3 right-3 text-slate-400 hover:text-red-500 transition-colors"
+          >
+            <X size={18} />
+          </button>
+          <div className="flex gap-4">
+            <div className="w-12 h-12 rounded-full bg-amber-100 flex justify-center items-center text-amber-500 shrink-0 shadow-inner">
+              <Gift size={24} />
+            </div>
+            <div>
+              <h4 className="font-bold text-slate-900 text-sm mb-1 leading-tight">Hoàn thiện hồ sơ nhận thưởng!</h4>
+              <p className="text-xs text-slate-500 mb-3">Cập nhật ngay ngày sinh và số điện thoại để nhận 50 điểm thưởng (tương đương 500.000đ).</p>
+              <Link href="/account">
+                <Button size="sm" className="w-full text-xs box-border font-bold bg-amber-500 hover:bg-amber-600 shadow-md shadow-amber-500/20">Cập nhật ngay</Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Phase 4: Sticky Recently Viewed Widget */}
+      <div className={`fixed top-1/2 right-4 -translate-y-1/2 z-40 transition-all duration-500 ${showStickyViewed ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20 pointer-events-none'}`}>
+        <div className="bg-white rounded-xl shadow-xl border border-slate-200 p-2 flex flex-col items-center gap-2 group">
+          <div className="py-2 px-1 border-b border-slate-100 text-[10px] font-bold text-slate-400 writing-vertical-rl rotate-180 uppercase tracking-widest text-center flex gap-2">
+            Vừa xem <Clock size={12} className="rotate-90 inline-block mb-1 mx-auto text-primary" />
+          </div>
+          {/* Mock recent items */}
+          <Link href="/product/nghe-thuat-tu-duy" className="relative w-12 h-16 rounded overflow-hidden hover:ring-2 hover:ring-primary transition-all">
+            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=150" alt="Recent 1" className="w-full h-full object-cover" />
+          </Link>
+          <Link href="/product/dac-nhan-tam" className="relative w-12 h-16 rounded overflow-hidden hover:ring-2 hover:ring-primary transition-all">
+            <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&q=80&w=150" alt="Recent 2" className="w-full h-full object-cover" />
+          </Link>
+        </div>
+      </div>
+
     </main>
   );
 }
