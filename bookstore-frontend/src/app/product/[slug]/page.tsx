@@ -4,8 +4,9 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
-import { ShoppingCart, Heart, Star, Truck, ShieldCheck, RefreshCw } from "lucide-react";
+import { ShoppingCart, Heart, Star, Truck, ShieldCheck, RefreshCw, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import { ProductTabs } from "@/components/product/ProductTabs";
 import { ALL_BOOKS } from "@/lib/mockData";
 import { cn } from "@/lib/utils";
@@ -38,6 +39,12 @@ export default function ProductDetailPage() {
     const currentPrice = (product.salePrice || product.originalPrice) + selectedVariant.priceOffset;
     const oldPrice = product.originalPrice + selectedVariant.priceOffset;
     const discountPercent = Math.round((1 - currentPrice / oldPrice) * 100);
+
+    // Scarcity logic
+    const isLowStock = selectedVariant.stock < 5 && selectedVariant.stock > 0;
+    const soldQty = product.soldQuantity || 0;
+    const totalQty = product.totalQuantity || 100;
+    const soldPercent = totalQty > 0 ? (soldQty / totalQty) * 100 : 0;
 
     return (
         <div className="bg-slate-50 min-h-screen pb-20">
@@ -109,11 +116,11 @@ export default function ProductDetailPage() {
                                 <span className="text-amber-500 font-bold">{product.rating}</span>
                                 <span className="text-slate-500 text-sm">({product.reviewsCount} Đánh giá)</span>
                                 <span className="text-slate-300">|</span>
-                                <span className="text-slate-500 text-sm">Đã bán 5k+</span>
+                                <span className="text-slate-500 text-sm">Đã bán {(product.soldQuantity || 5000).toLocaleString('vi-VN')}</span>
                             </div>
 
-                            {/* Price Block */}
-                            <div className="bg-slate-50 rounded-xl p-5 mb-8 border border-slate-100">
+                            {/* Price Block & Scarcity */}
+                            <div className="bg-slate-50 rounded-xl p-5 mb-8 border border-slate-100 flex flex-col gap-4">
                                 <div className="flex items-end gap-4">
                                     <span className="text-4xl font-bold text-accent tracking-tight">{currentPrice.toLocaleString('vi-VN')}đ</span>
                                     <div className="flex flex-col">
@@ -121,6 +128,25 @@ export default function ProductDetailPage() {
                                         <span className="text-xs font-bold text-white bg-accent px-2 py-0.5 rounded-sm inline-block w-max mt-1">Giảm {discountPercent}%</span>
                                     </div>
                                 </div>
+
+                                {isLowStock && (
+                                    <div className="flex items-center gap-2 bg-red-50 text-red-600 px-3 py-2 rounded-lg border border-red-100 animate-pulse w-max">
+                                        <Flame size={16} className="shrink-0" />
+                                        <span className="text-xs font-bold">Chỉ còn {selectedVariant.stock} sản phẩm cuối cùng!</span>
+                                    </div>
+                                )}
+
+                                {product.isFlashSale && (
+                                    <div className="flex flex-col gap-1.5 mt-2">
+                                        <div className="flex items-center justify-between text-xs font-bold text-slate-500">
+                                            <span className="uppercase tracking-wider flex items-center gap-1">
+                                                <Flame size={14} className="text-accent" /> Đang bán chạy
+                                            </span>
+                                            <span className="text-accent">Đã bán {soldQty}/{totalQty}</span>
+                                        </div>
+                                        <Progress value={soldPercent} className="h-2 bg-slate-200" />
+                                    </div>
+                                )}
                             </div>
 
                             {/* Variants Section */}

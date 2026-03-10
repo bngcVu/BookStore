@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Star, ThumbsUp, MessageSquare, PenTool } from "lucide-react";
+import { Star, ThumbsUp, MessageSquare, PenTool, CheckCircle2, XCircle, X } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -13,6 +14,7 @@ interface ProductTabsProps {
 export function ProductTabs({ description, product }: ProductTabsProps) {
     const [activeTab, setActiveTab] = useState("description");
     const [isWritingReview, setIsWritingReview] = useState(false);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     // Tự động chuyển tab nếu URL có hash #review
     useEffect(() => {
@@ -158,9 +160,42 @@ export function ProductTabs({ description, product }: ProductTabsProps) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <p className="text-slate-600 text-sm leading-relaxed ml-14">
-                                            {review.comment}
-                                        </p>
+                                        <div className="ml-14 flex flex-col gap-3">
+                                            <p className="text-slate-600 text-sm leading-relaxed">
+                                                {review.comment}
+                                            </p>
+
+                                            {/* Pros / Cons Section */}
+                                            {(review.pros?.length > 0 || review.cons?.length > 0) && (
+                                                <div className="flex flex-col gap-1.5 bg-slate-50 p-3 rounded-lg border border-slate-100 w-fit">
+                                                    {review.pros?.length > 0 && review.pros.map((pro: string, idx: number) => (
+                                                        <div key={`pro-${idx}`} className="flex items-center gap-2 text-xs text-slate-700 font-medium tracking-tight">
+                                                            <CheckCircle2 size={14} className="text-green-500 shrink-0" /> <span className="text-slate-500 font-normal">Ưu điểm:</span> {pro}
+                                                        </div>
+                                                    ))}
+                                                    {review.cons?.length > 0 && review.cons.map((con: string, idx: number) => (
+                                                        <div key={`con-${idx}`} className="flex items-center gap-2 text-xs text-slate-700 font-medium tracking-tight">
+                                                            <XCircle size={14} className="text-slate-400 shrink-0" /> <span className="text-slate-500 font-normal">Nhược điểm:</span> {con}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+
+                                            {/* Review Images */}
+                                            {review.images?.length > 0 && (
+                                                <div className="flex flex-wrap gap-2 mt-1">
+                                                    {review.images.map((img: string, idx: number) => (
+                                                        <div
+                                                            key={idx}
+                                                            className="relative w-20 h-20 rounded-lg overflow-hidden border border-slate-200 cursor-pointer hover:border-primary transition-colors"
+                                                            onClick={() => setSelectedImage(img)}
+                                                        >
+                                                            <Image src={img} alt={`Review Image ${idx + 1}`} fill className="object-cover" />
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
                                 ))
                             ) : (
@@ -172,6 +207,33 @@ export function ProductTabs({ description, product }: ProductTabsProps) {
                     </div>
                 )}
             </div>
+
+            {/* Image Lightbox Modal */}
+            {selectedImage && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm animate-in fade-in"
+                    onClick={() => setSelectedImage(null)}
+                >
+                    <button
+                        className="absolute top-4 right-4 text-white hover:text-red-400 bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors"
+                        onClick={(e) => { e.stopPropagation(); setSelectedImage(null); }}
+                    >
+                        <X size={24} />
+                    </button>
+                    <div
+                        className="relative w-[90vw] h-[80vh] max-w-4xl"
+                        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on the image itself
+                    >
+                        <Image
+                            src={selectedImage}
+                            alt="Phóng to ảnh đánh giá"
+                            fill
+                            className="object-contain"
+                            sizes="(max-width: 1024px) 90vw, 1024px"
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

@@ -21,9 +21,39 @@ export const AUTHORS = [
 ];
 
 const MOCK_REVIEWS = [
-    { id: "rev-1", user: "Nguyễn Văn A", rating: 5, comment: "Sách rất hay, đóng gói cẩn thận.", date: "2024-03-01", isVerified: true },
-    { id: "rev-2", user: "Trần Thị B", rating: 4, comment: "Nội dung ý nghĩa nhưng bìa hơi mỏng.", date: "2024-02-28", isVerified: true },
-    { id: "rev-3", user: "Lê Văn C", rating: 5, comment: "Giao hàng nhanh, nội dung sâu sắc.", date: "2024-02-25", isVerified: false },
+    {
+        id: "rev-1",
+        user: "Nguyễn Văn A",
+        rating: 5,
+        comment: "Sách rất hay, đóng gói cẩn thận. Giao hàng siêu tốc trong 2h.",
+        date: "2024-03-01",
+        isVerified: true,
+        pros: ["Nội dung sâu sắc", "Bìa đẹp, giấy tốt"],
+        cons: [],
+        images: ["https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=200", "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=200"]
+    },
+    {
+        id: "rev-2",
+        user: "Trần Thị B",
+        rating: 4,
+        comment: "Nội dung ý nghĩa nhưng bìa hơi mỏng dễ cong mép nếu không cẩn thận.",
+        date: "2024-02-28",
+        isVerified: true,
+        pros: ["Giá hợp lý"],
+        cons: ["Bìa mỏng"],
+        images: []
+    },
+    {
+        id: "rev-3",
+        user: "Lê Văn C",
+        rating: 5,
+        comment: "Giao hàng nhanh, nội dung sâu sắc. Sẽ tiếp tục ủng hộ shop.",
+        date: "2024-02-25",
+        isVerified: false,
+        pros: ["Giao hàng nhanh"],
+        cons: [],
+        images: ["https://images.unsplash.com/photo-1589998059171-988d887df643?auto=format&fit=crop&q=80&w=200"]
+    },
 ];
 
 export const ALL_BOOKS = [
@@ -54,7 +84,7 @@ export const ALL_BOOKS = [
         reviews: MOCK_REVIEWS,
         variants: [
             { id: "v1-1", name: "Bìa Mềm", priceOffset: 0, stock: 15 },
-            { id: "v1-2", name: "Bìa Cứng", priceOffset: 45000, stock: 5 }
+            { id: "v1-2", name: "Bìa Cứng", priceOffset: 45000, stock: 3 }
         ]
     },
     {
@@ -105,7 +135,7 @@ export const ALL_BOOKS = [
         badge: "Must Read",
         description: "Cuốn sách hay nhất mọi thời đại đưa bạn đến thành công.",
         reviews: MOCK_REVIEWS,
-        variants: [{ id: "v4-1", name: "Bìa Mềm", priceOffset: 0, stock: 100 }]
+        variants: [{ id: "v4-1", name: "Bìa Mềm", priceOffset: 0, stock: 2 }]
     },
     {
         id: "11",

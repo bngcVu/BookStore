@@ -46,7 +46,7 @@ export default function LoginPage() {
             // Success Redirect
             router.push("/account");
         } catch (err) {
-            setError("Có lỗi xảy ra. Vui lòng kiểm tra lại thông tin.");
+            setError("Sai tên đăng nhập hoặc mật khẩu.");
         } finally {
             setIsLoading(false);
         }
