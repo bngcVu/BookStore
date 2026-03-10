@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
     User,
     Mail,
@@ -21,6 +21,22 @@ import { USER_PROFILE } from '@/lib/mockData';
 export default function AccountInfoPage() {
     const [isEditing, setIsEditing] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setAvatarPreview(reader.result as string);
+                // Hiển thị toast thành công
+                setIsSuccess(true);
+                setTimeout(() => setIsSuccess(false), 3000);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
 
     const handleSave = () => {
         setIsEditing(false);
@@ -77,12 +93,26 @@ export default function AccountInfoPage() {
                     <div className={cn("absolute top-0 w-full h-32 opacity-20 -z-10", USER_PROFILE.loyalty.bg)}></div>
 
                     <div className="relative mt-2">
-                        <div className={cn("w-32 h-32 rounded-full flex items-center justify-center font-black text-4xl border-4 border-white shadow-xl relative z-10 bg-white", USER_PROFILE.loyalty.color)}>
-                            {USER_PROFILE.name.charAt(0)}
+                        <div className={cn("w-32 h-32 rounded-full flex items-center justify-center font-black text-4xl border-4 border-white shadow-xl relative z-10 bg-white overflow-hidden", USER_PROFILE.loyalty.color)}>
+                            {avatarPreview ? (
+                                <img src={avatarPreview} alt="Avatar Preview" className="w-full h-full object-cover" />
+                            ) : (
+                                USER_PROFILE.name.charAt(0)
+                            )}
                         </div>
-                        <button className="absolute bottom-0 right-0 w-10 h-10 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-slate-600 hover:text-primary transition-colors z-20">
+                        <button
+                            onClick={() => fileInputRef.current?.click()}
+                            className="absolute bottom-0 right-0 w-10 h-10 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-slate-600 hover:text-primary transition-colors z-20 cursor-pointer"
+                        >
                             <Camera size={18} />
                         </button>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            ref={fileInputRef}
+                            onChange={handleFileChange}
+                        />
                     </div>
 
                     <div className="text-center">
@@ -210,7 +240,11 @@ export default function AccountInfoPage() {
                                 <p className="font-bold text-sm text-slate-900">Mật khẩu đăng nhập</p>
                                 <p className="text-xs text-slate-500">Bạn đã cập nhật mật khẩu cách đây 3 tháng</p>
                             </div>
-                            <Button variant="outline" className="rounded-xl border-slate-200 text-xs font-bold whitespace-nowrap">
+                            <Button
+                                variant="outline"
+                                className="rounded-xl border-slate-200 text-xs font-bold whitespace-nowrap"
+                                onClick={() => alert("Tính năng Thay đổi mật khẩu đang được phát triển và thiết lập kết nối Backend (Bảo mật).")}
+                            >
                                 Thay đổi mật khẩu
                             </Button>
                         </div>
@@ -219,7 +253,11 @@ export default function AccountInfoPage() {
                                 <p className="font-bold text-sm text-slate-900">Xác thực 2 lớp (2FA)</p>
                                 <p className="text-xs text-slate-500">Giúp bảo mật tài khoản tốt hơn bằng SMS/Email</p>
                             </div>
-                            <Button variant="outline" className="rounded-xl border-slate-200 text-xs font-bold whitespace-nowrap">
+                            <Button
+                                variant="outline"
+                                className="rounded-xl border-slate-200 text-xs font-bold whitespace-nowrap"
+                                onClick={() => alert("Hệ thống gửi mã OTP xác thực 2 bước (2FA) đang được xây dựng!")}
+                            >
                                 Thiết lập ngay
                             </Button>
                         </div>

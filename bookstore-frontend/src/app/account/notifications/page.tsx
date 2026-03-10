@@ -283,7 +283,7 @@ export default function NotificationsPage() {
                         <div className="relative z-10">
                             <h3 className="font-bold text-slate-900 mb-2">Deal dành riêng cho bạn!</h3>
                             <p className="text-sm text-slate-600 mb-4">Chúng tôi vừa cập nhật danh sách giảm giá 30% cho tủ sách Kinh tế.</p>
-                            <Button size="sm" className="bg-primary hover:bg-primary-hover shadow-lg shadow-primary/25 rounded-xl font-bold">Xem ngay</Button>
+                            <Button size="sm" onClick={() => router.push('/')} className="bg-primary hover:bg-primary-hover shadow-lg shadow-primary/25 rounded-xl font-bold">Xem ngay</Button>
                         </div>
                         <BadgePercent size={80} className="absolute -bottom-4 -right-4 text-primary opacity-5 rotate-12 transition-transform group-hover:scale-110" />
                     </div>
@@ -291,7 +291,7 @@ export default function NotificationsPage() {
                         <div className="relative z-10">
                             <h3 className="font-bold text-slate-900 mb-2">Thông tin thăng hạng?</h3>
                             <p className="text-sm text-slate-600 mb-4">Bạn chỉ còn cách hạng Vàng 120 điểm nữa thôi. Mua sắm tiếp nào!</p>
-                            <Button size="sm" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-white rounded-xl font-bold">Xem tiêu chí</Button>
+                            <Button size="sm" onClick={() => router.push('/account')} variant="outline" className="border-accent text-accent hover:bg-accent hover:text-white rounded-xl font-bold">Xem tiêu chí</Button>
                         </div>
                         <Zap size={80} className="absolute -bottom-4 -right-4 text-accent opacity-5 -rotate-12 transition-transform group-hover:scale-110" />
                     </div>
