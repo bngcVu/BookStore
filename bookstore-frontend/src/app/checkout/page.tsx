@@ -3,8 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Truck, ShieldCheck, MapPin, Plus, Edit2 } from "lucide-react";
+import { ChevronLeft, Truck, ShieldCheck, MapPin, Plus, Edit2, Coins } from "lucide-react";
 import Image from "next/image";
+import { USER_PROFILE } from "@/lib/mockData";
 
 const cartItems = [
     { id: "1", title: "Nghệ Thuật Tư Duy Rành Mạch", price: 145000, quantity: 1, imageUrl: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=300" },
@@ -38,6 +39,7 @@ export default function CheckoutPage() {
     const [isAddressFormOpen, setIsAddressFormOpen] = useState(false);
     const [editingAddressId, setEditingAddressId] = useState<string | null>(null);
     const [addressForm, setAddressForm] = useState({ name: "", phone: "", street: "", city: "" });
+    const [usePoints, setUsePoints] = useState(false);
 
     const openAddForm = () => {
         setAddressForm({ name: "", phone: "", street: "", city: "" });
@@ -69,7 +71,11 @@ export default function CheckoutPage() {
 
     const subTotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
     const shippingFee = shippingMethod === "express" ? 35000 : 15000;
-    const total = subTotal + shippingFee - 20000; // Assuming 20k discount carried over
+
+    // Loyalty Points Logic
+    const pointsValueVND = USER_PROFILE.loyalty.points * 10; // 1 point = 10 VND
+    const pointsDiscount = usePoints ? pointsValueVND : 0;
+    const total = subTotal + shippingFee - 20000 - pointsDiscount; // 20k normal discount
 
     return (
         <div className="bg-slate-50 min-h-screen py-8">
@@ -290,6 +296,38 @@ export default function CheckoutPage() {
                                 <div className="flex items-center justify-between text-green-600 text-sm font-medium">
                                     <span>Khuyến mãi (BOOKSTORE20)</span>
                                     <span>-20.000đ</span>
+                                </div>
+                                {usePoints && (
+                                    <div className="flex items-center justify-between text-amber-600 text-sm font-medium">
+                                        <span>Dùng điểm thưởng</span>
+                                        <span>-{pointsValueVND.toLocaleString('vi-VN')}đ</span>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Loyalty Points Checkout Box */}
+                            <div className="bg-amber-50/50 border border-amber-100 rounded-xl p-4 mb-6">
+                                <div className="flex justify-between items-start gap-4 mb-2">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
+                                            <Coins size={16} className="text-amber-500" />
+                                        </div>
+                                        <div>
+                                            <h4 className="text-sm font-bold text-slate-900">Dùng điểm thưởng</h4>
+                                            <p className="text-xs text-slate-500">
+                                                Bạn có <span className="font-bold text-amber-600">{USER_PROFILE.loyalty.points.toLocaleString()} điểm</span> = {(pointsValueVND).toLocaleString('vi-VN')}đ
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <label className="relative inline-flex items-center cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            className="sr-only peer"
+                                            checked={usePoints}
+                                            onChange={() => setUsePoints(!usePoints)}
+                                        />
+                                        <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-500"></div>
+                                    </label>
                                 </div>
                             </div>
 

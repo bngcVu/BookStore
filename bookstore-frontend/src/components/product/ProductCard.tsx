@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ShoppingCart, Heart } from "lucide-react";
+import { ShoppingCart, Heart, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -22,6 +22,9 @@ export interface ProductCardProps {
     totalQuantity?: number;
 
     className?: string;
+    badge?: string;
+    rating?: number;
+    reviewsCount?: number;
 }
 
 export function ProductCard({
@@ -34,7 +37,10 @@ export function ProductCard({
     isFlashSale,
     soldQuantity = 0,
     totalQuantity = 100,
-    className
+    className,
+    badge,
+    rating,
+    reviewsCount
 }: ProductCardProps) {
 
     const discountPercent = salePrice
@@ -47,8 +53,15 @@ export function ProductCard({
     return (
         <div className={cn("group flex flex-col gap-3 bg-white border border-slate-100 rounded-xl p-3 transition-all duration-300 hover:shadow-lg hover:border-slate-200 relative", className)}>
 
+            {/* Status Badge */}
+            {badge && (
+                <Badge variant="default" className="absolute top-4 left-4 z-10 font-bold px-2 py-1 shadow-sm bg-primary text-white border-none">
+                    {badge}
+                </Badge>
+            )}
+
             {/* Discount Badge */}
-            {discountPercent > 0 && (
+            {discountPercent > 0 && !badge && (
                 <Badge variant="accent" className="absolute top-4 left-4 z-10 font-bold px-2 py-1 shadow-sm">
                     -{discountPercent}%
                 </Badge>
@@ -105,6 +118,17 @@ export function ProductCard({
                         )}
                     </div>
                 </div>
+
+                {/* Rating & Review */}
+                {rating && (
+                    <div className="flex items-center gap-1.5 mt-1.5">
+                        <div className="flex items-center gap-0.5">
+                            <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                            <span className="text-xs font-bold text-slate-700">{rating}</span>
+                        </div>
+                        <span className="text-[10px] text-slate-400">({reviewsCount || 0})</span>
+                    </div>
+                )}
 
                 {/* Flash Sale Progress */}
                 {isFlashSale && (

@@ -7,34 +7,13 @@ import { BannerCarousel } from "@/components/ui/BannerCarousel";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, ShieldCheck, Truck, Headphones, MessageSquare } from "lucide-react";
 import Link from "next/link";
-
-// Mock data based on schema
-const FLASH_SALE_BOOKS = [
-  { id: "1", slug: "nghe-thuat-tu-duy", title: "Nghệ Thuật Tư Duy Rành Mạch", author: "Rolf Dobelli", category: "Kỹ năng sống", originalPrice: 190000, salePrice: 145000, imageUrl: "", isFlashSale: true, soldQuantity: 85, totalQuantity: 100 },
-  { id: "2", slug: "nha-gia-kim", title: "Nhà Giả Kim", author: "Paulo Coelho", category: "Tiểu thuyết", originalPrice: 150000, salePrice: 99000, imageUrl: "", isFlashSale: true, soldQuantity: 150, totalQuantity: 200 },
-  { id: "3", slug: "tuoi-tre-dang-gia-bao-nhieu", title: "Tuổi Trẻ Đáng Giá Bao Nhiêu", author: "Rosie Nguyễn", category: "Kỹ năng sống", originalPrice: 120000, salePrice: 65000, imageUrl: "", isFlashSale: true, soldQuantity: 98, totalQuantity: 100 },
-  { id: "4", slug: "dac-nhan-tam", title: "Đắc Nhân Tâm", author: "Dale Carnegie", category: "Tâm lý", originalPrice: 135000, salePrice: 85000, imageUrl: "", isFlashSale: true, soldQuantity: 250, totalQuantity: 500 },
-  { id: "5", slug: "su-luoc-ve-loai-nguoi", title: "Sapiens: Lược Sử Loài Người", author: "Yuval Noah Harari", category: "Lịch sử", originalPrice: 250000, salePrice: 180000, imageUrl: "", isFlashSale: true, soldQuantity: 62, totalQuantity: 150 },
-  { id: "11", slug: "cay-cam-ngot-cua-toi", title: "Cây Cam Ngọt Của Tôi", author: "José Mauro de Vasconcelos", category: "Văn học", originalPrice: 108000, salePrice: 85000, imageUrl: "", isFlashSale: true, soldQuantity: 45, totalQuantity: 100 },
-  { id: "12", slug: "con-chut-gi-de-nho", title: "Còn Chút Gì Để Nhớ", author: "Nguyễn Nhật Ánh", category: "Văn học Việt Nam", originalPrice: 95000, salePrice: 70000, imageUrl: "", isFlashSale: true, soldQuantity: 30, totalQuantity: 50 },
-];
-
-const BEST_SELLERS = [
-  { id: "6", slug: "muon-kiep-nhan-sinh", title: "Muôn Kiếp Nhân Sinh", author: "Nguyên Phong", category: "Tâm linh", originalPrice: 168000, imageUrl: "" },
-  { id: "7", slug: "thi-pham-nam-cao", title: "Tuyển Tập Nam Cao", author: "Nam Cao", category: "Văn học Việt Nam", originalPrice: 185000, salePrice: 160000, imageUrl: "" },
-  { id: "8", slug: "cha-giau-cha-ngheo", title: "Cha Giàu Cha Nghèo", author: "Robert T. Kiyosaki", category: "Kinh doanh", originalPrice: 140000, imageUrl: "" },
-  { id: "9", slug: "di-tim-le-song", title: "Đi Tìm Lẽ Sống", author: "Viktor E. Frankl", category: "Tâm lý", originalPrice: 120000, salePrice: 95000, imageUrl: "" },
-  { id: "10", slug: "suoi-nguon", title: "Suối Nguồn", author: "Ayn Rand", category: "Tiểu thuyết", originalPrice: 320000, salePrice: 280000, imageUrl: "" },
-  { id: "13", slug: "tu duy thinh vuong", title: "Bí Mật Tư Duy Triệu Phú", author: "T. Harv Eker", category: "Kinh doanh", originalPrice: 120000, imageUrl: "" },
-  { id: "14", slug: "chien-thang-con-quy-trong-ban", title: "Chiến Thắng Con Quỷ Trong Bạn", author: "Napoleon Hill", category: "Phát triển bản thân", originalPrice: 145000, salePrice: 110000, imageUrl: "" },
-];
+import { FLASH_SALE_BOOKS, BEST_SELLERS } from "@/lib/mockData";
+import { ProductCarouselSkeleton } from "@/components/product/ProductSkeleton";
+import { useState, useEffect } from "react";
 
 // Target flash sale end date: 24h from now
 const targetDate = new Date();
 targetDate.setHours(targetDate.getHours() + 24);
-
-import { ProductCarouselSkeleton } from "@/components/product/ProductSkeleton";
-import { useState, useEffect } from "react";
 
 export default function Home() {
   const { hours, minutes, seconds } = useCountdown(targetDate);

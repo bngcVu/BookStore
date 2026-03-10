@@ -16,6 +16,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
+import { USER_PROFILE } from '@/lib/mockData';
 
 export default function AccountInfoPage() {
     const [isEditing, setIsEditing] = useState(false);
@@ -71,27 +72,65 @@ export default function AccountInfoPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* 2. Avatar / Profile Summary */}
-                <div className="lg:col-span-1 flex flex-col items-center gap-6 bg-white rounded-3xl border border-slate-100 p-8 shadow-sm h-fit">
-                    <div className="relative">
-                        <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center text-primary font-black text-4xl border-4 border-white shadow-xl">
-                            NA
+                <div className="lg:col-span-1 flex flex-col items-center gap-6 bg-white rounded-3xl border border-slate-100 p-8 shadow-sm h-fit relative overflow-hidden">
+                    {/* Decorative background based on tier */}
+                    <div className={cn("absolute top-0 w-full h-32 opacity-20 -z-10", USER_PROFILE.loyalty.bg)}></div>
+
+                    <div className="relative mt-2">
+                        <div className={cn("w-32 h-32 rounded-full flex items-center justify-center font-black text-4xl border-4 border-white shadow-xl relative z-10 bg-white", USER_PROFILE.loyalty.color)}>
+                            {USER_PROFILE.name.charAt(0)}
                         </div>
-                        <button className="absolute bottom-0 right-0 w-10 h-10 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-slate-600 hover:text-primary transition-colors">
+                        <button className="absolute bottom-0 right-0 w-10 h-10 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-slate-600 hover:text-primary transition-colors z-20">
                             <Camera size={18} />
                         </button>
                     </div>
+
                     <div className="text-center">
-                        <h2 className="text-xl font-bold text-slate-900">Nguyễn Văn A</h2>
-                        <p className="text-sm text-slate-500 mt-1">Thành viên từ: 15/05/2023</p>
+                        <h2 className="text-xl font-bold text-slate-900">{USER_PROFILE.name}</h2>
+                        <p className="text-sm text-slate-500 mt-1">Thành viên từ: {USER_PROFILE.joinDate}</p>
                     </div>
-                    <div className="w-full pt-6 border-t border-slate-50 flex flex-col gap-3">
-                        <div className="flex items-center justify-between text-sm px-2">
-                            <span className="text-slate-500">Hạng thành viên</span>
-                            <span className="font-bold text-accent">Bạc</span>
+
+                    {/* Loyalty Tier Dashboard */}
+                    <div className="w-full pt-6 border-t border-slate-100 flex flex-col gap-4">
+                        <div className="flex items-center justify-between">
+                            <span className="text-slate-500 text-sm font-medium">Hạng hiện tại</span>
+                            <div className={cn("px-3 py-1 rounded-full text-xs font-bold font-mono", USER_PROFILE.loyalty.bg, USER_PROFILE.loyalty.color)}>
+                                Lvl. {USER_PROFILE.loyalty.tier}
+                            </div>
                         </div>
-                        <div className="flex items-center justify-between text-sm px-2">
-                            <span className="text-slate-500">Điểm tích lũy</span>
-                            <span className="font-bold text-primary">1,250 pts</span>
+
+                        {/* Progress Bar (Goal Gradient Effect) */}
+                        <div className="space-y-2">
+                            <div className="flex justify-between text-xs text-slate-500">
+                                <span>Đã chi: {(USER_PROFILE.loyalty.currentSpend).toLocaleString('vi-VN')}đ</span>
+                                <span>{(USER_PROFILE.loyalty.targetSpend).toLocaleString('vi-VN')}đ</span>
+                            </div>
+                            <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                                <div
+                                    className={cn("h-full rounded-full transition-all duration-1000", USER_PROFILE.loyalty.bg.replace('100', '500') || "bg-amber-400")}
+                                    style={{ width: `${(USER_PROFILE.loyalty.currentSpend / USER_PROFILE.loyalty.targetSpend) * 100}%` }}
+                                ></div>
+                            </div>
+                            <p className="text-[11px] text-center text-slate-500 pt-1">
+                                Mua thêm <span className="font-bold text-slate-800">{((USER_PROFILE.loyalty.targetSpend - USER_PROFILE.loyalty.currentSpend)).toLocaleString('vi-VN')}đ</span> để thăng hạng {USER_PROFILE.loyalty.nextTier}
+                            </p>
+                        </div>
+
+                        <div className="bg-slate-50 rounded-xl p-4 mt-2 border border-slate-100 space-y-3">
+                            <div className="flex items-center justify-between text-sm">
+                                <span className="text-slate-600 font-medium">Điểm thưởng hiện có</span>
+                                <span className="font-bold text-primary flex items-center gap-1">
+                                    {USER_PROFILE.loyalty.points.toLocaleString('vi-VN')} <span className="text-[10px] text-slate-400 font-normal">pts</span>
+                                </span>
+                            </div>
+                            <div className="pt-2 border-t border-slate-200">
+                                <p className="text-xs text-slate-500 font-medium mb-2">Đặc quyền hạng {USER_PROFILE.loyalty.tier}:</p>
+                                <ul className="text-[11px] text-slate-600 space-y-1 pl-4 list-disc marker:text-amber-400">
+                                    <li>Giảm {USER_PROFILE.loyalty.discountPercent}% áp dụng cho mọi đơn hàng.</li>
+                                    <li>Tích lũy X2 điểm thưởng vào ngày Lễ.</li>
+                                    <li>Miễn phí vận chuyển đơn từ 150k.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

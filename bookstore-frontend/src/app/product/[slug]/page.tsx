@@ -1,36 +1,42 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
+import Image from "next/image";
 import { ShoppingCart, Heart, Star, Truck, ShieldCheck, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductTabs } from "@/components/product/ProductTabs";
-
-// Mock Data
-const PRODUCT = {
-    id: "book-1",
-    title: "Muôn Kiếp Nhân Sinh - Tập 1",
-    author: "Nguyên Phong",
-    publisher: "First News",
-    category: "Tâm linh",
-    originalPrice: 168000,
-    salePrice: 120000,
-    rating: 4.8,
-    reviewsCount: 1250,
-    description: "Muôn kiếp nhân sinh là một bức tranh kỳ vĩ về luật Nhân quả và Luân hồi của vũ trụ, được kể lại qua những trải nghiệm tiền kiếp có thật của doanh nhân Thomas – một người bạn tâm giao lâu đời của tác giả Nguyên Phong.",
-    variants: [
-        { id: "v1", name: "Bìa Mềm", priceOffset: 0, stock: 15 },
-        { id: "v2", name: "Bìa Cứng (Bản Đặc Biệt)", priceOffset: 50000, stock: 3 }
-    ],
-    images: ["img1", "img2", "img3"]
-};
+import { ALL_BOOKS } from "@/lib/mockData";
+import { cn } from "@/lib/utils";
 
 export default function ProductDetailPage() {
-    const [selectedVariant, setSelectedVariant] = useState(PRODUCT.variants[0]);
-    const [quantity, setQuantity] = useState(1);
+    const params = useParams();
+    const router = useRouter();
+    const slug = params.slug as string;
 
-    const currentPrice = (PRODUCT.salePrice || PRODUCT.originalPrice) + selectedVariant.priceOffset;
-    const oldPrice = PRODUCT.originalPrice + selectedVariant.priceOffset;
+    // Find product from mock data
+    const product = ALL_BOOKS.find(b => b.slug === slug) || ALL_BOOKS[0];
+
+    const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
+    const [quantity, setQuantity] = useState(1);
+    const [mainImage, setMainImage] = useState(product.imageUrl);
+
+    // Sync state when product changes (if navigation occurs)
+    useEffect(() => {
+        if (product) {
+            setSelectedVariant(product.variants[0]);
+            setMainImage(product.imageUrl);
+            setQuantity(1);
+        }
+    }, [product]);
+
+    if (!product) {
+        return <div className="container mx-auto p-20 text-center">Sản phẩm không tồn tại</div>;
+    }
+
+    const currentPrice = (product.salePrice || product.originalPrice) + selectedVariant.priceOffset;
+    const oldPrice = product.originalPrice + selectedVariant.priceOffset;
     const discountPercent = Math.round((1 - currentPrice / oldPrice) * 100);
 
     return (
@@ -41,9 +47,9 @@ export default function ProductDetailPage() {
                 <div className="flex items-center gap-2 text-sm text-slate-500 mb-6 font-medium">
                     <Link href="/" className="hover:text-primary transition-colors">Trang chủ</Link>
                     <span>/</span>
-                    <Link href={`/category/tam-linh`} className="hover:text-primary transition-colors">Tâm linh</Link>
+                    <Link href={`/category/${product.category.toLowerCase()}`} className="hover:text-primary transition-colors">{product.category}</Link>
                     <span>/</span>
-                    <span className="text-slate-900 truncate max-w-[200px] md:max-w-none">{PRODUCT.title}</span>
+                    <span className="text-slate-900 truncate max-w-[200px] md:max-w-none">{product.title}</span>
                 </div>
 
                 {/* Main Product Section - White Box */}
@@ -53,13 +59,28 @@ export default function ProductDetailPage() {
                         {/* Left: Product Images Gallery */}
                         <div className="lg:col-span-5 flex flex-col gap-4">
                             {/* Main Image View */}
-                            <div className="aspect-[3/4] bg-slate-100 rounded-xl relative border border-slate-200 flex items-center justify-center">
-                                <span className="text-slate-400 font-bold text-xl uppercase tracking-widest">Sách {PRODUCT.title}</span>
+                            <div className="aspect-[3/4] bg-slate-100 rounded-xl relative border border-slate-200 overflow-hidden group">
+                                <Image
+                                    src={mainImage}
+                                    alt={product.title}
+                                    fill
+                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                    priority
+                                />
                             </div>
                             {/* Thumbnails */}
-                            <div className="flex gap-3">
-                                {PRODUCT.images.map((img, i) => (
-                                    <div key={i} className={`w-20 aspect-[3/4] bg-slate-100 rounded-lg cursor-pointer border-2 ${i === 0 ? 'border-primary' : 'border-transparent hover:border-slate-300'} transition-all`}></div>
+                            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                                {product.images?.map((img, i) => (
+                                    <div
+                                        key={i}
+                                        onClick={() => setMainImage(img)}
+                                        className={cn(
+                                            "w-20 aspect-[3/4] bg-slate-100 rounded-lg cursor-pointer relative overflow-hidden transition-all border-2",
+                                            mainImage === img ? "border-primary" : "border-transparent hover:border-slate-300"
+                                        )}
+                                    >
+                                        <Image src={img} alt={`${product.title} ${i + 1}`} fill className="object-cover" />
+                                    </div>
                                 ))}
                             </div>
                         </div>
@@ -68,24 +89,25 @@ export default function ProductDetailPage() {
                         <div className="lg:col-span-7 flex flex-col">
                             {/* Manufacturer/Author Info */}
                             <div className="flex items-center gap-4 text-sm mb-2">
-                                <span className="text-slate-500">Tác giả: <span className="text-primary font-medium hover:underline cursor-pointer">{PRODUCT.author}</span></span>
+                                <span className="text-slate-500">Tác giả: <span className="text-primary font-medium hover:underline cursor-pointer">{product.author}</span></span>
                                 <span className="text-slate-300">|</span>
-                                <span className="text-slate-500">Nhà xuất bản: <span className="text-primary font-medium hover:underline cursor-pointer">{PRODUCT.publisher}</span></span>
+                                <span className="text-slate-500">Nhà xuất bản: <span className="text-primary font-medium hover:underline cursor-pointer">{product.publisher}</span></span>
                             </div>
 
-                            <h1 className="text-3xl font-bold text-slate-900 leading-tight mb-4">{PRODUCT.title}</h1>
+                            <h1 className="text-3xl font-bold text-slate-900 leading-tight mb-4">{product.title}</h1>
 
                             {/* Ratings */}
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="flex items-center text-accent">
-                                    <Star className="fill-accent w-4 h-4" />
-                                    <Star className="fill-accent w-4 h-4" />
-                                    <Star className="fill-accent w-4 h-4" />
-                                    <Star className="fill-accent w-4 h-4" />
-                                    <Star className="w-4 h-4" />
+                                <div className="flex items-center text-amber-400">
+                                    {[...Array(5)].map((_, i) => (
+                                        <Star
+                                            key={i}
+                                            className={cn("w-4 h-4", i < Math.floor(product.rating || 0) ? "fill-current" : "text-slate-300")}
+                                        />
+                                    ))}
                                 </div>
-                                <span className="text-accent font-bold">{PRODUCT.rating}</span>
-                                <span className="text-slate-500 text-sm">({PRODUCT.reviewsCount} Đánh giá)</span>
+                                <span className="text-amber-500 font-bold">{product.rating}</span>
+                                <span className="text-slate-500 text-sm">({product.reviewsCount} Đánh giá)</span>
                                 <span className="text-slate-300">|</span>
                                 <span className="text-slate-500 text-sm">Đã bán 5k+</span>
                             </div>
@@ -105,14 +127,16 @@ export default function ProductDetailPage() {
                             <div className="mb-8">
                                 <h3 className="text-sm font-semibold text-slate-900 mb-3 uppercase tracking-wider">Phiên bản: <span className="font-bold text-primary">{selectedVariant.name}</span></h3>
                                 <div className="flex flex-wrap gap-3">
-                                    {PRODUCT.variants.map(variant => (
+                                    {product.variants.map(variant => (
                                         <button
                                             key={variant.id}
                                             onClick={() => setSelectedVariant(variant)}
-                                            className={`px-4 py-2.5 rounded-lg border text-sm font-medium transition-all ${selectedVariant.id === variant.id
-                                                ? 'border-primary bg-primary/5 text-primary'
-                                                : 'border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50'
-                                                }`}
+                                            className={cn(
+                                                "px-4 py-2.5 rounded-lg border text-sm font-medium transition-all",
+                                                selectedVariant.id === variant.id
+                                                    ? "border-primary bg-primary/5 text-primary shadow-sm"
+                                                    : "border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50"
+                                            )}
                                         >
                                             {variant.name}
                                         </button>
@@ -121,17 +145,21 @@ export default function ProductDetailPage() {
                             </div>
 
                             {/* Quantity & CTA */}
-                            <div className="flex items-end gap-6 border-t border-slate-100 pt-8 mt-auto">
+                            <div className="flex flex-wrap items-end gap-4 border-t border-slate-100 pt-8 mt-auto">
                                 <div className="flex flex-col gap-2">
                                     <label className="text-sm font-medium text-slate-700">Số lượng</label>
-                                    <div className="flex items-center border border-slate-200 rounded-md overflow-hidden bg-white">
-                                        <button className="w-10 h-10 flex items-center justify-center text-slate-500 hover:bg-slate-50" onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
-                                        <input type="text" className="w-12 h-10 text-center font-medium text-slate-900 focus:outline-none" value={quantity} readOnly />
-                                        <button className="w-10 h-10 flex items-center justify-center text-slate-500 hover:bg-slate-50" onClick={() => setQuantity(Math.min(selectedVariant.stock, quantity + 1))}>+</button>
+                                    <div className="flex items-center border border-slate-200 rounded-md overflow-hidden bg-white h-12">
+                                        <button className="w-10 h-full flex items-center justify-center text-slate-500 hover:bg-slate-50" onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
+                                        <input type="text" className="w-12 h-full text-center font-medium text-slate-900 focus:outline-none" value={quantity} readOnly />
+                                        <button className="w-10 h-full flex items-center justify-center text-slate-500 hover:bg-slate-50" onClick={() => setQuantity(Math.min(selectedVariant.stock, quantity + 1))}>+</button>
                                     </div>
                                 </div>
 
-                                <Button size="lg" className="flex-1 h-12 text-base shadow-md font-semibold bg-accent hover:bg-accent-hover text-white pt-1">
+                                <Button
+                                    size="lg"
+                                    onClick={() => router.push('/checkout')}
+                                    className="flex-1 min-w-[150px] h-12 text-base shadow-md font-semibold bg-accent hover:bg-accent-hover text-white"
+                                >
                                     Mua Ngay
                                 </Button>
 
@@ -148,23 +176,23 @@ export default function ProductDetailPage() {
                     </div>
                 </div>
 
-                {/* Benefits Strip below main prod */}
+                {/* Benefits Strip */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto mb-10">
-                    <div className="bg-white p-4 rounded-xl border border-slate-100 flex items-center gap-4">
+                    <div className="bg-white p-4 rounded-xl border border-slate-100 flex items-center gap-4 transition-transform hover:scale-[1.02]">
                         <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0"><ShieldCheck /></div>
                         <div>
                             <h4 className="font-bold text-slate-900 text-sm">Cam Kết Chính Hãng</h4>
                             <p className="text-xs text-slate-500">100% sách có bản quyền</p>
                         </div>
                     </div>
-                    <div className="bg-white p-4 rounded-xl border border-slate-100 flex items-center gap-4">
+                    <div className="bg-white p-4 rounded-xl border border-slate-100 flex items-center gap-4 transition-transform hover:scale-[1.02]">
                         <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-green-600 shrink-0"><Truck /></div>
                         <div>
                             <h4 className="font-bold text-slate-900 text-sm">Giao Hàng Miễn Phí</h4>
                             <p className="text-xs text-slate-500">Cho đơn hàng từ 150.000đ</p>
                         </div>
                     </div>
-                    <div className="bg-white p-4 rounded-xl border border-slate-100 flex items-center gap-4">
+                    <div className="bg-white p-4 rounded-xl border border-slate-100 flex items-center gap-4 transition-transform hover:scale-[1.02]">
                         <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent shrink-0"><RefreshCw /></div>
                         <div>
                             <h4 className="font-bold text-slate-900 text-sm">Đổi Trả Dễ Dàng</h4>
@@ -174,7 +202,9 @@ export default function ProductDetailPage() {
                 </div>
 
                 {/* Tabs Section for Description & Reviews */}
-                <ProductTabs description={PRODUCT.description} />
+                <div className="max-w-6xl mx-auto">
+                    <ProductTabs description={product.description} product={product} />
+                </div>
 
             </div>
         </div>
