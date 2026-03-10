@@ -3,8 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Minus, Plus, Trash2, ArrowRight, Ticket, ShieldCheck } from "lucide-react";
+import { Minus, Plus, Trash2, ArrowRight, Ticket, ShieldCheck, Truck, Package, PlusCircle, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 
 // Mock Cart Data
 const initialCart = [
@@ -62,6 +63,16 @@ export default function CartPage() {
     const subTotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
     const total = Math.max(0, subTotal - discount);
 
+    // Phase 3: Smart Fulfillment Logic
+    const freeShippingTarget = 300000;
+    const remainingForFreeShipping = Math.max(0, freeShippingTarget - subTotal);
+    const shippingProgress = Math.min((subTotal / freeShippingTarget) * 100, 100);
+
+    const crossSellItems = [
+        { id: "cs-1", name: "Bookmark Từ Đứng Form", price: 15000, img: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=150" },
+        { id: "cs-2", name: "Sổ Tay Bìa Da Basic", price: 45000, img: "https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=150" }
+    ];
+
     if (cartItems.length === 0) {
         return (
             <div className="container mx-auto px-4 py-24 flex flex-col items-center justify-center text-center">
@@ -90,6 +101,29 @@ export default function CartPage() {
 
                     {/* Main Cart Items */}
                     <div className="w-full lg:w-2/3 space-y-6">
+
+                        {/* 1. Free Shipping Progress Bar (Phase 3) */}
+                        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8">
+                            <div className="flex items-center gap-3 mb-3">
+                                <div className="p-2 bg-primary/10 rounded-full text-primary shrink-0">
+                                    <Truck size={20} />
+                                </div>
+                                <div className="flex-1">
+                                    {remainingForFreeShipping > 0 ? (
+                                        <p className="text-sm font-bold text-slate-800">
+                                            Mua thêm <span className="text-primary">{remainingForFreeShipping.toLocaleString('vi-VN')}đ</span> để được <span className="text-emerald-500 uppercase tracking-tighter">Miễn phí giao hàng</span>
+                                        </p>
+                                    ) : (
+                                        <p className="text-sm font-bold text-emerald-600 flex items-center gap-2">
+                                            🎉 Chúc mừng! Đơn hàng của bạn đã đủ điều kiện Freeship
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+                            <Progress value={shippingProgress} className="h-2.5 bg-slate-100" />
+                        </div>
+
+                        {/* 2. Cart Items Table */}
                         <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8">
 
                             {/* Table Header */}
@@ -160,6 +194,31 @@ export default function CartPage() {
                                         <div className="hidden md:flex justify-end col-span-2">
                                             <span className="font-bold text-primary">{(item.price * item.quantity).toLocaleString('vi-VN')}đ</span>
                                         </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* 3. Cross-sell / Bundles (Phase 3) */}
+                        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+                            <div className="flex justify-between items-center mb-4">
+                                <h3 className="font-bold text-lg text-slate-900 flex items-center gap-2">
+                                    <Package size={20} className="text-accent" /> Mua thêm phụ kiện
+                                </h3>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {crossSellItems.map(item => (
+                                    <div key={item.id} className="flex gap-4 p-3 border border-slate-100 rounded-xl hover:border-primary/50 transition-colors group">
+                                        <div className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0 bg-slate-100">
+                                            <Image src={item.img} alt={item.name} fill className="object-cover" />
+                                        </div>
+                                        <div className="flex flex-col justify-center flex-1">
+                                            <h4 className="text-sm font-bold text-slate-900 line-clamp-1">{item.name}</h4>
+                                            <span className="text-accent font-semibold text-sm">{item.price.toLocaleString('vi-VN')}đ</span>
+                                        </div>
+                                        <button className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-50 text-slate-400 group-hover:bg-primary group-hover:text-white transition-all self-center">
+                                            <PlusCircle size={18} />
+                                        </button>
                                     </div>
                                 ))}
                             </div>

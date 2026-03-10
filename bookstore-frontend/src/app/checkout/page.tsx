@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Truck, ShieldCheck, MapPin, Plus, Edit2, Coins } from "lucide-react";
+import { ChevronLeft, Truck, ShieldCheck, MapPin, Plus, Edit2, Coins, Calendar } from "lucide-react";
 import Image from "next/image";
 import { USER_PROFILE } from "@/lib/mockData";
 
@@ -71,6 +71,17 @@ export default function CheckoutPage() {
 
     const subTotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
     const shippingFee = shippingMethod === "express" ? 35000 : 15000;
+
+    // Phase 3: Dynamic Delivery Estimates Logic
+    const getDeliveryDate = (daysToAdd: number) => {
+        const date = new Date();
+        date.setDate(date.getDate() + daysToAdd);
+        const dayNames = ["Chủ nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+        const dayOfWeek = dayNames[date.getDay()];
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        return `${dayOfWeek}, ${day}/${month}`;
+    };
 
     // Loyalty Points Logic
     const pointsValueVND = USER_PROFILE.loyalty.points * 10; // 1 point = 10 VND
@@ -188,7 +199,9 @@ export default function CheckoutPage() {
                                             <Truck className={shippingMethod === 'standard' ? 'text-primary' : 'text-slate-400'} size={24} />
                                             <div className="flex flex-col">
                                                 <span className="font-semibold text-slate-900">Giao hàng tiêu chuẩn</span>
-                                                <span className="text-sm text-slate-500">Dự kiến giao hàng trong 2-3 ngày làm việc</span>
+                                                <span className="text-sm text-slate-500 flex items-center gap-1.5 mt-0.5">
+                                                    <Calendar size={14} className="text-slate-400" /> Nhận hàng vào <span className="font-semibold text-slate-700">{getDeliveryDate(2)} - {getDeliveryDate(4)}</span>
+                                                </span>
                                             </div>
                                         </div>
                                         <span className="font-bold text-slate-900">15.000đ</span>
@@ -208,7 +221,9 @@ export default function CheckoutPage() {
                                             </div>
                                             <div className="flex flex-col">
                                                 <span className="font-semibold text-slate-900">Giao hàng hỏa tốc (2H)</span>
-                                                <span className="text-sm text-slate-500">Chỉ áp dụng tại khu vực nội thành TP.HCM</span>
+                                                <span className="text-sm text-slate-500 flex items-center gap-1.5 mt-0.5">
+                                                    <Calendar size={14} className="text-accent" /> Nhận hàng ngay trong <span className="font-semibold text-accent">Hôm nay</span>
+                                                </span>
                                             </div>
                                         </div>
                                         <span className="font-bold text-slate-900">35.000đ</span>
