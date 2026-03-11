@@ -71,7 +71,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                         <p className="px-2 text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Quản lý</p>
                         {ADMIN_NAVIGATION.map((item) => {
                             const Icon = item.icon;
-                            const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+                            const isActive = pathname === item.href || (pathname.startsWith(item.href + '/') && !ADMIN_NAVIGATION.some(nav => nav.href !== item.href && nav.href.startsWith(item.href)));
                             return (
                                 <Link
                                     key={item.name}

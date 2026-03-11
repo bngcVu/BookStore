@@ -175,8 +175,8 @@ export default function CatalogManagementPage() {
                                             <p className="text-slate-400 text-[10px] uppercase font-bold tracking-widest mt-1">{book.publisher}</p>
                                         </td>
                                         <td className="p-4">
-                                            <p className="font-black text-slate-900">{book.salePrice?.toLocaleString('vi-VN')} đ</p>
-                                            {book.originalPrice && <p className="text-xs text-slate-400 font-bold line-through mt-0.5">{book.originalPrice?.toLocaleString('vi-VN')} đ</p>}
+                                            <p className="font-black text-slate-900" suppressHydrationWarning>{book.salePrice?.toLocaleString('vi-VN')} đ</p>
+                                            {book.originalPrice && <p className="text-xs text-slate-400 font-bold line-through mt-0.5" suppressHydrationWarning>{book.originalPrice?.toLocaleString('vi-VN')} đ</p>}
                                         </td>
                                         <td className="p-4 text-center">
                                             {book.status ? (

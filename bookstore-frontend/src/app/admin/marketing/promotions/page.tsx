@@ -130,21 +130,21 @@ export default function PromotionsManagementPage() {
                                         </td>
                                         <td className="p-4">
                                             {v.type === 'percent' && (
-                                                <p className="font-bold text-slate-900 flex items-center gap-1.5">
+                                                <p className="font-bold text-slate-900 flex items-center gap-1.5" suppressHydrationWarning>
                                                     <Percent size={14} className="text-emerald-500" /> Giảm {v.value}% (Max {v.maxDiscount.toLocaleString('vi-VN')}đ)
                                                 </p>
                                             )}
                                             {v.type === 'fixed' && (
-                                                <p className="font-bold text-slate-900 flex items-center gap-1.5">
+                                                <p className="font-bold text-slate-900 flex items-center gap-1.5" suppressHydrationWarning>
                                                     <TrendingDown size={14} className="text-violet-500" /> Trừ thẳng {v.value.toLocaleString('vi-VN')}đ
                                                 </p>
                                             )}
                                             {v.type === 'shipping' && (
-                                                <p className="font-bold text-slate-900 flex items-center gap-1.5">
+                                                <p className="font-bold text-slate-900 flex items-center gap-1.5" suppressHydrationWarning>
                                                     <Gift size={14} className="text-blue-500" /> Miễn phí Vận chuyển (Tối đa {v.maxDiscount.toLocaleString('vi-VN')}đ)
                                                 </p>
                                             )}
-                                            <p className="text-[11px] font-medium text-slate-500 mt-1">Đơn tối thiểu: {v.minOrder === 0 ? "0đ" : v.minOrder.toLocaleString('vi-VN') + "đ"}</p>
+                                            <p className="text-[11px] font-medium text-slate-500 mt-1" suppressHydrationWarning>Đơn tối thiểu: {v.minOrder === 0 ? "0đ" : v.minOrder.toLocaleString('vi-VN') + "đ"}</p>
                                         </td>
                                         <td className="p-4">
                                             <div className="flex flex-col items-center">
@@ -154,7 +154,7 @@ export default function PromotionsManagementPage() {
                                                         style={{ width: `${(v.used / v.usageLimit) * 100}%` }}
                                                     />
                                                 </div>
-                                                <p className="text-xs font-bold text-slate-700">
+                                                <p className="text-xs font-bold text-slate-700" suppressHydrationWarning>
                                                     <span className={cn(v.used >= v.usageLimit ? "text-rose-600" : "")}>{v.used}</span> / {v.usageLimit} <Users size={12} className="inline text-slate-400 ml-1" />
                                                 </p>
                                             </div>

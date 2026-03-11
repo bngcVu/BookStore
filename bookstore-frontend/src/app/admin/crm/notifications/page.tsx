@@ -144,7 +144,7 @@ export default function PushNotificationsPage() {
                                                         <BarChart3 size={14} className="text-emerald-500" />
                                                         <span className="text-xs font-black text-slate-900">{push.openRate}% Open</span>
                                                     </div>
-                                                    <p className="text-[10px] font-bold text-slate-400">Đã gửi {push.sent.toLocaleString()} thiết bị</p>
+                                                    <p className="text-[10px] font-bold text-slate-400" suppressHydrationWarning>Đã gửi {push.sent.toLocaleString()} thiết bị</p>
                                                 </div>
                                             )}
                                             {push.status === 'scheduled' && (

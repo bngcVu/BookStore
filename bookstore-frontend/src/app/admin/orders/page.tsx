@@ -93,7 +93,7 @@ export default function AdminOrdersPage() {
                                                     <p className="text-[11px] font-black tracking-widest uppercase text-slate-400 mb-1">ID: #{order.id}</p>
                                                     <p className="font-bold text-slate-900 group-hover:text-primary transition-colors">{order.user}</p>
                                                 </div>
-                                                <p className="font-black text-primary">{order.total.toLocaleString('vi-VN')} đ</p>
+                                                <p className="font-black text-primary" suppressHydrationWarning>{order.total.toLocaleString('vi-VN')} đ</p>
                                             </div>
 
                                             <div className="space-y-2 mb-4">

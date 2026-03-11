@@ -113,7 +113,7 @@ export default function ShippingManagementPage() {
                                         <div className="flex items-center gap-2 text-slate-500">
                                             <Package size={16} /> <span className="text-xs font-bold">Phí cơ bản</span>
                                         </div>
-                                        <span className="font-black text-slate-900">{carrier.baseFee.toLocaleString('vi-VN')} đ</span>
+                                        <span className="font-black text-slate-900" suppressHydrationWarning>{carrier.baseFee.toLocaleString('vi-VN')} đ</span>
                                     </div>
 
                                     <div className="flex justify-between items-center p-3 bg-primary/5 border border-primary/10 rounded-xl relative overflow-hidden">
@@ -121,7 +121,7 @@ export default function ShippingManagementPage() {
                                         <div className="flex items-center gap-2 text-primary relative z-10">
                                             <Truck size={16} /> <span className="text-xs font-black uppercase tracking-wider">Freeship từ</span>
                                         </div>
-                                        <span className="font-black text-primary relative z-10">{carrier.freeShip.toLocaleString('vi-VN')} đ</span>
+                                        <span className="font-black text-primary relative z-10" suppressHydrationWarning>{carrier.freeShip.toLocaleString('vi-VN')} đ</span>
                                     </div>
                                 </div>
 
@@ -186,13 +186,14 @@ export default function ShippingManagementPage() {
                                                 type="text"
                                                 className="w-24 bg-transparent border-b border-transparent focus:border-primary focus:outline-none font-bold text-slate-700"
                                                 defaultValue={rate.base_fee.toLocaleString('vi-VN')}
+                                                suppressHydrationWarning
                                             /> đ
                                         </td>
-                                        <td className="p-4 font-medium text-slate-600">
+                                        <td className="p-4 font-medium text-slate-600" suppressHydrationWarning>
                                             +{rate.per_kg.toLocaleString('vi-VN')} đ
                                         </td>
                                         <td className="p-4">
-                                            <span className="font-bold text-emerald-600">{rate.threshold.toLocaleString('vi-VN')} đ</span>
+                                            <span className="font-bold text-emerald-600" suppressHydrationWarning>{rate.threshold.toLocaleString('vi-VN')} đ</span>
                                         </td>
                                         <td className="p-4 text-right">
                                             <Button

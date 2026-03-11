@@ -148,10 +148,10 @@ export default function CustomerManagementPage() {
                                         </span>
                                     </td>
                                     <td className="p-4 text-center">
-                                        <p className="font-black text-slate-700">{cust.points.toLocaleString()}</p>
+                                        <p className="font-black text-slate-700" suppressHydrationWarning>{cust.points.toLocaleString()}</p>
                                     </td>
                                     <td className="p-4 text-right">
-                                        <p className="font-black text-slate-900">{cust.totalSpent.toLocaleString()} đ</p>
+                                        <p className="font-black text-slate-900" suppressHydrationWarning>{cust.totalSpent.toLocaleString()} đ</p>
                                     </td>
                                     <td className="p-4 text-center">
                                         <p className="font-bold text-slate-500 text-xs">{cust.joinDate}</p>
@@ -227,6 +227,7 @@ export default function CustomerManagementPage() {
                                                     type="text"
                                                     defaultValue={tier.minSpent.toLocaleString('vi-VN')}
                                                     className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-black text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-sm"
+                                                    suppressHydrationWarning
                                                 />
                                             </div>
                                         </div>
