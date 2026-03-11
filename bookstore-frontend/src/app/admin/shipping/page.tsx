@@ -21,6 +21,14 @@ const MOCK_CARRIERS = [
 
 export default function ShippingManagementPage() {
     const [activeTab, setActiveTab] = useState('carriers');
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const MOCK_PROVINCE_RATES = [
+        { code: "VN-HN", name: "Hà Nội", carrier: "GHTK", base_fee: 22000, per_kg: 5000, threshold: 150000 },
+        { code: "VN-HCM", name: "TP. Hồ Chí Minh", carrier: "GHN", base_fee: 25000, per_kg: 7000, threshold: 200000 },
+        { code: "VN-DN", name: "Đà Nẵng", carrier: "GHTK", base_fee: 28000, per_kg: 6000, threshold: 180000 },
+        { code: "VN-HP", name: "Hải Phòng", carrier: "GHN", base_fee: 24000, per_kg: 5500, threshold: 150000 },
+    ];
 
     return (
         <div className="space-y-6">
@@ -134,8 +142,73 @@ export default function ShippingManagementPage() {
             )}
 
             {activeTab !== 'carriers' && (
-                <div className="py-24 text-center">
-                    <h3 className="text-lg font-bold text-slate-400 animate-pulse">Tính năng cấu hình tỷ lệ vùng miền đang cập nhật...</h3>
+                <div className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden animate-in fade-in duration-500">
+                    <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                        <div className="relative w-64 group">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" size={16} />
+                            <input
+                                type="text"
+                                placeholder="Tìm Tỉnh/Thành..."
+                                className="w-full pl-10 pr-4 h-9 border border-slate-200 rounded-lg text-xs bg-white focus:outline-none focus:ring-2 focus:ring-primary/20"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                        </div>
+                        <Button size="sm" className="font-bold gap-2">
+                            Cập nhật hàng loạt
+                        </Button>
+                    </div>
+
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left text-sm">
+                            <thead className="bg-slate-50 text-[10px] font-black uppercase tracking-widest text-slate-400 border-b border-slate-100">
+                                <tr>
+                                    <th className="p-4">Khu vực / Tỉnh thành</th>
+                                    <th className="p-4">Đối tác mặc định</th>
+                                    <th className="p-4">Phí cơ bản (Base)</th>
+                                    <th className="p-4">Phụ phí /kg</th>
+                                    <th className="p-4">Ngưỡng Freeship</th>
+                                    <th className="p-4 text-right">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-50">
+                                {MOCK_PROVINCE_RATES.filter(r => r.name.toLowerCase().includes(searchQuery.toLowerCase())).map((rate) => (
+                                    <tr key={rate.code} className="hover:bg-slate-50/80 transition-colors group">
+                                        <td className="p-4">
+                                            <p className="font-bold text-slate-900">{rate.name}</p>
+                                            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">{rate.code}</p>
+                                        </td>
+                                        <td className="p-4">
+                                            <span className="px-2 py-1 rounded-md bg-slate-100 text-slate-600 text-[10px] font-black">{rate.carrier}</span>
+                                        </td>
+                                        <td className="p-4">
+                                            <input
+                                                type="text"
+                                                className="w-24 bg-transparent border-b border-transparent focus:border-primary focus:outline-none font-bold text-slate-700"
+                                                defaultValue={rate.base_fee.toLocaleString('vi-VN')}
+                                            /> đ
+                                        </td>
+                                        <td className="p-4 font-medium text-slate-600">
+                                            +{rate.per_kg.toLocaleString('vi-VN')} đ
+                                        </td>
+                                        <td className="p-4">
+                                            <span className="font-bold text-emerald-600">{rate.threshold.toLocaleString('vi-VN')} đ</span>
+                                        </td>
+                                        <td className="p-4 text-right">
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                className="text-primary font-black text-xs hover:bg-primary/10"
+                                                onClick={() => alert(`Đã cập nhật cấu hình vận chuyển cho ${rate.name}`)}
+                                            >
+                                                Lưu
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             )}
         </div>

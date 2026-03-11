@@ -12,7 +12,11 @@ import {
     ChevronRight,
     ShieldCheck,
     UserPlus,
-    ArrowUpRight
+    ArrowUpRight,
+    Settings2,
+    X,
+    Save,
+    Check
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -33,6 +37,14 @@ const TIER_COLORS = {
 
 export default function CustomerManagementPage() {
     const [activeTab, setActiveTab] = useState('all');
+    const [isTierModalOpen, setIsTierModalOpen] = useState(false);
+
+    const MOCK_TIER_CONFIGS = [
+        { id: 1, name: "Bronze", minSpent: 0, discount: 0, benefits: "Tích điểm 1% đơn hàng" },
+        { id: 2, name: "Silver", minSpent: 5000000, discount: 2, benefits: "Tích điểm 2%, Quà sinh nhật" },
+        { id: 3, name: "Gold", minSpent: 20000000, discount: 5, benefits: "Tích điểm 5%, Freeship đơn > 0đ" },
+        { id: 4, name: "Platinum", minSpent: 50000000, discount: 10, benefits: "Tích điểm 10%, Ưu đãi đặc biệt hàng tháng" },
+    ];
 
     return (
         <div className="space-y-6">
@@ -89,8 +101,13 @@ export default function CustomerManagementPage() {
                         <Button variant="outline" size="sm" className="h-10 gap-2 font-bold text-slate-600 border-slate-200">
                             <Filter size={16} /> Lọc hạng thẻ
                         </Button>
-                        <Button variant="outline" size="sm" className="h-10 gap-2 font-bold text-slate-600 border-slate-200">
-                            <ShieldCheck size={16} /> Review Loyalty
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            className="h-10 gap-2 font-bold text-slate-600 border-slate-200 hover:text-primary hover:border-primary/30"
+                            onClick={() => setIsTierModalOpen(true)}
+                        >
+                            <Settings2 size={16} /> Cấu hình Hạng thẻ
                         </Button>
                     </div>
                 </div>
@@ -174,6 +191,92 @@ export default function CustomerManagementPage() {
                     </div>
                 </div>
             </div>
+            {/* Tier Configuration Drawer */}
+            {isTierModalOpen && (
+                <div className="fixed inset-0 z-50 flex justify-end">
+                    <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setIsTierModalOpen(false)} />
+                    <div className="relative w-full max-w-xl bg-white h-full shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
+                        <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+                            <div>
+                                <h2 className="text-xl font-black text-slate-900 tracking-tight">Cấu hình Cấp bậc Loyalty</h2>
+                                <p className="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">Thiết lập điều kiện thăng hạng và ưu đãi</p>
+                            </div>
+                            <Button variant="ghost" size="sm" className="w-9 h-9 p-0 rounded-full" onClick={() => setIsTierModalOpen(false)}>
+                                <X size={20} className="text-slate-500" />
+                            </Button>
+                        </div>
+
+                        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+                            {MOCK_TIER_CONFIGS.map((tier) => (
+                                <div key={tier.id} className="p-5 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all border-l-4 border-l-primary/30">
+                                    <div className="flex items-center justify-between mb-4">
+                                        <span className={cn(
+                                            "px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border shadow-sm",
+                                            TIER_COLORS[tier.name as keyof typeof TIER_COLORS]
+                                        )}>
+                                            {tier.name}
+                                        </span>
+                                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter italic">ID: {tier.id}</p>
+                                    </div>
+
+                                    <div className="grid grid-cols-2 gap-6 mb-4">
+                                        <div className="space-y-1.5">
+                                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Chi tiêu tối thiểu (VNĐ)</p>
+                                            <div className="relative">
+                                                <input
+                                                    type="text"
+                                                    defaultValue={tier.minSpent.toLocaleString('vi-VN')}
+                                                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-black text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-sm"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="space-y-1.5">
+                                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Giảm giá trực tiếp (%)</p>
+                                            <div className="relative">
+                                                <input
+                                                    type="number"
+                                                    defaultValue={tier.discount}
+                                                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-black text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-sm"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-1.5">
+                                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Quyền lợi thành viên</p>
+                                        <textarea
+                                            rows={2}
+                                            defaultValue={tier.benefits}
+                                            className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-sm resize-none"
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="p-6 border-t border-slate-100 bg-slate-50/50">
+                            <div className="flex gap-3">
+                                <Button
+                                    className="flex-1 font-black bg-primary hover:bg-primary/90 text-white gap-2 h-12 shadow-lg shadow-primary/25"
+                                    onClick={() => {
+                                        alert("Đã cập nhật cấu hình cấp bậc Loyalty thành công!");
+                                        setIsTierModalOpen(false);
+                                    }}
+                                >
+                                    <Save size={18} /> Lưu cấu hình
+                                </Button>
+                                <Button
+                                    variant="outline"
+                                    className="font-bold border-slate-200 h-12 px-6 bg-white"
+                                    onClick={() => setIsTierModalOpen(false)}
+                                >
+                                    Hủy
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
