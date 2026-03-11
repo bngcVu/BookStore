@@ -49,8 +49,17 @@ export default function CatalogManagementPage() {
                     <p className="text-sm font-medium text-slate-500 mt-1">Quản lý sách, tên tác giả, danh mục và nhà xuất bản</p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <Button variant="outline" className="font-bold border-slate-200">Xuất Excel</Button>
-                    <Button className="font-bold bg-primary hover:bg-primary/90 text-white gap-2">
+                    <Button
+                        variant="outline"
+                        className="font-bold border-slate-200"
+                        onClick={() => alert("Đang chuẩn bị tệp danh mục...")}
+                    >
+                        Xuất Excel
+                    </Button>
+                    <Button
+                        className="font-bold bg-primary hover:bg-primary/90 text-white gap-2"
+                        onClick={() => alert("Mở form thêm Sách mới...")}
+                    >
                         <Plus size={16} /> Thêm Mới
                     </Button>
                 </div>
@@ -98,7 +107,11 @@ export default function CatalogManagementPage() {
                         />
                     </div>
                     <div className="flex items-center gap-2 w-full sm:w-auto">
-                        <Button variant="outline" className="w-full sm:w-auto h-10 gap-2 font-bold text-slate-600 border-slate-200">
+                        <Button
+                            variant="outline"
+                            className="w-full sm:w-auto h-10 gap-2 font-bold text-slate-600 border-slate-200"
+                            onClick={() => alert("Mở bộ lọc nâng cao...")}
+                        >
                             <Filter size={16} /> Lọc
                         </Button>
                     </div>
@@ -161,13 +174,28 @@ export default function CatalogManagementPage() {
                                         </td>
                                         <td className="p-4 text-right">
                                             <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <Button variant="ghost" size="sm" className="w-8 h-8 p-0 text-slate-400 hover:text-primary hover:bg-primary/10">
+                                                <Button
+                                                    variant="ghost"
+                                                    size="sm"
+                                                    className="w-8 h-8 p-0 text-slate-400 hover:text-primary hover:bg-primary/10"
+                                                    onClick={() => alert(`Sửa thông tin: ${book.title}`)}
+                                                >
                                                     <Edit3 size={16} />
                                                 </Button>
-                                                <Button variant="ghost" size="sm" className="w-8 h-8 p-0 text-slate-400 hover:text-amber-500 hover:bg-amber-50">
+                                                <Button
+                                                    variant="ghost"
+                                                    size="sm"
+                                                    className="w-8 h-8 p-0 text-slate-400 hover:text-amber-500 hover:bg-amber-50"
+                                                    onClick={() => alert(`Thay đổi trạng thái hiển thị: ${book.title}`)}
+                                                >
                                                     {book.status ? <EyeOff size={16} /> : <Eye size={16} />}
                                                 </Button>
-                                                <Button variant="ghost" size="sm" className="w-8 h-8 p-0 text-slate-400 hover:text-rose-500 hover:bg-rose-50">
+                                                <Button
+                                                    variant="ghost"
+                                                    size="sm"
+                                                    className="w-8 h-8 p-0 text-slate-400 hover:text-rose-500 hover:bg-rose-50"
+                                                    onClick={() => confirm(`Xóa sách ${book.title}?`) && alert("Đã xóa mô phỏng")}
+                                                >
                                                     <Trash2 size={16} />
                                                 </Button>
                                             </div>

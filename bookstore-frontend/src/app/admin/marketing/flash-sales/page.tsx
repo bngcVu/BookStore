@@ -24,6 +24,7 @@ const MOCK_FLASH_SALES = [
 
 export default function FlashSaleManagementPage() {
     const [activeTab, setActiveTab] = useState('all');
+    const [searchQuery, setSearchQuery] = useState('');
 
     return (
         <div className="space-y-6">
@@ -78,6 +79,8 @@ export default function FlashSaleManagementPage() {
                             type="text"
                             placeholder="Tìm tên chiến dịch..."
                             className="w-full pl-10 pr-4 h-10 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all shadow-sm"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
                         />
                     </div>
                     <div className="flex items-center gap-2 w-full sm:w-auto">
@@ -100,62 +103,76 @@ export default function FlashSaleManagementPage() {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100">
-                            {MOCK_FLASH_SALES.filter(fs => activeTab === 'all' || fs.status === activeTab).map((fs, idx) => (
-                                <tr key={idx} className="hover:bg-amber-50/30 transition-colors group">
-                                    <td className="p-4">
-                                        <p className="font-black text-slate-900 text-sm">{fs.name}</p>
-                                        <p className="text-[10px] font-bold text-slate-400 mt-1 uppercase tracking-wider">Mã: {fs.id}</p>
-                                    </td>
-                                    <td className="p-4 text-center">
-                                        {fs.status === 'active' && (
-                                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-emerald-700 bg-emerald-100 border border-emerald-200 animate-pulse">
-                                                <span className="w-2 h-2 rounded-full bg-emerald-500"></span> ĐANG CHẠY
-                                            </span>
-                                        )}
-                                        {fs.status === 'upcoming' && (
-                                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-amber-700 bg-amber-100 border border-amber-200">
-                                                <Clock size={12} className="text-amber-500" /> SẮP TỚI
-                                            </span>
-                                        )}
-                                        {fs.status === 'ended' && (
-                                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-500 bg-slate-100 border border-slate-200">
-                                                <CheckCircle2 size={12} className="text-slate-400" /> ĐÃ KẾT THÚC
-                                            </span>
-                                        )}
-                                    </td>
-                                    <td className="p-4">
-                                        <div className="flex flex-col gap-1">
-                                            <div className="flex items-center gap-2 text-xs font-bold text-slate-700 bg-slate-50 px-2 py-1 rounded w-max">
-                                                <Calendar size={12} className="text-slate-400" /> Bắt đầu: {fs.startTime}
+                            {MOCK_FLASH_SALES
+                                .filter(fs => (activeTab === 'all' || fs.status === activeTab) && fs.name.toLowerCase().includes(searchQuery.toLowerCase()))
+                                .map((fs, idx) => (
+                                    <tr key={idx} className="hover:bg-amber-50/30 transition-colors group">
+                                        <td className="p-4">
+                                            <p className="font-black text-slate-900 text-sm">{fs.name}</p>
+                                            <p className="text-[10px] font-bold text-slate-400 mt-1 uppercase tracking-wider">Mã: {fs.id}</p>
+                                        </td>
+                                        <td className="p-4 text-center">
+                                            {fs.status === 'active' && (
+                                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-emerald-700 bg-emerald-100 border border-emerald-200 animate-pulse">
+                                                    <span className="w-2 h-2 rounded-full bg-emerald-500"></span> ĐANG CHẠY
+                                                </span>
+                                            )}
+                                            {fs.status === 'upcoming' && (
+                                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-amber-700 bg-amber-100 border border-amber-200">
+                                                    <Clock size={12} className="text-amber-500" /> SẮP TỚI
+                                                </span>
+                                            )}
+                                            {fs.status === 'ended' && (
+                                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-500 bg-slate-100 border border-slate-200">
+                                                    <CheckCircle2 size={12} className="text-slate-400" /> ĐÃ KẾT THÚC
+                                                </span>
+                                            )}
+                                        </td>
+                                        <td className="p-4">
+                                            <div className="flex flex-col gap-1">
+                                                <div className="flex items-center gap-2 text-xs font-bold text-slate-700 bg-slate-50 px-2 py-1 rounded w-max">
+                                                    <Calendar size={12} className="text-slate-400" /> Bắt đầu: {fs.startTime}
+                                                </div>
+                                                <div className="flex items-center gap-2 text-xs font-medium text-slate-500 px-2 w-max">
+                                                    Kết thúc: <span className="text-slate-400">{fs.endTime}</span>
+                                                </div>
                                             </div>
-                                            <div className="flex items-center gap-2 text-xs font-medium text-slate-500 px-2 w-max">
-                                                Kết thúc: <span className="text-slate-400">{fs.endTime}</span>
+                                        </td>
+                                        <td className="p-4 text-center">
+                                            <Button variant="link" className="font-bold text-amber-600 p-0 h-auto">
+                                                {fs.totalItems} SP
+                                            </Button>
+                                        </td>
+                                        <td className="p-4 text-center">
+                                            <span className="font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded inline-block text-[11px]">{fs.discount}</span>
+                                        </td>
+                                        <td className="p-4 text-right">
+                                            <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <Button
+                                                    variant="ghost"
+                                                    size="sm"
+                                                    className="w-8 h-8 p-0 text-slate-400 hover:text-amber-600 hover:bg-amber-50"
+                                                    title="Chỉnh sửa"
+                                                    onClick={() => alert(`Chỉnh sửa chiến dịch: ${fs.name}`)}
+                                                >
+                                                    <Edit2 size={16} />
+                                                </Button>
+                                                <Button
+                                                    variant="ghost"
+                                                    size="sm"
+                                                    className="w-8 h-8 p-0 text-slate-400 hover:text-rose-500 hover:bg-rose-50"
+                                                    title="Xóa"
+                                                    onClick={() => confirm(`Bạn có chắc chắn muốn xóa chiến dịch ${fs.name}?`) && alert('Đã xóa (Mô phỏng)')}
+                                                >
+                                                    <Trash2 size={16} />
+                                                </Button>
+                                                <Button variant="ghost" size="sm" className="w-8 h-8 p-0 text-slate-400 hover:text-slate-600 hover:bg-slate-100">
+                                                    <MoreVertical size={16} />
+                                                </Button>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td className="p-4 text-center">
-                                        <Button variant="link" className="font-bold text-amber-600 p-0 h-auto">
-                                            {fs.totalItems} SP
-                                        </Button>
-                                    </td>
-                                    <td className="p-4 text-center">
-                                        <span className="font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded inline-block text-[11px]">{fs.discount}</span>
-                                    </td>
-                                    <td className="p-4 text-right">
-                                        <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <Button variant="ghost" size="sm" className="w-8 h-8 p-0 text-slate-400 hover:text-amber-600 hover:bg-amber-50" title="Chỉnh sửa">
-                                                <Edit2 size={16} />
-                                            </Button>
-                                            <Button variant="ghost" size="sm" className="w-8 h-8 p-0 text-slate-400 hover:text-rose-500 hover:bg-rose-50" title="Xóa">
-                                                <Trash2 size={16} />
-                                            </Button>
-                                            <Button variant="ghost" size="sm" className="w-8 h-8 p-0 text-slate-400 hover:text-slate-600 hover:bg-slate-100">
-                                                <MoreVertical size={16} />
-                                            </Button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
+                                        </td>
+                                    </tr>
+                                ))}
                         </tbody>
                     </table>
                 </div>

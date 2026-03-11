@@ -31,6 +31,12 @@ const COLUMNS = [
 
 export default function AdminOrdersPage() {
     const [searchQuery, setSearchQuery] = useState('');
+    const [orders, setOrders] = useState(MOCK_ADMIN_ORDERS);
+
+    const handleMoveStatus = (id: string, currentStatus: string) => {
+        const nextStatus = currentStatus === 'processing' ? 'shipping' : 'completed';
+        setOrders(prev => prev.map(o => o.id === id ? { ...o, status: nextStatus } : o));
+    };
 
     return (
         <div className="space-y-6 flex flex-col h-[calc(100vh-8rem)]">
@@ -38,7 +44,7 @@ export default function AdminOrdersPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 shrink-0">
                 <div>
                     <h1 className="text-2xl font-black text-slate-900 tracking-tight">Quản lý Đơn hàng (Fulfillment)</h1>
-                    <p className="text-sm font-medium text-slate-500 mt-1">Kéo thả thẻ đơn hàng để chuyển trạng thái</p>
+                    <p className="text-sm font-medium text-slate-500 mt-1">Kéo thả thẻ đơn hàng hoặc nhấn nút chuyển trạng thái</p>
                 </div>
                 <div className="flex items-center gap-3">
                     <div className="relative group w-64">
@@ -61,7 +67,7 @@ export default function AdminOrdersPage() {
             <div className="flex-1 overflow-x-auto overflow-y-hidden pb-4">
                 <div className="flex gap-6 h-full min-w-[900px]">
                     {COLUMNS.map(col => {
-                        const colOrders = MOCK_ADMIN_ORDERS.filter(o => o.status === col.id);
+                        const colOrders = orders.filter(o => o.status === col.id && (o.user.toLowerCase().includes(searchQuery.toLowerCase()) || o.id.toLowerCase().includes(searchQuery.toLowerCase())));
 
                         return (
                             <div key={col.id} className="flex-1 flex flex-col bg-slate-100/50 rounded-2xl border border-slate-200 overflow-hidden">
@@ -106,16 +112,28 @@ export default function AdminOrdersPage() {
                                                 <Button variant="ghost" size="sm" className="h-8 px-2 text-xs font-bold text-slate-500 hover:text-primary gap-1">
                                                     <Printer size={14} /> In phiếu
                                                 </Button>
-                                                <Button variant="ghost" size="sm" className="h-8 px-2 text-xs font-bold text-slate-500 hover:text-primary gap-1">
-                                                    Chi tiết <ChevronRight size={14} />
-                                                </Button>
+                                                {order.status !== 'completed' && (
+                                                    <Button
+                                                        variant="ghost"
+                                                        size="sm"
+                                                        className="h-8 px-2 text-xs font-bold text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 gap-1 border border-transparent hover:border-emerald-100"
+                                                        onClick={() => handleMoveStatus(order.id, order.status)}
+                                                    >
+                                                        Tiếp tục <ArrowRight size={14} />
+                                                    </Button>
+                                                )}
+                                                {order.status === 'completed' && (
+                                                    <Button variant="ghost" size="sm" className="h-8 px-2 text-xs font-bold text-slate-500 hover:text-primary gap-1">
+                                                        Chi tiết <ChevronRight size={14} />
+                                                    </Button>
+                                                )}
                                             </div>
                                         </div>
                                     ))}
 
                                     {colOrders.length === 0 && (
                                         <div className="h-32 flex flex-col items-center justify-center border-2 border-dashed border-slate-200 rounded-xl text-slate-400">
-                                            <p className="text-sm font-medium">Kéo thả đơn vào đây</p>
+                                            <p className="text-sm font-medium">Trống</p>
                                         </div>
                                     )}
                                 </div>

@@ -18,8 +18,11 @@ import {
     RefreshCcw,
     Zap,
     Ticket,
-    Search,
-    Bell
+    Bell,
+    MessageSquare,
+    Send,
+    ShieldHalf,
+    Search
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -35,7 +38,10 @@ const ADMIN_NAVIGATION = [
     { name: 'Flash Sales', href: '/admin/marketing/flash-sales', icon: Zap },
     { name: 'Vouchers & Combo', href: '/admin/marketing/promotions', icon: Ticket },
     { name: 'Khách hàng (CRM)', href: '/admin/crm', icon: Users },
-    { name: 'Cài đặt', href: '/admin/settings', icon: Settings },
+    { name: 'Đánh giá & Bình luận', href: '/admin/content/reviews', icon: MessageSquare },
+    { name: 'Thông báo Push', href: '/admin/crm/notifications', icon: Send },
+    { name: 'Phân quyền Admin', href: '/admin/settings/roles', icon: ShieldHalf },
+    { name: 'Cài đặt hệ thống', href: '/admin/settings', icon: Settings },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -86,7 +92,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
                     {/* User & Logout */}
                     <div className="p-4 border-t border-slate-100">
-                        <div className="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100 cursor-pointer hover:border-slate-300 transition-colors">
+                        <div
+                            className="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100 cursor-pointer hover:border-slate-300 transition-colors"
+                            onClick={() => alert("Chuyển hướng đến trang Profile cá nhân...")}
+                        >
                             <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-primary to-accent flex items-center justify-center text-white font-bold text-sm">
                                 A
                             </div>
@@ -94,7 +103,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                                 <p className="text-sm font-bold text-slate-900 truncate">Super Admin</p>
                                 <p className="text-xs text-slate-500 truncate">hello@bookstore.vn</p>
                             </div>
-                            <LogOut size={16} className="text-slate-400" />
+                            <button
+                                className="p-1.5 hover:bg-slate-200 rounded-lg transition-colors"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    confirm("Bạn có chắc chắn muốn đăng xuất?") && (window.location.href = "/");
+                                }}
+                            >
+                                <LogOut size={16} className="text-slate-400" />
+                            </button>
                         </div>
                     </div>
                 </div>

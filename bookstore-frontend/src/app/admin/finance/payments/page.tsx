@@ -43,7 +43,7 @@ export default function FinancePaymentsPage() {
                             className="w-full pl-10 pr-4 h-10 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-sm"
                         />
                     </div>
-                    <Button variant="outline" className="font-bold border-slate-200 gap-2">
+                    <Button variant="outline" className="font-bold border-slate-200 gap-2" onClick={() => alert("Đang kết xuất tệp đối soát...")}>
                         Xuất Excel CSV
                     </Button>
                 </div>
@@ -136,7 +136,12 @@ export default function FinancePaymentsPage() {
                                     <td className="p-4 text-right">
                                         <p className="font-bold text-slate-600 text-xs">{txn.date}</p>
                                         {txn.status === 'pending' && (
-                                            <Button variant="ghost" size="sm" className="h-6 mt-2 text-[10px] font-bold text-primary hover:bg-primary/10 gap-1">
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                className="h-6 mt-2 text-[10px] font-bold text-primary hover:bg-primary/10 gap-1"
+                                                onClick={() => alert(`Đang đồng bộ trạng thái thực tế từ cổng ${txn.type.toUpperCase()}...`)}
+                                            >
                                                 <RefreshCw size={12} /> Sync
                                             </Button>
                                         )}

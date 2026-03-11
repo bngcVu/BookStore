@@ -37,10 +37,16 @@ export default function PromotionsManagementPage() {
                     <p className="text-sm font-medium text-slate-500 mt-1">Tạo Mã giảm giá (Vouchers) và cấu hình Combo mua sắm</p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <Button className="font-bold bg-violet-600 hover:bg-violet-700 text-white gap-2 shadow-lg shadow-violet-500/20">
+                    <Button
+                        className="font-bold bg-violet-600 hover:bg-violet-700 text-white gap-2 shadow-lg shadow-violet-500/20"
+                        onClick={() => alert("Mở trình tạo Combo Buy X Get Y...")}
+                    >
                         <Plus size={16} /> Tạo Combo Buy X Get Y
                     </Button>
-                    <Button className="font-bold bg-slate-900 hover:bg-slate-800 text-white gap-2 shadow-lg shadow-slate-900/20">
+                    <Button
+                        className="font-bold bg-slate-900 hover:bg-slate-800 text-white gap-2 shadow-lg shadow-slate-900/20"
+                        onClick={() => alert("Mở trình tạo Mã giảm giá (Voucher) mới...")}
+                    >
                         <Plus size={16} /> Tạo Voucher Mới
                     </Button>
                 </div>
@@ -80,7 +86,11 @@ export default function PromotionsManagementPage() {
                             />
                         </div>
                         <div className="flex items-center gap-2 w-full sm:w-auto">
-                            <Button variant="outline" className="w-full sm:w-auto h-10 gap-2 font-bold text-slate-600 border-slate-200">
+                            <Button
+                                variant="outline"
+                                className="w-full sm:w-auto h-10 gap-2 font-bold text-slate-600 border-slate-200"
+                                onClick={() => alert("Mở bộ lọc Loại mã khuyến mãi...")}
+                            >
                                 <Filter size={16} /> Lọc Loại mã
                             </Button>
                         </div>
@@ -104,7 +114,15 @@ export default function PromotionsManagementPage() {
                                         <td className="p-4">
                                             <div className="flex items-center gap-2 mb-1">
                                                 <span className="font-black text-slate-900 text-sm tracking-widest border border-dashed border-slate-300 rounded px-2 py-1 bg-slate-50">{v.code}</span>
-                                                <Button variant="ghost" size="sm" className="w-6 h-6 p-0 text-slate-400 hover:text-violet-600 shrink-0">
+                                                <Button
+                                                    variant="ghost"
+                                                    size="sm"
+                                                    className="w-6 h-6 p-0 text-slate-400 hover:text-violet-600 shrink-0"
+                                                    onClick={() => {
+                                                        navigator.clipboard.writeText(v.code);
+                                                        alert(`Đã copy mã: ${v.code}`);
+                                                    }}
+                                                >
                                                     <Copy size={12} />
                                                 </Button>
                                             </div>
@@ -158,7 +176,11 @@ export default function PromotionsManagementPage() {
                                             </p>
                                         </td>
                                         <td className="p-4 text-right">
-                                            <Button variant="link" className="font-bold text-violet-600 p-0 h-auto opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <Button
+                                                variant="link"
+                                                className="font-bold text-violet-600 p-0 h-auto opacity-0 group-hover:opacity-100 transition-opacity"
+                                                onClick={() => alert(`Cấu hình Voucher: ${v.code}`)}
+                                            >
                                                 Cấu hình
                                             </Button>
                                         </td>

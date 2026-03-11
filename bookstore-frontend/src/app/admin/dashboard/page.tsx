@@ -36,10 +36,17 @@ export default function AdminDashboard() {
                     <p className="text-sm font-medium text-slate-500 mt-1">Hôm nay là Thứ Tư, 12/03/2024</p>
                 </div>
                 <div className="flex items-center gap-2">
-                    <Button variant="outline" className="font-bold rounded-lg h-9 shadow-sm">
+                    <Button
+                        variant="outline"
+                        className="font-bold rounded-lg h-9 shadow-sm"
+                        onClick={() => alert("Mở bộ chọn bộ lọc thời gian...")}
+                    >
                         24h qua
                     </Button>
-                    <Button className="font-bold rounded-lg h-9 shadow-sm bg-primary hover:bg-primary/90 text-white">
+                    <Button
+                        className="font-bold rounded-lg h-9 shadow-sm bg-primary hover:bg-primary/90 text-white"
+                        onClick={() => alert("Đang khởi tạo tệp báo cáo tổng quan. Vui lòng đợi...")}
+                    >
                         Tải báo cáo
                     </Button>
                 </div>
@@ -128,7 +135,11 @@ export default function AdminDashboard() {
                         ))}
                     </div>
                     <div className="p-4 bg-slate-50 border-t border-slate-100">
-                        <Button variant="outline" className="w-full font-bold text-primary border-primary/20 hover:bg-primary hover:text-white">
+                        <Button
+                            variant="outline"
+                            className="w-full font-bold text-primary border-primary/20 hover:bg-primary hover:text-white"
+                            onClick={() => alert("Đang chuyển hướng đến trang Quản lý kho để lập Phiếu Nhập...")}
+                        >
                             Lên phiếu nhập kho
                         </Button>
                     </div>
@@ -140,7 +151,13 @@ export default function AdminDashboard() {
             <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
                 <div className="flex items-center justify-between mb-6">
                     <h3 className="font-black text-slate-900">Top Sách Bán Chạy (Tuần)</h3>
-                    <Button variant="link" className="font-bold text-primary">Xem tất cả</Button>
+                    <Button
+                        variant="link"
+                        className="font-bold text-primary"
+                        onClick={() => alert("Chuyển hướng đến trang báo cáo chi tiết Danh mục bán chạy...")}
+                    >
+                        Xem tất cả
+                    </Button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {BEST_SELLERS.slice(0, 4).map((book, i) => (

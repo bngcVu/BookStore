@@ -44,6 +44,11 @@ const MOCK_REFUNDS = [
 
 export default function RefundsManagementPage() {
     const [activeStatus, setActiveStatus] = useState('pending');
+    const [refunds, setRefunds] = useState(MOCK_REFUNDS);
+
+    const handleAction = (id: string, newStatus: string) => {
+        setRefunds(prev => prev.map(r => r.id === id ? { ...r, status: newStatus } : r));
+    };
 
     return (
         <div className="space-y-6">
@@ -68,9 +73,9 @@ export default function RefundsManagementPage() {
             {/* Tabs */}
             <div className="flex gap-2 border-b border-slate-200">
                 {[
-                    { id: 'pending', label: 'Cần xử lý', count: 1 },
-                    { id: 'approved', label: 'Đã duyệt', count: 1 },
-                    { id: 'rejected', label: 'Từ chối', count: 0 }
+                    { id: 'pending', label: 'Cần xử lý', count: refunds.filter(r => r.status === 'pending').length },
+                    { id: 'approved', label: 'Đã duyệt', count: refunds.filter(r => r.status === 'approved').length },
+                    { id: 'rejected', label: 'Từ chối', count: refunds.filter(r => r.status === 'rejected').length }
                 ].map(tab => (
                     <button
                         key={tab.id}
@@ -92,7 +97,7 @@ export default function RefundsManagementPage() {
 
             {/* Content */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {MOCK_REFUNDS.filter(r => r.status === activeStatus).map((refund) => (
+                {refunds.filter(r => r.status === activeStatus).map((refund) => (
                     <div key={refund.id} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:border-orange-200 transition-colors">
                         <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
                             <div>
@@ -156,10 +161,17 @@ export default function RefundsManagementPage() {
                                     className="flex-1 h-10 px-3 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20"
                                 />
                                 <div className="flex gap-2 shrink-0">
-                                    <Button variant="outline" className="h-10 text-rose-600 border-rose-200 hover:bg-rose-50 hover:border-rose-300 gap-1 font-bold">
+                                    <Button
+                                        variant="outline"
+                                        className="h-10 text-rose-600 border-rose-200 hover:bg-rose-50 hover:border-rose-300 gap-1 font-bold"
+                                        onClick={() => handleAction(refund.id, 'rejected')}
+                                    >
                                         <XCircle size={16} /> Từ chối
                                     </Button>
-                                    <Button className="h-10 bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-500/20 font-bold gap-1">
+                                    <Button
+                                        className="h-10 bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-500/20 font-bold gap-1"
+                                        onClick={() => handleAction(refund.id, 'approved')}
+                                    >
                                         <CheckCircle2 size={16} /> Duyệt Form
                                     </Button>
                                 </div>
@@ -169,24 +181,38 @@ export default function RefundsManagementPage() {
                         {refund.status === 'approved' && (
                             <div className="p-4 border-t border-slate-100 bg-emerald-50 text-emerald-700 flex items-center justify-between">
                                 <p className="text-xs font-bold flex items-center gap-2">
-                                    <CheckCircle2 size={14} /> Đã duyệt lúc 10:30 - 13/03/2024
+                                    <CheckCircle2 size={14} /> Đã duyệt lúc 10:30 - {refund.date}
                                 </p>
                                 <Button variant="link" className="p-0 h-auto text-emerald-700 font-black text-xs gap-1">
                                     <MessageSquare size={14} /> Nhắn tin khách
                                 </Button>
                             </div>
                         )}
+
+                        {refund.status === 'rejected' && (
+                            <div className="p-4 border-t border-slate-100 bg-rose-50 text-rose-700 flex items-center justify-between">
+                                <p className="text-xs font-bold flex items-center gap-2">
+                                    <XCircle size={14} /> Đã từ chối yêu cầu
+                                </p>
+                                <Button
+                                    variant="link"
+                                    className="p-0 h-auto text-rose-700 font-black text-xs gap-1"
+                                    onClick={() => handleAction(refund.id, 'pending')}
+                                >
+                                    Khôi phục về Chờ duyệt
+                                </Button>
+                            </div>
+                        )}
                     </div>
                 ))}
 
-                {MOCK_REFUNDS.filter(r => r.status === activeStatus).length === 0 && (
+                {refunds.filter(r => r.status === activeStatus).length === 0 && (
                     <div className="lg:col-span-2 py-24 text-center text-slate-400">
                         <CheckCircle2 size={48} className="mx-auto mb-4 opacity-50 text-emerald-500" />
-                        <p className="font-bold text-slate-500">Tuyệt vời, không có yêu cầu Đổi trả / Hoàn tiền nào!</p>
+                        <p className="font-bold text-slate-500">Tuyệt vời, không có yêu cầu nào trong mục này!</p>
                     </div>
                 )}
             </div>
-
         </div>
     );
 }

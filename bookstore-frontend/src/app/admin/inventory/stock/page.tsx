@@ -42,10 +42,17 @@ export default function InventoryManagementPage() {
                     <p className="text-sm font-medium text-slate-500 mt-1">Kiểm soát tồn kho, phiếu nhập và phiếu xuất</p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <Button variant="outline" className="font-bold border-slate-200 gap-2">
+                    <Button
+                        variant="outline"
+                        className="font-bold border-slate-200 gap-2"
+                        onClick={() => alert("Đang chuẩn bị form Xuất Kho...")}
+                    >
                         <ArrowUpFromLine size={16} /> Xuất Kho
                     </Button>
-                    <Button className="font-bold bg-primary hover:bg-primary/90 text-white gap-2">
+                    <Button
+                        className="font-bold bg-primary hover:bg-primary/90 text-white gap-2"
+                        onClick={() => alert("Đang chuẩn bị form Nhập Kho...")}
+                    >
                         <ArrowDownToLine size={16} /> Lập Phiếu Nhập
                     </Button>
                 </div>

@@ -31,8 +31,17 @@ export default function ShippingManagementPage() {
                     <p className="text-sm font-medium text-slate-500 mt-1">Quản lý Bảng giá (Rates) và Tích hợp API vận chuyển</p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <Button variant="outline" className="font-bold border-slate-200">Test API</Button>
-                    <Button className="font-bold bg-primary hover:bg-primary/90 text-white gap-2">
+                    <Button
+                        variant="outline"
+                        className="font-bold border-slate-200"
+                        onClick={() => alert("Đang kiểm tra kết nối API với các đơn vị vận chuyển...")}
+                    >
+                        Test API
+                    </Button>
+                    <Button
+                        className="font-bold bg-primary hover:bg-primary/90 text-white gap-2"
+                        onClick={() => alert("Mở form tích hợp Đối tác vận chuyển mới...")}
+                    >
                         <Plus size={16} /> Thêm Đối Tác
                     </Button>
                 </div>
@@ -109,7 +118,12 @@ export default function ShippingManagementPage() {
                                 </div>
 
                                 <div className="mt-6 flex justify-end">
-                                    <Button variant="outline" size="sm" className="font-bold border-slate-200 gap-2 w-full hover:border-primary/30 hover:text-primary transition-all">
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        className="font-bold border-slate-200 gap-2 w-full hover:border-primary/30 hover:text-primary transition-all"
+                                        onClick={() => alert(`Mở bảng cấu hình nâng cao cho đơn vị: ${carrier.name}`)}
+                                    >
                                         <Edit3 size={14} /> Cấu hình API & Giá
                                     </Button>
                                 </div>
