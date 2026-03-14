@@ -42,45 +42,80 @@
 
 ### 0.1 Cấu trúc thư mục Clean Architecture
 
+> Dependency phải chảy vào trong: Controller → Service → Repository. Controller **không được** gọi thẳng Repository, Service **không được** trả về JPA Entity ra ngoài (phải qua Mapper).
+
 ```
 com/bookstore/
-├── domain/entity/          # JPA Entities mapping với DB
+├── domain/entity/          # JPA Entities mapping với DB (chỉ dùng trong service trở xuống)
 ├── domain/repository/      # Spring Data JPA interfaces
-├── service/                # Business logic
-├── controller/             # REST Controllers
-├── dto/request/            # Request bodies
-├── dto/response/           # Response bodies
-├── config/                 # Spring configs
-├── security/               # JWT, filters
-├── exception/              # Global handler
-└── util/                   # Helpers
+├── service/                # Business logic (@Transactional đặt tại đây)
+├── controller/             # REST Controllers (chỉ xử lý HTTP concern)
+├── dto/request/            # Request bodies (validated với @Valid)
+├── dto/response/           # Response bodies (không bao giờ expose Entity trực tiếp)
+├── mapper/                 # MapStruct mappers: Entity ↔ DTO (KHÔNG dùng manual mapping)
+├── config/                 # Spring configs (Security, CORS, Redis, Cache...)
+├── security/               # JWT, filters, UserDetailsService
+├── exception/              # Global handler, AppException, ErrorCode
+├── event/                  # Domain Events (ApplicationEvent) cho cross-cutting concerns
+└── util/                   # Helpers, constants
 ```
+
+> **⚠️ Quy tắc `@Transactional`**: Đặt `@Transactional` tại layer **Service**, không đặt ở Controller hay Repository. Method write cần `@Transactional`, method read có thể dùng `@Transactional(readOnly = true)` để tối ưu. Các flow phức tạp (order creation) cần `@Transactional` bao toàn bộ steps để đảm bảo rollback khi lỗi.
 
 ### 0.2 Các class cần tạo
 
 - [ ] `ApiResponse<T>` — wrapper response chuẩn `{ status, message, data, timestamp }`
 - [ ] `GlobalExceptionHandler` — `@ControllerAdvice` xử lý tất cả exceptions
-- [ ] `AppException`, `ErrorCode` — custom exception với mã lỗi rõ ràng
-- [ ] `SecurityConfig` — Spring Security, CORS cho `localhost:3000`
-- [ ] `JwtUtil` — generate/validate Access Token (15 phút) + Refresh Token (7 ngày)
-- [ ] `JwtAuthenticationFilter` — filter đọc Bearer token từ header
+- [ ] `AppException`, `ErrorCode` — custom exception với mã lỗi rõ ràng (định nghĩa cụ thể: `USER_NOT_FOUND`, `EMAIL_ALREADY_EXISTS`, `OTP_EXPIRED`, `INVALID_TOKEN`...)
+- [ ] `SecurityConfig` — Spring Security, CORS cho `localhost:3000`; thêm Secure Headers: `HSTS`, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Content-Security-Policy`
+- [ ] `JwtUtil` — generate/validate Access Token (15 phút, RS256) + Refresh Token (7 ngày)
+- [ ] `JwtAuthenticationFilter` — filter đọc Bearer token từ header; validate đầy đủ: signature, exp, iss, aud
+- [ ] `RequestLoggingFilter` — structured logging: `traceId`, `userId`, `method`, `path`, `statusCode`, `durationMs` (dùng MDC)
+- [ ] `AuditLogger` — utility ghi audit log cho các sự kiện nhạy cảm: login, logout, password change, token revoke
 
 ### 0.3 Dependency cần thêm vào `pom.xml`
 
 ```xml
 <!-- Security -->
 spring-boot-starter-security
-jjwt-api + jjwt-impl + jjwt-jackson (io.jsonwebtoken)
+jjwt-api + jjwt-impl + jjwt-jackson (io.jsonwebtoken 0.12.x)
 
 <!-- Validation -->
 spring-boot-starter-validation
 
+<!-- Cache / Redis -->
+spring-boot-starter-data-redis
+spring-boot-starter-cache
+
 <!-- Utilities -->
 lombok
 mapstruct
+mapstruct-processor
+
+<!-- API Documentation -->
+springdoc-openapi-starter-webmvc-ui  (swagger-ui tại /swagger-ui.html)
+
+<!-- Database Migration -->
+flyway-core  (org.flywaydb — zero-downtime schema migration)
+# SQL files đặt tại src/main/resources/db/migration/V{n}__{mô-tả}.sql
+# Zero-downtime pattern: Expand (thêm cột nullable) trước, Contract (xóa cột cũ) sau
+# Không bao giờ sửa migration file đã chạy ở production
+
+<!-- Testing -->
+spring-boot-starter-test (JUnit 5, Mockito)
+testcontainers + testcontainers-postgresql  (integration test với DB thật)
 ```
 
-**Verify**: Project build thành công, `GET /api/health` trả về `200 OK`
+### 0.4 Testing baseline (bắt buộc từ Phase 0)
+
+> Skill `backend-dev-guidelines` yêu cầu: không phase nào được hoàn thành mà thiếu test coverage cho business logic.
+
+- **Unit test**: Test từng Service method với Mockito mock (Repository, external services)
+- **Integration test**: Test từng Repository với `@DataJpaTest` + Testcontainers (PostgreSQL thật)
+- **Controller test**: Test từng Controller với `@WebMvcTest` + MockMvc (không cần full Spring context)
+- Mỗi Phase Verify phải bao gồm kiểm tra unit test coverage cho các service vừa viết
+
+**Verify**: Project build thành công, `GET /api/health` trả về `200 OK`, Swagger UI load được tại `/swagger-ui.html`
 
 ---
 
@@ -128,22 +163,42 @@ PATCH  /api/v1/users/me/password      → Đổi mật khẩu
 POST   /api/v1/admin/auth/login       → Admin login (FE: /admin/login)
 ```
 
-### 1.4 Business logic quan trọng
+### 1.4 Admin RBAC — Phân quyền Admin
 
-- Password: BCrypt `strength=12`
-- Access Token: JWT RS256, expire 15 phút
-- Refresh Token: lưu DB hoặc Redis, expire 7 ngày, rotate mỗi lần dùng
+> `admins` table cần thêm field `role` để phân quyền. Không phải mọi admin đều có quyền như nhau.
+
+| Role | Quyền | FE page có thể truy cập |
+|------|-------|--------------------------|
+| `SUPER_ADMIN` | Toàn bộ — bao gồm cấu hình tiers, xóa dữ liệu, export finance | Tất cả admin pages |
+| `WAREHOUSE_STAFF` | Quản lý tồn kho, cập nhật trạng thái đơn đến `shipping`, nhập hàng | `/admin/inventory`, `/admin/orders` |
+| `CUSTOMER_SERVICE` | Xem đơn hàng, duyệt/từ chối refund, xem và reply review, ban/unban user | `/admin/orders`, `/admin/crm`, `/admin/content/reviews` |
+| `MARKETING` | Quản lý flash sale, voucher, promotion | `/admin/marketing/*` |
+
+- JWT payload của admin phải chứa `role`: `{ adminId, email, role, iss, aud }`
+- Dùng `@PreAuthorize("hasRole('SUPER_ADMIN')")` Spring Security annotation tại method level
+- API `PATCH /admin/refunds/{id}/approve` chỉ cho `CUSTOMER_SERVICE` hoặc `SUPER_ADMIN`
+- API `POST /admin/payments/export` chỉ cho `SUPER_ADMIN`
+
+### 1.5 Business logic quan trọng
+
+- Password: BCrypt `strength=12`; **password complexity**: tối thiểu 8 ký tự, phải có chữ hoa, chữ thường, số
+- Access Token: JWT RS256, expire 15 phút; validate đầy đủ: signature, `exp`, `iss`, `aud` — không tin header `alg` từ token
+- Refresh Token: lưu DB (bảng `refresh_tokens`), expire 7 ngày, rotate mỗi lần dùng (old token bị blacklist ngay lập tức)
+- **Token storage guidance cho FE**: Khuyến nghị lưu Access Token trong memory (JS variable), Refresh Token trong `httpOnly; Secure; SameSite=Strict` cookie — tránh `localStorage` vì dễ bị XSS đọc
 - Register: tự động gắn `customer_tiers` lowest tier (Bronze/Bạc)
 - Register: tạo user với `email_verified_at = null`; khuyến nghị set `status = inactive` cho tới khi verify email thành công
-- OTP email: TTL 5 phút, mỗi mã chỉ dùng 1 lần (`is_used = true`), giới hạn số lần nhập sai và có cooldown resend 30-60 giây
+- OTP email: TTL 5 phút, mỗi mã chỉ dùng 1 lần (`is_used = true`), **max 5 lần nhập sai / session → lock**, cooldown resend 60 giây, **max 5 lần resend / ngày / email**
 - OTP type: tách rõ `register_verify_email`, `forgot_password`, `change_password_confirm` để tránh dùng nhầm luồng
 - Login: không cho customer đăng nhập nếu email chưa được xác thực hoặc tài khoản đang `inactive` / `banned`
+- **Rate limiting auth endpoints** (chống brute force): `POST /auth/login` → max 5 requests/phút/IP; `POST /auth/register/verify-otp` → max 5 requests/session; implement với Spring `bucket4j` hoặc custom filter + Redis counter
 - Forgot password: chỉ cho reset bằng OTP email; không yêu cầu user đang đăng nhập
 - Change password: yêu cầu `currentPassword`; với action nhạy cảm có thể yêu cầu thêm OTP email
-- Change password / reset password: revoke tất cả refresh token cũ, cập nhật `updated_at`, ghi audit log nếu có
-- OTP cleanup: cần job dọn OTP hết hạn hoặc query chỉ lấy OTP chưa dùng và chưa hết hạn
+- Change password / reset password: revoke tất cả refresh token cũ, cập nhật `updated_at`, **ghi audit log bắt buộc** (event type, userId, IP, userAgent, timestamp)
+- OTP cleanup: cần `@Scheduled` job dọn OTP hết hạn mỗi giờ hoặc query chỉ lấy OTP chưa dùng và chưa hết hạn
+- **Admin account**: Cân nhắc bắt buộc TOTP/MFA (Google Authenticator) cho admin login — admin có quyền cao nhất
+- **Audit events phải log**: `user_registered`, `email_verified`, `user_login_success`, `user_login_failed`, `password_changed`, `password_reset`, `token_revoked`, `admin_login`
 
-### 1.5 DTOs
+### 1.6 DTOs
 
 ```java
 // Request
@@ -186,6 +241,25 @@ UserResponse     { id, email, fullName, avatarUrl, tier, rewardPoints, totalSpen
 - [ ] `CategoryRepository` — `findByParentIdIsNull()`, `findBySlug()`
 - [ ] `BookVariantRepository` — `findByBookId()`
 
+> **⚠️ N+1 Query Warning**: `BookDetailResponse` trả về `authors[]`, `images[]`, `variants[]` từ nhiều bảng. Bắt buộc dùng `@EntityGraph` hoặc JOIN FETCH để tải eager trong 1-2 queries, không để Hibernate lazy-load từng item thành N+1 queries.
+
+### 2.2.1 Search Backend — Lựa chọn kỹ thuật
+
+> `GET /api/v1/books/search` cần xác định backend implementation trước khi code.
+
+| Approach | Khi nào dùng | Ưu điểm | Nhược điểm |
+|----------|-------------|----------|-----------|
+| **PostgreSQL FTS** (`tsvector` / `tsquery`) | ≤ 100k sách, không cần autocomplete | Không cần service thêm, dễ setup | Relevance ranking kém, không hỗ trợ typo tolerance |
+| **LIKE / ILIKE `%q%`** | Prototype nhanh | 0 setup | Full table scan, không scale |
+| **Elasticsearch / OpenSearch** | > 100k sách, cần relevance, autocomplete, suggestion | Best UX, blazing fast | Phức tạp, hạ tầng thêm |
+
+**Khuyến nghị cho BookStore**: Bắt đầu với **PostgreSQL FTS** (`to_tsvector('simple', title || ' ' || authors)` + GIN index). Nếu sau scale cần thì migrate sang Elasticsearch mà không ảnh hưởng API shape.
+
+```sql
+-- Index cần tạo (trong Flyway migration)
+CREATE INDEX idx_books_search ON books USING GIN (to_tsvector('simple', title || ' ' || coalesce(description, '')));
+```
+
 ### 2.3 APIs cần implement
 
 ```
@@ -210,7 +284,25 @@ GET    /api/v1/books                  → Danh sách có filter + phân trang (F
 # Books — Product detail page
 GET    /api/v1/books/{slug}           → Chi tiết sách + variants + images (FE: /product/[slug])
 GET    /api/v1/books/{id}/related     → Sách liên quan (FE: /product/[slug] bottom)
+
+# Search
+GET    /api/v1/books/search           → Tìm kiếm full-text (FE: thanh search header)
+  Query: ?q=clean+code&page=0&size=20
 ```
+
+### 2.3.1 Caching strategy cho Catalog APIs (Redis)
+
+> Catalog data là read-heavy, ít thay đổi — caching là bắt buộc trước khi go production.
+
+```yaml
+GET /api/v1/categories:          TTL 6h   (thay đổi rất ít)
+GET /api/v1/books/featured:      TTL 1h
+GET /api/v1/books/best-sellers:  TTL 30min
+GET /api/v1/books/{slug}:        TTL 1h   (invalidate khi admin update book)
+GET /api/v1/books/search:        TTL 5min (dynamic, không nên cache quá lâu)
+```
+
+Dùng Spring Cache `@Cacheable` + Redis. Evict cache khi admin PATCH/DELETE book/category.
 
 ### 2.4 Response shape (theo đúng mockData.ts FE đang dùng)
 
@@ -241,7 +333,7 @@ PageResponse<T> {
 }
 ```
 
-**Verify**: Homepage load được sách, `/category/ky-nang-song` filter được, `/product/[slug]` load đủ thông tin
+**Verify**: Homepage load được sách, `/category/ky-nang-song` filter được, `/product/[slug]` load đủ thông tin; không có N+1 query (check Hibernate SQL logs); cache hit trên lần gọi 2+
 
 ---
 
@@ -296,12 +388,14 @@ GET    /api/v1/shipping/carriers      → Danh sách nhà vận chuyển
 
 ```
 POST   /api/v1/orders                 → Tạo đơn hàng (FE: /checkout submit)
+  Header: Idempotency-Key: <uuid-v4>  ← BẮT BUỘC để tránh tạo 2 đơn khi client retry
   Body: { addressId, carrierId, paymentMethod, voucherId?, usePoints, note, items[] }
 
 GET    /api/v1/orders                 → DS đơn hàng của user (FE: /account/orders)
   Query: ?status=shipping&page=0&size=10
 
 GET    /api/v1/orders/{id}            → Chi tiết đơn hàng (FE: /account/orders detail)
+GET    /api/v1/orders/{id}/tracking   → Thông tin vận chuyển: carrier, tracking_number, estimated_delivery, current_status
 PATCH  /api/v1/orders/{id}/cancel     → Hủy đơn { reason }
 
 # Payment flow cho online payment
@@ -314,24 +408,35 @@ POST   /api/v1/payments/webhook                  → Webhook/IPN cập nhật tr
 ### 3.6 Business logic quan trọng khi tạo đơn
 
 1. **Validate stock**: kiểm tra `inventory.quantity - inventory.reserved_quantity >= requested_qty`
-2. **Lock inventory**: tăng `reserved_quantity` (prevent oversell)
+2. **Lock inventory**: tăng `reserved_quantity` (prevent oversell); dùng `SELECT ... FOR UPDATE` hoặc Optimistic Locking (`@Version`) để tránh race condition khi nhiều user cùng mua sách cuối cùng
 3. **Calculate total**: `subtotal + shipping_fee - discount_amount - points_discount`
 4. **Save** `OrderEntity` với status `pending_payment`
 5. **Clear cart** sau khi tạo đơn thành công
 6. **Create** `OrderStatusHistoryEntity` → trạng thái đầu tiên
-7. **Payment idempotency**: callback/webhook từ gateway phải xử lý idempotent, không tạo 2 payment records hoặc update order lặp
-8. **Inventory release**: nếu payment fail / order timeout / order cancel thì giảm `reserved_quantity`; chỉ trừ kho thật khi đơn được xác nhận xử lý theo policy hệ thống
-9. **Order timeout**: đơn online payment ở trạng thái `pending_payment` cần auto-cancel sau X phút nếu chưa thanh toán
-10. **Snapshot data**: lưu `shipping_address`, `recipient_name`, `recipient_phone`, `unit_price`, `discount_amount` ngay tại thời điểm tạo đơn để tránh lệ thuộc dữ liệu hiện tại
-11. **Re-validate at submit**: voucher, shipping fee, flash sale price, reward points phải được tính lại tại thời điểm submit order
-12. **State machine**: định nghĩa rõ chuyển trạng thái hợp lệ `pending_payment -> paid -> processing -> shipping -> delivered -> completed` và các nhánh `cancelled`, `payment_failed`, `refund_pending`, `refunded`
-13. **Cancellation rule**: chỉ cho user hủy đơn ở các trạng thái cho phép; nếu đã thanh toán online thì cần xác định có tạo refund hay hoàn tác payment hay không
+7. **Order number**: Tạo `orderCode` dạng `BS` + yyyyMMdd + 6 chữ số random (ví dụ: `BS20260313001234`) — unique, dễ đọc cho customer service
+8. **Idempotency**: Lưu `Idempotency-Key` vào DB (Redis TTL 24h); nếu key đã tồn tại thì trả lại response cũ thay vì tạo mới
+9. **Payment idempotency**: callback/webhook từ gateway phải xử lý idempotent, không tạo 2 payment records hoặc update order lặp
+10. **Inventory release**: nếu payment fail / order timeout / order cancel thì giảm `reserved_quantity`; chỉ trừ kho thật khi đơn được xác nhận xử lý theo policy hệ thống
+11. **Order timeout**: đơn online payment ở trạng thái `pending_payment` cần auto-cancel sau X phút nếu chưa thanh toán
+12. **Snapshot data**: lưu `shipping_address`, `recipient_name`, `recipient_phone`, `unit_price`, `discount_amount` ngay tại thời điểm tạo đơn để tránh lệ thuộc dữ liệu hiện tại
+13. **Re-validate at submit**: voucher, shipping fee, flash sale price, reward points phải được tính lại tại thời điểm submit order
+14. **State machine**: định nghĩa rõ chuyển trạng thái hợp lệ `pending_payment -> paid -> processing -> shipping -> delivered -> completed` và các nhánh `cancelled`, `payment_failed`, `refund_pending`, `refunded`
+15. **Cancellation rule**: chỉ cho user hủy đơn ở các trạng thái cho phép; nếu đã thanh toán online thì cần xác định có tạo refund hay hoàn tác payment hay không
 
 ### 3.6.1 Payment business rules thực tế
 
 - `cod`: có thể tạo đơn trực tiếp với `payment_status = pending`
 - `vnpay` / `momo`: chỉ đánh dấu `payment_status = paid` khi callback/webhook hợp lệ từ gateway
+- `installment`: DB đã có `payments.installment_months` (INT) và `payments.installment_bank` (VARCHAR). Khi user chọn trả góp, request `POST /api/v1/orders/{id}/payments/init` phải include `{ paymentMethod: "installment", installmentMonths: 6, installmentBank: "VCB" }`. Validate `installmentMonths` theo whitelist ngân hàng hỗ trợ trước khi tạo bản ghi `payments`
+- **Webhook HMAC verification** (bắt buộc, từ skill `api-security-patterns`):
+  1. Đọc `X-Webhook-Signature` và `X-Webhook-Timestamp` từ header
+  2. Reject nếu timestamp cách hiện tại quá 5 phút (chống replay attack)
+  3. Tính HMAC-SHA256 của `timestamp.payload` với signing secret
+  4. So sánh bằng `MessageDigest.isEqual()` (constant-time, chống timing attack)
+  5. Reject nếu signature không khớp
 - Verify chữ ký callback/IPN và đối chiếu `amount`, `orderCode`, `transaction_id` trước khi update DB
+- **Webhook HTTP response**: Handler phải trả `200 OK` ngay trong vòng **200ms** — TRƯỚC KHI xử lý logic nặng. Dùng `@Async` hoặc message queue để process payment update ở background; không xử lý inline trong request thread (VNPAY/MoMo sẽ retry nếu response chậm)
+- **Server-to-server verification bắt buộc**: Sau khi nhận callback/IPN, phải gọi **trực tiếp** API query trạng thái của VNPAY/MoMo (server-to-server) để xác nhận lại kết quả thật — không tin hoàn toàn dữ liệu trong payload callback. Chỉ update `payment_status = paid` sau khi gateway xác nhận thành công
 - Không tin tưởng hoàn toàn dữ liệu redirect từ client/browser; trạng thái cuối cùng phải ưu tiên webhook hoặc verify server-to-server
 - Lưu toàn bộ `gateway_response` vào bảng `payments` để phục vụ đối soát và xử lý tranh chấp
 - Khi online payment thành công: tạo record `payments`, cập nhật `orders.payment_status`, append `order_status_history`, và chuyển đơn sang bước xử lý tiếp theo
@@ -356,7 +461,29 @@ OrderResponse {
 }
 ```
 
-**Verify**: Giỏ hàng → Chọn địa chỉ → Đặt hàng COD thành công, xem được trong `/account/orders`
+### 3.8 Background Jobs cần setup trong Phase 3
+
+- `OrderTimeoutJob` (`@Scheduled`): Mỗi 5 phút, cancel các đơn `pending_payment` quá X phút → release inventory, rollback voucher_usage
+- `CartCleanupJob` (`@Scheduled`): Mỗi ngày, xóa cart của guest/anonymous đã không hoạt động > 30 ngày
+
+### 3.9 Order Creation Saga — Bảng Compensating Transactions
+
+> Tạo đơn hàng là một **multi-step saga**. Nếu bất kỳ bước nào fail, phải rollback các bước trước đó để tránh data inconsistency. Toàn bộ steps 1-5 phải nằm trong cùng `@Transactional`.
+
+| Bước | Action | Nếu fail ở bước này → Rollback |
+|------|--------|-------------------------------|
+| 1 | Validate stock (đọc inventory) | Không cần rollback (chưa write) |
+| 2 | Lock inventory (`reserved_quantity += qty`) | Không cần rollback (bước này fail = không lock) |
+| 3 | Apply voucher (check + tạm lock usage) | Release inventory reservation từ bước 2 |
+| 4 | Calculate & verify total (reprice) | Release inventory, release voucher lock |
+| 5 | Save `OrderEntity` + `OrderItemEntity` | Release inventory, release voucher lock |
+| 6 | Clear cart | **Không rollback order** — clear cart là idempotent; nếu fail thì retry safe, không ảnh hưởng đơn đã tạo |
+
+> **Nguyên tắc**: Steps 1–5 nằm trong `@Transactional`, nên DB rollback tự động nếu exception xảy ra trong transaction. Clear cart (step 6) có thể đặt ngoài transaction hoặc retry riêng. `OrderTimeoutJob` chịu trách nhiệm release reservation cho đơn không thanh toán đúng hạn.
+
+
+
+**Verify**: Giỏ hàng → Chọn địa chỉ → Đặt hàng COD thành công, xem được trong `/account/orders`; Retry POST /orders với cùng Idempotency-Key không tạo đơn thứ 2
 
 ---
 
@@ -389,7 +516,7 @@ POST   /api/v1/vouchers/validate      → Kiểm tra voucher hợp lệ với gi
 - Kiểm tra các điều kiện: thời gian hiệu lực, `is_active`, min order value, max discount, usage limit toàn cục, usage limit per user, danh mục hoặc SKU được áp dụng
 - Khi tạo đơn thành công phải ghi `voucher_usage`; nếu đơn bị hủy hoặc thanh toán fail theo policy thì rollback usage
 - Cần rule ưu tiên khi chồng nhiều giảm giá: flash sale, promotion, voucher, tier discount, reward points
-- Cần cơ chế chống race condition khi voucher gần hết lượt dùng
+- Cần cơ chế chống race condition khi voucher gần hết lượt dùng — **giải pháp**: dùng `UPDATE vouchers SET usage_count = usage_count + 1 WHERE id = ? AND usage_count < usage_limit` (atomic SQL increment); nếu affected rows = 0 thì voucher đã hết lượt → trả lỗi. Không dùng SELECT rồi UPDATE riêng lẽ (TOCTOU race)
 
 ### 4.3 APIs — Admin
 
@@ -412,6 +539,15 @@ GET    /api/v1/admin/promotions                → List promotions
 POST   /api/v1/admin/promotions                → Tạo promotion
 ```
 
+### 4.3.1 Buy X Get Y — `is_gift` logic
+
+- `promotion_books.is_gift = 1` đánh dấu sách nào là **quà tặng** (sách "Get") trong promotion
+- Khi áp dụng promotion Buy X Get Y vào đơn hàng:
+  1. Identify "get" items từ `promotion_books WHERE is_gift = 1`
+  2. Set `order_items.is_gift = 1` và `order_items.unit_price = 0`, `order_items.discount_amount = original_price` cho gift items
+  3. Gift items **không được tính vào `subtotal`** nhưng vẫn được ghi vào `order_items` để hiển thị và tracking kho
+  4. Khi inventory reserve: vẫn trừ `inventory.reserved_quantity` cho cả gift items (sách thật vẫn ra khỏi kho)
+
 ### 4.4 Business logic Flash Sale
 
 - Check `start_time <= now <= end_time` và `is_active = true`
@@ -420,6 +556,16 @@ POST   /api/v1/admin/promotions                → Tạo promotion
 - Giá flash sale phải được re-check tại thời điểm tạo đơn, không tin giá đang lưu ở cart
 - Cần policy fallback nếu flash sale hết hạn trong lúc user đang checkout
 - `sold_count` chỉ nên tăng khi order được thanh toán hoặc xác nhận thành công theo quy tắc hệ thống, tránh cộng sai do abandoned cart
+- **Race condition cho `sold_count` + `per_user_limit`**: Dùng Redis atomic counter `INCR flash_sale:{id}:sold` để track real-time; so sánh với `quantity_limit` trước khi admit order. Nếu không dùng Redis thì dùng `SELECT ... FOR UPDATE` trên `flash_sale_items` khi tạo đơn để lock row
+
+### 4.5 Caching cho Flash Sale
+
+> Flash sale data được read cực kỳ nhiều (homepage countdown, banner) nhưng cũng thay đổi theo thời gian thực.
+
+```yaml
+GET /api/v1/flash-sales/active:  TTL 2min  (balance freshness vs load)
+# Flash sale item sold_count: Không cache — cần real-time để tránh oversell
+```
 
 **Verify**: Trang `/flash-sale` load được sản phẩm sale, áp voucher giảm giá trong checkout
 
@@ -437,6 +583,34 @@ POST   /api/v1/admin/promotions                → Tạo promotion
 - [ ] `InventoryHistoryEntity`, `PriceHistoryEntity`
 - [ ] `ReviewEntity`, `ReviewImageEntity`
 - [ ] `UserBookInteractionEntity`
+
+#### 5.1.1b `user_book_interactions` — Write Triggers
+
+> Bảng này là input cho recommendation engine (Phase 6+). Cần định nghĩa rõ khi nào insert.
+
+| Sự kiện | `interaction_type` | Logic |
+|---------|-------------------|-------|
+| User xem trang `/product/{slug}` | `view` | Gọi async sau khi response trả về; không block API |
+| User thêm vào giỏ hàng | `cart` | Tại `POST /api/v1/cart` |
+| Order chuyển sang `completed` | `purchase` | Trigger trong `OrderService.completeOrder()` |
+
+SQL mẫu (upsert):
+```sql
+INSERT INTO user_book_interactions (user_id, book_id, interaction_type, interaction_count, last_interaction_at)
+VALUES (:userId, :bookId, :type, 1, NOW())
+ON DUPLICATE KEY UPDATE
+  interaction_count = interaction_count + 1,
+  last_interaction_at = NOW();
+```
+Chỉ ghi cho **authenticated users**; guest views không ghi (không có `user_id`).
+
+### 5.1.1 Price History — Khi nào ghi record
+
+> `price_history` table tồn tại trong schema nhưng chưa có trigger logic rõ ràng.
+
+- **Trigger ghi**: Mỗi khi admin `PATCH /admin/books/{id}` hoặc `PATCH /admin/flash-sales/{id}/items` làm thay đổi `sale_price` hoặc `original_price`, tự động insert một record `price_history { variantId, oldPrice, newPrice, changedBy, changedAt, reason }`
+- Implement qua `@EntityListeners(PriceHistoryListener.class)` trên `BookVariantEntity` — intercept `@PreUpdate`, compare old vs new price
+- Dùng để: hiện lịch sử giá trên trang product detail, trigger notify wishlist khi giá giảm (`PriceDroppedEvent`), admin analytics
 
 ### 5.2 APIs — Wishlist (FE: `/account/wishlist`)
 
@@ -475,9 +649,47 @@ POST   /api/v1/orders/{id}/refund-requests       → User tạo yêu cầu hoàn
 GET    /api/v1/orders/{id}/refund-requests       → User xem trạng thái yêu cầu hoàn tiền
 ``` 
 
-- Chỉ cho tạo refund request trong thời hạn cho phép sau khi giao hàng
+- Chỉ cho tạo refund request trong thời hạn cho phép sau khi giao hàng (**mặc định 30 ngày kể từ `delivered_at`** — cần chốt business rule Q11)
 - Refund phải gắn tới `order_item` cụ thể, số lượng, lý do, ảnh minh chứng, và số tiền hoàn tối đa
+  - **Mã RMA (Return Merchandise Authorization) bắt buộc**: Khi tạo refund request thành công, hệ thống sinh `rma_number` (ví dụ `RMA-20260313-0012`) để customer dùng khi gửi hàng về; lưu vào bảng `refunds.rma_number`
+  > ⚠️ **Schema gap**: Bảng `refunds` hiện tại **chưa có** cột `rma_number` và `inspection_grade`. Bắt buộc tạo Flyway migration trước khi implement:
+  > ```sql
+  > ALTER TABLE refunds
+  >   ADD COLUMN rma_number VARCHAR(30) NULL COMMENT 'Mã RMA tự sinh khi tạo yêu cầu hoàn trả',
+  >   ADD COLUMN inspection_grade ENUM('A','B','C','D') NULL COMMENT 'Kết quả kiểm tra hàng hoàn';
+  > ```
+- **Điều kiện tạo refund**: order đạt trạng thái `delivered` hoặc `completed`; `refund_request_count` chưa vượt limit per order; item chưa bị refund trùng
 - Khi refund được duyệt: hoàn lại tiền, hoàn hoặc thu hồi points theo policy, cập nhật tồn kho nếu hàng hoàn nhập kho
+
+### 5.3.3 Quy trình kiểm tra hàng hoàn trả (Inspection Workflow)
+
+> Áp dụng khi customer gửi sách vật lý về kho. Admin/warehouse nhân viên phải grading trước khi quyết định disposition.
+
+| Grade | Mô tả | Disposition |
+|-------|-------|-------------|
+| A — Nguyên vẹn | Sách còn seal hoặc như mới, không hư hỏng | Nhập lại kho (`customer_return_restock`), bán lại giá gốc |
+| B — Đã qua sử dụng | Sách đọc rồi, bìa/ruột không hư | Bán giá thanh lý hoặc nhập kho đặc biệt (`discounted_stock`) |
+| C — Hư hỏng nhẹ | Bìa trầy, trang torn nhẹ | Xem xét bồi thường từ carrier hoặc write-off |
+| D — Không thể bán | Hư hỏng nặng, bẩn, thiếu trang | Write-off (`inventory_history.type = write_off`) |
+
+- Sau grading, admin cập nhật `refunds.inspection_grade` và chọn `disposition`
+- Nếu disposition là `restock`: tạo `inventory_history` type `customer_return_restock`, tăng `quantity`, giảm `reserved_quantity`
+- Nếu disposition là `write_off`: tạo `inventory_history` type `write_off`, không tăng stock
+- Kết quả grading ảnh hưởng đến quyết định approve/reject và số tiền hoàn cuối cùng
+
+### 5.3.4 Return Fraud Detection
+
+- Nếu user có `refund_rate > 30%` (số lần refund / số lần mua) → tự động flag tài khoản để review thủ công
+- Refund request không có ảnh minh chứng cho sản phẩm > ngưỡng giá trị cần flag
+  - Tính `refund_rate` qua subquery thay vì cột riêng (bảng `users` **không có** `refund_count`/`total_orders`):
+  ```sql
+  SELECT
+      COUNT(r.id) * 1.0 / NULLIF(COUNT(DISTINCT o.id), 0) AS refund_rate
+  FROM orders o
+  LEFT JOIN refunds r ON r.order_id = o.id
+  WHERE o.user_id = :userId AND o.status != 'cancelled'
+  ```
+  Nếu cần real-time thì dùng **Redis counter** (`INCR user:{id}:refund_count` và `user:{id}:order_count`); ghi audit log khi flag
 
 ### 5.4 APIs — Admin Inventory (FE: `/admin/inventory/stock`)
 
@@ -490,6 +702,27 @@ PATCH  /api/v1/admin/inventory/{variantId}    → Điều chỉnh tồn kho
 
 GET    /api/v1/admin/inventory/{variantId}/history → Lịch sử nhập/xuất kho
 ```
+
+### 5.4.1 Inventory Adjustment Types (Enum bắt buộc)
+
+> Trường `type` trong `inventory_history` phải dùng enum cố định — không để free-text. Giúp đối soát và reporting chính xác.
+
+| Type | Khi nào dùng |
+|------|-------------|
+| `purchase_receipt` | Nhập hàng mới từ nhà cung cấp |
+| `customer_return_restock` | Hàng hoàn trả Grade A được nhập lại kho |
+| `admin_adjustment` | Điều chỉnh thủ công bởi admin (kiểm kê, sửa lỗi) |
+| `write_off` | Xóa kho do hư hỏng, mất mát, hàng hoàn Grade D |
+| `reservation_placed` | Số lượng tạm giữ cho order mới tạo (tăng `reserved_quantity`) |
+| `reservation_released` | Giải phóng tạm giữ khi order hủy/timeout (giảm `reserved_quantity`) |
+| `sold` | Kho thực sự xuất hàng khi đơn được xử lý và giao |
+
+### 5.4.2 Low Stock Alert Logic
+
+- `min_stock_level` là field **per-SKU** trên bảng `inventory`, do admin cấu hình (PATCH inventory API)
+- Default `min_stock_level = 5` nếu admin chưa cấu hình
+- Dashboard low-stock query: `WHERE (quantity - reserved_quantity) < min_stock_level`
+- **"Available stock"** (tồn kho bán được thật sự) = `quantity - reserved_quantity`; phải dùng công thức này nhất quán tại mọi điểm trong code (cart check, order create, admin dashboard)
 
 **Verify**: `/account/wishlist` load được, viết review sau khi đã mua sách, admin thấy tồn kho
 
@@ -534,8 +767,29 @@ earned_points = floor(total_amount / 1000) * tier.discount_percent
 - Tạo `notification` khi được lên hạng tier
 - Điểm chỉ nên cộng khi đơn `completed`, không cộng tại thời điểm vừa tạo đơn
 - Nếu đơn bị refund toàn phần hoặc một phần sau khi đã cộng điểm thì cần clawback points theo policy
-- Cần xử lý `reward_points.expires_at` và job expire points định kỳ
+- Cần xử lý `reward_points.expires_at` và `@Scheduled` job expire points định kỳ (hàng đêm)
 - Khi user dùng điểm để giảm giá, cần ghi cả ledger `reward_points` và `loyalty_transactions` để truy vết số dư
+
+### 6.5 Domain Events — Cơ chế trigger cross-phase
+
+> Skill `architecture-patterns` recommend dùng **Domain Events** để tách coupling giữa order completion và các side effects (loyalty, notification, email).
+
+Implement với `ApplicationEventPublisher` của Spring:
+
+```java
+// Khi đơn chuyển sang COMPLETED:
+publisher.publishEvent(new OrderCompletedEvent(orderId, userId, totalAmount));
+
+// Các listener (trong cùng transaction hoặc @Async):
+@EventListener OrderCompletedEvent → LoyaltyService.grantPoints()
+@EventListener OrderCompletedEvent → NotificationService.sendOrderCompleteNotification()
+@EventListener OrderCompletedEvent → ReviewService.markEligibleForReview()
+
+// Tương tự cho wishlist price drop:
+@EventListener PriceDroppedEvent → NotificationService.notifyWishlistUsers()
+```
+
+Lợi ích: Service không phụ thuộc nhau trực tiếp, dễ thêm listener mới mà không sửa OrderService.
 
 ---
 
@@ -695,9 +949,11 @@ Phase 8: [ ] Response time < 200ms  [ ] Redis cache hit > 80% cho books API
 5. Thứ tự áp dụng giảm giá giữa flash sale, promotion, voucher, tier discount, reward points là gì?
 6. Refund partial có hoàn partial shipping fee, voucher usage và reward points hay không?
 7. Điều kiện đủ để review là `delivered` hay `completed`?
-8. Wishlist lưu theo `bookId` hay `variantId`, và notify giảm giá dựa trên giá nào?
+8. ✅ **Đã xác nhận**: Wishlist lưu theo **`bookId`** (FK → `books.id`, không phải `variant_id`). Bảng `wishlists` có cột `added_price` (giá tại thời điểm thêm) và `notify_on_price_drop` flag. Khi giá bất kỳ variant của cuốn sách đó giảm xuống dưới `added_price` → trigger thông báo. Giá so sánh: `MIN(book_variants.price WHERE book_id = ? AND is_active = 1)` vs `wishlists.added_price`.
 9. Notification gửi in-app only hay thêm email / SMS cho các sự kiện quan trọng?
 10. Các thay đổi trạng thái đơn hàng, payment, refund có cần audit log riêng ngoài bảng history hiện có hay không?
+11. Thời hạn đổi trả là bao nhiêu ngày kể từ `delivered_at`? (đề xuất 30 ngày; sách đặc thù: sealed vs mở cần policy riêng?)
+12. Sản phẩm giá trị thấp (< threshold) có áp dụng "returnless refund" (hoàn tiền không cần gửi hàng vật lý về) hay không? Threshold là bao nhiêu?
 
 ---
 
@@ -900,8 +1156,15 @@ Phase 8: [ ] Response time < 200ms  [ ] Redis cache hit > 80% cho books API
 
 - Mục tiêu: tính phí ship cho checkout
 - Validation chính: province code hợp lệ, totalWeight > 0, carrier active
-- Side effects / dữ liệu ghi: không có; có thể cache rate lookups
-- Done when: fee tính đúng theo carrier/rate config hiện hành
+- **Công thức tính totalWeight**: `totalWeight = sum(orderItem.quantity × book.weight_grams)` — `weight_grams` nằm ở bảng **`books`** (không phải `book_variants`); BE JOIN qua `book_variants.book_id → books.id` để lấy giá trị; validate lại ở server khi tạo đơn
+- **Công thức tính phí ship** (từ bảng `shipping_rates`):
+  ```
+  fee = rates.base_fee + ceil(totalWeight_grams / 500) * rates.per_500g_fee
+  if (orderSubtotal >= rates.free_ship_threshold) fee = 0
+  ```
+  Response phải trả thêm `estimatedDaysMin`, `estimatedDaysMax` từ `shipping_rates.estimated_days_min/max`
+- Side effects / dữ liệu ghi: không có; có thể cache rate lookups theo `(province_code, carrier_id)`
+- Done when: fee tính đúng theo carrier/rate config; free-ship threshold hoạt động; response có ETA
 
 #### B3.9 `POST /api/v1/orders`
 
@@ -1760,6 +2023,19 @@ List<String> imageUrls;             // sorted by sortOrder, primary first
 List<CategoryResponse> categories;
 BookStatsResponse stats;            // avgRating, reviewCount, soldCount
 ```
+
+**`dto/response/BookVariantResponse.java`** (bắt buộc include `compareAtPrice`):
+```java
+Long id;
+String sku;
+String coverType;   // "hard_cover" | "soft_cover" | "digital"
+String edition;
+BigDecimal price;
+BigDecimal compareAtPrice;  // book_variants.compare_at_price — giá gốc để hiện gạch ngang trên FE
+int stockQuantity;          // inventory.quantity - inventory.reserved_quantity
+boolean isActive;
+```
+> `compareAtPrice` là giá gốc trước khi giảm; nếu `price < compareAtPrice` → FE hiện badge "Tiết kiệm X%". Null nếu không có giá gốc so sánh.
 
 **`BookServiceImpl.getBySlug(String slug)`**:
 - `@EntityGraph` hoặc JPQL JOIN FETCH để load variants, images, authors, categories trong 1 query
