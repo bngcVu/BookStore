@@ -40,6 +40,10 @@ spring:
     serialization:
       "write-dates-as-timestamps": false
 
+  # Disable Flyway migrations
+  flyway:
+    enabled: false
+
   mail:
     host: smtp.gmail.com
     port: 587
@@ -54,8 +58,13 @@ spring:
 
 security:
   jwt:
-    secret: "change-this-secret-to-a-long-random-value"
-    access-token-exp-min: 60
+    issuer: "bookstore-api"
+    audience: "bookstore-client"
+    # Optional Base64-encoded PKCS8 private key and X509 public key.
+    # If empty, the app will generate an ephemeral key pair at startup.
+    private-key-base64: ""
+    public-key-base64: ""
+    access-token-exp-min: 15
     refresh-token-exp-days: 7
 
 # Logging Configuration
