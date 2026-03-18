@@ -9,6 +9,10 @@ import com.bookstore.exception.AppException;
 import com.bookstore.exception.ErrorCode;
 import java.time.LocalDateTime;
 import java.util.Random;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -16,18 +20,26 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OtpService {
+    private static final Logger logger = LoggerFactory.getLogger(OtpService.class);
     private static final int OTP_LENGTH = 6;
     private static final int OTP_TTL_MINUTES = 5;
 
     private final OtpCodeRepository otpCodeRepository;
     private final UserRepository userRepository;
     private final JavaMailSender mailSender;
+    private final boolean sendEmailEnabled;
     private final Random random = new Random();
 
-    public OtpService(OtpCodeRepository otpCodeRepository, UserRepository userRepository, JavaMailSender mailSender) {
+    public OtpService(
+            OtpCodeRepository otpCodeRepository,
+            UserRepository userRepository,
+            JavaMailSender mailSender,
+            @Value("${app.otp.send-email:false}") boolean sendEmailEnabled
+    ) {
         this.otpCodeRepository = otpCodeRepository;
         this.userRepository = userRepository;
         this.mailSender = mailSender;
+        this.sendEmailEnabled = sendEmailEnabled;
     }
 
     @Transactional
@@ -86,10 +98,25 @@ public class OtpService {
     }
 
     private void sendEmail(String email, OtpType type, String code) {
+        if (!sendEmailEnabled) {
+            logger.info("OTP generated for local testing: email={} type={} otpCode={}", email, type, code);
+            return;
+        }
+
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
         message.setSubject("BookStore OTP - " + type.name());
         message.setText("Your OTP code is: " + code + ". It expires in " + OTP_TTL_MINUTES + " minutes.");
-        mailSender.send(message);
+        try {
+            mailSender.send(message);
+        } catch (MailException ex) {
+            logger.warn(
+                    "OTP email send failed for email={} type={}. Continue for local testing. otpCode={}. reason={}",
+                    email,
+                    type,
+                    code,
+                    ex.getMessage()
+            );
+        }
     }
 }

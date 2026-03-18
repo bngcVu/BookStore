@@ -67,6 +67,10 @@ security:
     access-token-exp-min: 15
     refresh-token-exp-days: 7
 
+app:
+  otp:
+    send-email: false
+
 # Logging Configuration
 logging:
   level:
