@@ -27,8 +27,8 @@ public class CustomerTierEntity {
     @Column(name = "min_spent")
     private BigDecimal minSpent;
 
-    @Column(name = "discount_percent")
-    private Integer discountPercent;
+    @Column(name = "discount_percent", columnDefinition = "TINYINT UNSIGNED")
+    private Short discountPercent;
 
     private String benefits;
 

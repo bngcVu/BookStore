@@ -29,7 +29,7 @@ public class RefreshTokenEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @Column(name = "token_hash", length = 64, nullable = false, unique = true)
+    @Column(name = "token_hash", columnDefinition = "CHAR(64)", nullable = false, unique = true)
     private String tokenHash;
 
     @Column(name = "expires_at")
