@@ -89,6 +89,10 @@ public class JwtUtil {
         return claims;
     }
 
+    public long getRefreshTokenExpDays() {
+        return jwtProperties.getRefreshTokenExpDays();
+    }
+
     private KeyPair loadOrGenerateKeyPair() {
         try {
             if (StringUtils.hasText(jwtProperties.getPrivateKeyBase64())

@@ -43,6 +43,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = authHeader.substring(7);
             try {
                 Claims claims = jwtUtil.parseAndValidate(token);
+                Object tokenType = claims.get("type");
+                if ("refresh".equals(tokenType)) {
+                    filterChain.doFilter(request, response);
+                    return;
+                }
                 String subject = claims.getSubject();
 
                 if (StringUtils.hasText(subject)

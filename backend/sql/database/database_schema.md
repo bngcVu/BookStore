@@ -37,6 +37,12 @@ Dưới đây là tài liệu chi tiết về cấu trúc của 38 bảng trong 
 - **user_id** (BIGINT): Khóa ngoại tham chiếu `users.id`
 - **email**, **phone**, **code**, **type**, **expires_at**, **is_used**, **created_at**
 
+### 1.5. `refresh_tokens` (Refresh Token)
+- **id** (BIGINT): Khóa chính
+- **user_id** (BIGINT): Khóa ngoại tham chiếu `users.id`
+- **token_hash** (CHAR): Hash SHA-256 của refresh token
+- **expires_at**, **revoked_at**, **created_at**
+
 ---
 
 ## 2. Address & Location (Địa chỉ & Khu vực)
