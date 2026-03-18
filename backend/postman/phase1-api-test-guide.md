@@ -2,13 +2,32 @@
 
 Muc tieu: test nhanh cac API Auth va User Profile bang Postman.
 
+Flow dang ky moi:
+Dang ky khoi tao -> Gui OTP -> Nhan OTP -> Nguoi dung nhap OTP -> He thong xac nhan -> Dang ky thanh cong.
+
+DB-mode:
+- Du lieu dang ky cho OTP duoc luu o bang registration_pending.
+- User chi duoc insert vao bang users sau khi verify OTP thanh cong.
+- He thong tu dong cleanup pending het han moi 5 phut.
+
 ## 1) Cau hinh chung
 
 - Base URL: http://localhost:8080
+- Luu y URL auth:
+  - Dung chuan: /api/v1/auth/...
+  - He thong co ho tro them /v1/auth/... de tranh loi go nham URL.
 - Header bat buoc cho request co body:
   - Content-Type: application/json
 - Neu goi API can auth:
   - Authorization: Bearer <accessToken>
+
+- Cau hinh local OTP hien tai:
+  - app.otp.send-email = false
+  - app.otp.fixed-code = 123456
+  - app.otp.ttl-minutes = 2
+
+- SQL can chay 1 lan truoc khi test:
+  - backend/sql/database/registration_pending.sql
 
 ## 2) Thu tu test de nghi
 
@@ -43,6 +62,8 @@ Muc tieu: test nhanh cac API Auth va User Profile bang Postman.
 - Ky vong:
   - HTTP 200
   - status = success
+  - message: Register initialized. Please verify OTP to complete registration
+  - user duoc tao/cap nhat o trang thai cho xac thuc (chua hoan tat dang ky)
 
 ### 3.2 Send Register OTP
 
@@ -58,6 +79,7 @@ Muc tieu: test nhanh cac API Auth va User Profile bang Postman.
 - Ky vong:
   - HTTP 200
   - status = success
+  - chi danh cho email chua verify
 
 ### 3.3 Verify Register OTP
 
@@ -74,6 +96,13 @@ Muc tieu: test nhanh cac API Auth va User Profile bang Postman.
 - Ky vong:
   - HTTP 200
   - status = success
+  - message: Register success
+  - buoc nay moi la hoan tat dang ky
+
+- Luu y:
+  - voi cau hinh local hien tai, code OTP de test la 123456.
+  - OTP chi co hieu luc trong 2 phut.
+  - neu qua 2 phut, goi lai send-otp roi verify lai.
 
 ### 3.4 Login
 
@@ -221,11 +250,16 @@ Muc tieu: test nhanh cac API Auth va User Profile bang Postman.
 - Loi ket noi localhost:8080:
   - Backend chua run hoac da stop.
 
+- Loi 403 khi goi send-otp:
+  - Thuong do go sai URL (thieu /api).
+  - Vi du sai: /v1/auth/register/send-otp
+  - Vi du dung: /api/v1/auth/register/send-otp
+
 ## 5) Checklist nhanh
 
 - /api/health tra 200
-- Register thanh cong
-- OTP flow thanh cong
+- Register khoi tao thanh cong
+- OTP flow thanh cong (verify-otp la buoc dang ky thanh cong)
 - Login thanh cong va lay duoc token
 - /users/me tra du lieu dung
 - Refresh va Logout dung logic

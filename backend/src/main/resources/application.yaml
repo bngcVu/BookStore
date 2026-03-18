@@ -70,6 +70,8 @@ security:
 app:
   otp:
     send-email: false
+    ttl-minutes: 2
+    fixed-code: "123456"
 
 # Logging Configuration
 logging:

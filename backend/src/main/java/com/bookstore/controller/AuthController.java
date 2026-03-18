@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping({"/api/v1/auth", "/v1/auth"})
 public class AuthController {
     private final AuthService authService;
     private final OtpService otpService;
@@ -32,7 +32,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<ApiResponse<UserResponse>> register(@Valid @RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(ApiResponse.success("Register success", authService.register(request)));
+        return ResponseEntity.ok(ApiResponse.success("Register initialized. Please verify OTP to complete registration", authService.register(request)));
     }
 
     @PostMapping("/register/send-otp")
@@ -56,7 +56,7 @@ public class AuthController {
             );
         }
         authService.verifyRegisterOtp(request.getEmail(), request.getCode());
-        return ResponseEntity.ok(ApiResponse.success("OTP verified", null));
+        return ResponseEntity.ok(ApiResponse.success("Register success", null));
     }
 
     @PostMapping("/register/resend-otp")

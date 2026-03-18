@@ -38,6 +38,7 @@ D:\BookStore\backend\src\main\java\com\bookstore\exception\GlobalExceptionHandle
 D:\BookStore\backend\src\main\java\com\bookstore\logging\AuditLogger.java
 D:\BookStore\backend\src\main\java\com\bookstore\logging\RequestLoggingFilter.java
 D:\BookStore\backend\src\main\java\com\bookstore\mapper\UserMapper.java
+D:\BookStore\backend\src\main\java\com\bookstore\mapper\UserMapperImpl.java
 D:\BookStore\backend\src\main\java\com\bookstore\security\JwtAuthenticationFilter.java
 D:\BookStore\backend\src\main\java\com\bookstore\security\JwtProperties.java
 D:\BookStore\backend\src\main\java\com\bookstore\security\JwtUtil.java

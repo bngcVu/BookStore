@@ -1,6 +1,6 @@
 # Backend Implementation Phases — BookStore
 
-> Chia phase dựa trên **phân tích FE đã code** (`bookstore-frontend/src/app/`) và **38 bảng DB** (`database_schema.md`)  
+> Chia phase dựa trên **phân tích FE đã code** (`bookstore-frontend/src/app/`) và DB trong thư mục `backend/sql/database` (`create_tables.sql`, `refresh_tokens.sql`, `registration_pending.sql`, `wishlist_enhancements.sql`, `database_optimizations.sql`)  
 > Thứ tự ưu tiên: phụ thuộc FK → luồng mua hàng → admin → tính năng nâng cao
 
 ---
@@ -9,7 +9,7 @@
 
 | FE Page (đã code) | DB Tables cần | Priority |
 |---|---|---|
-| `/login`, `/register` | `users`, `customer_tiers`, `otp_codes` | P0 |
+| `/login`, `/register` | `customer_tiers`, `users`, `otp_codes`, `refresh_tokens`, `registration_pending` | P0 |
 | `/` (homepage) | `books`, `book_variants`, `categories`, `flash_sales` | P1 |
 | `/category/[slug]` | `categories`, `books`, `authors`, `publishers` | P1 |
 | `/product/[slug]` | `books`, `book_variants`, `book_images`, `inventory`, `reviews` | P1 |
@@ -122,9 +122,19 @@ testcontainers + testcontainers-postgresql  (integration test với DB thật)
 ## 🔐 Phase 1 — Auth & User Profile
 
 > **Mục tiêu**: Unblock FE pages `/login`, `/register`, `/account`  
-> **DB Tables**: `customer_tiers`, `users`, `admins`, `otp_codes`  
+> **DB Tables**: `customer_tiers`, `users`, `admins`, `otp_codes`, `refresh_tokens`, `registration_pending`  
 > **Thời gian**: 3-4 ngày  
 > **Skill tham khảo**: [`.antigravity/skills/007/references/api-security-patterns.md`](../.antigravity/skills/007/references/api-security-patterns.md)
+
+### 1.0 SQL prerequisite cho Phase 1 (DB hiện tại)
+
+Chạy theo đúng thứ tự sau trước khi test API auth:
+
+1. `backend/sql/database/create_tables.sql`
+2. `backend/sql/database/refresh_tokens.sql`
+3. `backend/sql/database/registration_pending.sql`
+
+Quy ước cập nhật SQL: luôn tạo file SQL mới trong `backend/sql/database`, không ghi đè file cũ đã tồn tại.
 
 ### 1.1 JPA Entities
 
@@ -132,12 +142,16 @@ testcontainers + testcontainers-postgresql  (integration test với DB thật)
 - [ ] `UserEntity` → bảng `users` (FK: `tier_id` → `CustomerTierEntity`)
 - [ ] `AdminEntity` → bảng `admins`
 - [ ] `OtpCodeEntity` → bảng `otp_codes`
+- [ ] `RefreshTokenEntity` → bảng `refresh_tokens`
+- [ ] `RegistrationPendingEntity` → bảng `registration_pending`
 
 ### 1.2 Repositories
 
 - [ ] `UserRepository` — `findByEmail()`, `findByPhone()`, `existsByEmail()`
 - [ ] `AdminRepository` — `findByEmail()`
 - [ ] `CustomerTierRepository` — `findByMinSpentLessThanEqualOrderByMinSpentDesc()`
+- [ ] `RefreshTokenRepository` — quản lý refresh token (rotate/revoke/list active)
+- [ ] `RegistrationPendingRepository` — `findByEmail()`, `existsByEmail()`, cleanup pending hết hạn
 
 ### 1.3 APIs cần implement
 
@@ -186,7 +200,7 @@ POST   /api/v1/admin/auth/login       → Admin login (FE: /admin/login)
 - Refresh Token: lưu DB (bảng `refresh_tokens`), expire 7 ngày, rotate mỗi lần dùng (old token bị blacklist ngay lập tức)
 - **Token storage guidance cho FE**: Khuyến nghị lưu Access Token trong memory (JS variable), Refresh Token trong `httpOnly; Secure; SameSite=Strict` cookie — tránh `localStorage` vì dễ bị XSS đọc
 - Register: tự động gắn `customer_tiers` lowest tier (Bronze/Bạc)
-- Register: tạo user với `email_verified_at = null`; khuyến nghị set `status = inactive` cho tới khi verify email thành công
+- Register (DB-mode): chưa tạo record trong `users` ở bước đầu; lưu tạm vào `registration_pending`, chỉ tạo `users` sau khi verify OTP thành công
 - OTP email: TTL 5 phút, mỗi mã chỉ dùng 1 lần (`is_used = true`), **max 5 lần nhập sai / session → lock**, cooldown resend 60 giây, **max 5 lần resend / ngày / email**
 - OTP type: tách rõ `register_verify_email`, `forgot_password`, `change_password_confirm` để tránh dùng nhầm luồng
 - Login: không cho customer đăng nhập nếu email chưa được xác thực hoặc tài khoản đang `inactive` / `banned`
@@ -214,7 +228,7 @@ AuthResponse     { accessToken, refreshToken, user: UserResponse }
 UserResponse     { id, email, fullName, avatarUrl, tier, rewardPoints, totalSpent }
 ```
 
-**Verify**: Đăng ký → Nhận OTP email → Xác thực email → Đăng nhập → Lấy profile `/users/me` thành công
+**Verify**: Đăng ký (tạo `registration_pending`) → Gửi OTP → Xác thực OTP (tạo `users`) → Đăng nhập → Lấy profile `/users/me` thành công
 
 ---
 
