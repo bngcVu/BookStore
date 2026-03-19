@@ -13,12 +13,14 @@ D:\BookStore\backend\src\main\java\com\bookstore\domain\entity\Gender.java
 D:\BookStore\backend\src\main\java\com\bookstore\domain\entity\OtpCodeEntity.java
 D:\BookStore\backend\src\main\java\com\bookstore\domain\entity\OtpType.java
 D:\BookStore\backend\src\main\java\com\bookstore\domain\entity\RefreshTokenEntity.java
+D:\BookStore\backend\src\main\java\com\bookstore\domain\entity\RegistrationPendingEntity.java
 D:\BookStore\backend\src\main\java\com\bookstore\domain\entity\UserEntity.java
 D:\BookStore\backend\src\main\java\com\bookstore\domain\entity\UserStatus.java
 D:\BookStore\backend\src\main\java\com\bookstore\domain\repository\AdminRepository.java
 D:\BookStore\backend\src\main\java\com\bookstore\domain\repository\CustomerTierRepository.java
 D:\BookStore\backend\src\main\java\com\bookstore\domain\repository\OtpCodeRepository.java
 D:\BookStore\backend\src\main\java\com\bookstore\domain\repository\RefreshTokenRepository.java
+D:\BookStore\backend\src\main\java\com\bookstore\domain\repository\RegistrationPendingRepository.java
 D:\BookStore\backend\src\main\java\com\bookstore\domain\repository\UserRepository.java
 D:\BookStore\backend\src\main\java\com\bookstore\dto\request\ForgotPasswordRequest.java
 D:\BookStore\backend\src\main\java\com\bookstore\dto\request\LoginRequest.java
@@ -45,6 +47,7 @@ D:\BookStore\backend\src\main\java\com\bookstore\security\JwtUtil.java
 D:\BookStore\backend\src\main\java\com\bookstore\service\AdminAuthService.java
 D:\BookStore\backend\src\main\java\com\bookstore\service\AuthService.java
 D:\BookStore\backend\src\main\java\com\bookstore\service\OtpService.java
+D:\BookStore\backend\src\main\java\com\bookstore\service\PendingRegistrationCleanupJob.java
 D:\BookStore\backend\src\main\java\com\bookstore\service\UserService.java
 D:\BookStore\backend\src\main\java\com\bookstore\util\PasswordPolicy.java
 D:\BookStore\backend\src\main\java\com\bookstore\util\SecurityUtil.java

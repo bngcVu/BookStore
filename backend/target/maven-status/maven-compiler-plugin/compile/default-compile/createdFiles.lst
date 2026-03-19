@@ -1,3 +1,4 @@
+com\bookstore\service\PendingRegistrationCleanupJob.class
 com\bookstore\domain\repository\UserRepository.class
 com\bookstore\domain\entity\UserStatus.class
 com\bookstore\exception\GlobalExceptionHandler.class
@@ -23,6 +24,7 @@ com\bookstore\dto\request\ResetPasswordRequest.class
 com\bookstore\controller\UserController.class
 com\bookstore\util\SecurityUtil.class
 com\bookstore\api\entity\Book.class
+com\bookstore\domain\repository\RegistrationPendingRepository.class
 com\bookstore\controller\AuthController.class
 com\bookstore\service\AuthService.class
 com\bookstore\security\JwtProperties.class
@@ -45,6 +47,7 @@ com\bookstore\dto\request\LoginRequest.class
 com\bookstore\domain\entity\AdminEntity.class
 com\bookstore\service\OtpService.class
 com\bookstore\domain\entity\OtpType.class
+com\bookstore\domain\entity\RegistrationPendingEntity.class
 com\bookstore\api\response\ApiResponse.class
 com\bookstore\mapper\UserMapper.class
 com\bookstore\exception\ErrorCode.class
