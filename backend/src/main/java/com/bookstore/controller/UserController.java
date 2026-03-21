@@ -24,17 +24,17 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<ApiResponse<UserResponse>> getProfile() {
-        return ResponseEntity.ok(ApiResponse.success("Profile", userService.getCurrentUser()));
+        return ResponseEntity.ok(ApiResponse.success("Lấy hồ sơ người dùng thành công", userService.getCurrentUser()));
     }
 
     @PatchMapping
     public ResponseEntity<ApiResponse<UserResponse>> updateProfile(@Valid @RequestBody UpdateProfileRequest request) {
-        return ResponseEntity.ok(ApiResponse.success("Profile updated", userService.updateProfile(request)));
+        return ResponseEntity.ok(ApiResponse.success("Cập nhật hồ sơ người dùng thành công", userService.updateProfile(request)));
     }
 
     @PatchMapping("/password")
     public ResponseEntity<ApiResponse<Void>> changePassword(@Valid @RequestBody UpdatePasswordRequest request) {
         userService.changePassword(request);
-        return ResponseEntity.ok(ApiResponse.success("Password updated", null));
+        return ResponseEntity.ok(ApiResponse.success("Cập nhật mật khẩu thành công", null));
     }
 }

@@ -41,6 +41,7 @@ public class AuthService {
     private final JwtUtil jwtUtil;
     private final UserMapper userMapper;
     private final OtpService otpService;
+    private final RegistrationEmailService registrationEmailService;
     private final RegistrationPendingRepository registrationPendingRepository;
     private final AuditLogger auditLogger;
     private final int otpTtlMinutes;
@@ -53,6 +54,7 @@ public class AuthService {
             JwtUtil jwtUtil,
             UserMapper userMapper,
             OtpService otpService,
+            RegistrationEmailService registrationEmailService,
             RegistrationPendingRepository registrationPendingRepository,
             AuditLogger auditLogger,
             @org.springframework.beans.factory.annotation.Value("${app.otp.ttl-minutes:5}") int otpTtlMinutes
@@ -64,6 +66,7 @@ public class AuthService {
         this.jwtUtil = jwtUtil;
         this.userMapper = userMapper;
         this.otpService = otpService;
+        this.registrationEmailService = registrationEmailService;
         this.registrationPendingRepository = registrationPendingRepository;
         this.auditLogger = auditLogger;
         this.otpTtlMinutes = otpTtlMinutes;
@@ -102,6 +105,7 @@ public class AuthService {
         pending.setPhone(request.getPhone());
         pending.setExpiresAt(LocalDateTime.now().plusMinutes(otpTtlMinutes));
         registrationPendingRepository.save(pending);
+        otpService.sendRegisterOtp(normalizedEmail);
 
         UserResponse response = new UserResponse();
         response.setEmail(normalizedEmail);
@@ -149,6 +153,7 @@ public class AuthService {
         UserEntity saved = userRepository.save(user);
         otpService.markUsed(otp);
         registrationPendingRepository.deleteByEmail(normalizedEmail);
+        registrationEmailService.sendRegistrationSuccessEmail(saved);
         auditLogger.log("email_verified", String.valueOf(saved.getId()), null, null, Map.of("email", normalizedEmail));
     }
 

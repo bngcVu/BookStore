@@ -79,9 +79,7 @@ public class OtpService {
             throw new AppException(ErrorCode.OTP_EXPIRED);
         }
 
-        boolean usingFixedOtp = fixedOtpCode != null && !fixedOtpCode.isBlank() && fixedOtpCode.equals(code);
-
-        if (!otp.getCode().equals(code) && !usingFixedOtp) {
+        if (!otp.getCode().equals(code)) {
             throw new AppException(ErrorCode.INVALID_OTP);
         }
 
@@ -124,8 +122,8 @@ public class OtpService {
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
-        message.setSubject("BookStore OTP - " + type.name());
-        message.setText("Your OTP code is: " + code + ". It expires in " + otpTtlMinutes + " minutes.");
+        message.setSubject("BookStore - Mã OTP " + type.name());
+        message.setText("Mã OTP của bạn là: " + code + ". Mã sẽ hết hạn sau " + otpTtlMinutes + " phút.");
         try {
             mailSender.send(message);
         } catch (MailException ex) {

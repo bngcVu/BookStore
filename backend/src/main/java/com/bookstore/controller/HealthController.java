@@ -20,6 +20,6 @@ public class HealthController {
         data.put("status", "UP");
         data.put("checkedAt", Instant.now());
 
-        return ResponseEntity.ok(ApiResponse.success("Service is healthy", data));
+        return ResponseEntity.ok(ApiResponse.success("Dịch vụ hoạt động bình thường", data));
     }
 }

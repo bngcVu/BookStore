@@ -5,6 +5,7 @@ D:\BookStore\backend\src\main\java\com\bookstore\config\SecurityConfig.java
 D:\BookStore\backend\src\main\java\com\bookstore\controller\AdminAuthController.java
 D:\BookStore\backend\src\main\java\com\bookstore\controller\AuthController.java
 D:\BookStore\backend\src\main\java\com\bookstore\controller\HealthController.java
+D:\BookStore\backend\src\main\java\com\bookstore\controller\RegistrationEmailController.java
 D:\BookStore\backend\src\main\java\com\bookstore\controller\UserController.java
 D:\BookStore\backend\src\main\java\com\bookstore\domain\entity\AdminEntity.java
 D:\BookStore\backend\src\main\java\com\bookstore\domain\entity\AdminRole.java
@@ -20,12 +21,15 @@ D:\BookStore\backend\src\main\java\com\bookstore\domain\repository\AdminReposito
 D:\BookStore\backend\src\main\java\com\bookstore\domain\repository\CustomerTierRepository.java
 D:\BookStore\backend\src\main\java\com\bookstore\domain\repository\OtpCodeRepository.java
 D:\BookStore\backend\src\main\java\com\bookstore\domain\repository\RefreshTokenRepository.java
+D:\BookStore\backend\src\main\java\com\bookstore\domain\repository\RegistrationEmailRepository.java
 D:\BookStore\backend\src\main\java\com\bookstore\domain\repository\RegistrationPendingRepository.java
 D:\BookStore\backend\src\main\java\com\bookstore\domain\repository\UserRepository.java
 D:\BookStore\backend\src\main\java\com\bookstore\dto\request\ForgotPasswordRequest.java
 D:\BookStore\backend\src\main\java\com\bookstore\dto\request\LoginRequest.java
 D:\BookStore\backend\src\main\java\com\bookstore\dto\request\RefreshTokenRequest.java
 D:\BookStore\backend\src\main\java\com\bookstore\dto\request\RegisterRequest.java
+D:\BookStore\backend\src\main\java\com\bookstore\dto\request\RegisterVerifyRequest.java
+D:\BookStore\backend\src\main\java\com\bookstore\dto\request\RegistrationSuccessEmailRequest.java
 D:\BookStore\backend\src\main\java\com\bookstore\dto\request\ResetPasswordRequest.java
 D:\BookStore\backend\src\main\java\com\bookstore\dto\request\SendOtpRequest.java
 D:\BookStore\backend\src\main\java\com\bookstore\dto\request\UpdatePasswordRequest.java
@@ -48,6 +52,7 @@ D:\BookStore\backend\src\main\java\com\bookstore\service\AdminAuthService.java
 D:\BookStore\backend\src\main\java\com\bookstore\service\AuthService.java
 D:\BookStore\backend\src\main\java\com\bookstore\service\OtpService.java
 D:\BookStore\backend\src\main\java\com\bookstore\service\PendingRegistrationCleanupJob.java
+D:\BookStore\backend\src\main\java\com\bookstore\service\RegistrationEmailService.java
 D:\BookStore\backend\src\main\java\com\bookstore\service\UserService.java
 D:\BookStore\backend\src\main\java\com\bookstore\util\PasswordPolicy.java
 D:\BookStore\backend\src\main\java\com\bookstore\util\SecurityUtil.java

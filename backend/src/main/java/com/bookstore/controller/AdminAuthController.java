@@ -22,6 +22,6 @@ public class AdminAuthController {
 
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<AuthResponse>> login(@Valid @RequestBody LoginRequest request) {
-        return ResponseEntity.ok(ApiResponse.success("Admin login success", adminAuthService.login(request)));
+        return ResponseEntity.ok(ApiResponse.success("Đăng nhập quản trị thành công", adminAuthService.login(request)));
     }
 }
