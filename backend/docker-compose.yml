@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # --- Dịch vụ Database (MySQL) ---
+  db:
+    image: mysql:8.0
+    container_name: bookstore-db
+    restart: always
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      MYSQL_DATABASE: bookstore
+    ports:
+      - "3308:3306" # Máy thật gọi 3307, bên trong Docker chạy 3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  # --- Dịch vụ Java Backend ---
+  app:
+    build: .
+    container_name: bookstore-app
+    restart: on-failure
+    depends_on:
+      - db
+    env_file: .env
+    ports:
+      - "8080:8080"
+    environment:
+      # QUAN TRỌNG: App gọi DB qua tên service 'db' và port gốc 3306
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/bookstore?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+      # Tự động tạo bảng trong lần chạy đầu tiên trên Docker
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update 
+
+volumes:
+  mysql_data:

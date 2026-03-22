@@ -3,10 +3,12 @@ com\bookstore\domain\repository\UserRepository.class
 com\bookstore\domain\entity\UserStatus.class
 com\bookstore\exception\GlobalExceptionHandler.class
 com\bookstore\util\PasswordPolicy.class
+com\bookstore\domain\repository\RegistrationEmailRepository.class
 com\bookstore\domain\entity\Gender.class
 com\bookstore\service\AdminAuthService.class
 com\bookstore\dto\request\UpdatePasswordRequest.class
 com\bookstore\dto\request\SendOtpRequest.class
+com\bookstore\service\RegistrationEmailService.class
 com\bookstore\dto\request\UpdateProfileRequest.class
 com\bookstore\domain\repository\AdminRepository.class
 com\bookstore\domain\repository\RefreshTokenRepository.class
@@ -37,9 +39,11 @@ com\bookstore\domain\entity\CustomerTierEntity.class
 com\bookstore\dto\request\RefreshTokenRequest.class
 com\BookStoreApplication.class
 com\bookstore\dto\request\VerifyOtpRequest.class
+com\bookstore\dto\request\RegistrationSuccessEmailRequest.class
 com\bookstore\domain\entity\UserEntity.class
 com\bookstore\exception\AppException.class
 com\bookstore\dto\response\UserResponse.class
+com\bookstore\dto\request\RegisterVerifyRequest.class
 com\bookstore\service\UserService.class
 com\bookstore\domain\entity\RefreshTokenEntity.class
 com\bookstore\domain\repository\CustomerTierRepository.class
@@ -53,3 +57,4 @@ com\bookstore\mapper\UserMapper.class
 com\bookstore\exception\ErrorCode.class
 com\bookstore\api\response\PageResponse.class
 com\bookstore\domain\repository\OtpCodeRepository.class
+com\bookstore\controller\RegistrationEmailController.class
