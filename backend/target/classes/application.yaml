@@ -44,9 +44,10 @@ spring:
   flyway:
     enabled: false
 
+  # --- Cấu hình Brevo Mail ---
   mail:
-    host: ${SPRING_MAIL_HOST}
-    port: ${SPRING_MAIL_PORT}
+    host: ${SPRING_MAIL_HOST:smtp-relay.brevo.com}
+    port: ${SPRING_MAIL_PORT:587}
     username: ${SPRING_MAIL_USERNAME}
     password: ${SPRING_MAIL_PASSWORD}
     properties:
@@ -55,6 +56,7 @@ spring:
           auth: ${SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH:true}
           starttls:
             enable: ${SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE:true}
+            required: true # Bắt buộc dùng TLS để bảo mật thông tin khách hàng
 
 security:
   jwt:
@@ -66,6 +68,9 @@ security:
     refresh-token-exp-days: ${SECURITY_JWT_REFRESH_TOKEN_EXP_DAYS}
 
 app:
+  # --- Cấu hình riêng cho Email & OTP của Cửa hàng sách ---
+  mail:
+    from: ${APP_MAIL_FROM:buingocvu.study@gmail.com}
   otp:
     send-email: ${APP_OTP_SEND_EMAIL:false}
     ttl-minutes: ${APP_OTP_TTL_MINUTES}
