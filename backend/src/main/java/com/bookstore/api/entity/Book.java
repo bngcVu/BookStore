@@ -5,5 +5,5 @@ public class Book {
     private String title;
     private String slug;
     private String isbn;
-    
+
 }
