@@ -33,7 +33,8 @@ public class AdminAuthService {
 
     @Transactional
     public AuthResponse login(LoginRequest request) {
-        AdminEntity admin = adminRepository.findByEmail(request.getEmail())
+        String normalizedEmail = request.getEmail().trim().toLowerCase();
+        AdminEntity admin = adminRepository.findByEmail(normalizedEmail)
                 .orElseThrow(() -> new AppException(ErrorCode.INVALID_CREDENTIALS));
 
         if (!passwordEncoder.matches(request.getPassword(), admin.getPasswordHash())) {

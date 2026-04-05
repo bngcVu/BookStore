@@ -159,27 +159,36 @@ public class AuthService {
 
     @Transactional
     public AuthResponse login(LoginRequest request) {
-        UserEntity user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new AppException(ErrorCode.INVALID_CREDENTIALS));
+        String normalizedEmail = request.getEmail().trim().toLowerCase();
+        UserEntity user = userRepository.findByEmail(normalizedEmail)
+                .orElseThrow(() -> {
+                    auditLogger.log("user_login_failed", normalizedEmail, null, null, Map.of("reason", "user_not_found"));
+                    return new AppException(ErrorCode.INVALID_CREDENTIALS);
+                });
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
+            auditLogger.log("user_login_failed", String.valueOf(user.getId()), null, null, Map.of("reason", "invalid_password"));
             throw new AppException(ErrorCode.INVALID_CREDENTIALS);
         }
 
         if (user.getStatus() == UserStatus.inactive) {
+            auditLogger.log("user_login_failed", String.valueOf(user.getId()), null, null, Map.of("reason", "inactive"));
             throw new AppException(ErrorCode.ACCOUNT_INACTIVE);
         }
 
         if (user.getStatus() == UserStatus.banned) {
+            auditLogger.log("user_login_failed", String.valueOf(user.getId()), null, null, Map.of("reason", "banned"));
             throw new AppException(ErrorCode.ACCOUNT_BANNED);
         }
 
         if (user.getEmailVerifiedAt() == null) {
+            auditLogger.log("user_login_failed", String.valueOf(user.getId()), null, null, Map.of("reason", "email_not_verified"));
             throw new AppException(ErrorCode.EMAIL_NOT_VERIFIED);
         }
 
         user.setLastLoginAt(LocalDateTime.now());
         userRepository.save(user);
+        auditLogger.log("user_login_success", String.valueOf(user.getId()), null, null, Map.of("email", user.getEmail()));
 
         return buildAuthResponse(user, List.of("ROLE_USER"));
     }
@@ -217,12 +226,14 @@ public class AuthService {
                 .ifPresent(token -> {
                     token.setRevokedAt(LocalDateTime.now());
                     refreshTokenRepository.save(token);
+                    auditLogger.log("token_revoked", String.valueOf(token.getUser().getId()), null, null, Map.of());
                 });
     }
 
     @Transactional
     public void forgotPassword(String email) {
-        otpService.sendForgotPasswordOtp(email);
+        String normalizedEmail = email.trim().toLowerCase();
+        otpService.sendForgotPasswordOtp(normalizedEmail);
     }
 
     public void verifyForgotPasswordOtp(String email, String code) {
@@ -231,9 +242,10 @@ public class AuthService {
 
     @Transactional
     public void resetPassword(ResetPasswordRequest request) {
-        OtpCodeEntity otp = otpService.validateOtp(request.getEmail(), request.getCode(),
+        String normalizedEmail = request.getEmail().trim().toLowerCase();
+        OtpCodeEntity otp = otpService.validateOtp(normalizedEmail, request.getCode(),
                 com.bookstore.domain.entity.OtpType.reset_password);
-        UserEntity user = userRepository.findByEmail(request.getEmail())
+        UserEntity user = userRepository.findByEmail(normalizedEmail)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         PasswordPolicy.validate(request.getNewPassword());
         user.setPasswordHash(passwordEncoder.encode(request.getNewPassword()));

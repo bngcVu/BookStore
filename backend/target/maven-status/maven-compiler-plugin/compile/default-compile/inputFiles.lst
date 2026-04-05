@@ -77,6 +77,7 @@ D:\BookStore\backend\src\main\java\com\bookstore\service\AdminAuthService.java
 D:\BookStore\backend\src\main\java\com\bookstore\service\AuthService.java
 D:\BookStore\backend\src\main\java\com\bookstore\service\BookService.java
 D:\BookStore\backend\src\main\java\com\bookstore\service\CategoryService.java
+D:\BookStore\backend\src\main\java\com\bookstore\service\OtpCleanupJob.java
 D:\BookStore\backend\src\main\java\com\bookstore\service\OtpService.java
 D:\BookStore\backend\src\main\java\com\bookstore\service\PendingRegistrationCleanupJob.java
 D:\BookStore\backend\src\main\java\com\bookstore\service\RegistrationEmailService.java

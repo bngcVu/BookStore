@@ -18,6 +18,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 @Service
 public class OtpService {
@@ -30,6 +31,8 @@ public class OtpService {
     private final JavaMailSender mailSender;
     private final boolean sendEmailEnabled;
     private final int otpTtlMinutes;
+    private final int resendCooldownSeconds;
+    private final int maxResendPerDay;
     private final String fixedOtpCode;
     private final Random random = new Random();
 
@@ -40,6 +43,8 @@ public class OtpService {
             JavaMailSender mailSender,
             @Value("${app.otp.send-email:false}") boolean sendEmailEnabled,
             @Value("${app.otp.ttl-minutes:5}") int otpTtlMinutes,
+                @Value("${app.otp.resend-cooldown-seconds:60}") int resendCooldownSeconds,
+                @Value("${app.otp.max-resend-per-day:5}") int maxResendPerDay,
             @Value("${app.otp.fixed-code:}") String fixedOtpCode
     ) {
         this.otpCodeRepository = otpCodeRepository;
@@ -48,12 +53,14 @@ public class OtpService {
         this.mailSender = mailSender;
         this.sendEmailEnabled = sendEmailEnabled;
         this.otpTtlMinutes = otpTtlMinutes;
+        this.resendCooldownSeconds = resendCooldownSeconds;
+        this.maxResendPerDay = maxResendPerDay;
         this.fixedOtpCode = fixedOtpCode;
     }
 
     @Transactional
     public void sendRegisterOtp(String email) {
-        String normalizedEmail = email.trim().toLowerCase();
+        String normalizedEmail = normalizeEmail(email);
         if (userRepository.existsByEmail(normalizedEmail)) {
             throw new AppException(ErrorCode.EMAIL_ALREADY_EXISTS, "Email is already verified");
         }
@@ -61,18 +68,24 @@ public class OtpService {
         RegistrationPendingEntity pending = registrationPendingRepository.findByEmail(normalizedEmail)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND, "No pending registration found"));
 
+        enforceOtpSendPolicy(normalizedEmail, OtpType.register);
         createAndSendOtp(normalizedEmail, OtpType.register, pending.getExpiresAt());
     }
 
     @Transactional
     public void sendForgotPasswordOtp(String email) {
-        userRepository.findByEmail(email)
-            .ifPresent(user -> createAndSendOtp(email, OtpType.reset_password, LocalDateTime.now().plusMinutes(otpTtlMinutes)));
+        String normalizedEmail = normalizeEmail(email);
+        userRepository.findByEmail(normalizedEmail)
+            .ifPresent(user -> {
+                enforceOtpSendPolicy(normalizedEmail, OtpType.reset_password);
+                createAndSendOtp(normalizedEmail, OtpType.reset_password, LocalDateTime.now().plusMinutes(otpTtlMinutes));
+            });
     }
 
     public OtpCodeEntity validateOtp(String email, String code, OtpType type) {
+        String normalizedEmail = normalizeEmail(email);
         OtpCodeEntity otp = otpCodeRepository
-                .findTopByEmailAndTypeAndIsUsedFalseOrderByCreatedAtDesc(email, type)
+                .findTopByEmailAndTypeAndIsUsedFalseOrderByCreatedAtDesc(normalizedEmail, type)
                 .orElseThrow(() -> new AppException(ErrorCode.INVALID_OTP));
 
         if (otp.getExpiresAt() != null && otp.getExpiresAt().isBefore(LocalDateTime.now())) {
@@ -103,6 +116,36 @@ public class OtpService {
         otpCodeRepository.save(otp);
 
         sendEmail(email, type, code);
+    }
+
+    private void enforceOtpSendPolicy(String email, OtpType type) {
+        LocalDateTime now = LocalDateTime.now();
+
+        otpCodeRepository.findTopByEmailAndTypeOrderByCreatedAtDesc(email, type).ifPresent(lastOtp -> {
+            if (lastOtp.getCreatedAt() != null &&
+                    lastOtp.getCreatedAt().plusSeconds(resendCooldownSeconds).isAfter(now)) {
+                throw new AppException(
+                        ErrorCode.OTP_RATE_LIMIT,
+                        "Please wait before requesting another OTP"
+                );
+            }
+        });
+
+        LocalDateTime dayStart = now.toLocalDate().atStartOfDay();
+        long sentToday = otpCodeRepository.countByEmailAndTypeAndCreatedAtAfter(email, type, dayStart);
+        if (sentToday >= maxResendPerDay) {
+            throw new AppException(
+                    ErrorCode.OTP_RATE_LIMIT,
+                    "You have reached the daily OTP resend limit"
+            );
+        }
+    }
+
+    private String normalizeEmail(String email) {
+        if (!StringUtils.hasText(email)) {
+            return "";
+        }
+        return email.trim().toLowerCase();
     }
 
     private String generateOtp() {

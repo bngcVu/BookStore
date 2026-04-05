@@ -78,6 +78,8 @@ app:
   otp:
     send-email: ${APP_OTP_SEND_EMAIL:false}
     ttl-minutes: ${APP_OTP_TTL_MINUTES}
+    resend-cooldown-seconds: ${APP_OTP_RESEND_COOLDOWN_SECONDS:60}
+    max-resend-per-day: ${APP_OTP_MAX_RESEND_PER_DAY:5}
     fixed-code: ${APP_OTP_FIXED_CODE}
 
 # Logging Configuration

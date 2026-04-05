@@ -10,6 +10,7 @@ public enum ErrorCode {
     ACCOUNT_INACTIVE(HttpStatus.FORBIDDEN, "Account is inactive"),
     ACCOUNT_BANNED(HttpStatus.FORBIDDEN, "Account is banned"),
     EMAIL_NOT_VERIFIED(HttpStatus.FORBIDDEN, "Email is not verified"),
+    OTP_RATE_LIMIT(HttpStatus.TOO_MANY_REQUESTS, "Too many OTP requests, please wait"),
     OTP_EXPIRED(HttpStatus.BAD_REQUEST, "OTP has expired"),
     INVALID_OTP(HttpStatus.BAD_REQUEST, "Invalid OTP"),
     PASSWORD_POLICY_VIOLATION(HttpStatus.BAD_REQUEST, "Password policy violation"),
