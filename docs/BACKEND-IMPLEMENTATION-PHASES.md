@@ -93,7 +93,10 @@
 
 > **Mục tiêu**: Setup cấu trúc project, security, exception handling. Không liên quan đến business logic.  
 > **Thời gian**: 2-3 ngày  
-> **Skill tham khảo**: [`.antigravity/skills/architecture-patterns/SKILL.md`](../.antigravity/skills/architecture-patterns/SKILL.md)
+> **Agents hỗ trợ**: [`backend-specialist`](file:///d:/BookStore/.agent/agents/backend-specialist.md), [`security-auditor`](file:///d:/BookStore/.agent/agents/security-auditor.md)  
+> **Rules**: [`GEMINI.md`](file:///d:/BookStore/.agent/rules/GEMINI.md)  
+> **Skills**: [`api-patterns`](file:///d:/BookStore/.agent/skills/api-patterns/SKILL.md), [`architecture`](file:///d:/BookStore/.agent/skills/architecture/SKILL.md), [`clean-code`](file:///d:/BookStore/.agent/skills/clean-code/SKILL.md)  
+> **Workflows**: [`/plan`](file:///d:/BookStore/.agent/workflows/plan.md), [`/create`](file:///d:/BookStore/.agent/workflows/create.md), [`/test`](file:///d:/BookStore/.agent/workflows/test.md)
 
 ### 0.1 Cấu trúc thư mục Clean Architecture
 
@@ -179,7 +182,10 @@ testcontainers + testcontainers-postgresql  (integration test với DB thật)
 > **Mục tiêu**: Unblock FE pages `/login`, `/register`, `/account`  
 > **DB Tables**: `customer_tiers`, `users`, `admins`, `otp_codes`, `refresh_tokens`, `registration_pending`  
 > **Thời gian**: 3-4 ngày  
-> **Skill tham khảo**: [`.antigravity/skills/007/references/api-security-patterns.md`](../.antigravity/skills/007/references/api-security-patterns.md)
+> **Agents hỗ trợ**: [`backend-specialist`](file:///d:/BookStore/.agent/agents/backend-specialist.md), [`security-auditor`](file:///d:/BookStore/.agent/agents/security-auditor.md)  
+> **Rules**: [`GEMINI.md`](file:///d:/BookStore/.agent/rules/GEMINI.md)  
+> **Skills**: [`api-patterns`](file:///d:/BookStore/.agent/skills/api-patterns/SKILL.md), [`database-design`](file:///d:/BookStore/.agent/skills/database-design/SKILL.md), [`vulnerability-scanner`](file:///d:/BookStore/.agent/skills/vulnerability-scanner/SKILL.md)  
+> **Workflows**: [`/create`](file:///d:/BookStore/.agent/workflows/create.md), [`/enhance`](file:///d:/BookStore/.agent/workflows/enhance.md), [`/test`](file:///d:/BookStore/.agent/workflows/test.md)
 
 ### 1.0 SQL prerequisite cho Phase 1 (DB hiện tại)
 
@@ -292,7 +298,10 @@ UserResponse     { id, email, fullName, avatarUrl, tier, rewardPoints, totalSpen
 > **Mục tiêu**: Unblock FE pages `/` (homepage), `/category/[slug]`, `/product/[slug]`  
 > **DB Tables**: `categories`, `authors`, `publishers`, `books`, `book_authors`, `book_images`, `book_variants`  
 > **Thời gian**: 4-5 ngày  
-> **Skill tham khảo**: [`.antigravity/skills/api-design-principles/resources/implementation-playbook.md`](../.antigravity/skills/api-design-principles/resources/implementation-playbook.md)
+> **Agents hỗ trợ**: [`backend-specialist`](file:///d:/BookStore/.agent/agents/backend-specialist.md), [`database-architect`](file:///d:/BookStore/.agent/agents/database-architect.md), [`performance-optimizer`](file:///d:/BookStore/.agent/agents/performance-optimizer.md)  
+> **Rules**: [`GEMINI.md`](file:///d:/BookStore/.agent/rules/GEMINI.md)  
+> **Skills**: [`api-patterns`](file:///d:/BookStore/.agent/skills/api-patterns/SKILL.md), [`database-design`](file:///d:/BookStore/.agent/skills/database-design/SKILL.md), [`performance-profiling`](file:///d:/BookStore/.agent/skills/performance-profiling/SKILL.md)  
+> **Workflows**: [`/create`](file:///d:/BookStore/.agent/workflows/create.md), [`/enhance`](file:///d:/BookStore/.agent/workflows/enhance.md), [`/test`](file:///d:/BookStore/.agent/workflows/test.md)
 
 ### 2.1 JPA Entities
 
@@ -411,7 +420,10 @@ PageResponse<T> {
 > **Mục tiêu**: Unblock FE pages `/cart`, `/checkout`, `/account/orders`, `/account/addresses`  
 > **DB Tables**: `provinces`, `districts`, `user_addresses`, `carts`, `orders`, `order_items`, `order_status_history`, `payments`, `shipping_carriers`, `shipping_rates`  
 > **Thời gian**: 5-6 ngày  
-> **Skill tham khảo**: [`.antigravity/skills/architecture-patterns/resources/implementation-playbook.md`](../.antigravity/skills/architecture-patterns/resources/implementation-playbook.md)
+> **Agents hỗ trợ**: [`backend-specialist`](file:///d:/BookStore/.agent/agents/backend-specialist.md), [`database-architect`](file:///d:/BookStore/.agent/agents/database-architect.md), [`debugger`](file:///d:/BookStore/.agent/agents/debugger.md)  
+> **Rules**: [`GEMINI.md`](file:///d:/BookStore/.agent/rules/GEMINI.md)  
+> **Skills**: [`api-patterns`](file:///d:/BookStore/.agent/skills/api-patterns/SKILL.md), [`database-design`](file:///d:/BookStore/.agent/skills/database-design/SKILL.md), [`testing-patterns`](file:///d:/BookStore/.agent/skills/testing-patterns/SKILL.md), [`systematic-debugging`](file:///d:/BookStore/.agent/skills/systematic-debugging/SKILL.md)  
+> **Workflows**: [`/plan`](file:///d:/BookStore/.agent/workflows/plan.md), [`/create`](file:///d:/BookStore/.agent/workflows/create.md), [`/test`](file:///d:/BookStore/.agent/workflows/test.md), [`/debug`](file:///d:/BookStore/.agent/workflows/debug.md)
 
 ### 3.1 JPA Entities
 
@@ -561,6 +573,10 @@ OrderResponse {
 > **Mục tiêu**: Unblock FE pages `/flash-sale`, áp dụng voucher trong `/checkout`, admin marketing pages  
 > **DB Tables**: `flash_sales`, `flash_sale_items`, `vouchers`, `voucher_usage`, `promotions`, `promotion_books`  
 > **Thời gian**: 3-4 ngày
+> **Agents hỗ trợ**: [`backend-specialist`](file:///d:/BookStore/.agent/agents/backend-specialist.md), [`database-architect`](file:///d:/BookStore/.agent/agents/database-architect.md)  
+> **Rules**: [`GEMINI.md`](file:///d:/BookStore/.agent/rules/GEMINI.md)  
+> **Skills**: [`api-patterns`](file:///d:/BookStore/.agent/skills/api-patterns/SKILL.md), [`database-design`](file:///d:/BookStore/.agent/skills/database-design/SKILL.md)  
+> **Workflows**: [`/create`](file:///d:/BookStore/.agent/workflows/create.md), [`/enhance`](file:///d:/BookStore/.agent/workflows/enhance.md), [`/test`](file:///d:/BookStore/.agent/workflows/test.md)
 
 ### 4.1 JPA Entities
 
@@ -645,6 +661,10 @@ GET /api/v1/flash-sales/active:  TTL 2min  (balance freshness vs load)
 > **Mục tiêu**: Unblock `/account/wishlist`, review trên `/product/[slug]`, admin inventory  
 > **DB Tables**: `inventory`, `inventory_history`, `wishlists`, `price_history`, `reviews`, `review_images`, `user_book_interactions`  
 > **Thời gian**: 3-4 ngày
+> **Agents hỗ trợ**: [`backend-specialist`](file:///d:/BookStore/.agent/agents/backend-specialist.md), [`database-architect`](file:///d:/BookStore/.agent/agents/database-architect.md)  
+> **Rules**: [`GEMINI.md`](file:///d:/BookStore/.agent/rules/GEMINI.md)  
+> **Skills**: [`api-patterns`](file:///d:/BookStore/.agent/skills/api-patterns/SKILL.md), [`database-design`](file:///d:/BookStore/.agent/skills/database-design/SKILL.md)  
+> **Workflows**: [`/create`](file:///d:/BookStore/.agent/workflows/create.md), [`/enhance`](file:///d:/BookStore/.agent/workflows/enhance.md), [`/test`](file:///d:/BookStore/.agent/workflows/test.md)
 
 ### 5.1 JPA Entities
 
@@ -802,6 +822,10 @@ GET    /api/v1/admin/inventory/{variantId}/history → Lịch sử nhập/xuất
 > **Mục tiêu**: Unblock điểm thưởng trong `/checkout`, `/account`, `/admin/crm`, notifications  
 > **DB Tables**: `reward_points`, `loyalty_transactions`, `notifications`  
 > **Thời gian**: 2-3 ngày
+> **Agents hỗ trợ**: [`backend-specialist`](file:///d:/BookStore/.agent/agents/backend-specialist.md)  
+> **Rules**: [`GEMINI.md`](file:///d:/BookStore/.agent/rules/GEMINI.md)  
+> **Skills**: [`api-patterns`](file:///d:/BookStore/.agent/skills/api-patterns/SKILL.md), [`clean-code`](file:///d:/BookStore/.agent/skills/clean-code/SKILL.md)  
+> **Workflows**: [`/create`](file:///d:/BookStore/.agent/workflows/create.md), [`/test`](file:///d:/BookStore/.agent/workflows/test.md)
 
 ### 6.1 JPA Entities
 
@@ -866,7 +890,10 @@ Lợi ích: Service không phụ thuộc nhau trực tiếp, dễ thêm listener
 
 > **Mục tiêu**: Toàn bộ admin pages hoạt động được  
 > **Thời gian**: 5-6 ngày  
-> **Skill tham khảo**: [`.antigravity/skills/api-design-principles/SKILL.md`](../.antigravity/skills/api-design-principles/SKILL.md)
+> **Agents hỗ trợ**: [`backend-specialist`](file:///d:/BookStore/.agent/agents/backend-specialist.md), [`security-auditor`](file:///d:/BookStore/.agent/agents/security-auditor.md)  
+> **Rules**: [`GEMINI.md`](file:///d:/BookStore/.agent/rules/GEMINI.md)  
+> **Skills**: [`api-patterns`](file:///d:/BookStore/.agent/skills/api-patterns/SKILL.md), [`clean-code`](file:///d:/BookStore/.agent/skills/clean-code/SKILL.md), [`database-design`](file:///d:/BookStore/.agent/skills/database-design/SKILL.md)  
+> **Workflows**: [`/plan`](file:///d:/BookStore/.agent/workflows/plan.md), [`/create`](file:///d:/BookStore/.agent/workflows/create.md), [`/test`](file:///d:/BookStore/.agent/workflows/test.md)
 
 ### 7.1 Dashboard (FE: `/admin/dashboard`)
 
@@ -960,7 +987,10 @@ GET/POST/PATCH  /api/v1/admin/shipping/rates       → Cấu hình bảng giá s
 
 > **Mục tiêu**: Caching, rate limiting, tối ưu queries  
 > **Thời gian**: 3-4 ngày  
-> **Skill tham khảo**: [`.antigravity/skills/application-performance-performance-optimization/SKILL.md`](../.antigravity/skills/application-performance-performance-optimization/SKILL.md)
+> **Agents hỗ trợ**: [`backend-specialist`](file:///d:/BookStore/.agent/agents/backend-specialist.md), [`performance-optimizer`](file:///d:/BookStore/.agent/agents/performance-optimizer.md), [`devops-engineer`](file:///d:/BookStore/.agent/agents/devops-engineer.md)  
+> **Rules**: [`GEMINI.md`](file:///d:/BookStore/.agent/rules/GEMINI.md)  
+> **Skills**: [`performance-profiling`](file:///d:/BookStore/.agent/skills/performance-profiling/SKILL.md), [`api-patterns`](file:///d:/BookStore/.agent/skills/api-patterns/SKILL.md)  
+> **Workflows**: [`/enhance`](file:///d:/BookStore/.agent/workflows/enhance.md), [`/test`](file:///d:/BookStore/.agent/workflows/test.md)
 
 ### 8.1 Caching với Redis
 
