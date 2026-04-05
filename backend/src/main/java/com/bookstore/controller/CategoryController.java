@@ -1,5 +1,6 @@
 package com.bookstore.controller;
 
+import com.bookstore.api.response.ApiResponse;
 import com.bookstore.dto.request.CategoryCreateRequest;
 import com.bookstore.dto.response.CategoryResponse;
 import com.bookstore.service.CategoryService;
@@ -28,8 +29,8 @@ public class CategoryController {
      * Lấy toàn bộ cây danh mục (public).
      */
     @GetMapping
-    public ResponseEntity<List<CategoryResponse>> getCategoryTree() {
-        return ResponseEntity.ok(categoryService.getCategoryTree());
+    public ResponseEntity<ApiResponse<List<CategoryResponse>>> getCategoryTree() {
+        return ResponseEntity.ok(ApiResponse.success("Lấy danh mục thành công", categoryService.getCategoryTree()));
     }
 
     /**
@@ -37,8 +38,8 @@ public class CategoryController {
      * Lấy chi tiết danh mục theo slug (public).
      */
     @GetMapping("/{slug}")
-    public ResponseEntity<CategoryResponse> getBySlug(@PathVariable String slug) {
-        return ResponseEntity.ok(categoryService.getBySlug(slug));
+    public ResponseEntity<ApiResponse<CategoryResponse>> getBySlug(@PathVariable String slug) {
+        return ResponseEntity.ok(ApiResponse.success("Lấy chi tiết danh mục thành công", categoryService.getBySlug(slug)));
     }
 
     /**
@@ -47,8 +48,9 @@ public class CategoryController {
      */
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<CategoryResponse> create(@Valid @RequestBody CategoryCreateRequest request) {
+    public ResponseEntity<ApiResponse<CategoryResponse>> create(@Valid @RequestBody CategoryCreateRequest request) {
         CategoryResponse response = categoryService.create(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.success("Tạo danh mục thành công", response));
     }
 }

@@ -1,5 +1,6 @@
 package com.bookstore.controller;
 
+import com.bookstore.api.response.ApiResponse;
 import com.bookstore.dto.request.BookCreateRequest;
 import com.bookstore.dto.response.BookResponse;
 import com.bookstore.service.BookService;
@@ -33,8 +34,8 @@ public class BookController {
      * Lấy chi tiết sách theo slug (public).
      */
     @GetMapping("/{slug}")
-    public ResponseEntity<BookResponse> getBySlug(@PathVariable String slug) {
-        return ResponseEntity.ok(bookService.getBySlug(slug));
+    public ResponseEntity<ApiResponse<BookResponse>> getBySlug(@PathVariable String slug) {
+        return ResponseEntity.ok(ApiResponse.success("Lấy chi tiết sách thành công", bookService.getBySlug(slug)));
     }
 
     /**
@@ -42,7 +43,7 @@ public class BookController {
      * Lấy danh sách sách theo danh mục (public, phân trang).
      */
     @GetMapping
-    public ResponseEntity<Page<BookResponse>> getByCategory(
+    public ResponseEntity<ApiResponse<Page<BookResponse>>> getByCategory(
             @RequestParam(required = false) Long categoryId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size) {
@@ -51,7 +52,7 @@ public class BookController {
         Page<BookResponse> result = (categoryId != null)
                 ? bookService.getByCategory(categoryId, pageable)
                 : bookService.getNewest(pageable);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(ApiResponse.success("Lấy danh sách sách thành công", result));
     }
 
     /**
@@ -59,11 +60,11 @@ public class BookController {
      * Sách nổi bật (public).
      */
     @GetMapping("/featured")
-    public ResponseEntity<Page<BookResponse>> getFeatured(
+    public ResponseEntity<ApiResponse<Page<BookResponse>>> getFeatured(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(bookService.getFeatured(pageable));
+        return ResponseEntity.ok(ApiResponse.success("Lấy sách nổi bật thành công", bookService.getFeatured(pageable)));
     }
 
     /**
@@ -71,11 +72,11 @@ public class BookController {
      * Sách bán chạy (public).
      */
     @GetMapping("/bestsellers")
-    public ResponseEntity<Page<BookResponse>> getBestSellers(
+    public ResponseEntity<ApiResponse<Page<BookResponse>>> getBestSellers(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(bookService.getBestSellers(pageable));
+        return ResponseEntity.ok(ApiResponse.success("Lấy sách bán chạy thành công", bookService.getBestSellers(pageable)));
     }
 
     /**
@@ -83,12 +84,12 @@ public class BookController {
      * Tìm kiếm sách (public).
      */
     @GetMapping("/search")
-    public ResponseEntity<Page<BookResponse>> search(
+    public ResponseEntity<ApiResponse<Page<BookResponse>>> search(
             @RequestParam String keyword,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(bookService.search(keyword, pageable));
+        return ResponseEntity.ok(ApiResponse.success("Tìm kiếm sách thành công", bookService.search(keyword, pageable)));
     }
 
     /**
@@ -97,8 +98,9 @@ public class BookController {
      */
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<BookResponse> create(@Valid @RequestBody BookCreateRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(bookService.create(request));
+    public ResponseEntity<ApiResponse<BookResponse>> create(@Valid @RequestBody BookCreateRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.success("Tạo sách thành công", bookService.create(request)));
     }
 
     /**
@@ -107,8 +109,8 @@ public class BookController {
      */
     @PatchMapping("/{id}/toggle-active")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> toggleActive(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<Void>> toggleActive(@PathVariable Long id) {
         bookService.toggleActive(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(ApiResponse.success("Cập nhật trạng thái sách thành công", null));
     }
 }

@@ -26,7 +26,6 @@ spring:
     show-sql: ${SPRING_JPA_SHOW_SQL:true}
     properties:
       hibernate:
-        dialect: ${SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT}
         format_sql: ${SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL:true}
         use_sql_comments: true
     open-in-view: false
@@ -43,6 +42,11 @@ spring:
   # Disable Flyway migrations
   flyway:
     enabled: false
+
+  data:
+    redis:
+      repositories:
+        enabled: false
 
   # --- Cấu hình Brevo Mail ---
   mail:
@@ -62,8 +66,8 @@ security:
   jwt:
     issuer: ${SECURITY_JWT_ISSUER}
     audience: ${SECURITY_JWT_AUDIENCE}
-    private-key-base64: ${SECURITY_JWT_PRIVATE_KEY_BASE64:}
-    public-key-base64: ${SECURITY_JWT_PUBLIC_KEY_BASE64:}
+    private-key-base64: ${SECURITY_JWT_PRIVATE_KEY_BASE64}
+    public-key-base64: ${SECURITY_JWT_PUBLIC_KEY_BASE64}
     access-token-exp-min: ${SECURITY_JWT_ACCESS_TOKEN_EXP_MIN}
     refresh-token-exp-days: ${SECURITY_JWT_REFRESH_TOKEN_EXP_DAYS}
 

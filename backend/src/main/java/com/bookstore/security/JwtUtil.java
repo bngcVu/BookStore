@@ -3,11 +3,9 @@ package com.bookstore.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import java.security.KeyFactory;
 import java.security.KeyPair;
-import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -18,15 +16,11 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 @Component
 public class JwtUtil {
-    private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
-
     private final JwtProperties jwtProperties;
 
     private PrivateKey privateKey;
@@ -95,22 +89,18 @@ public class JwtUtil {
 
     private KeyPair loadOrGenerateKeyPair() {
         try {
-            if (StringUtils.hasText(jwtProperties.getPrivateKeyBase64())
-                    && StringUtils.hasText(jwtProperties.getPublicKeyBase64())) {
-                byte[] privateBytes = Base64.getDecoder().decode(jwtProperties.getPrivateKeyBase64());
-                byte[] publicBytes = Base64.getDecoder().decode(jwtProperties.getPublicKeyBase64());
-
-                KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-                PrivateKey loadedPrivateKey = keyFactory.generatePrivate(new PKCS8EncodedKeySpec(privateBytes));
-                PublicKey loadedPublicKey = keyFactory.generatePublic(new X509EncodedKeySpec(publicBytes));
-                return new KeyPair(loadedPublicKey, loadedPrivateKey);
+            if (!StringUtils.hasText(jwtProperties.getPrivateKeyBase64())
+                    || !StringUtils.hasText(jwtProperties.getPublicKeyBase64())) {
+                throw new IllegalStateException("SECURITY_JWT_PRIVATE_KEY_BASE64 và SECURITY_JWT_PUBLIC_KEY_BASE64 là bắt buộc.");
             }
 
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);
-            KeyPair generated = keyPairGenerator.generateKeyPair();
-            logger.warn("No RSA keypair configured for JWT. Using ephemeral keys for this runtime.");
-            return generated;
+            byte[] privateBytes = Base64.getDecoder().decode(jwtProperties.getPrivateKeyBase64());
+            byte[] publicBytes = Base64.getDecoder().decode(jwtProperties.getPublicKeyBase64());
+
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            PrivateKey loadedPrivateKey = keyFactory.generatePrivate(new PKCS8EncodedKeySpec(privateBytes));
+            PublicKey loadedPublicKey = keyFactory.generatePublic(new X509EncodedKeySpec(publicBytes));
+            return new KeyPair(loadedPublicKey, loadedPrivateKey);
         } catch (Exception ex) {
             throw new IllegalStateException("Failed to initialize JWT keypair", ex);
         }

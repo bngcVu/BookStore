@@ -1,12 +1,19 @@
-# Sử dụng JDK 17 phân bản nhẹ (alpine) để tiết kiệm dung lượng
-FROM eclipse-temurin:21-jdk-alpine
+# syntax=docker/dockerfile:1
 
-# Thiết lập thư mục làm việc trong container
+FROM eclipse-temurin:21-jdk-alpine AS builder
+WORKDIR /workspace
+
+COPY .mvn .mvn
+COPY mvnw mvnw
+COPY pom.xml pom.xml
+COPY src src
+
+RUN chmod +x mvnw
+RUN ./mvnw -q -DskipTests package
+
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
-# Copy file .jar từ thư mục target của máy thật vào container
-# Lưu ý: Bạn phải chạy 'mvn package' trước để có file này
-COPY target/*.jar /app/app.jar
+COPY --from=builder /workspace/target/*.jar /app/app.jar
 
-# Lệnh để chạy ứng dụng
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
