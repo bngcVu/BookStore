@@ -46,6 +46,9 @@ public class SecurityConfig {
                     .requestMatchers("/v1/auth/**").permitAll()
                     .requestMatchers("/api/v1/admin/auth/**").permitAll()
                     .requestMatchers("/v1/admin/auth/**").permitAll()
+                        // ---- Catalog (public GET) ----
+                        .requestMatchers(HttpMethod.GET, "/api/v1/categories/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/books/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

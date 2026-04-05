@@ -17,7 +17,13 @@ public enum ErrorCode {
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "Invalid token"),
     VALIDATION_ERROR(HttpStatus.BAD_REQUEST, "Validation failed"),
     ACCESS_DENIED(HttpStatus.FORBIDDEN, "Access denied"),
-    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error"),
+
+    // ---- Catalog ----
+    NOT_FOUND(HttpStatus.NOT_FOUND, "Resource not found"),
+    CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "Category not found"),
+    DUPLICATE_VALUE(HttpStatus.CONFLICT, "Duplicate value"),
+    INSUFFICIENT_STOCK(HttpStatus.CONFLICT, "Insufficient stock");
 
     private final HttpStatus status;
     private final String defaultMessage;
