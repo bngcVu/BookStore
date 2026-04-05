@@ -5,6 +5,61 @@
 
 ---
 
+## 📈 Progress Tracking (Cập nhật: 2026-04-05)
+
+> **Ghi chú**: Section này được maintain theo trạng thái thực tế của codebase tại `backend/src/main/java/com/bookstore/`.
+
+### Tổng quan tiến độ
+
+| Phase | Trạng thái | % Hoàn thành | Ghi chú |
+|-------|-----------|:------------:|---------|
+| Phase 0 — Foundation | ✅ Cơ bản xong | ~90% | Thiếu test baseline, Flyway migrations chưa tạo, Redis/Cache chưa enable |
+| Phase 1 — Auth & User Profile | ✅ Cơ bản xong | ~85% | Full auth flow hoạt động. Thiếu rate limiting, audit log chi tiết |
+| Phase 2 — Product Catalog | ⚠️ Một phần | ~70% | CRUD cơ bản OK. Thiếu filter nâng cao, related books, caching, tách DTO |
+| Phase 3 — Address + Cart + Order | ❌ Chưa bắt đầu | 0% | **CẦN LÀM TIẾP** — unblock `/cart`, `/checkout`, `/account/orders` |
+| Phase 4 — Flash Sale + Promotions | ❌ Chưa bắt đầu | 0% | |
+| Phase 5 — Inventory + Wishlist + Reviews | ❌ Chưa bắt đầu | 0% | Chỉ có `InventoryEntity` |
+| Phase 6 — Loyalty & Notifications | ❌ Chưa bắt đầu | 0% | |
+| Phase 7 — Admin APIs (Full) | ❌ Chưa bắt đầu | 0% | Chỉ có Admin Auth login |
+| Phase 8 — Performance & Hardening | ❌ Chưa bắt đầu | 0% | Dependencies đã có (Redis, Cache) |
+
+### Chi tiết ticket P0 đã hoàn thành
+
+| Ticket | Scope | ✅/❌ | File(s) chính | Vấn đề cần fix |
+|--------|-------|:----:|--------------|----------------|
+| T0-01 | Shared response + exception | ✅ | `api/response/ApiResponse.java`, `exception/*` | `ErrorCode` dùng `HttpStatus` thay vì int (OK, tốt hơn doc) |
+| T0-02 | Health + security config | ✅ | `controller/HealthController.java`, `config/SecurityConfig.java` | |
+| T1-01 | Register | ✅ | `service/AuthService.java` | Dùng `registration_pending` pattern |
+| T1-02 | Send OTP register | ✅ | `service/OtpService.java` | |
+| T1-03 | Verify OTP register | ✅ | `service/AuthService.java` | |
+| T1-04 | Login | ✅ | `service/AuthService.java` | |
+| T1-05 | Refresh token | ✅ | `service/AuthService.java` | |
+| T1-06 | Logout | ✅ | `service/AuthService.java` | |
+| T1-07 | Get/Patch profile | ✅ | `controller/UserController.java`, `service/UserService.java` | |
+| T1-08 | Resend OTP | ✅ | `controller/AuthController.java` | Reuse `sendRegisterOtp` |
+| T1-09 | Forgot password | ✅ | `service/AuthService.java` | |
+| T1-10 | Verify OTP forgot | ✅ | `controller/AuthController.java` | |
+| T1-11 | Reset password | ✅ | `service/AuthService.java` | |
+| T1-12 | Change password | ✅ | `controller/UserController.java` | |
+| T2-01 | Categories list/detail | ✅ | `controller/CategoryController.java`, `service/CategoryService.java` | |
+| T2-02 | Featured + best-sellers | ✅ | `controller/BookController.java` | Endpoint tên `bestsellers` (không hyphen) |
+| T2-03 | Books listing + filter | ⚠️ | `controller/BookController.java` | Chỉ filter `categoryId`, thiếu `authorId`, `publisherId`, `minPrice`, `maxPrice`, `sort`, `keyword` |
+| T2-04 | Book detail | ✅ | `service/BookService.java` | Chưa có `@EntityGraph` / JOIN FETCH |
+| T3-01–T3-08 | Address/Cart/Order | ❌ | — | Toàn bộ chưa implement |
+
+### Vấn đề kỹ thuật cần fix
+
+1. **Test coverage thấp** — Chỉ 4 test files: `HealthControllerTest`, `CategoryRepositoryTest`, `OtpServiceTest`, `RegistrationEmailServiceTest`
+2. **Flyway migration files chưa tạo** — dependency `flyway-core` + `flyway-mysql` đã có nhưng không có files trong `db/migration/`
+3. **Dependency dư thừa** — `spring-security-oauth2-authorization-server`, `spring-boot-starter-oauth2-client` không cần
+4. **Testcontainers mismatch** — `testcontainers-postgresql` trong pom nhưng runtime dùng MySQL
+5. **Caching chưa enable** — `@EnableCaching`, `@Cacheable` chưa có ở bất kỳ đâu
+6. **BookResponse chưa tách** — Cần `BookSummaryResponse` (list) vs `BookDetailResponse` (detail) theo doc
+7. **Enums chưa tách package** — `OtpType`, `UserStatus`, `AdminRole`, `Gender` nằm chung `domain/entity/` thay vì `domain/entity/enums/`
+8. **Scheduled jobs nằm trong `service/`** — Nên tách ra `scheduler/` package theo doc
+
+---
+
 ## 🗺️ Tổng Quan Mapping: FE Page → DB Tables → API cần có
 
 | FE Page (đã code) | DB Tables cần | Priority |
@@ -2385,4 +2440,5 @@ spring:
 
 ---
 
-*Cập nhật: March 12, 2026 — dựa trên FE commit hiện tại và 38 bảng database_schema.md*
+*Cập nhật: April 05, 2026 — audit tiến độ backend so với codebase thực tế, thêm Progress Tracking section*
+
