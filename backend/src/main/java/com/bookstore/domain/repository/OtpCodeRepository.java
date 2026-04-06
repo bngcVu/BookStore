@@ -1,7 +1,7 @@
 package com.bookstore.domain.repository;
 
 import com.bookstore.domain.entity.OtpCodeEntity;
-import com.bookstore.domain.entity.OtpType;
+import com.bookstore.domain.entity.enums.OtpType;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,7 +1,7 @@
 package com.bookstore.service;
 
 import com.bookstore.domain.entity.OtpCodeEntity;
-import com.bookstore.domain.entity.OtpType;
+import com.bookstore.domain.entity.enums.OtpType;
 import com.bookstore.domain.entity.RegistrationPendingEntity;
 import com.bookstore.domain.repository.OtpCodeRepository;
 import com.bookstore.domain.repository.RegistrationPendingRepository;

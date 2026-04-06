@@ -9,7 +9,8 @@ import com.bookstore.domain.entity.CategoryEntity;
 import com.bookstore.domain.entity.PublisherEntity;
 import com.bookstore.dto.response.AuthorResponse;
 import com.bookstore.dto.response.BookImageResponse;
-import com.bookstore.dto.response.BookResponse;
+import com.bookstore.dto.response.BookSummaryResponse;
+import com.bookstore.dto.response.BookDetailResponse;
 import com.bookstore.dto.response.BookVariantResponse;
 import com.bookstore.dto.response.CategoryResponse;
 import com.bookstore.dto.response.PublisherResponse;
@@ -99,8 +100,35 @@ public class CatalogMapper {
     }
 
     // ---- Book ----
+    public BookSummaryResponse toBookSummaryResponse(BookEntity entity) {
+        if (entity == null) return null;
 
-    public BookResponse toBookResponse(BookEntity entity) {
+        List<AuthorResponse> authors = entity.getBookAuthors() == null
+                ? Collections.emptyList()
+                : entity.getBookAuthors().stream()
+                        .map(ba -> toAuthorResponse(ba.getAuthor()))
+                        .collect(Collectors.toList());
+
+        String defaultImageUrl = entity.getImages() != null && !entity.getImages().isEmpty() 
+                ? entity.getImages().get(0).getImageUrl() : null;
+
+        return BookSummaryResponse.builder()
+                .id(entity.getId())
+                .title(entity.getTitle())
+                .slug(entity.getSlug())
+                .originalPrice(entity.getBasePrice())
+                .salePrice(entity.getBasePrice())
+                .avgRating(entity.getAvgRating())
+                .reviewCount(entity.getReviewCount())
+                .soldCount(entity.getSoldCount())
+                .isFeatured(entity.getIsFeatured())
+                .category(toCategoryResponse(entity.getCategory()))
+                .authors(authors)
+                .imageUrl(defaultImageUrl)
+                .build();
+    }
+
+    public BookDetailResponse toBookDetailResponse(BookEntity entity) {
         if (entity == null) return null;
 
         List<AuthorResponse> authors = entity.getBookAuthors() == null
@@ -121,27 +149,26 @@ public class CatalogMapper {
                         .filter(v -> Boolean.TRUE.equals(v.getIsActive()))
                         .map(this::toBookVariantResponse)
                         .collect(Collectors.toList());
+                        
+        String defaultImageUrl = images.isEmpty() ? null : images.get(0).getImageUrl();
 
-        return BookResponse.builder()
+        return BookDetailResponse.builder()
                 .id(entity.getId())
                 .title(entity.getTitle())
                 .slug(entity.getSlug())
                 .isbn(entity.getIsbn())
                 .description(entity.getDescription())
-                .basePrice(entity.getBasePrice())
+                .originalPrice(entity.getBasePrice())
+                .salePrice(entity.getBasePrice())
                 .avgRating(entity.getAvgRating())
                 .reviewCount(entity.getReviewCount())
                 .soldCount(entity.getSoldCount())
-                .viewCount(entity.getViewCount())
-                .isActive(entity.getIsActive())
                 .isFeatured(entity.getIsFeatured())
                 .publicationYear(entity.getPublicationYear())
                 .pages(entity.getPages())
-                .dimensions(entity.getDimensions())
                 .weightGrams(entity.getWeightGrams())
-                .coverType(entity.getCoverType() != null ? entity.getCoverType().name() : null)
                 .language(entity.getLanguage())
-                .createdAt(entity.getCreatedAt())
+                .imageUrl(defaultImageUrl)
                 .category(toCategoryResponse(entity.getCategory()))
                 .publisher(toPublisherResponse(entity.getPublisher()))
                 .authors(authors)

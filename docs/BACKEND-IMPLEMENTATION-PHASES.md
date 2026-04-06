@@ -450,6 +450,8 @@ PATCH  /api/v1/users/me/addresses/{id}/set-default → Đặt mặc định
 
 ### 3.3 APIs — Giỏ hàng
 
+> **Lưu ý Quan Trọng**: Toàn bộ chức năng Giỏ hàng và Mua hàng (Checkout) yêu cầu bắt buộc tài khoản đã đăng nhập. Khách vãng lai (Guest) không thể thao tác với giỏ hàng (không tồn tại guest cart).
+
 ```
 GET    /api/v1/cart                   → Lấy giỏ hàng (FE: /cart, header badge count)
 POST   /api/v1/cart/items             → Thêm sản phẩm { variantId, quantity }
@@ -545,7 +547,6 @@ OrderResponse {
 ### 3.8 Background Jobs cần setup trong Phase 3
 
 - `OrderTimeoutJob` (`@Scheduled`): Mỗi 5 phút, cancel các đơn `pending_payment` quá X phút → release inventory, rollback voucher_usage
-- `CartCleanupJob` (`@Scheduled`): Mỗi ngày, xóa cart của guest/anonymous đã không hoạt động > 30 ngày
 
 ### 3.9 Order Creation Saga — Bảng Compensating Transactions
 

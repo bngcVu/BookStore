@@ -44,7 +44,7 @@ public class AuthController {
 
     @PostMapping("/register/send-otp")
     public ResponseEntity<ApiResponse<Void>> sendRegisterOtp(@Valid @RequestBody SendOtpRequest request) {
-        if (request.getType() != com.bookstore.domain.entity.OtpType.register) {
+        if (request.getType() != com.bookstore.domain.entity.enums.OtpType.register) {
             throw new com.bookstore.exception.AppException(
                     com.bookstore.exception.ErrorCode.INVALID_OTP,
                     "Invalid OTP type for register"
@@ -56,7 +56,7 @@ public class AuthController {
 
     @PostMapping("/register/verify-otp")
     public ResponseEntity<ApiResponse<Void>> verifyRegisterOtp(@Valid @RequestBody VerifyOtpRequest request) {
-        if (request.getType() != com.bookstore.domain.entity.OtpType.register) {
+        if (request.getType() != com.bookstore.domain.entity.enums.OtpType.register) {
             throw new com.bookstore.exception.AppException(
                     com.bookstore.exception.ErrorCode.INVALID_OTP,
                     "Invalid OTP type for register"
@@ -68,7 +68,7 @@ public class AuthController {
 
     @PostMapping("/register/resend-otp")
     public ResponseEntity<ApiResponse<Void>> resendRegisterOtp(@Valid @RequestBody SendOtpRequest request) {
-        if (request.getType() != com.bookstore.domain.entity.OtpType.register) {
+        if (request.getType() != com.bookstore.domain.entity.enums.OtpType.register) {
             throw new com.bookstore.exception.AppException(
                     com.bookstore.exception.ErrorCode.INVALID_OTP,
                     "Invalid OTP type for register"
@@ -102,7 +102,7 @@ public class AuthController {
 
     @PostMapping("/forgot-password/verify-otp")
     public ResponseEntity<ApiResponse<Void>> verifyForgotPasswordOtp(@Valid @RequestBody VerifyOtpRequest request) {
-        if (request.getType() != com.bookstore.domain.entity.OtpType.reset_password) {
+        if (request.getType() != com.bookstore.domain.entity.enums.OtpType.reset_password) {
             throw new com.bookstore.exception.AppException(
                     com.bookstore.exception.ErrorCode.INVALID_OTP,
                     "Invalid OTP type for reset password"

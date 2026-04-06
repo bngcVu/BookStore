@@ -5,7 +5,8 @@ import com.bookstore.domain.entity.CustomerTierEntity;
 import com.bookstore.domain.entity.OtpCodeEntity;
 import com.bookstore.domain.entity.RegistrationPendingEntity;
 import com.bookstore.domain.entity.UserEntity;
-import com.bookstore.domain.entity.UserStatus;
+import com.bookstore.domain.entity.enums.OtpType;
+import com.bookstore.domain.entity.enums.UserStatus;
 import com.bookstore.domain.repository.CustomerTierRepository;
 import com.bookstore.domain.repository.RegistrationPendingRepository;
 import com.bookstore.domain.repository.RefreshTokenRepository;
@@ -119,7 +120,7 @@ public class AuthService {
     @Transactional
     public void verifyRegisterOtp(String email, String code) {
         String normalizedEmail = email.trim().toLowerCase();
-        OtpCodeEntity otp = otpService.validateOtp(normalizedEmail, code, com.bookstore.domain.entity.OtpType.register);
+        OtpCodeEntity otp = otpService.validateOtp(normalizedEmail, code, com.bookstore.domain.entity.enums.OtpType.register);
         RegistrationPendingEntity pending = registrationPendingRepository.findByEmail(normalizedEmail)
                 .orElseThrow(() -> new AppException(ErrorCode.INVALID_OTP, "No pending registration found"));
 
@@ -237,14 +238,14 @@ public class AuthService {
     }
 
     public void verifyForgotPasswordOtp(String email, String code) {
-        otpService.validateOtp(email, code, com.bookstore.domain.entity.OtpType.reset_password);
+        otpService.validateOtp(email, code, com.bookstore.domain.entity.enums.OtpType.reset_password);
     }
 
     @Transactional
     public void resetPassword(ResetPasswordRequest request) {
         String normalizedEmail = request.getEmail().trim().toLowerCase();
         OtpCodeEntity otp = otpService.validateOtp(normalizedEmail, request.getCode(),
-                com.bookstore.domain.entity.OtpType.reset_password);
+                com.bookstore.domain.entity.enums.OtpType.reset_password);
         UserEntity user = userRepository.findByEmail(normalizedEmail)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         PasswordPolicy.validate(request.getNewPassword());

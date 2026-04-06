@@ -1,6 +1,6 @@
 package com.bookstore.dto.request;
 
-import com.bookstore.domain.entity.Gender;
+import com.bookstore.domain.entity.enums.Gender;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import lombok.Getter;

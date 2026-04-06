@@ -1,6 +1,6 @@
 package com.bookstore.dto.request;
 
-import com.bookstore.domain.entity.OtpType;
+import com.bookstore.domain.entity.enums.OtpType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

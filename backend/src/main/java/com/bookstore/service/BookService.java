@@ -11,7 +11,8 @@ import com.bookstore.domain.repository.BookVariantRepository;
 import com.bookstore.domain.repository.CategoryRepository;
 import com.bookstore.domain.repository.PublisherRepository;
 import com.bookstore.dto.request.BookCreateRequest;
-import com.bookstore.dto.response.BookResponse;
+import com.bookstore.dto.response.BookSummaryResponse;
+import com.bookstore.dto.response.BookDetailResponse;
 import com.bookstore.exception.AppException;
 import com.bookstore.exception.ErrorCode;
 import com.bookstore.mapper.CatalogMapper;
@@ -21,6 +22,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -41,47 +44,50 @@ public class BookService {
     // ---- Queries (public API) ----
 
     @Transactional(readOnly = true)
-    public BookResponse getBySlug(String slug) {
+    @Cacheable(value = "book_detail", key = "#slug")
+    public BookDetailResponse getBySlug(String slug) {
         BookEntity book = findActiveBySlug(slug);
-        // Tăng lượt xem (fire-and-forget – không cần chờ)
-        bookRepository.save(book); // nếu cần thật sự track view thì dùng event
-        return catalogMapper.toBookResponse(book);
+        return catalogMapper.toBookDetailResponse(book);
     }
 
     @Transactional(readOnly = true)
-    public Page<BookResponse> getByCategory(Long categoryId, Pageable pageable) {
+    @Cacheable(value = "books_by_category", key = "#categoryId + '_' + #pageable.pageNumber + '_' + #pageable.pageSize")
+    public Page<BookSummaryResponse> getByCategory(Long categoryId, Pageable pageable) {
         return bookRepository.findByCategoryIdAndIsActiveTrue(categoryId, pageable)
-                .map(catalogMapper::toBookResponse);
+                .map(catalogMapper::toBookSummaryResponse);
     }
 
     @Transactional(readOnly = true)
-    public Page<BookResponse> getFeatured(Pageable pageable) {
+    @Cacheable(value = "featured_books", key = "#pageable.pageNumber + '_' + #pageable.pageSize")
+    public Page<BookSummaryResponse> getFeatured(Pageable pageable) {
         return bookRepository.findByIsFeaturedTrueAndIsActiveTrue(pageable)
-                .map(catalogMapper::toBookResponse);
+                .map(catalogMapper::toBookSummaryResponse);
     }
 
     @Transactional(readOnly = true)
-    public Page<BookResponse> getBestSellers(Pageable pageable) {
+    @Cacheable(value = "bestseller_books", key = "#pageable.pageNumber + '_' + #pageable.pageSize")
+    public Page<BookSummaryResponse> getBestSellers(Pageable pageable) {
         return bookRepository.findBestSellers(pageable)
-                .map(catalogMapper::toBookResponse);
+                .map(catalogMapper::toBookSummaryResponse);
     }
 
     @Transactional(readOnly = true)
-    public Page<BookResponse> getNewest(Pageable pageable) {
+    public Page<BookSummaryResponse> getNewest(Pageable pageable) {
         return bookRepository.findNewest(pageable)
-                .map(catalogMapper::toBookResponse);
+                .map(catalogMapper::toBookSummaryResponse);
     }
 
     @Transactional(readOnly = true)
-    public Page<BookResponse> search(String keyword, Pageable pageable) {
+    public Page<BookSummaryResponse> search(String keyword, Pageable pageable) {
         return bookRepository.searchByTitle(keyword, pageable)
-                .map(catalogMapper::toBookResponse);
+                .map(catalogMapper::toBookSummaryResponse);
     }
 
     // ---- Mutations (Admin) ----
 
     @Transactional
-    public BookResponse create(BookCreateRequest request) {
+    @CacheEvict(value = {"book_detail", "books_by_category", "featured_books", "bestseller_books"}, allEntries = true)
+    public BookDetailResponse create(BookCreateRequest request) {
         // Validate ISBN không trùng
         if (request.getIsbn() != null && bookRepository.existsByIsbn(request.getIsbn())) {
             throw new AppException(ErrorCode.DUPLICATE_VALUE, "ISBN đã tồn tại: " + request.getIsbn());
@@ -131,10 +137,11 @@ public class BookService {
 
         BookEntity saved = bookRepository.save(book);
         log.info("Đã tạo sách: id={}, title={}", saved.getId(), saved.getTitle());
-        return catalogMapper.toBookResponse(saved);
+        return catalogMapper.toBookDetailResponse(saved);
     }
 
     @Transactional
+    @CacheEvict(value = {"book_detail", "books_by_category", "featured_books", "bestseller_books"}, allEntries = true)
     public void toggleActive(Long bookId) {
         BookEntity book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND, "Sách không tồn tại"));

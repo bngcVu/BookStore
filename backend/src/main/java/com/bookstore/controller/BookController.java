@@ -2,7 +2,8 @@ package com.bookstore.controller;
 
 import com.bookstore.api.response.ApiResponse;
 import com.bookstore.dto.request.BookCreateRequest;
-import com.bookstore.dto.response.BookResponse;
+import com.bookstore.dto.response.BookSummaryResponse;
+import com.bookstore.dto.response.BookDetailResponse;
 import com.bookstore.service.BookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +35,7 @@ public class BookController {
      * Lấy chi tiết sách theo slug (public).
      */
     @GetMapping("/{slug}")
-    public ResponseEntity<ApiResponse<BookResponse>> getBySlug(@PathVariable String slug) {
+    public ResponseEntity<ApiResponse<BookDetailResponse>> getBySlug(@PathVariable String slug) {
         return ResponseEntity.ok(ApiResponse.success("Lấy chi tiết sách thành công", bookService.getBySlug(slug)));
     }
 
@@ -43,13 +44,13 @@ public class BookController {
      * Lấy danh sách sách theo danh mục (public, phân trang).
      */
     @GetMapping
-    public ResponseEntity<ApiResponse<Page<BookResponse>>> getByCategory(
+    public ResponseEntity<ApiResponse<Page<BookSummaryResponse>>> getByCategory(
             @RequestParam(required = false) Long categoryId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
-        Page<BookResponse> result = (categoryId != null)
+        Page<BookSummaryResponse> result = (categoryId != null)
                 ? bookService.getByCategory(categoryId, pageable)
                 : bookService.getNewest(pageable);
         return ResponseEntity.ok(ApiResponse.success("Lấy danh sách sách thành công", result));
@@ -60,7 +61,7 @@ public class BookController {
      * Sách nổi bật (public).
      */
     @GetMapping("/featured")
-    public ResponseEntity<ApiResponse<Page<BookResponse>>> getFeatured(
+    public ResponseEntity<ApiResponse<Page<BookSummaryResponse>>> getFeatured(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
@@ -72,7 +73,7 @@ public class BookController {
      * Sách bán chạy (public).
      */
     @GetMapping("/bestsellers")
-    public ResponseEntity<ApiResponse<Page<BookResponse>>> getBestSellers(
+    public ResponseEntity<ApiResponse<Page<BookSummaryResponse>>> getBestSellers(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
@@ -84,7 +85,7 @@ public class BookController {
      * Tìm kiếm sách (public).
      */
     @GetMapping("/search")
-    public ResponseEntity<ApiResponse<Page<BookResponse>>> search(
+    public ResponseEntity<ApiResponse<Page<BookSummaryResponse>>> search(
             @RequestParam String keyword,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size) {
@@ -98,7 +99,7 @@ public class BookController {
      */
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponse<BookResponse>> create(@Valid @RequestBody BookCreateRequest request) {
+    public ResponseEntity<ApiResponse<BookDetailResponse>> create(@Valid @RequestBody BookCreateRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.success("Tạo sách thành công", bookService.create(request)));
     }
